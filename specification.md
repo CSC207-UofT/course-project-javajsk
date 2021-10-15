@@ -1,6 +1,5 @@
 ## Food Truck Ordering App
 
-###Specification
 Our app will have two user interfaces. One for users that want to order food from food trucks
 and another for vendors that are selling food from food trucks. Both the customers and vendors need accounts 
 to access our application that is secured with password-based authentication.
