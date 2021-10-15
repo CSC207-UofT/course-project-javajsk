@@ -18,7 +18,14 @@ public class    FiFoBook implements OrderBook {
             return null;
         }
         String nextId = orderQueue.remove();
-        return orders.get(nextId);
+
+        items--;
+
+        // This is to ensure that cancelled orders do not get sent to the queue.
+        if(orders.get(nextId).getOrderStatus() != Orderable.CANCELLED){
+            return orders.get(nextId);
+        }
+        return this.getNextOrder();
     }
 
     @Override

@@ -2,6 +2,13 @@ package Interfaces;
 
 import java.util.ArrayList;
 
+/** The shop interface
+ *
+ * This interface allows vendors and users to interact with a shop. The shop is an abstract interface
+ * which allows modification of menu items, order placing and order updating and certain getters and setters
+ * related directly to shops (e.g. Shop name, shop location and shop status).
+ *
+ */
 public interface Shop {
     /** The following methods are for shop attributes **/
     String getShopName();
