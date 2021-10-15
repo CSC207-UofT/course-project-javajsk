@@ -8,6 +8,7 @@ public interface Orderable{
     final int PREPARING = 1;
     final int COMPLETED = 2;
 
+    String getOrderId();
 
     ArrayList<Sellable> getOrderItems();
 

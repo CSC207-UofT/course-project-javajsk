@@ -12,11 +12,6 @@ public class FiFoBook implements OrderBook {
     Queue<String> orderQueue = new LinkedList<String>();
     int items = 0;
 
-
-    public String generateKey(Orderable item){
-        return "";
-    }
-
     @Override
     public Orderable getNextOrder() {
         if(items == 0){
@@ -34,8 +29,7 @@ public class FiFoBook implements OrderBook {
     @Override
     public void addOrder(Orderable item) {
         items++;
-        String key = generateKey(item);
-        orders.put(key, item);
+        orders.put(item.getOrderId(), item);
         orderQueue.add(key);
 
     }

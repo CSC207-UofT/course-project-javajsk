@@ -8,7 +8,16 @@ public class RegularOrder implements Orderable {
     private float Ordertime;
     private int orderStatus;
     private float discount;
-    private float eta;
+    private float eta; 
+    private String id;
+
+
+
+
+    @Override
+    public String getOrderId(){
+        return id;
+    }
 
     @Override
     public ArrayList<Sellable> getOrderItems() {
