@@ -11,7 +11,10 @@ public class FiFoBook implements OrderBook {
     HashMap<String, Orderable> orders = new HashMap<>();
     Queue<String> orderQueue = new LinkedList<String>();
     int items = 0;
-
+    public FiFoBook( HashMap<String, Orderable> orders, Queue<String> orderQueue){
+        this.orders = orders;
+        this.orderQueue = orderQueue;
+    }
     @Override
     public Orderable getNextOrder() {
         if(items == 0){
@@ -30,7 +33,7 @@ public class FiFoBook implements OrderBook {
     public void addOrder(Orderable item) {
         items++;
         orders.put(item.getOrderId(), item);
-        orderQueue.add(key);
+        orderQueue.add(item.getOrderId());
 
     }
 

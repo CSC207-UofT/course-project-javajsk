@@ -40,7 +40,7 @@ public class RegularMenu implements Menu {
     }
 
     @Override
-    public boolean setItemPrice(String id, double price) {
+    public boolean setItemPrice(String id, float price) {
         if(items.containsKey(id)){
             items.get(id).setPrice(price);
             return true;

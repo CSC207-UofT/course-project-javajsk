@@ -12,7 +12,7 @@ public interface Menu {
 
     float getItemPrice(String id);
 
-    boolean setItemPrice(String id, double price);
+    boolean setItemPrice(String id, float price);
 
     boolean getItemAvailability(String id);
 

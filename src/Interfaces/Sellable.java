@@ -6,7 +6,7 @@ public interface Sellable {
 
     float getPrice();
 
-    void setPrice(double price);
+    void setPrice(float price);
 
     String getName();
 

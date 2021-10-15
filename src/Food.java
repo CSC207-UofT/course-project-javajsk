@@ -3,12 +3,12 @@ import Interfaces.Sellable;
 public class Food implements Sellable {
     boolean isAvailable;
     String id;
-    double price;
+    float price;
     String name;
     String description;
     float discount;
 
-    public void Food(String id, String name, double price, String description, boolean available, float discount){
+    public void Food(String id, String name, float price, String description, boolean available, float discount){
         this.id = id;
         this.name = name;
         this.price = price;
@@ -28,7 +28,7 @@ public class Food implements Sellable {
     }
 
     @Override
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
