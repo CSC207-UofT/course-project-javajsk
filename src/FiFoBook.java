@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class FiFoBook implements OrderBook {
+public class    FiFoBook implements OrderBook {
     HashMap<String, Orderable> orders = new HashMap<>();
     Queue<String> orderQueue = new LinkedList<String>();
     int items = 0;

@@ -6,11 +6,11 @@ public interface Shop {
     /** The following methods are for shop attributes **/
     String getShopName();
 
-    void changeShopName(String newName);
+    void setShopName(String newName);
 
     String getLocation();
 
-    void changeLocation(String location);
+    void setLocation(String location);
 
     boolean getShopStatus();
 
