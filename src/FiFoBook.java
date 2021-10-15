@@ -30,7 +30,7 @@ public class FiFoBook implements OrderBook {
     public void addOrder(Orderable item) {
         items++;
         orders.put(item.getOrderId(), item);
-        orderQueue.add(key);
+        orderQueue.add(item.getOrderId());
 
     }
 

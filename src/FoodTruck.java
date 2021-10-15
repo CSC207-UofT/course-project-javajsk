@@ -143,8 +143,8 @@ public class FoodTruck implements Shop {
     }
 
     @Override
-    public void setOrderStatus(String id, int status) {
-        orderBook.setOrderStatus(id, status);
+    public boolean setOrderStatus(String id, int status) {
+        return orderBook.setOrderStatus(id, status);
     }
 
     @Override
@@ -153,13 +153,13 @@ public class FoodTruck implements Shop {
     }
 
     @Override
-    public void addItemToOrder(String id, Sellable item, int quantity) {
-        orderBook.addItemToOrder(id, item, quantity);
+    public boolean addItemToOrder(String id, Sellable item, int quantity) {
+        return orderBook.addItemToOrder(id, item, quantity);
     }
 
     @Override
-    public void modifyOrder(String id, int index, Sellable item) {
-        orderBook.modifyOrder(id, index, item);
+    public boolean modifyOrder(String id, int index, Sellable item) {
+        return orderBook.modifyOrder(id, index, item);
     }
 
     @Override

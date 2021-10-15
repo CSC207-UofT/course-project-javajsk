@@ -59,13 +59,13 @@ public interface Shop {
 
     boolean completeOrder(String id);
 
-    void setOrderStatus(String id, int status);
+    boolean setOrderStatus(String id, int status);
 
     ArrayList<Sellable> getOrderItems(String id);
 
-    void addItemToOrder(String id, Sellable item, int quantity);
+    boolean addItemToOrder(String id, Sellable item, int quantity);
 
-    void modifyOrder(String id, int index, Sellable item);
+    boolean modifyOrder(String id, int index, Sellable item);
 
     boolean removeItemFromOrder(String id, int index);
 
