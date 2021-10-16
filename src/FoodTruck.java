@@ -9,17 +9,18 @@ public class FoodTruck implements Shop {
      * This food truck class is supposed to represent a food truck (specifically ones found on campus at University of
      * Toronto, st. george campus.
      *
-     * @param shopName is the Name of this foodTruck
-     * @param location is the current location of the foodTruck
-     * @param isOpen is a boolean value that stores whether or not the foodTruck is open.
-     * @param menu is an instance of a Menu object that stores this foodTruck's menu.
-     * @param orderbook is an orderBook object that allows orders to be managed for this foodTruck.
+     * shopName is the Name of this foodTruck
+     * location is the current location of the foodTruck
+     * isOpen is a boolean value that stores whether or not the foodTruck is open.
+     * menu is an instance of a Menu object that stores this foodTruck's menu.
+     * orderbook is an orderBook object that allows orders to be managed for this foodTruck.
      */
     String shopName;
     String location;
     boolean isOpen;
     Menu menu;
     OrderBook orderBook;
+    String ID;
 
 
     /**
@@ -44,6 +45,7 @@ public class FoodTruck implements Shop {
      * @param newName The new name of the shop in plaintext which will be set for this foodTruck.
      */
     public void changeShopName(String newName) {
+
         this.shopName = newName;
     }
 
@@ -66,6 +68,7 @@ public class FoodTruck implements Shop {
      * @param location the new location to move the foodTruck to.
      */
     public void changeLocation(String location) {
+
         this.location = location;
     }
 
