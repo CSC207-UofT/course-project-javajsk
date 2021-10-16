@@ -8,7 +8,7 @@ public class Food implements Sellable {
     String description;
     float discount;
 
-    public void Food(String id, String name, float price, String description, boolean available, float discount){
+    public Food(String id, String name, float price, String description, boolean available, float discount){
         this.id = id;
         this.name = name;
         this.price = price;

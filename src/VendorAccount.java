@@ -1,4 +1,5 @@
 public class VendorAccount extends Account{
     String ID;
-    String password;
+    String Password;
+
 }

@@ -11,9 +11,11 @@ public class    FiFoBook implements OrderBook {
     HashMap<String, Orderable> orders = new HashMap<>();
     Queue<String> orderQueue = new LinkedList<String>();
     int items = 0;
-    public FiFoBook( HashMap<String, Orderable> orders, Queue<String> orderQueue){
+    public FiFoBook(HashMap<String, Orderable> orders,Queue<String> orderQueue,int items ){
         this.orders = orders;
         this.orderQueue = orderQueue;
+        this.items = items;
+
     }
     @Override
     public Orderable getNextOrder() {
