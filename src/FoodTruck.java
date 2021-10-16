@@ -20,6 +20,7 @@ public class FoodTruck implements Shop {
     boolean isOpen;
     Menu menu;
     OrderBook orderBook;
+    String ID;
 
 
     /**
