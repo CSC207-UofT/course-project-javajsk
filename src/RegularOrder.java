@@ -12,7 +12,10 @@ public class RegularOrder implements Orderable {
     private String id;
 
 
-
+    public RegularOrder(ArrayList<Sellable> items, float discount){
+        this.items = items;
+        this.discount = discount;
+    }
 
     @Override
     public String getOrderId(){
