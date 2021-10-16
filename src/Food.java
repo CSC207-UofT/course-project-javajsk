@@ -39,7 +39,7 @@ public class Food implements Sellable {
 
     @Override
     public void setName(String newName) {
-        this.name = name;
+        this.name = newName;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Food implements Sellable {
 
     @Override
     public void setDescription(String newDesc) {
-        this.description = description;
+        this.description = newDesc;
     }
 
     @Override

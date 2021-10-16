@@ -2,15 +2,22 @@ package Interfaces;
 
 import java.util.ArrayList;
 
+/** The shop interface
+ *
+ * This interface allows vendors and users to interact with a shop. The shop is an abstract interface
+ * which allows modification of menu items, order placing and order updating and certain getters and setters
+ * related directly to shops (e.g. Shop name, shop location and shop status).
+ *
+ */
 public interface Shop {
     /** The following methods are for shop attributes **/
     String getShopName();
 
-    void changeShopName(String newName);
+    void setShopName(String newName);
 
     String getLocation();
 
-    void changeLocation(String location);
+    void setLocation(String location);
 
     boolean getShopStatus();
 
@@ -37,11 +44,11 @@ public interface Shop {
 
     String getMenuItemName(String id);
 
+    boolean setMenuItemName(String id, String newName);
+
     Float getMenuItemDiscount(String id);
 
     boolean setMenuItemDiscount(String id, float discount);
-
-    boolean setMenuItemName(String id, String newName);
 
     ArrayList<Sellable> getAllMenuItems();
 
@@ -59,13 +66,13 @@ public interface Shop {
 
     boolean completeOrder(String id);
 
-    void setOrderStatus(String id, int status);
+    boolean setOrderStatus(String id, int status);
 
     ArrayList<Sellable> getOrderItems(String id);
 
-    void addItemToOrder(String id, Sellable item, int quantity);
+    boolean addItemToOrder(String id, Sellable item, int quantity);
 
-    void modifyOrder(String id, int index, Sellable item);
+    boolean modifyOrder(String id, int index, Sellable item);
 
     boolean removeItemFromOrder(String id, int index);
 

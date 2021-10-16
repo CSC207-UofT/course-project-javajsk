@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class FiFoBook implements OrderBook {
+public class    FiFoBook implements OrderBook {
     HashMap<String, Orderable> orders = new HashMap<>();
     Queue<String> orderQueue = new LinkedList<String>();
     int items = 0;
@@ -20,8 +20,16 @@ public class FiFoBook implements OrderBook {
         if(items == 0){ //Returns null if order queue is empty
             return null;
         }
-        String nextId = orderQueue.remove(); //Pops the first element in the Queue
-        return orders.get(nextId); //Returns the popped element
+
+        String nextId = orderQueue.remove();//Pops the first element in the Queue
+
+        items--;
+
+        // This is to ensure that cancelled orders do not get sent to the queue.
+        if(orders.get(nextId).getOrderStatus() != Orderable.CANCELLED){
+            return orders.get(nextId);
+        }
+        return this.getNextOrder();//Returns the popped element
     }
 
     @Override
@@ -34,6 +42,7 @@ public class FiFoBook implements OrderBook {
         items++;
         orders.put(item.getOrderId(), item); //Adds an item to order hashmap
         orderQueue.add(item.getOrderId()); //Adds the order to the orderQueue
+
 
     }
 
