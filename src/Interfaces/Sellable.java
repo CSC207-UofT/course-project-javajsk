@@ -1,5 +1,12 @@
 package Interfaces;
 
+/** The Sellable Interface
+ *
+ * This is an abstract interface that allows different types of menu items to all be on a food truck's menu and
+ * allows modification of price, item name, description, discounts, and availability through getter and
+ * setter methods.
+ *
+ **/
 public interface Sellable {
 
     String getId();

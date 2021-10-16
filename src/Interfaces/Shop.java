@@ -44,11 +44,11 @@ public interface Shop {
 
     String getMenuItemName(String id);
 
+    boolean setMenuItemName(String id, String newName);
+
     Float getMenuItemDiscount(String id);
 
     boolean setMenuItemDiscount(String id, float discount);
-
-    boolean setMenuItemName(String id, String newName);
 
     ArrayList<Sellable> getAllMenuItems();
 
