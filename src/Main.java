@@ -16,10 +16,10 @@ public class Main{
         truck1.shopName = "truck1";
         DMS dms1 = new DMS();
         dms1.shops.put("1", truck1);
-        user.ID = "name";
-        user.Password = "password";
-        user1.ID = "name1";
-        user1.Password = "password1";
+        user.ID = "User";
+        user.Password = "user_password";
+        user1.ID = "Vendor";
+        user1.Password = "vendor_password";
         Food burger = new Food("1", "Burger", 5, "A burger", true,1);
         Food hot_dog = new Food("2", "Hot Dog", 3, "A hot dog", true,1);
         Food fries = new Food("3", "Fries", 1, "Fries", true,1);
