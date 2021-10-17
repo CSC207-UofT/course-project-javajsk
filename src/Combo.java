@@ -7,14 +7,14 @@ public class Combo implements Sellable {
     float price;
     String name;
     String id;
-    ArrayList<Food> MainItems;
-    ArrayList<Food> SideItems;
-    ArrayList<Food> DrinkItems;
+    ArrayList<Sellable> MainItems;
+    ArrayList<Sellable> SideItems;
+    ArrayList<Sellable> DrinkItems;
     String description;
     float Discount;
     boolean availability;
 
-    public Combo(ArrayList<Food> mainitem, ArrayList<Food> sideitem, ArrayList<Food> drinkitem,
+    public Combo(ArrayList<Sellable> mainitem, ArrayList<Sellable> sideitem, ArrayList<Sellable> drinkitem,
                  String ID, String name, float discount, String description){
         this.MainItems = mainitem;
         this.SideItems = sideitem;
@@ -35,11 +35,11 @@ public class Combo implements Sellable {
         // using the totalAvailability function to check if all elements in
         // this.MainItems, this.SideItems, and this.DrinkItems are available.
     }
-    public float totalPrice(ArrayList<Food> items){
+    public float totalPrice(ArrayList<Sellable> items){
         // This function will take on an array of food items and return the price of all the items in the array.
         // This function uses a for loop accumulator to add up the total price of all the foods.
         float accumulator = 0;
-        for (Food item : items){
+        for (Sellable item : items){
             accumulator = accumulator + item.getPrice();
         }
         return accumulator;
@@ -100,9 +100,9 @@ public class Combo implements Sellable {
         this.availability = available;
     }
 
-    public boolean totalAvailability(ArrayList<Food> items) {
+    public boolean totalAvailability(ArrayList<Sellable> items) {
         // loops through all elements in the given array to check if all items are available.
-        for (Food item : items){
+        for (Sellable item : items){
             if (!item.isAvailable()){
                 return false;
             }
@@ -110,9 +110,9 @@ public class Combo implements Sellable {
         return true;
     }
 
-    public List<Food> getItems() {
+    public List<Sellable> getItems() {
         // Returns all the items in the combo in a single list.
-        List<Food> items = new ArrayList<>();
+        List<Sellable> items = new ArrayList<>();
         items.addAll(this.MainItems);
         items.addAll(this.SideItems);
         items.addAll(this.DrinkItems);
