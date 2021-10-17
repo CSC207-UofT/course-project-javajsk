@@ -56,7 +56,7 @@ public interface OrderBook {
      * @param id of order
      * @param index of item in an order
      * @param item to be changed
-     * @return
+     * @return true if order is changed
      */
     boolean modifyOrder(String id, int index, Sellable item);
 
@@ -71,7 +71,7 @@ public interface OrderBook {
     /**
      *  Gets the status of an order
      * @param id of order
-     * @return integer value corresponding to the status of the orde
+     * @return integer value corresponding to the status of the order
      */
     int getOrderStatus(String id);
 
