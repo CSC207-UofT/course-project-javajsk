@@ -15,9 +15,9 @@ public class Combo implements Sellable {
     float price;
     String name;
     String id;
-    ArrayList<Food> MainItems;
-    ArrayList<Food> SideItems;
-    ArrayList<Food> DrinkItems;
+    ArrayList<MainItem> MainItems;
+    ArrayList<SideItem> SideItems;
+    ArrayList<DrinkItem> DrinkItems;
     String description;
     float Discount;
     boolean availability;
@@ -35,7 +35,7 @@ public class Combo implements Sellable {
      * @param sideitems   SideItems in the combo
      * @param drinkitems  DrinkItems in the combo
      */
-    public Combo(ArrayList<Food> mainitems, ArrayList<Food> sideitems, ArrayList<Food> drinkitems,
+    public Combo(ArrayList<MainItem> mainitems, ArrayList<SideItem> sideitems, ArrayList<DrinkItem> drinkitems,
                  String ID, String name, float discount, String description){
         this.MainItems = mainitems;
         this.SideItems = sideitems;
@@ -55,15 +55,6 @@ public class Combo implements Sellable {
                 totalAvailability(this.DrinkItems);
         // using the totalAvailability function to check if all elements in
         // this.MainItems, this.SideItems, and this.DrinkItems are available.
-    }
-    public float totalPrice(ArrayList<Food> items){
-        // This function will take on an array of food items and return the price of all the items in the array.
-        // This function uses a for loop accumulator to add up the total price of all the foods.
-        float accumulator = 0;
-        for (Food item : items){
-            accumulator = accumulator + item.getPrice();
-        }
-        return accumulator;
     }
 
     /**
@@ -179,13 +170,82 @@ public class Combo implements Sellable {
     }
 
     /**
+     * Get the MainItems in this combo
+     *
+     * @return Return the MainItems in this combo
+     */
+    public ArrayList<MainItem> getMainItems() {
+        return this.MainItems;
+    }
+
+    /**
+     * Get the SideItems in this combo
+     *
+     * @return Return the SideItems in this combo
+     */
+    public ArrayList<SideItem> getSideItems() {
+        return this.SideItems;
+    }
+
+    /**
+     * Get the SideItems in this combo
+     *
+     * @return Return the SideItems in this combo
+     */
+    public ArrayList<DrinkItem> getDrinkItems() {
+        return this.DrinkItems;
+    }
+
+    /**
+     * Get the total price of all the MainItems in this combo
+     *
+     * @return Return the total price of all the MainItems in this combo
+     */
+    public float totalPrice(ArrayList<MainItem> items){
+        // This function uses a for loop accumulator to add up the total price of all the foods.
+        float accumulator = 0;
+        for (MainItem item : items){
+            accumulator = accumulator + item.getPrice();
+        }
+        return accumulator;
+    }
+
+    /**
+     * Get the total price of all the SideItems in this combo
+     *
+     * @return Return the total price of all the SideItems in this combo
+     */
+    public float totalPrice(ArrayList<SideItem> items){
+        // This function uses a for loop accumulator to add up the total price of all the foods.
+        float accumulator = 0;
+        for (SideItem item : items){
+            accumulator = accumulator + item.getPrice();
+        }
+        return accumulator;
+    }
+
+    /**
+     * Get the total price of all the MainItems in this combo
+     *
+     * @return Return the total price of all the MainItems in this combo
+     */
+    public float totalPrice(ArrayList<DrinkItem> items){
+        // This function uses a for loop accumulator to add up the total price of all the foods.
+        float accumulator = 0;
+        for (DrinkItem item : items){
+            accumulator = accumulator + item.getPrice();
+        }
+        return accumulator;
+    }
+
+    /**
      * Returns whether all the items in the given list of items are available
      *
      * @param items A list of items, either main items, side items, and drink items.
      */
-    public boolean totalAvailability(ArrayList<Food> items) {
+    public boolean totalAvailability(ArrayList<MainItem> items) {
         // loops through all elements in the given array to check if all items are available.
-        for (Food item : items){
+        for (Mainitem item : items){
             if (!item.isAvailable()){
                 return false;
             }
@@ -193,19 +253,25 @@ public class Combo implements Sellable {
         return true;
     }
 
-    /**
-     * Return false if any item is not available, true otherwise.
-     *
-     * @return Return whether all the items in the given list of items are available
-     */
-    public List<Food> getItems() {
-        // Returns all the items in the combo in a single list.
-        List<Food> items = new ArrayList<>();
-        items.addAll(this.MainItems);
-        items.addAll(this.SideItems);
-        items.addAll(this.DrinkItems);
-
-        return items;
+    public boolean totalAvailability(ArrayList<SideItem> items) {
+        // loops through all elements in the given array to check if all items are available.
+        for (SideItem item : items){
+            if (!item.isAvailable()){
+                return false;
+            }
+        }
+        return true;
     }
+
+    public boolean totalAvailability(ArrayList<DrinkItem> items) {
+        // loops through all elements in the given array to check if all items are available.
+        for (DrinkItem item : items){
+            if (!item.isAvailable()){
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 }
