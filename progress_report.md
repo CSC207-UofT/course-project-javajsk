@@ -62,6 +62,6 @@ In addition, the code covers a vast set of edge cases and has validation and ver
    - Wrote [Shop](src/Interfaces/Shop.java), [FoodTruck](src/FoodTruck.java), and [OrderBook](src/Interfaces/OrderBook.java)
    - Contributed to the CRC Model
  - Vijay
-   - Contributed to the [Orderalble](src/Interfaces/Orderable.java), [FifoBook](src/FiFoBook.java), and [Food](src/Food.java) classes
+   - Contributed to the [Orderalble](src/Interfaces/Orderable.java), [FifoBook](src/FiFoBook.java), and [MainItem](src/MainItem.java) classes
    - Contributed to the [Progress Report](progress_report.md).
    - Helped design parts of the architecture.

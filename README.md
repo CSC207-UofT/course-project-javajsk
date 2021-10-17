@@ -1,6 +1,11 @@
-## Replace this README.md!
+# Project JavaJSK - FoodTruck System
 
-This is a standard README.md file for you to replace. You'll want to include your own content here!
+Name TBA
 
-MD (Markdown) files use [Markdown formatting](https://guides.github.com/features/mastering-markdown/):
-these look very much like .txt files, so you can write them in a very similar way.
+# Problem specification
+Our problem that we intend to solve and it's specification can be found [here](/specification.md).
+
+# Progress Report
+We are constantly updating the progress we make on this program, to get the latest information
+please view the document listed as [progress_report](progress_report.md).
+
