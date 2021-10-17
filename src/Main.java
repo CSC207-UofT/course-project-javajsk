@@ -23,7 +23,6 @@ public class Main{
         Food burger = new Food("1", "Burger", 5, "A burger", true,1);
         Food hot_dog = new Food("2", "Hot Dog", 3, "A hot dog", true,1);
         Food fries = new Food("3", "Fries", 1, "Fries", true,1);
-        System.out.println(burger.discount);
         Boolean running = true;
         while(running) {
             Scanner reader = new Scanner(System.in);

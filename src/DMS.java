@@ -108,7 +108,6 @@ public class DMS implements DataSystem {
         if(shops.containsKey(shopId)){
             return shops.get(shopId).getShopStatus();
         }
-        System.out.println("This is fake.");
         return false;
     }
 
@@ -266,7 +265,6 @@ public class DMS implements DataSystem {
         if(shops.containsKey(shopId)){
             shops.get(shopId).addOrder(item);
         }
-        System.out.println("Fake.");
     }
 
     /**
