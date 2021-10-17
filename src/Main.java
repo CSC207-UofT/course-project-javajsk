@@ -24,11 +24,12 @@ public class Main{
         Food hot_dog = new Food("2", "Hot Dog", 3, "A hot dog", true,1);
         Food fries = new Food("3", "Fries", 1, "Fries", true,1);
         Boolean running = true;
+        Boolean log_in_failed = false;
         while(running) {
             Scanner reader = new Scanner(System.in);
-            System.out.println("Press 1 if you are a Customer, Press 0 if you are a Vendor");
-            int prompt1 = reader.nextInt();
-            if (prompt1 == 1) {
+            System.out.println("Press C if you are a Customer, Press V if you are a Vendor");
+            String prompt1 = reader.next();
+            if (prompt1.equals("C")) {
                 System.out.println("Enter User ID");
                 String name = reader.next();
                 System.out.println("Enter User Password");
@@ -57,10 +58,11 @@ public class Main{
                 }
                 else{
                     System.out.println("Invalid Log-in credentials. Try again. ");
+                    log_in_failed = true;
                 }
 
 
-            } else if (prompt1 == 0) {
+            } else if (prompt1.equals("V")) {
                 System.out.println("Enter Vendor ID");
                 String name1 = reader.next();
                 System.out.println("Enter Vendor Password");
@@ -97,10 +99,16 @@ public class Main{
                 }
 
             }
-            System.out.println("Signed out. Would you like to log in again?");
-            String prompt2 = reader.next();
-            if(prompt2.equals("N")){
-                running = false;
+            if(log_in_failed){
+                System.out.println("Enter credentials again");
+            }
+            else {
+                System.out.println("Signed out. Would you like to log in again?");
+                String prompt2 = reader.next();
+                if(prompt2.equals("N")){
+                    running = false;
+            }
+
             }
         }
     }
