@@ -82,13 +82,13 @@ public class Main{
                     } while (prompt3 != 1);
                     Orderable order = dms1.shops.get("1").getNextOrder();
                     if(order != null) {
-                        System.out.println("There are orders in the queue. Would you like to see?");
+                        System.out.println("There are orders in the queue. Press Y to see.");
                         String prompt4 = reader.next();
                         if(prompt4.equals("Y")){
                             System.out.println("Order item: "+(order.getOrderItems()).get(0).getName());
                             String process = "N";
                             while(!process.equals("Y")){
-                                System.out.println("Would you like to process order?");
+                                System.out.println("Press Y to process order.");
                                 process = reader.next();
 
 
@@ -114,7 +114,7 @@ public class Main{
                 System.out.println("Enter credentials again");
             }
             else {
-                System.out.println("Signed out. Would you like to log in again?");
+                System.out.println("Signed out. Press Y to log in again. ");
                 String prompt2 = reader.next();
                 if(prompt2.equals("N")){
                     running = false;
