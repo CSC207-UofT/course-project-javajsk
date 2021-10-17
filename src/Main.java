@@ -23,8 +23,8 @@ public class Main{
         Food burger = new Food("1", "Burger", 5, "A burger", true,1);
         Food hot_dog = new Food("2", "Hot Dog", 3, "A hot dog", true,1);
         Food fries = new Food("3", "Fries", 1, "Fries", true,1);
-        Boolean running = true;
-        Boolean log_in_failed = false;
+        boolean running = true;
+        boolean log_in_failed = false;
         while(running) {
             Scanner reader = new Scanner(System.in);
             System.out.println("Press C if you are a Customer, Press V if you are a Vendor");
@@ -77,11 +77,16 @@ public class Main{
                     if(order != null) {
                         System.out.println("There are orders in the queue. Would you like to see?");
                         String prompt4 = reader.next();
-                        if(prompt4.equals("Y")){
+                        if(prompt4.equals("Y") || prompt4.equals("y")){
                             System.out.println("Order item: "+(order.getOrderItems()).get(0).getName());
                             String process = "N";
-                            while(!process.equals("Y")){
-                                System.out.println("Would you like to process order?");
+                            while(!(process.equals("Y") || process.equals("y"))){
+                                if(process.equals("N") || process.equals("n")) {
+                                    System.out.println("Would you like to process order?. Press Y to confirm.");
+                                }
+                                else{
+                                    System.out.println("Invalid Input. Would you like to process order?");
+                                }
                                 process = reader.next();
 
 
