@@ -20,9 +20,9 @@ public class Main{
         user.Password = "user_password";
         user1.ID = "Vendor";
         user1.Password = "vendor_password";
-        Food burger = new Food("1", "Burger", 5, "A burger", true,1);
-        Food hot_dog = new Food("2", "Hot Dog", 3, "A hot dog", true,1);
-        Food fries = new Food("3", "Fries", 1, "Fries", true,1);
+        MainItem burger = new MainItem("1", "Burger", 5, "A burger", true,1);
+        DrinkItem Soda = new DrinkItem("2", "Soda", 3, "A can of soda", true,1);
+        SideItem fries = new SideItem("3", "Fries", 1, "Fries", true,1);
         boolean running = true;
         boolean log_in_failed = false;
         while(running) {
@@ -39,13 +39,12 @@ public class Main{
 
                     System.out.println("The menu has burgers(B), hot dogs(H), and fries(F). Enter your choice");
                     String order_req = reader.next();
-
                     ArrayList<Sellable> order_items= new ArrayList<Sellable>();
                     if(order_req.equals("B")){
                         order_items.add(burger);
                     }
-                    else if(order_req.equals("H")){
-                        order_items.add(hot_dog);
+                    else if(order_req.equals("S")){
+                        order_items.add(Soda);
                     }
                     else if(order_req.equals("F")){
                         order_items.add(fries);
