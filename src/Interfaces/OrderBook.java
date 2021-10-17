@@ -7,33 +7,108 @@ public interface OrderBook {
 
     Orderable getOrder(String id);
 
+    /** Adds an item to an existing order
+     *
+     * @param item to be added to an order
+     */
+    void addOrder(Orderable item);
 
-    void addOrder(Orderable item); //Adds an order to the OrderQueue
+    /** Removes an order
+     *
+     * @param id of the order to be removed
+     * @return true if order was removed
+     */
+    boolean removeOrder(String id);
 
+    /** Updates order status to Complete and remove it from the order queue
+     *
+     * @param id of order
+     * @return true when order is competed
+     */
+    boolean completeOrder(String id);
 
-    boolean removeOrder(String id); //Removes an order from the Queue
+    /** Updates the progress of an order
+     *
+     * @param id of order
+     * @param status to update to
+     * @return true of order has been updated
+     */
+    boolean setOrderStatus(String id, int status);
 
-    boolean completeOrder(String id); //Updates an order to let the user know it is ready for pickup
+    /** Gets all item in an order
+     *
+     * @param id of the order
+     * @return A list of all items in an order
+     */
+    ArrayList<Sellable> getOrderItems(String id);
 
-    boolean setOrderStatus(String id, int status); //Updates the progress of the food item in the Queue
+    /** Adds an item to order
+     *
+     * @param id of order
+     * @param item to be added
+     * @param quantity of items
+     * @return true if item was added
+     */
+    boolean addItemToOrder(String id, Sellable item, int quantity);
 
-    ArrayList<Sellable> getOrderItems(String id); //Returns a list of items in a particular order
+    /** Changes an order
+     *
+     * @param id of order
+     * @param index of item in an order
+     * @param item to be changed
+     * @return
+     */
+    boolean modifyOrder(String id, int index, Sellable item);
 
-    boolean addItemToOrder(String id, Sellable item, int quantity); //Adds a menu item to an order
+    /** Removes item from order
+     *
+     * @param id of order
+     * @param index of item to be removed
+     * @return true if item has been removed
+     */
+    boolean removeItemFromOrder(String id, int index);
 
-    boolean modifyOrder(String id, int index, Sellable item); //Changes an order
+    /**
+     *  Gets the status of an order
+     * @param id of order
+     * @return integer value corresponding to the status of the orde
+     */
+    int getOrderStatus(String id);
 
-    boolean removeItemFromOrder(String id, int index); //Removes a menu item from an order
+    /**
+     * Gets the total price of an order
+     * @param id of order
+     * @return the total price of an order
+     */
+    float getTotalPriceOfOrder(String id);
 
-    int getOrderStatus(String id); //Returns the current status of an order
+    /**
+     * Checks if order is cancelled
+     * @param id of order
+     * @return true if order is cancelled
+     */
+    boolean isOrderCancelled(String id);
 
-    float getTotalPriceOfOrder(String id); //Returns the cumulative price of all items in an order
+    /**
+     * Sets a discount for a certain order
+     * @param id of order
+     * @param percentage of discount
+     * @return true if discount is applied to an order
+     */
+    boolean setOrderDiscount(String id, float percentage);
 
-    boolean isOrderCancelled(String id); //Returns True if an order is cancelled or not
+    /**
+     * Gets the discount associated with an order
+     * @param id of order
+     * @return the discount percentage, if any
+     */
+    float getOrderDiscount(String id);
 
-    boolean setOrderDiscount(String id, float percentage); //Sets a specified discount on a specific order
-
-    float getOrderDiscount(String id); //Returns the discount amount on an order, if any at all
-
+    /**
+     * Changes the time an order should be ready for pickup
+     * @param id of order
+     * @param time to be changed to
+     * @return true if order time has been updated
+     */
     boolean updateOrderETA(String id, float time); //Updates the time remaining for an order to be completed
 }
