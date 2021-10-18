@@ -34,18 +34,12 @@ public class FoodTruck implements Shop {
 
     }
 
+    /**
+     * Function to set the shop's name
+     * @param newName the new name to set the shop to in plaintext.
+     */
     @Override
     public void setShopName(String newName) {
-
-    }
-
-
-    /**
-     * A function that replaces the name of the foodTruck.
-     * @param newName The new name of the shop in plaintext which will be set for this foodTruck.
-     */
-    public void changeShopName(String newName) {
-
         this.shopName = newName;
     }
 
@@ -58,17 +52,12 @@ public class FoodTruck implements Shop {
         return location;
     }
 
-    @Override
-    public void setLocation(String location) {
-
-    }
-
     /**
      * This function is a setter for the location of the foodTruck
      * @param location the new location to move the foodTruck to.
      */
-    public void changeLocation(String location) {
-
+    @Override
+    public void setLocation(String location) {
         this.location = location;
     }
 
