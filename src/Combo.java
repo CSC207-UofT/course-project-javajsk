@@ -15,12 +15,14 @@ public class Combo implements Sellable {
     float price;
     String name;
     String id;
+
     ArrayList<MainItem> MainItems;
     ArrayList<SideItem> SideItems;
     ArrayList<DrinkItem> DrinkItems;
     String description;
     float Discount;
     boolean availability;
+
 
 
     /**
@@ -56,6 +58,7 @@ public class Combo implements Sellable {
         // using the totalAvailability function to check if all elements in
         // this.MainItems, this.SideItems, and this.DrinkItems are available.
     }
+
 
     /**
      * Get the ID of this combo
@@ -169,6 +172,7 @@ public class Combo implements Sellable {
         this.availability = available;
     }
 
+
     /**
      * Get the MainItems in this combo
      *
@@ -252,6 +256,7 @@ public class Combo implements Sellable {
         }
         return true;
     }
+
 
     public boolean totalAvailability(ArrayList<SideItem> items) {
         // loops through all elements in the given array to check if all items are available.
