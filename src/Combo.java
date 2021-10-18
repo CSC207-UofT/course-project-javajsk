@@ -44,17 +44,17 @@ public class Combo implements Sellable {
         this.DrinkItems = drinkitems;
         this.name = name;
         this.Discount = discount;
-        float mainsprice = totalPrice(mainitems);
-        float sidesprice = totalPrice(sideitems);
-        float drinksprice = totalPrice(drinkitems);
+        float mainsprice = totalPriceMain(mainitems);
+        float sidesprice = totalPriceSide(sideitems);
+        float drinksprice = totalPriceDrink(drinkitems);
         this.price = (mainsprice + sidesprice + drinksprice) * this.Discount; // the price of a combo is
         // the price of all the items added together multiplied by the discount that the people running
         // the food truck provides.
         this.id = ID;
         this.description = description;
-        this.availability = totalAvailability(this.MainItems) &&
-                totalAvailability(this.SideItems) &&
-                totalAvailability(this.DrinkItems);
+        this.availability = totalAvailabilityMain(this.MainItems) &&
+                totalAvailabilitySide(this.SideItems) &&
+                totalAvailabilityDrink(this.DrinkItems);
         // using the totalAvailability function to check if all elements in
         // this.MainItems, this.SideItems, and this.DrinkItems are available.
     }
@@ -205,7 +205,7 @@ public class Combo implements Sellable {
      *
      * @return Return the total price of all the MainItems in this combo
      */
-    public float totalPrice(ArrayList<MainItem> items){
+    public float totalPriceMain(ArrayList<MainItem> items){
         // This function uses a for loop accumulator to add up the total price of all the foods.
         float accumulator = 0;
         for (MainItem item : items){
@@ -219,7 +219,7 @@ public class Combo implements Sellable {
      *
      * @return Return the total price of all the SideItems in this combo
      */
-    public float totalPrice(ArrayList<SideItem> items){
+    public float totalPriceSide(ArrayList<SideItem> items){
         // This function uses a for loop accumulator to add up the total price of all the foods.
         float accumulator = 0;
         for (SideItem item : items){
@@ -233,7 +233,7 @@ public class Combo implements Sellable {
      *
      * @return Return the total price of all the MainItems in this combo
      */
-    public float totalPrice(ArrayList<DrinkItem> items){
+    public float totalPriceDrink(ArrayList<DrinkItem> items){
         // This function uses a for loop accumulator to add up the total price of all the foods.
         float accumulator = 0;
         for (DrinkItem item : items){
@@ -247,9 +247,9 @@ public class Combo implements Sellable {
      *
      * @param items A list of items, either main items, side items, and drink items.
      */
-    public boolean totalAvailability(ArrayList<MainItem> items) {
+    public boolean totalAvailabilityMain(ArrayList<MainItem> items) {
         // loops through all elements in the given array to check if all items are available.
-        for (Mainitem item : items){
+        for (MainItem item : items){
             if (!item.isAvailable()){
                 return false;
             }
@@ -258,7 +258,7 @@ public class Combo implements Sellable {
     }
 
 
-    public boolean totalAvailability(ArrayList<SideItem> items) {
+    public boolean totalAvailabilitySide(ArrayList<SideItem> items) {
         // loops through all elements in the given array to check if all items are available.
         for (SideItem item : items){
             if (!item.isAvailable()){
@@ -268,7 +268,7 @@ public class Combo implements Sellable {
         return true;
     }
 
-    public boolean totalAvailability(ArrayList<DrinkItem> items) {
+    public boolean totalAvailabilityDrink(ArrayList<DrinkItem> items) {
         // loops through all elements in the given array to check if all items are available.
         for (DrinkItem item : items){
             if (!item.isAvailable()){

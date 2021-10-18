@@ -11,7 +11,7 @@ public class Main{
         FoodTruck truck1 = new FoodTruck();
         HashMap<String, Orderable> orders = new HashMap<>();
         Queue<String> orderQueue = new LinkedList<String>();
-        FiFoBook book = new FiFoBook(orders, orderQueue, 0);
+        FiFoBook book = new FiFoBook(orders, orderQueue);
         truck1.orderBook = book;
         truck1.shopName = "truck1";
         DMS dms1 = new DMS();
@@ -82,7 +82,7 @@ public class Main{
                     } while (prompt3 != 1);
                     Orderable order = dms1.shops.get("1").getNextOrder();
                     if(order != null) {
-                        System.out.println("There are orders in the queue. Press Y to see.");
+                        System.out.println("There are orders in the queue. Press Y to see. Press Q to log out.");
                         String prompt4 = reader.next();
                         if(prompt4.equals("Y")){
                             System.out.println("Order item: "+(order.getOrderItems()).get(0).getName());
@@ -96,9 +96,9 @@ public class Main{
                             order.setOrderStatus(Orderable.COMPLETED);
                             System.out.println("Order completed");
                         }
+                        else if(prompt4.equals("Q")){
 
-
-
+                        }
                     }
                     else{
                         System.out.println("No more orders to process!");

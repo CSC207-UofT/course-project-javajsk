@@ -85,6 +85,9 @@ public class FiFoBook implements OrderBook {
     public boolean setOrderStatus(String id, int status) {
         if(orders.containsKey(id)){
             orders.get(id).setOrderStatus(status);
+            if(status == 2){
+                this.items -=1;
+            }
             return true;
         }
         return false;
