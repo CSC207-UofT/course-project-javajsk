@@ -10,16 +10,11 @@ public interface ICart {
     // Note boolean values to assert if successful.
     public boolean removeItem(IFood item);
 
-    public boolean removeItem(int index); // Remove an item by index
-
     public boolean setItemQuantity(IFood item, int quantity);
 
-    // Modify item quantity by index
-    public boolean setItemQuantity(int index, int quantity);
+    public boolean addItem(IFood item, IAddon[] addons, int[] addonQuantities);
 
-    public boolean addItem(IFood item, int quantity, IAddon[] addons);
-
-    public boolean setAddons(IFood item, IAddon[] addons);
+    public boolean setAddons(IFood item,int index, IAddon[] addons, int[] addonQuantities);
 
 
 

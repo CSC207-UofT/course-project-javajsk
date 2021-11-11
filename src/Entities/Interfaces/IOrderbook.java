@@ -7,8 +7,6 @@ public interface IOrderbook {
 
     public int getOrderPosition(IOrder order);
 
-    public boolean removeOrder(int index);
-
     public boolean removeOrder(IOrder order);
 
     public boolean addOrder(IOrder order);
