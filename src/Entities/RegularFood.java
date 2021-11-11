@@ -61,6 +61,13 @@ public class RegularFood implements IFood {
      */
     @Override
     public float getPrice() {
+        if(this.price == -1){
+            float sum = 0;
+            for (ISingleton single: this.components) {
+                sum += single.getPrice();
+            }
+            return sum;
+        }
         return this.price;
     }
 
