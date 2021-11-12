@@ -1,9 +1,9 @@
 package Entities.Interfaces;
 
 public interface IOrder {
-    public ICart getCart();
+    ICart getCart();
 
-    public boolean setStatus();
+    void setStatus(boolean status);
 
     //TODO: anything else?
 }
