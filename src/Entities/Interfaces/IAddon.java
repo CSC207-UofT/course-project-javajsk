@@ -1,10 +1,28 @@
 package Entities.Interfaces;
 
+/**
+ * The Addon Interface
+ *
+ * This is an abstract interface that allows for the name, description, price, and add-on type to be
+ * accessed using getter methods.
+ */
 public interface IAddon {
+    /**
+     * A method that returns the name of the Addon
+     * @return name of addon
+     */
     public String getName();
 
+    /**
+     * A method that returns the description of the Addon
+     * @return description of Addon
+     */
     public String getDescription();
 
+    /**
+     * A method that returns the price of the Addon
+     * @return price of Addon
+     */
     public float getPrice();
 
 
@@ -21,5 +39,10 @@ public interface IAddon {
      TODO: What is the soloution?
     */
 
-    public String[] getTypes();
+    /**
+     * A method that returns an arraylist of the types the addon is, where each type/category is
+     * represented by an integer
+     * @return arraylist of addon types
+     */
+    public Integer[] getTypes();
 }
