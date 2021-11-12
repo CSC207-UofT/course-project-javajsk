@@ -4,7 +4,7 @@
 
 The idea of this project is to create a system that allows students of UofT to pre-order items from the food trucks 
 commonly found on St. George st. The app consists of many different object-oriented principles and contains objects that are designed
-to model FoodTrucks, Users, Vendors (i.e. the owners of the foodTrucks) and Menu items.
+to model FoodTrucks, User, Vendors (i.e. the owners of the foodTrucks) and Menu items.
 Currently, we are not including _"Cloud"_ functionality and limiting the program to a local, networkless scope.
 
 The skeleton program allows users to use a CLI-based interface to see what food is available and place an order. The vendor will then be able
@@ -62,6 +62,6 @@ In addition, the code covers a vast set of edge cases and has validation and ver
    - Wrote [Shop](src/Interfaces/Shop.java), [FoodTruck](src/FoodTruck.java), and [OrderBook](src/Interfaces/OrderBook.java)
    - Contributed to the CRC Model
  - Vijay
-   - Contributed to the [Orderalble](src/Interfaces/Orderable.java), [FifoBook](src/FiFoBook.java), and [Food](src/Food.java) classes
+   - Contributed to the [Orderalble](src/Interfaces/Orderable.java), [FifoBook](src/FiFoBook.java), and [MainItem](src/MainItem.java) classes
    - Contributed to the [Progress Report](progress_report.md).
    - Helped design parts of the architecture.

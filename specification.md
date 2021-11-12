@@ -10,7 +10,7 @@ Customers are capable of seeing the menus of all the food trucks and in the menu
 Customers can only add food items from one food truck at a time since they can't order from multiple food trucks in the same order.
 Food items will have photos, the pricing, and a short description. Multiple food items can also be combined to form a combo deal.
 After selecting all the desired food items, the customer can check out which sends the order to the food truck vendors.
-Users can track their order status to see if their order is cancelled, processing, confirmed, or completed. 
+User can track their order status to see if their order is cancelled, processing, confirmed, or completed. 
 Before an order is confirmed by the vendor, the customer is still allowed to cancel their order.
 Customers can also view their order history as well as keep track of their favourite menu items and orders that allow for quick repurchases.
 Lastly after making a purchase at a specific food truck, the user is permitted to leave a review about their experience.
