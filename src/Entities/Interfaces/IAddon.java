@@ -33,4 +33,10 @@ public interface IAddon {
      * @return arraylist of addon types
      */
     ArrayList<Integer> getTypes();
+
+    /**
+     * A method that returns whether the addon is available
+     * @return whether addon is available
+     */
+    boolean getAvailability();
 }
