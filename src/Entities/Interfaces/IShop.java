@@ -12,4 +12,6 @@ public interface IShop {
     // TODO: Please look into what datatype we will use for locations
     // This may change over time.
     public String getLocation();
+
+    public boolean isFoodAvailable(IFood food);
 }

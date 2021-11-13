@@ -70,6 +70,7 @@ public class RegularCart implements ICart {
      * @param index The index at which to remove the order.
      * @return if the removal succeeded or not.
      */
+    @Override
     public boolean removeItem(IFood item, int index) {
         // removes item at given index.
         if(contents.containsKey(item)){
@@ -90,7 +91,6 @@ public class RegularCart implements ICart {
      * @param item Which food item to remove.
      * @return if the removal succeeded or not.
      */
-    @Override
     public boolean removeItem(IFood item) {
         //simply removes the last entry of the item.
         if(contents.containsKey(item)){
@@ -253,4 +253,7 @@ public class RegularCart implements ICart {
         return retArr;
     }
 
+    public boolean isEmpty(){
+        return contents.isEmpty();
+    }
 }
