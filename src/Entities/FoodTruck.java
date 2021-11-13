@@ -1,5 +1,6 @@
 package Entities;
 
+import Entities.Interfaces.IFood;
 import Entities.Interfaces.IOrderbook;
 import Entities.Interfaces.IShop;
 
@@ -54,4 +55,5 @@ public class FoodTruck implements IShop {
     public void setLocation(String location) {
         this.location = location;
     }
+
 }

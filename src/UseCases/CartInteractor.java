@@ -19,7 +19,7 @@ public class CartInteractor {
     }
 
     public void addToCart(IFood item, List<HashMap<IAddon, Integer>> addons){
-        if(this.selected_shop.isFoodAvailable(item) && item.isValidAddons(addons)){
+        if(this.selected_shop.getMenu().isFoodAvailable(item) && item.isValidAddons(addons)){
             cart.addItem(item, addons);
         }
     }
