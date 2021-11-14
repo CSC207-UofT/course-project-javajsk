@@ -44,7 +44,7 @@ public class OrderInteractor {
      */
     public boolean validCart(RegularCart cart, FoodTruck foodTruck){
         IFood[] items = cart.getFoods();
-        HashMap<IFood, ISingleton> menuItems = foodTruck.getMenu();
+        HashMap<IFood, ISingleton> menuItems = foodTruck.getMenu().getMenuContents();
         for (IFood item:items){
             if (!menuItems.containsKey(item)){return false;}
         }

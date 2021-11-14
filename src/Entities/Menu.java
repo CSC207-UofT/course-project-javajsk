@@ -22,6 +22,10 @@ public class Menu {
         }
     }
 
+    public HashMap<IFood, ISingleton> getMenuContents() {
+        return menu;
+    }
+
     public float getPrice(IFood item) {
         if (menu.containsKey(item)) {
             return menu.get(item).getPrice();
