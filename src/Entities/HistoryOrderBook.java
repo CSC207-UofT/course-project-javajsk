@@ -11,6 +11,7 @@ public class HistoryOrderBook implements IOrderbook {
      *
      * This class represents a list of previous orders made by a user
      * (i.e. a list of order history for one user).
+     * Users cannot remove orders from their order history
      *
      * orders -  list of orders the user has previously made (sorted from oldest to most recent)
      */
@@ -62,4 +63,13 @@ public class HistoryOrderBook implements IOrderbook {
     public boolean addOrder(IOrder order) {
         return this.orders.add(order);
     }
+
+    /**
+     * A method that returns whether a given order was successfully removed
+     * This will always return false as this order book cannot remove orders
+     * @param order order to be removed
+     * @return whether the order was successfully removed (false)
+     */
+    @Override
+    public boolean removeOrder(IOrder order) { return false; }
 }

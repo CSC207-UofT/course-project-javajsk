@@ -13,13 +13,14 @@ public class VendorOrderBook implements IOrderbook {
      * that a vendor would need.
      * Assumes a vendor would typically work on orders in a first come, first
      * serve basis (this assumption is for the getNextOrder method).
+     * Vendors are allowed to remove orders from the order book
      *
      * orders - list of orders in the book (sorted oldest to newest)
      */
     public LinkedList<IOrder> orders;
 
     /**
-     * Constructs a FifoOrderBook with an arraylist of 0 orders
+     * Constructs a VendorOrderBook with an arraylist of 0 orders where orders can be removed
      */
     public VendorOrderBook(){
         this.orders = new LinkedList<IOrder>();
@@ -64,21 +65,22 @@ public class VendorOrderBook implements IOrderbook {
     }
 
     /**
+     * A method that returns whether a given order was successfully removed
+     * @param order order to be removed
+     * @return whether the order was successfully removed
+     */
+    @Override
+    public boolean removeOrder(IOrder order) {
+        return this.orders.remove(order);
+    }
+
+    /**
      * A method that returns the next order in the order book (the oldest
      * order added)
      * @return next order from orderbook
      */
     public IOrder getNextOrder() {
         return this.orders.getFirst();
-    }
-
-    /**
-     * A method that returns whether a given order was successfully removed
-     * @param order order to be removed
-     * @return whether the order was successfully removed
-     */
-    public boolean removeOrder(IOrder order) {
-        return this.orders.remove(order);
     }
 
     /**
