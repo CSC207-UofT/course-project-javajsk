@@ -26,8 +26,7 @@ public class RegularFood implements IFood {
      * @param description Brief description of the item
      * @param components   The singleton entities that make up this RegularFood object.
      */
-    public RegularFood(String name, String description, float price,
-                       List<ISingleton> components) {
+    public RegularFood(String name, String description, float price, List<ISingleton> components) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -79,5 +78,25 @@ public class RegularFood implements IFood {
     @Override
     public List<ISingleton> getComponents() {
         return this.components;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    @Override
+    public void setComponents(List<ISingleton> components) {
+        this.components = components;
     }
 }

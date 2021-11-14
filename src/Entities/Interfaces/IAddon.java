@@ -45,4 +45,12 @@ public interface IAddon {
      * @return arraylist of addon types
      */
     public Integer[] getTypes();
+
+    public void setName(String name);
+
+    public void setPrice(float price);
+
+    public void setDescription(String description);
+
+    public void setTypes(Integer[] types);
 }

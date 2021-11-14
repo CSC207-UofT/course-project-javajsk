@@ -10,4 +10,12 @@ public interface IFood {
     public float getPrice();
 
     public List<ISingleton> getComponents();
+
+    public void setName(String name);
+
+    public void setDescription(String description);
+
+    public void setPrice(float price);
+
+    public void setComponents(List<ISingleton> components);
 }
