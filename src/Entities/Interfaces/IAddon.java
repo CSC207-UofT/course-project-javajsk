@@ -28,6 +28,12 @@ public interface IAddon {
     float getPrice();
 
     /**
+     * A method that sets the price of the Addon
+     * @param newPrice price of Addon
+     */
+    void setPrice(float newPrice);
+
+    /**
      * A method that returns an arraylist of the types the addon is, where each type/category is
      * represented by an integer
      * @return arraylist of addon types
@@ -39,4 +45,10 @@ public interface IAddon {
      * @return whether addon is available
      */
     boolean getAvailability();
+
+    /**
+     * A method that sets the availability of the Addon
+     * @param newAvail whether addon is available
+     */
+    void setAvailability(boolean newAvail);
 }

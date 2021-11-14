@@ -73,6 +73,15 @@ public class RegularAddon implements IAddon {
     }
 
     /**
+     * A method that sets the price of the Addon
+     * @param newPrice price of Addon
+     */
+    @Override
+    public void setPrice(float newPrice){
+        this.price = newPrice;
+    }
+
+    /**
      * A method that returns an arraylist of the types the addon is, where each type/category is
      * represented by an integer
      * @return arraylist of addon types
@@ -89,5 +98,14 @@ public class RegularAddon implements IAddon {
     @Override
     public boolean getAvailability() {
         return this.isAvailable;
+    }
+
+    /**
+     * A method that sets the availability of the Addon
+     * @param newAvail whether addon is available
+     */
+    @Override
+    public void setAvailability(boolean newAvail){
+        this.isAvailable = newAvail;
     }
 }
