@@ -11,7 +11,7 @@ public interface ICart {
     // remove that item
 
     // Note boolean values to assert if successful.
-    public boolean removeItem(IFood item);
+    public boolean removeItem(IFood item, int index);
 
     public boolean setItemQuantity(IFood item, int quantity);
 
@@ -25,6 +25,7 @@ public interface ICart {
 
     public IFood[] getFoods();
 
+    public boolean isEmpty();
 
 
 

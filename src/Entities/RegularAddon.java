@@ -49,6 +49,7 @@ public class RegularAddon implements IAddon {
      * A method that returns the name of the Addon
      * @return name of addon
      */
+
     @Override
     public String getName() {
         return this.name;
@@ -71,7 +72,7 @@ public class RegularAddon implements IAddon {
     public float getPrice() {
         return this.price;
     }
-
+  
     /**
      * A method that sets the price of the Addon
      * @param newPrice price of Addon

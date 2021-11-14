@@ -1,8 +1,11 @@
 package Entities;
 
+import Entities.Interfaces.IAddon;
 import Entities.Interfaces.IFood;
 import Entities.Interfaces.ISingleton;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -26,8 +29,7 @@ public class RegularFood implements IFood {
      * @param description Brief description of the item
      * @param components   The singleton entities that make up this RegularFood object.
      */
-    public RegularFood(String name, String description, float price,
-                       List<ISingleton> components) {
+    public RegularFood(String name, String description, float price, List<ISingleton> components) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -79,5 +81,51 @@ public class RegularFood implements IFood {
     @Override
     public List<ISingleton> getComponents() {
         return this.components;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    @Override
+    public void setComponents(List<ISingleton> components) {
+        this.components = components;
+    }
+
+    @Override
+    public boolean isValidAddons(List<HashMap<IAddon, Integer>> addons) {
+        if(addons.size() != components.size()){
+            return false;
+        }
+        List<List<IAddon>> allowedTypes = this.getAllowedAddons();
+        for(int i =0; i < addons.size(); i++){
+            List<IAddon> allowedForSingleton = allowedTypes.get(i);
+            for(IAddon selectedAddon: addons.get(i).keySet()){
+                if(!allowedForSingleton.contains(selectedAddon)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public List<List<IAddon>> getAllowedAddons() {
+        List<List<IAddon>> addons = new ArrayList<>();
+        for(ISingleton item: components){
+            addons.add(item.getAllowedAddonTypes());
+        }
+        return addons;
     }
 }
