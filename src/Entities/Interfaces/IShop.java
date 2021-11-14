@@ -13,7 +13,6 @@ public interface IShop {
     // Locations will be strings for now. Might implement map feature later if we have time.
     public String getLocation();
 
-
     public void setMenu(Menu menu);
 
     public void setOrderBook(FifoOrderBook orderBook);

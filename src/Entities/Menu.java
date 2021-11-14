@@ -39,6 +39,10 @@ public class Menu {
         this.menu = menu;
     }
 
+    public boolean isFoodAvailable(IFood item){
+        return true;
+    }
+
 }
 // incomplete
 

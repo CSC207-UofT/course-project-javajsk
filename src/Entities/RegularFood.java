@@ -1,8 +1,11 @@
 package Entities;
 
+import Entities.Interfaces.IAddon;
 import Entities.Interfaces.IFood;
 import Entities.Interfaces.ISingleton;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -98,5 +101,31 @@ public class RegularFood implements IFood {
     @Override
     public void setComponents(List<ISingleton> components) {
         this.components = components;
+    }
+
+    @Override
+    public boolean isValidAddons(List<HashMap<IAddon, Integer>> addons) {
+        if(addons.size() != components.size()){
+            return false;
+        }
+        List<List<IAddon>> allowedTypes = this.getAllowedAddons();
+        for(int i =0; i < addons.size(); i++){
+            List<IAddon> allowedForSingleton = allowedTypes.get(i);
+            for(IAddon selectedAddon: addons.get(i).keySet()){
+                if(!allowedForSingleton.contains(selectedAddon)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public List<List<IAddon>> getAllowedAddons() {
+        List<List<IAddon>> addons = new ArrayList<>();
+        for(ISingleton item: components){
+            addons.add(item.getAllowedAddonTypes());
+        }
+        return addons;
     }
 }
