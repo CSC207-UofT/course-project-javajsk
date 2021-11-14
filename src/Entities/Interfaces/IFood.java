@@ -30,6 +30,14 @@ public interface IFood {
      */
     public List<ISingleton> getComponents();
 
+    public void setName(String name);
+
+    public void setDescription(String description);
+
+    public void setPrice(float price);
+
+    public void setComponents(List<ISingleton> components);
+
     public boolean isValidAddons(List<HashMap<IAddon, Integer>> addons);
 
     public List<List<IAddon>> getAllowedAddons();

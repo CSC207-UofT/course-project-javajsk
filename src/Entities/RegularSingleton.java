@@ -5,7 +5,7 @@ import Entities.Interfaces.ISingleton;
 
 import java.util.List;
 
-public class RegularSingleton{
+public class RegularSingleton implements ISingleton{
     String name;
     String description;
     float price;
@@ -41,6 +41,32 @@ public class RegularSingleton{
     public String getDescription() {
         return this.description;
     }
+
+    @Override
+    public List<IAddon> getAllowedAddonTypes() {
+        return add_ons;
+    }
+
+    @Override
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public void setAllowedAddonTypes(List<IAddon> allowedAddonTypes) {
+        this.add_ons = add_ons;
+    }
+
     /**
      * Get the name of this object
      *

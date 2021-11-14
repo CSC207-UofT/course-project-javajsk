@@ -13,7 +13,9 @@ public class Menu {
     public Menu() {
         this.menu = new HashMap<>();
     }
-
+    public Menu(HashMap<IFood, ISingleton> menu){
+        this.menu = menu;
+    }
     public void MenuItem(IFood[] foods, ISingleton[] singleton) {
         for (int i = 0; i < foods.length; i++) {
             menu.put(foods[i], singleton[i]);
@@ -32,6 +34,9 @@ public class Menu {
             return menu.get(item).getDescription();
         } else
             return null;
+    }
+    public void setMenu(HashMap<IFood, ISingleton> menu){
+        this.menu = menu;
     }
 
     public boolean isFoodAvailable(IFood item){
