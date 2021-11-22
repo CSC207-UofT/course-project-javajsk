@@ -16,6 +16,7 @@ import java.util.List;
  */
 
 public class RegularFood implements IFood {
+    String id;
     String name;
     String description;
     float price;
@@ -29,12 +30,22 @@ public class RegularFood implements IFood {
      * @param description Brief description of the item
      * @param components   The singleton entities that make up this RegularFood object.
      */
-    public RegularFood(String name, String description, float price, List<ISingleton> components) {
+    public RegularFood(String id, String name, String description, float price, List<ISingleton> components) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.components = components;
     }
+
+    /**
+     * Method returns the id of this RegularFood object
+     *
+     * @return id of food object
+     */
+    @Override
+    public String getId(){ return this.id; }
+
 
     /**
      * Get the name of this object
@@ -45,6 +56,7 @@ public class RegularFood implements IFood {
     public String getName() {
         return this.name;
     }
+
 
     /**
      * Get the description of this object
