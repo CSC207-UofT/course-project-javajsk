@@ -7,7 +7,7 @@ import Entities.Interfaces.IAddon;
         * This is an abstract interface that allows for Addons to be
         * accessed from the database.
         */
-interface AddonRespository{
+interface AddonRepository{
     /**
      *
      * @param id of addon
