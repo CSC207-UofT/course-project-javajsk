@@ -8,7 +8,7 @@ import Entities.RegularFood;
  * This is an interface that allows for the attainment, changing, and deletion
  * of a RegularFood objects in the higher level data storage.
  */
-public interface FoodAccessInterface {
+public interface FoodRepository {
         /**
          *  A method that returns the desired RegularFood object from
          *  the higher level data storage.
