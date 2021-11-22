@@ -1,6 +1,7 @@
 package UseCases.DataAccessInterfaces;
 
 import Entities.FoodTruck;
+import Entities.Interfaces.IShop;
 import Entities.Menu;
 
 public interface FoodTruckRepository {
@@ -18,5 +19,7 @@ public interface FoodTruckRepository {
     public boolean setShopMenu(String id, Menu menu);
 
     public boolean setShopStatus(String id, Boolean status);
+
+    boolean save(IShop shop);
 
 }

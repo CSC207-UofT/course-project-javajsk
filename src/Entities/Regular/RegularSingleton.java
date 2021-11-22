@@ -1,4 +1,4 @@
-package Entities;
+package Entities.Regular;
 
 import Entities.Interfaces.IAddon;
 import Entities.Interfaces.ISingleton;

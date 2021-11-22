@@ -24,6 +24,10 @@ interface AddonRepository{
 
     boolean setAddon(String id, IAddon addon);
 
+    //TODO: DOC
+    boolean save(IAddon addon);
+
+
     /**
      *
      * @param id of addon
