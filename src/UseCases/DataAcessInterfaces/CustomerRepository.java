@@ -26,14 +26,22 @@ public interface CustomerRepository {
     Boolean setCustomer(String id, User customer);
     /**
      *  A method that removes a customer from the repository
+     *
+     * @param id corresponds to the id of the customer
+     * @return true if the customer is deleted and false if not
      */
     Boolean deleteCustomer(String id);
     /**
      *  A method for generating an authentication token for the user
+     *
+     * @return the generated token in a string
      */
     String getAuthenticationToken();
     /**
      *  A method that checks if a token is still valid
+     *
+     * @param token the token we are checking
+     * @return true if the token is valid and false if it isn't
      */
     Boolean isValidAuthToken(String token);
 }
