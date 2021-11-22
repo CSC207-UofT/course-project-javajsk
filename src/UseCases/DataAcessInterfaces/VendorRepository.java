@@ -8,7 +8,7 @@ import Entities.Vendor;
  * This is an interface that allows for the attainment, changing, deletion, and validation
  * of vendors in the higher level data storage.
  */
-public interface VendorAccessInterface {
+public interface VendorRepository {
 
     /**
      *  A method that returns the desired vendor from
