@@ -1,4 +1,4 @@
-package UseCases.DataAcessInterfaces;
+package UseCases.DataAccessInterfaces;
 
 import Entities.Interfaces.ISingleton;
 
