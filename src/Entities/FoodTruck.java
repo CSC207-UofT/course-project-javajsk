@@ -7,7 +7,7 @@ import Entities.Interfaces.IShop;
 public class FoodTruck implements IShop {
 
     Menu menu;
-    FifoOrderBook orderbook;
+    IOrderbook orderbook;
     String location;
     String name;
 
@@ -17,7 +17,7 @@ public class FoodTruck implements IShop {
      * @param location Initial String location
      * @param name Initial String name
      */
-    public FoodTruck(Menu menu, FifoOrderBook orderbook, String location, String name){
+    public FoodTruck(Menu menu, IOrderbook orderbook, String location, String name){
         this.menu = menu;
         this.orderbook = orderbook;
         this.location = location;
@@ -68,7 +68,7 @@ public class FoodTruck implements IShop {
      * @param orderBook Set OrderBook of FoodTruck
      */
     @Override
-    public void setOrderBook(FifoOrderBook orderBook) {
+    public void setOrderBook(IOrderbook orderBook) {
         this.orderbook = orderBook;
     }
 

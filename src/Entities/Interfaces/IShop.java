@@ -1,6 +1,5 @@
 package Entities.Interfaces;
 
-import Entities.FifoOrderBook;
 import Entities.Menu;
 
 public interface IShop {
@@ -15,7 +14,7 @@ public interface IShop {
 
     public void setMenu(Menu menu);
 
-    public void setOrderBook(FifoOrderBook orderBook);
+    public void setOrderBook(IOrderbook orderBook);
 
     public void setName(String name);
 

@@ -1,7 +1,8 @@
-package Entities;
+package Entities.Regular;
 
 import Entities.Interfaces.IAddon;
 import Entities.Interfaces.IFood;
+import Entities.Interfaces.ISelection;
 import Entities.Interfaces.ISingleton;
 
 import java.util.ArrayList;
@@ -116,7 +117,7 @@ public class RegularFood implements IFood {
     }
 
     @Override
-    public boolean isValidAddons(List<HashMap<IAddon, Integer>> addons) {
+    public boolean isValidAddons(ISelection addons) {
         if(addons.size() != components.size()){
             return false;
         }
