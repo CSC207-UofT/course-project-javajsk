@@ -2,7 +2,7 @@ package UseCases.DataAcessInterfaces;
 
 import Entities.Interfaces.ISingleton;
 
-public interface SingletonAccessInterface {
+public interface SingletonRepository {
     /**
      * Get the Singleton that matches the inputted id
      *
