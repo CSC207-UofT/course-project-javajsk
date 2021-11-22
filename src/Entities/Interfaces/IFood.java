@@ -38,7 +38,7 @@ public interface IFood {
 
     public void setComponents(List<ISingleton> components);
 
-    public boolean isValidAddons(List<HashMap<IAddon, Integer>> addons);
+    public boolean isValidAddons(ISelection addons);
 
     public List<List<IAddon>> getAllowedAddons();
 }

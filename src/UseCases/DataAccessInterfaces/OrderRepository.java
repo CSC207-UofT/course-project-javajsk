@@ -42,4 +42,6 @@ public interface OrderRepository {
      * @return arraylist of orders
      */
     ArrayList<IOrder> getOrdersByFoodTruck(String truckId);
+
+    boolean save(IOrder order);
 }

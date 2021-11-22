@@ -1,6 +1,6 @@
 package UseCases.DataAccessInterfaces;
 
-import Entities.RegularFood;
+import Entities.Interfaces.IFood;
 
 /**
  * The FoodAccessInterface Interface
@@ -16,7 +16,7 @@ public interface FoodRepository {
          * @param id The associated id of the RegularFood object.
          * @return Return the RegularFood object with the associated id.
          */
-        public RegularFood getFood(String id);
+        public IFood getFood(String id);
 
         /**
          *  A method that changes information of the desired RegularFood object in
@@ -27,7 +27,7 @@ public interface FoodRepository {
          *
          * @return Return whether the changes to the RegularFood object have been made.
          */
-        public Boolean setFood(String id, RegularFood new_food);
+        public Boolean setFood(String id, IFood new_food);
 
         /**
          *  A method that deletes a desired RegularFood object in
@@ -38,4 +38,6 @@ public interface FoodRepository {
          * @return Return whether the deletion has been made.
          */
         public Boolean deleteFood (String id);
+
+        boolean save(IFood food);
 }

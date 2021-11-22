@@ -10,9 +10,11 @@ public class Menu {
 
 
     private HashMap<IFood, ISingleton> menu;
+
     public Menu() {
         this.menu = new HashMap<>();
     }
+
     public Menu(HashMap<IFood, ISingleton> menu){
         this.menu = menu;
     }
