@@ -1,4 +1,4 @@
-package UseCases.DataAcessInterfaces;
+package UseCases.DataAccessInterfaces;
 
 import Entities.Interfaces.IAddon;
 /**
@@ -7,7 +7,7 @@ import Entities.Interfaces.IAddon;
         * This is an abstract interface that allows for Addons to be
         * accessed from the database.
         */
-interface AddonAccessInterface{
+interface AddonRespository{
     /**
      *
      * @param id of addon
