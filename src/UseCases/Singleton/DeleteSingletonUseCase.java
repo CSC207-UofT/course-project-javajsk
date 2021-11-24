@@ -5,7 +5,6 @@ import Entities.Interfaces.IVendor;
 import UseCases.DataAccessInterfaces.SingletonRepository;
 import UseCases.DataAccessInterfaces.VendorRepository;
 import UseCases.OutputBoundary.ErrorPopup;
-import UseCases.OutputBoundary.SingletonModel;
 
 public class DeleteSingletonUseCase implements DeleteSingletonInputBoundary {
     SingletonRepository singletonRepository;
