@@ -10,7 +10,6 @@ import UseCases.OutputBoundary.SingletonModel;
 public class DeleteSingletonUseCase implements DeleteSingletonInputBoundary {
     SingletonRepository singletonRepository;
     VendorRepository vendorRepository;
-    SingletonModel singletonModel;
     ErrorPopup errorPopup;
 
     @Override
