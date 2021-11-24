@@ -27,4 +27,6 @@ public interface SingletonRepository {
      * @return    True if successful, False otherwise
      */
     boolean deleteSingleton(String id);
+
+    boolean save(ISingleton singleton);
 }

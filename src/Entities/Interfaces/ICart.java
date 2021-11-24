@@ -13,15 +13,17 @@ public interface ICart {
     // Note boolean values to assert if successful.
     public boolean removeItem(IFood item, int index);
 
+    public String getId();
+
     public boolean setItemQuantity(IFood item, int quantity);
 
-    public boolean addItem(IFood item, List<HashMap<IAddon, Integer>> addons);
+    public boolean addItem(IFood item, ISelection addons);
 
-    public boolean setAddons(IFood item, int index, List<HashMap<IAddon, Integer>> addons);
+    public boolean setAddons(IFood item, int index, ISelection addons);
 
     public int getQuantity(IFood item);
 
-    public List<HashMap<IAddon, Integer>> getAddons(IFood item , int index);
+    public ISelection getAddons(IFood item , int index);
 
     public IFood[] getFoods();
 
