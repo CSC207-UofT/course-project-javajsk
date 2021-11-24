@@ -20,8 +20,6 @@ public class DeleteSingletonUseCase implements DeleteSingletonInputBoundary {
             ISingleton singleton = singletonRepository.getSingleton(singletonID);
             if(singleton != null) {
                 singletonRepository.deleteSingleton(singletonID);
-                singletonModel.updateSingleton(singleton);
-                singletonRepository.save(singleton);
             } else { errorPopup.displayError("Invalid ID"); }
         }
         errorPopup.displayError("User is not Vendor");
