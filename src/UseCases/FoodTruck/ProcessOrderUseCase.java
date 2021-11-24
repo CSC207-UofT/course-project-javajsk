@@ -1,7 +1,6 @@
-package UseCases.Cart;
+package UseCases.FoodTruck;
 
 import Entities.Interfaces.IOrder;
-import Entities.Interfaces.IOrderbook;
 import Entities.Interfaces.IShop;
 import Entities.Interfaces.IVendor;
 import Entities.VendorOrderBook;
@@ -9,7 +8,7 @@ import UseCases.DataAccessInterfaces.FoodTruckRepository;
 import UseCases.DataAccessInterfaces.VendorRepository;
 import UseCases.OutputBoundary.ErrorPopup;
 
-public class ProcessOrderUseCase implements  ProcessOrderInputBoundary{
+public class ProcessOrderUseCase implements ProcessOrderInputBoundary {
     VendorRepository vendorRepository;
     FoodTruckRepository foodTruckRepository;
     ErrorPopup errorDisplayer;

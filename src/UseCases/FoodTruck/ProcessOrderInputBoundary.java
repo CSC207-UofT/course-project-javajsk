@@ -1,4 +1,4 @@
-package UseCases.Cart;
+package UseCases.FoodTruck;
 
 import Entities.VendorOrderBook;
 
