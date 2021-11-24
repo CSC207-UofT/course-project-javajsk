@@ -74,7 +74,12 @@ public class RegularSingleton implements ISingleton{
 
     @Override
     public void setAllowedAddonTypes(List<IAddon> allowedAddonTypes) {
-        this.add_ons = add_ons;
+        this.add_ons = allowedAddonTypes;
+    }
+
+    @Override
+    public void setSingleton(RegularSingleton singleton) {
+        // TODO: implement this function
     }
 
     /**

@@ -1,5 +1,9 @@
 package UseCases.OutputBoundary;
 
-public interface SingletonModel {
+import Entities.Interfaces.ISingleton;
 
+public interface SingletonModel {
+    void displaySingleton(ISingleton singleton);
+
+    void updateSingleton(ISingleton singleton);
 }

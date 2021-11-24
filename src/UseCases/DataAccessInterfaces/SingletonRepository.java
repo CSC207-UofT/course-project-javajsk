@@ -3,6 +3,10 @@ package UseCases.DataAccessInterfaces;
 import Entities.Interfaces.ISingleton;
 
 public interface SingletonRepository {
+
+    @SuppressWarnings("UnusedReturnValue")
+    ISingleton createSingleton(ISingleton singleton);
+
     /**
      * Get the Singleton that matches the inputted id
      *

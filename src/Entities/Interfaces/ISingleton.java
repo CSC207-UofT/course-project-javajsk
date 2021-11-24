@@ -1,5 +1,7 @@
 package Entities.Interfaces;
 
+import Entities.Regular.RegularSingleton;
+
 import java.util.List;
 
 public interface ISingleton {
@@ -19,4 +21,6 @@ public interface ISingleton {
     public void setDescription(String description);
 
     public void setAllowedAddonTypes(List<IAddon> allowedAddonTypes);
+
+    void setSingleton(RegularSingleton singleton);
 }
