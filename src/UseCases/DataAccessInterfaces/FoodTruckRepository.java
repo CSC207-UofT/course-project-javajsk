@@ -10,9 +10,7 @@ public interface FoodTruckRepository {
      * @param id The String id associated with the reference of this object in the higher level data system
      * @return
      */
-    public FoodTruck getFoodTruck(String id);
-
-    public boolean setFoodTruck(String id, String name, Menu menu, Boolean status);
+    IShop getFoodTruck(String id);
 
     public boolean setShopName(String id, String name);
 
@@ -20,6 +18,8 @@ public interface FoodTruckRepository {
 
     public boolean setShopStatus(String id, Boolean status);
 
-    boolean save(IShop shop);
+    IShop createFoodTruck(IShop FoodTruck);
+
+    boolean save(IShop FoodTruck);
 
 }
