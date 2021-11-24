@@ -6,7 +6,7 @@ import Entities.Interfaces.ICustomer;
 /**
  * The Customer Interface
  *
- * This is an abstract interface for accessing a higher  with customers
+ * This is an abstract interface for accessing customers from a repository
  */
 public interface CustomerRepository {
 
@@ -34,19 +34,26 @@ public interface CustomerRepository {
     Boolean deleteCustomer(String id);
     /**
      *  A method for generating an authentication token for the user
-     * TODO: UPDATE THIS DOC
+     *
+     * @param username the username of user
+     * @param password  the password for the user
      *
      * @return the generated token in a string
      */
     String getAuthenticationToken(String username, String password);
     /**
-     *  A method that checks if a token is still valid
+     *  A method that finds the user with the given token
      * TODO: UPDATE THIS DOC
-     * @param token the token we are checking
-     * @return true if the token is valid and false if it isn't
+     * @param token the token we are using to find a user
+     * @return the customer that matched the token
      */
     ICustomer getUserFromToken(String token);
 
-    //TODO: DOC
+    /**
+     * A method for saving a customer to the repository
+     *
+     * @param customer the customer we want to save
+     * @return true if the customer has been saved and false if it has not
+     */
     boolean save(ICustomer customer);
 }
