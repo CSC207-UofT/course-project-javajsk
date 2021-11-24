@@ -4,30 +4,31 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface ICart {
+    // Consider replacing with an abstract class?
 
-    public float getTotalPrice();
+
+    float getTotalPrice();
 
     // Remove an item by its value e.g. if cart contains an item == item, then
     // remove that item
-
     // Note boolean values to assert if successful.
-    public boolean removeItem(IFood item, int index);
+    boolean removeItem(IFood item, int index);
 
-    public String getId();
+    String getId();
 
-    public boolean setItemQuantity(IFood item, int quantity);
+    boolean setItemQuantity(IFood item, int quantity);
 
-    public boolean addItem(IFood item, ISelection addons);
+    boolean addItem(IFood item, ISelection addons);
 
-    public boolean setAddons(IFood item, int index, ISelection addons);
+    boolean setAddons(IFood item, int index, ISelection addons);
 
-    public int getQuantity(IFood item);
+    int getQuantity(IFood item);
 
-    public ISelection getAddons(IFood item , int index);
+    ISelection getAddons(IFood item , int index);
 
-    public IFood[] getFoods();
+    IFood[] getFoods();
 
-    public boolean isEmpty();
+    boolean isEmpty();
 
 
 
