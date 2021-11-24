@@ -6,5 +6,5 @@ import Entities.Interfaces.ISingleton;
 import java.util.List;
 
 public interface CreateFoodInputBoundary {
-    IFood createFood(String id, String name, String desc, float price, List<ISingleton> singletons);
+    boolean createFood(String token, String id, String name, String desc, float price, List<ISingleton> singletons);
 }
