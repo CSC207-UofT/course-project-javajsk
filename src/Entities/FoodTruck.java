@@ -1,15 +1,15 @@
 package Entities;
 
-import Entities.Interfaces.IFood;
-import Entities.Interfaces.IOrder;
-import Entities.Interfaces.IOrderbook;
-import Entities.Interfaces.IShop;
+import Entities.Interfaces.*;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class FoodTruck implements IShop {
 
     Menu menu;
     IOrderbook orderbook;
-
+    HashMap<IAddon, Boolean> addonAvailability;
     String location;
     String name;
 
@@ -19,12 +19,47 @@ public class FoodTruck implements IShop {
      * @param location Initial String location
      * @param name Initial String name
      */
-    public FoodTruck(Menu menu, IOrderbook orderbook, String location, String name){
-
+    public FoodTruck(Menu menu, IOrderbook orderbook, String location, String name, HashMap<IAddon, Boolean> addAvail){
         this.menu = menu;
         this.orderbook = orderbook;
         this.location = location;
         this.name = name;
+        this.addonAvailability = addAvail;
+    }
+
+
+    @Override
+    public void setAddonAvailability(IAddon add, Boolean avail) {
+        if(addonAvailability.containsKey(add)){
+            addonAvailability.replace(add, avail);
+        }else{
+            addonAvailability.put(add, avail);
+        }
+    }
+
+    @Override
+    public boolean isAddonAvailable(IAddon add) {
+        return addonAvailability.getOrDefault(add, false);
+    }
+
+    @Override
+    public boolean isAddonListAvailable(List<IAddon> addons) {
+        for(IAddon addon: addons){
+            if(!this.isAddonAvailable(addon)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isValidAddons(List<ISelection> order) {
+        for(ISelection sel: order){
+            if(!this.isAddonListAvailable(sel.getUsedAddons())){
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -89,6 +124,11 @@ public class FoodTruck implements IShop {
     @Override
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    @Override
+    public String getID() {
+        return null;
     }
 
 }

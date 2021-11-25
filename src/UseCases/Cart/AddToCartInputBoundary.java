@@ -6,5 +6,5 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface AddToCartInputBoundary {
-    ICart addToCart(String cartId, String foodId, ISelection orderInfo, String token);
+    ICart addToCart(String cartId, String foodId, List<ISelection> orderInfo, IShop shop, String token);
 }

@@ -119,18 +119,19 @@ public class RegularFood implements IFood {
     }
 
     @Override
-    public boolean isValidAddons(ISelection addons) {
+    public boolean isValidAddons(List<ISelection> addons) {
         if(addons.size() != components.size()){
             return false;
         }
         List<List<IAddon>> allowedTypes = this.getAllowedAddons();
         for(int i =0; i < addons.size(); i++){
             List<IAddon> allowedForSingleton = allowedTypes.get(i);
-            for(IAddon selectedAddon: addons.get(i).keySet()){
-                if(!allowedForSingleton.contains(selectedAddon)){
+            for (IAddon selectedAddon : addons.get(i).getUsedAddons()) {
+                if (!allowedForSingleton.contains(selectedAddon)) {
                     return false;
                 }
             }
+
         }
         return true;
     }
