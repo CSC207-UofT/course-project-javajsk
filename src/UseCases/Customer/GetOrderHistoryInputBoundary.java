@@ -4,5 +4,5 @@ import Entities.Interfaces.IOrderbook;
 
 public interface GetOrderHistoryInputBoundary {
 
-    IOrderbook getOrderHistory(String userToken, String customerID);
+    IOrderbook getOrderHistory(String customerID);
 }
