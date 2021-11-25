@@ -2,12 +2,12 @@ package UseCases.Addon;
 
 import Entities.Interfaces.IAddon;
 
-public interface CreateAddonInputBoundary {
+public interface CreateAddonInputBoundary{
     /**
      * Creates an Addon
      *
      * @return Addon
      */
-    IAddon createAddon(String name, String id, String description, float price);
+    IAddon createAddon(String vendorToken, String id, String name, String description, float price);
 
 }

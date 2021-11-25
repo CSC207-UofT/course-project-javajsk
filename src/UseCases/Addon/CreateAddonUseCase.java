@@ -2,30 +2,23 @@ package UseCases.Addon;
 
 import Entities.Interfaces.IAddon;
 import Entities.RegularAddon;
-
-import java.util.Scanner;
-import java.util.UUID;
-
-
+import UseCases.DataAccessInterfaces.AddonRepository;
+import UseCases.Addon.ErrorPopup;
 
 public class CreateAddonUseCase implements CreateAddonInputBoundary {
-    public IAddon createAddon(String VendorToken) {
-        Scanner AddonName = new Scanner(System.in);
-        Scanner AddonDescr = new Scanner(System.in);
-        Scanner AddonPrice = new Scanner(System.in);
-        AddonFactory af = new AddonFactory();
-        IVendor vendor = VendorRepository.getAuthenticationToken(VendorToken);
+    AddonRepository addonRepository;
+    VendorRepository vendorRepository;
+    ErrorPopup errorPopup;
+
+    public boolean createAddon(String vendorToken, String id, String name, String description, float price) {
+        IVendor vendor = vendorRepository.getVendorfromToken(vendorToken);
         if (vendor != null) {
-            String AddonId = UUID.randomUUID().toString();
-            System.out.println("Enter Addon name");
-            String name = AddonName.nextLine();
-            System.out.println("Enter Addon description");
-            String description = AddonDescr.nextLine();
-            System.out.println("Enter Addon Price");
-            float price = AddonPrice.nextFloat();
-            RegularAddon addon = new RegularAddon(name, AddonId, description, price);
-            return AddonRepository.setAddon(AddonId, addon);
+            RegularAddon addon = new RegularAddon(id, name, description, price);
+            AddonRespository.createAddon(addon);
+            return true;
         }
-        return null;
+        return AddonRepository.save(addon);
+        ErrorPopup.displayError("User is not a vendor");
+        return false;
     }
 }
