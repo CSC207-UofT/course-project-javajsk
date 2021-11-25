@@ -18,15 +18,7 @@ public interface OrderRepository {
     IOrder getOrder(String id);
 
     /**
-     * Method returns whether an order was successfully updated in higher level data system
-     * @param id id of order
-     * @param order order
-     * @return whether order was set
-     */
-    boolean setOrder(String id, IOrder order);
-
-    /**
-     * Method sets status of order with given id in the higher level data system
+     * Method sets status of order with given id in the repository
      * Will return false if order with given id doesn't exist
      * @param id id of order
      * @param status status of order
@@ -43,5 +35,5 @@ public interface OrderRepository {
      */
     ArrayList<IOrder> getOrdersByFoodTruck(String truckId);
 
-    boolean save(IOrder order);
+    boolean saveOrder(IOrder order);
 }

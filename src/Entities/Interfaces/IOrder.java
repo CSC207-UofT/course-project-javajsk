@@ -3,7 +3,7 @@ package Entities.Interfaces;
 public interface IOrder {
     ICart getCart();
 
-    void setStatus(boolean status);
+    void setStatus(String status);
 
     //TODO: anything else?
 }
