@@ -1,33 +1,33 @@
-## Design Document
+# Design Document
 
-# Specification
-
-WIP
-
-# Diagram (optional)
+### Specification
 
 WIP
 
-# Major Design Decisions
+### Diagram (optional)
 
 WIP
 
-# Clean Architecture
+### Major Design Decisions
 
 WIP
 
-# SOLID Design Principles
+### Clean Architecture
 
 WIP
 
-# Packaging Strategies
+### SOLID Design Principles
 
 WIP
 
-# Design Patterns
+### Packaging Strategies
 
 WIP
 
-# Progress Report
+### Design Patterns
+
+WIP
+
+### Progress Report
 
 WIP
