@@ -1,24 +1,29 @@
 package UseCases.Addon;
 
 import Entities.Interfaces.IAddon;
-import Entities.RegularAddon;
+import Entities.Interfaces.IVendor;
+import Entities.Regular.RegularAddon;
 import UseCases.DataAccessInterfaces.AddonRepository;
 import UseCases.Addon.ErrorPopup;
+import UseCases.DataAccessInterfaces.VendorRepository;
+
+import java.util.ArrayList;
 
 public class CreateAddonUseCase implements CreateAddonInputBoundary {
     AddonRepository addonRepository;
     VendorRepository vendorRepository;
     ErrorPopup errorPopup;
 
-    public boolean createAddon(String vendorToken, String id, String name, String description, float price) {
-        IVendor vendor = vendorRepository.getVendorfromToken(vendorToken);
+    public Boolean createAddon(String vendorToken, String name, String description, float price,
+                               ArrayList<Integer> types, boolean availability, String ID) {
+        IVendor vendor = vendorRepository.getVendorFromToken(vendorToken);
         if (vendor != null) {
-            RegularAddon addon = new RegularAddon(id, name, description, price);
-            AddonRespository.createAddon(addon);
-            return true;
+            IAddon addon = new RegularAddon(name, description, price, types, availability, ID);
+            addonRepository.createAddon(addon);
+            return addonRepository.save(addon);
         }
-        return AddonRepository.save(addon);
-        ErrorPopup.displayError("User is not a vendor");
+
+        errorPopup.displayError("User is not a vendor");
         return false;
     }
 }
