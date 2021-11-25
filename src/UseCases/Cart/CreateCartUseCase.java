@@ -28,12 +28,14 @@ public class CreateCartUseCase implements CreateCartInputBoundary{
         if(customer != null) {
             ICart cart =cf.get(cartType);
             // Cart gets mutated to have the id
+
             boolean success = cartRepository.createCart(cart);
             if(success) {
                 customer.setCart(cart);
                 cartModel.displayCart(cart);
                 return customerRepository.save(customer);
             }
+
         }
 
         errorDisplayer.displayError("User must be logged in.");
