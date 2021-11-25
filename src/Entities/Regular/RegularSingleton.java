@@ -11,6 +11,7 @@ public class RegularSingleton implements ISingleton{
     String description;
     float price;
     List<IAddon> add_ons;
+    String ID;
     /**
      * Construct an instance of a RegularFood, which is an object sold by a food truck vendor.
      *
@@ -20,12 +21,14 @@ public class RegularSingleton implements ISingleton{
      * @param description Brief description of the item
      * @param add_ons   A list of 0 or more add_on entities that make up a Singleton object.
      */
+
     public RegularSingleton(String id, String name, String description, float price, List<IAddon> add_ons){
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.add_ons = add_ons;
+        this.ID = ID;
     }
 
     /**

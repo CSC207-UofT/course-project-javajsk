@@ -7,9 +7,11 @@ import java.util.List;
 
 public class RegularSelection {
     List<HashMap<IAddon, Integer>> singleFood;
+    String ID;
 
-    public RegularSelection(List<HashMap<IAddon, Integer>> selection){
+    public RegularSelection(List<HashMap<IAddon, Integer>> selection, String ID){
         this.singleFood = selection;
+        this.ID = ID;
     }
 
     public float getPrice(){
