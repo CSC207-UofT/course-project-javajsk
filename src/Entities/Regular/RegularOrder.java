@@ -5,7 +5,7 @@ import Entities.Interfaces.IOrder;
 
 public class RegularOrder implements IOrder {
     ICart cart;
-    Boolean status = false;
+    String status;
     /**
      * Construct an instance of a RegularOrder, a cart with the
      *
@@ -30,7 +30,7 @@ public class RegularOrder implements IOrder {
      * @param status False for a non-completed order and true for a completed order
      */
     @Override
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
