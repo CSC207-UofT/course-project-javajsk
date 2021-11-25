@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface CartRepository {
 
-
-    ICart createCart(String userId, ICart cart);
+    // Mutating function which adds id to cart object.
+    boolean createCart(ICart cart);
 
     ICart getCart(String cartId);
 
