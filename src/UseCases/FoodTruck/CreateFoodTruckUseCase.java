@@ -17,7 +17,7 @@ public class CreateFoodTruckUseCase implements CreateFoodTruckInputBoundary{
 
     @Override
     public Boolean createFoodTruck(String userToken, String name, Menu menu, String status, IOrderbook orderbook, String location) {
-        IVendor vendor = vendorRepository.getUserFromToken(userToken);
+        IVendor vendor = (IVendor) vendorRepository.getUserFromToken(userToken);
         if(vendor != null) {
             FoodTruck foodTruck = new FoodTruck(menu, orderbook, status, name);
             foodTruckRepository.createFoodTruck(foodTruck);

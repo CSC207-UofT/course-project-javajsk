@@ -23,7 +23,7 @@ public class AddToCartUseCase implements AddToCartInputBoundary{
 
     @Override
     public ICart addToCart(String cartId, String foodId, ISelection orderInfo, String token) {
-        ICustomer customer = customerRepository.getUserFromToken(token);
+        ICustomer customer = (ICustomer) customerRepository.getUserFromToken(token);
         ICart cart = cartRepository.getCart(cartId);
         if(customer != null) {
             if(customer.hasCart(cart)) {

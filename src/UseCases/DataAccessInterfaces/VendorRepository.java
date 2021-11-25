@@ -8,7 +8,7 @@ import Entities.Interfaces.IVendor;
  * This is an interface that allows for the attainment, changing, deletion, and validation
  * of vendors in the higher level data storage.
  */
-public interface VendorRepository {
+public interface VendorRepository extends UserRepository{
 
     /**
      *  A method that returns the desired vendor from
@@ -27,30 +27,6 @@ public interface VendorRepository {
      * @return Return the vendor associated with the id.
      */
     public Boolean setVendor(String id, String password, String name);
-
-    /**
-     *  A method that returns the authentication token used by the vendor
-     *
-     * @param id The associated id of the vendor.
-     * @return Return the authentication token used by the vendor.
-     */
-    public String getAuthenticationToken(String id);
-
-    /**
-     *  A method that returns the id of a vendor from an authentication token.
-     *
-     * @param token The authentication token used by a vendor.
-     * @return Return the associated id of the vendor.
-     */
-    public IVendor getUserFromToken(String token);
-
-    /**
-     *  A method that returns whether a vendor's authentication token is currently valid.
-     *
-     * @param token The authentication token used by a vendor.
-     * @return Return whether a vendor's authentication token is currently valid.
-     */
-    public Boolean isTokenValid(String token);
 
     boolean save(IVendor vendor);
 }

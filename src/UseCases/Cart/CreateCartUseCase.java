@@ -24,7 +24,7 @@ public class CreateCartUseCase implements CreateCartInputBoundary{
     public boolean createCart(String userToken, String cartType) {
 
         CartFactory cf = new CartFactory();
-        ICustomer customer = customerRepository.getUserFromToken(userToken);
+        ICustomer customer = (ICustomer) customerRepository.getUserFromToken(userToken);
         if(customer != null) {
             ICart cart =cf.get(cartType);
             cartRepository.createCart(customer.getId(), cart);

@@ -17,7 +17,7 @@ public class ProcessOrderUseCase implements ProcessOrderInputBoundary {
 
     @Override
     public Boolean processOrder(String userToken, String shopID) {
-        IVendor vendor = vendorRepository.getUserFromToken(userToken);
+        IVendor vendor = (IVendor) vendorRepository.getUserFromToken(userToken);
         if(vendor != null){
             IShop foodtruck = foodTruckRepository.getFoodTruck(shopID);
             if(foodtruck != null){
