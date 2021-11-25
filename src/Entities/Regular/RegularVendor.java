@@ -27,11 +27,10 @@ public class RegularVendor implements IVendor {
 
     /**
      * Method that returns the vendor's shop list that they manage.
-     * @param vendor The vendor that we want to see the shop list of.
      * @return The chosen vendor's shop list.
      */
     @Override
-    public ArrayList<IShop> getShops(IVendor vendor) {
+    public ArrayList<IShop> getShops() {
         return this.shopList;
     }
 
