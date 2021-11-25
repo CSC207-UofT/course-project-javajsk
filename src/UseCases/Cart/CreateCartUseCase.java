@@ -27,6 +27,7 @@ public class CreateCartUseCase implements CreateCartInputBoundary{
         ICustomer customer = (ICustomer) customerRepository.getUserFromToken(userToken);
         if(customer != null) {
             ICart cart =cf.get(cartType);
+            // Cart gets mutated to have the id
             cartRepository.createCart(customer.getId(), cart);
             customer.addCart(cart);
             cartModel.displayCart(cart);
