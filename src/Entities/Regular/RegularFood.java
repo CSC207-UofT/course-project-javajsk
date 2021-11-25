@@ -58,7 +58,6 @@ public class RegularFood implements IFood {
         return this.name;
     }
 
-
     /**
      * Get the description of this object
      *

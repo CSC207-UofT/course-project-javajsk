@@ -27,6 +27,9 @@ public interface FoodRepository {
          * @return Return whether the deletion has been made.
          */
         public boolean deleteFood (String id);
+  
+        public Boolean setFood(String id, IFood new_food);
+
 
         /**
          * A method that saves the desired food object to the high level data storage

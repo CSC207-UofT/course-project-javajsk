@@ -19,4 +19,8 @@ public class RegularCustomer implements ICustomer {
         cartList.add(cart);
     }
 
+    @Override
+    public boolean hasCart(ICart cart) {
+        return false;
+    }
 }

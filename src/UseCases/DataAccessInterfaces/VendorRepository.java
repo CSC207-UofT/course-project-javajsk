@@ -42,7 +42,7 @@ public interface VendorRepository {
      * @param token The authentication token used by a vendor.
      * @return Return the associated id of the vendor.
      */
-    public String getUserIDFromToken(String token);
+    public IVendor getUserFromToken(String token);
 
     /**
      *  A method that returns whether a vendor's authentication token is currently valid.
