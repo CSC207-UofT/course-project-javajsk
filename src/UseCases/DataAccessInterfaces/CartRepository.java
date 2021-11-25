@@ -10,7 +10,7 @@ import java.util.List;
 public interface CartRepository {
 
 
-    ICart createCart(String userId, ICart cart);
+    ICart createCart(ICart cart);
 
     ICart getCart(String cartId);
 

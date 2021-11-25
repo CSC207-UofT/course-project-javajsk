@@ -14,7 +14,13 @@ public class ProcessOrderUseCase implements ProcessOrderInputBoundary {
     FoodTruckRepository foodTruckRepository;
     ErrorPopup errorDisplayer;
     FoodTruckModel foodTruckModel;
-
+    public ProcessOrderUseCase(VendorRepository vendorRepository,FoodTruckRepository foodTruckRepository,
+                             ErrorPopup errorDisplayer, FoodTruckModel foodTruckModel ){
+        this.vendorRepository = vendorRepository;
+        this.errorDisplayer = errorDisplayer;
+        this.foodTruckRepository = foodTruckRepository;
+        this.foodTruckModel = foodTruckModel;
+    }
     @Override
     public Boolean processOrder(String userToken, String shopID) {
         IVendor vendor = (IVendor) vendorRepository.getUserFromToken(userToken);

@@ -27,8 +27,6 @@ public interface FoodRepository {
          * @return Return whether the deletion has been made.
          */
         public boolean deleteFood (String id);
-  
-        public Boolean setFood(String id, IFood new_food);
 
 
         /**
@@ -37,4 +35,6 @@ public interface FoodRepository {
          * @return whether food object was succesfully saved
          */
         boolean save(IFood food);
+
+        boolean createFood(IFood food);
 }
