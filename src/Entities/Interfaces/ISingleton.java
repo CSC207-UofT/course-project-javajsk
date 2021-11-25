@@ -23,4 +23,6 @@ public interface ISingleton {
     void setAllowedAddonTypes(List<IAddon> allowedAddonTypes);
 
     void setSingleton(RegularSingleton singleton);
+
+    String getID();
 }

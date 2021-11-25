@@ -48,4 +48,9 @@ public class RegularVendor implements IVendor {
         }
         return null;
     }
+
+    @Override
+    public String getID() {
+        return this.getID();
+    }
 }

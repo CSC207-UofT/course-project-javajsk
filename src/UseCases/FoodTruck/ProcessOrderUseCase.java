@@ -14,7 +14,13 @@ public class ProcessOrderUseCase implements ProcessOrderInputBoundary {
     FoodTruckRepository foodTruckRepository;
     ErrorPopup errorDisplayer;
     FoodTruckModel foodTruckModel;
-
+    public ProcessOrderUseCase(VendorRepository vendorRepository,FoodTruckRepository foodTruckRepository,
+                             ErrorPopup errorDisplayer, FoodTruckModel foodTruckModel ){
+        this.vendorRepository = vendorRepository;
+        this.errorDisplayer = errorDisplayer;
+        this.foodTruckRepository = foodTruckRepository;
+        this.foodTruckModel = foodTruckModel;
+    }
     @Override
     public Boolean processOrder(String userToken, String shopID) {
         IVendor vendor = (IVendor) vendorRepository.getUserFromToken(userToken);
@@ -23,7 +29,7 @@ public class ProcessOrderUseCase implements ProcessOrderInputBoundary {
             if(foodtruck != null){
                 VendorOrderBook orderbook = (VendorOrderBook) foodtruck.getOrderBook(); //TODO: Does this casting make sense?
                 IOrder order = orderbook.getNextOrder();
-                order.setStatus(true); //TODO: We don't have Status codes yet. Its just true and false rn.
+                order.setStatus("Completed"); //TODO: We don't have Status codes yet. Its just true and false rn.
                 foodTruckModel.updateFoodTruck(foodtruck);
                 return foodTruckRepository.save(foodtruck);
             }

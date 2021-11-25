@@ -19,4 +19,6 @@ public interface IShop {
     public void setName(String name);
 
     public void setLocation(String location);
+
+    String getID();
 }

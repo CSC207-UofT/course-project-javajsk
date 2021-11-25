@@ -1,11 +1,12 @@
 package Entities.Regular;
 
 import Entities.Interfaces.IAddon;
+import Entities.Interfaces.ISelection;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class RegularSelection {
+public class RegularSelection implements ISelection {
     List<HashMap<IAddon, Integer>> singleFood;
     String ID;
 
@@ -24,7 +25,17 @@ public class RegularSelection {
         return sum;
     }
 
+    @Override
+    public int size() {
+        return this.singleFood.size();
+    }
+
     public HashMap<IAddon, Integer> get(int index){
         return singleFood.get(index);
+    }
+
+    @Override
+    public String getID() {
+        return this.getID();
     }
 }

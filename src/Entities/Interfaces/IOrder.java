@@ -5,5 +5,7 @@ public interface IOrder {
 
     void setStatus(String status);
 
+    String getID();
+
     //TODO: anything else?
 }

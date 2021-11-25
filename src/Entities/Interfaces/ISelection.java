@@ -10,4 +10,6 @@ public interface ISelection {
 
     HashMap<IAddon, Integer> get(int index);
 
+    String getID();
+
 }

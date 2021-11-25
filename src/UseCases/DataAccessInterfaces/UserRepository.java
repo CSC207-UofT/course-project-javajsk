@@ -9,4 +9,5 @@ public interface UserRepository {
     String getAuthenticationToken(String username, String password);
 
     void setPassword(String token, String new_password);
+
 }

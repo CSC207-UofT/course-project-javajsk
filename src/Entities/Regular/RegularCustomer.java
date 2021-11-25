@@ -7,10 +7,11 @@ import java.util.List;
 
 public class RegularCustomer implements ICustomer {
     String ID;
-    List<ICart> cartList;
-    public RegularCustomer(String ID,  List<ICart> cartList){
+    ICart currentCart;
+
+    public RegularCustomer(String ID,  ICart cartList){
         this.ID = ID;
-        this.cartList = cartList;
+        this.currentCart = cartList;
     }
     @Override
     public String getId(){
@@ -18,12 +19,17 @@ public class RegularCustomer implements ICustomer {
     }
 
     @Override
-    public void addCart(ICart cart){
-        cartList.add(cart);
+    public void setCart(ICart cart){
+        currentCart = cart;
     }
 
     @Override
-    public boolean hasCart(ICart cart) {
-        return false;
+    public ICart getCart() {
+        return currentCart;
+    }
+
+    @Override
+    public String getID() {
+        return this.getId();
     }
 }

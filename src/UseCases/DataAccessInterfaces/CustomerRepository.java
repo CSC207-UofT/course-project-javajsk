@@ -17,14 +17,7 @@ public interface CustomerRepository extends UserRepository {
      * @return a user object that has a matching id
      */
     ICustomer getCustomer(String id);
-    /**
-     *  A method that changes
-     *
-     * @param id corresponds to the id of the customer
-     * @param customer the new customer object that will replace the existing one
-     * @return true if the change is successful and false if the entry did not change
-     */
-    Boolean setCustomer(String id, ICustomer customer);
+
     /**
      *  A method that removes a customer from the repository
      *
@@ -35,4 +28,6 @@ public interface CustomerRepository extends UserRepository {
 
     //TODO: DOC
     boolean save(ICustomer customer);
+
+    boolean createCustomer(ICustomer customer);
 }
