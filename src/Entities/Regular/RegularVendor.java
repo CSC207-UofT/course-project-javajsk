@@ -18,4 +18,9 @@ public class RegularVendor implements IVendor {
         shopList.add(shop);
 
     }
+
+    @Override
+    public String getID() {
+        return this.getID();
+    }
 }

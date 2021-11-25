@@ -21,9 +21,10 @@ public class CreateOrderUseCase implements CreateOrderInputBoundary{
     public boolean createOrder(ICart cart, ICustomer customer, IShop foodTruck) {
         boolean validCart = validCart(cart, foodTruck);
         if (validCart){
-            IOrder order = new RegularOrder(cart);
+            String ID = null;
+            IOrder order = new RegularOrder(cart, ID);
             order.setStatus("processing");
-            if (!this.orderData.saveOrder(order)){
+            if (!this.orderData.save(order)){
                 //handle order not being saved
                 return false;
             }

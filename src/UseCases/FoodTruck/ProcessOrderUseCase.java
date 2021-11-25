@@ -23,7 +23,7 @@ public class ProcessOrderUseCase implements ProcessOrderInputBoundary {
             if(foodtruck != null){
                 VendorOrderBook orderbook = (VendorOrderBook) foodtruck.getOrderBook(); //TODO: Does this casting make sense?
                 IOrder order = orderbook.getNextOrder();
-                order.setStatus(true); //TODO: We don't have Status codes yet. Its just true and false rn.
+                order.setStatus("Completed"); //TODO: We don't have Status codes yet. Its just true and false rn.
                 foodTruckModel.updateFoodTruck(foodtruck);
                 return foodTruckRepository.save(foodtruck);
             }

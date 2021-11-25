@@ -51,4 +51,6 @@ public interface IAddon {
      * @param newAvail whether addon is available
      */
     void setAvailability(boolean newAvail);
+
+    String getID();
 }
