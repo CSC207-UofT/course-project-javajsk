@@ -1,6 +1,7 @@
 package Entities;
 
 import Entities.Interfaces.IFood;
+import Entities.Interfaces.IOrder;
 import Entities.Interfaces.IOrderbook;
 import Entities.Interfaces.IShop;
 
@@ -8,6 +9,7 @@ public class FoodTruck implements IShop {
 
     Menu menu;
     IOrderbook orderbook;
+
     String location;
     String name;
 
@@ -18,6 +20,7 @@ public class FoodTruck implements IShop {
      * @param name Initial String name
      */
     public FoodTruck(Menu menu, IOrderbook orderbook, String location, String name){
+
         this.menu = menu;
         this.orderbook = orderbook;
         this.location = location;
