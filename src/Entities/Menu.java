@@ -9,6 +9,7 @@ public class Menu {
 
     private HashMap<IFood, Object[]> menu;
 
+
     /**
      * A method for adding a new food item to a menu
      *
