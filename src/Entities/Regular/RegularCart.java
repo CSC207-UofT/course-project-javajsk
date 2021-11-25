@@ -18,10 +18,12 @@ public class RegularCart implements ICart {
      * A class that makes storage of addon information easier.
      */
     public static class foodInformation{
+        public String ID;
         List<HashMap<IAddon, Integer>> singleFood;
 
-        public foodInformation(List<HashMap<IAddon, Integer>> data){
+        public foodInformation(List<HashMap<IAddon, Integer>> data, String ID){
             this.singleFood = data;
+            this.ID = ID;
         }
 
         public float getPrice(){

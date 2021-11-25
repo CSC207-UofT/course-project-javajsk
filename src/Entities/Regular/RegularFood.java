@@ -21,6 +21,7 @@ public class RegularFood implements IFood {
     String description;
     float price;
     List<ISingleton> components;
+    String ID;
 
     /**
      * Construct an instance of a RegularFood, which is an object sold by a food truck vendor.
@@ -30,11 +31,12 @@ public class RegularFood implements IFood {
      * @param description Brief description of the item
      * @param components   The singleton entities that make up this RegularFood object.
      */
-    public RegularFood(String name, String description, float price, List<ISingleton> components) {
+    public RegularFood(String name, String description, float price, List<ISingleton> components, String id) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.components = components;
+        this.ID = id;
     }
 
     /**

@@ -6,12 +6,15 @@ import Entities.Interfaces.ICart;
 import java.util.List;
 
 public class RegularCustomer implements ICustomer {
-    String id;
+    String ID;
     List<ICart> cartList;
-
+    public RegularCustomer(String ID,  List<ICart> cartList){
+        this.ID = ID;
+        this.cartList = cartList;
+    }
     @Override
     public String getId(){
-        return this.id;
+        return this.ID;
     }
 
     @Override

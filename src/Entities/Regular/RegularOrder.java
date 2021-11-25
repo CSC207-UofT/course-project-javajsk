@@ -6,13 +6,15 @@ import Entities.Interfaces.IOrder;
 public class RegularOrder implements IOrder {
     ICart cart;
     Boolean status = false;
+    String ID;
     /**
      * Construct an instance of a RegularOrder, a cart with the
      *
      * @param cart The cart object for the order
      */
-    public RegularOrder(ICart cart){
+    public RegularOrder(ICart cart, String ID){
         this.cart = cart;
+        this.ID = ID;
     }
     /**
      * Get the cart of the order
