@@ -18,7 +18,7 @@ public class RemoveFromCartUseCase implements RemoveFromCartInputBoundary{
 
     @Override
     public boolean removeFromCart( String cartId, String foodid, int index, String token) {
-        ICustomer customer = customerRepository.getUserFromToken(token);
+        ICustomer customer = (ICustomer) customerRepository.getUserFromToken(token);
         if(customer != null){
             IFood food = foodRepository.getFood(foodid);
             if (food != null) {

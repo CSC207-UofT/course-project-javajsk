@@ -18,7 +18,7 @@ public class ChangeMenuUseCase implements ChangeMenuInputBoundary{
 
     @Override
     public boolean changeMenu(String userToken, String shopID, Menu menu) {
-        IVendor vendor = vendorRepository.getUserFromToken(userToken);
+        IVendor vendor = (IVendor) vendorRepository.getUserFromToken(userToken);
 
         if(vendor != null){
             IShop foodtruck  = foodTruckRepository.getFoodTruck(shopID);
