@@ -15,16 +15,31 @@ public class RegularVendor implements IVendor {
         this.shopList = shopList;
         this.ID = ID;
     }
+
+    /**
+     * Method that adds a shop to the vendor's shop list that they manage.
+     * @param shop The shop that the method is going to add to the vendor's shop list.
+     */
     @Override
     public void addShop(IShop shop) {
         shopList.add(shop);
     }
 
+    /**
+     * Method that returns the vendor's shop list that they manage.
+     * @param vendor The vendor that we want to see the shop list of.
+     * @return The chosen vendor's shop list.
+     */
     @Override
     public ArrayList<IShop> getShops(IVendor vendor) {
         return this.shopList;
     }
 
+    /**
+     * Method that returns a vendor's shop.
+     * @param id The id of the shop that the vendor owns.
+     * @return The shop that the vendor owns.
+     */
     @Override
     public IShop getShop(String id) {
         for (IShop i:this.shopList){

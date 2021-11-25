@@ -20,6 +20,12 @@ public class CreateVendorUseCase implements CreateVendorInputBoundary{
         this.vendorRepository = vendorRepository;
     }
 
+    /**
+     *
+     * @param id The assigned id to the new vendor
+     * @param shops The shops that the new vendor owns
+     * @return A RegularVendor object of the newly created vendor.
+     */
     @Override
     public RegularVendor createVendor(String id, ArrayList<IShop> shops) {
         RegularVendor new_vendor = new RegularVendor(shops, id);
