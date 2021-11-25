@@ -42,4 +42,10 @@ public class Vendor {
     public void setFoodtrucks(List<FoodTruck> foodtrucks) {
         this.foodtrucks = foodtrucks;
     }
+
+    public void updateVendor(Vendor new_vendor){
+        this.name = new_vendor.getName();
+        this.password = new_vendor.getPassword();
+        this.foodtrucks = new_vendor.getFoodtrucks();
+    }
 }
