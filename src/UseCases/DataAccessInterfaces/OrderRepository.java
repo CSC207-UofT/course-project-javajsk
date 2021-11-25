@@ -1,6 +1,7 @@
 package UseCases.DataAccessInterfaces;
 
 import Entities.Interfaces.IOrder;
+import Entities.Interfaces.IOrderbook;
 
 import java.util.ArrayList;
 
@@ -33,7 +34,9 @@ public interface OrderRepository {
      * @param truckId if of foodtruck
      * @return arraylist of orders
      */
-    ArrayList<IOrder> getOrdersByFoodTruck(String truckId);
+    IOrderbook getOrdersByFoodTruck(String truckId);
+
+    IOrderbook getOrdersByCustomer(String customerID);
 
     boolean save(IOrder order);
 
