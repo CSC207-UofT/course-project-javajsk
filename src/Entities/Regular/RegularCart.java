@@ -130,7 +130,7 @@ public class RegularCart implements ICart {
             if(foodData.size() == quantity){
                 return true;
             }
-            if(foodData.size() < quantity){
+            else if(foodData.size() < quantity){
                 ISelection last_item = foodData.get(foodData.size()-1);
                 for(int i = 0; i < quantity - foodData.size(); i++) {
                     foodData.add(last_item);

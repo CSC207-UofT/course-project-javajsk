@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Menu {
-
-
     private HashMap<IFood, ISingleton> menu;
 
     public Menu() {
