@@ -10,34 +10,31 @@ import Entities.Interfaces.IFood;
  */
 public interface FoodRepository {
         /**
-         *  A method that returns the desired RegularFood object from
+         *  A method that returns the desired food object from
          *  the higher level data storage.
          *
-         * @param id The associated id of the RegularFood object.
+         * @param id The associated id of the food object.
          * @return Return the RegularFood object with the associated id.
          */
         public IFood getFood(String id);
 
         /**
-         *  A method that changes information of the desired RegularFood object in
+         *  A method that deletes a desired food object in
          *  the higher level data storage.
          *
-         * @param id The associated id of the RegularFood object.
-         * @param new_food A new RegularFood object that has the desired new information
-         *
-         * @return Return whether the changes to the RegularFood object have been made.
-         */
-        public Boolean setFood(String id, IFood new_food);
-
-        /**
-         *  A method that deletes a desired RegularFood object in
-         *  the higher level data storage.
-         *
-         * @param id The associated id of the RegularFood object.
+         * @param id The associated id of the food object.
          *
          * @return Return whether the deletion has been made.
          */
-        public Boolean deleteFood (String id);
+        public boolean deleteFood (String id);
+  
+        public Boolean setFood(String id, IFood new_food);
 
+
+        /**
+         * A method that saves the desired food object to the high level data storage
+         * @param food food object to be saved
+         * @return whether food object was succesfully saved
+         */
         boolean save(IFood food);
 }

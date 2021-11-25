@@ -23,5 +23,4 @@ public class RegularCustomer implements ICustomer {
     public boolean hasCart(ICart cart) {
         return false;
     }
-
 }

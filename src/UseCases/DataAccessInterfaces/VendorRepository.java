@@ -54,5 +54,16 @@ public interface VendorRepository {
      */
     public Boolean isTokenValid(String token);
 
+    /**
+     * A method that returns a vendor object given the specific token
+     *
+     * @param token token of specific vendor
+     * @return Vendor object
+     */
+    public IVendor getUserFromToken(String token);
+
+    /**
+     * TODO: Add javadoc
+     */
     boolean save(IVendor vendor);
 }
