@@ -35,5 +35,5 @@ public interface OrderRepository {
      */
     ArrayList<IOrder> getOrdersByFoodTruck(String truckId);
 
-    boolean saveOrder(IOrder order);
+    boolean save(IOrder order);
 }
