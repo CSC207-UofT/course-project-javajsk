@@ -14,7 +14,13 @@ public class CreateFoodTruckUseCase implements CreateFoodTruckInputBoundary{
     VendorRepository vendorRepository;
     ErrorPopup errorDisplayer;
     FoodTruckModel foodTruckModel;
-
+    public CreateFoodTruckUseCase(VendorRepository vendorRepository,FoodTruckRepository foodTruckRepository,
+                             ErrorPopup errorDisplayer, FoodTruckModel foodTruckModel ){
+        this.vendorRepository = vendorRepository;
+        this.errorDisplayer = errorDisplayer;
+        this.foodTruckRepository = foodTruckRepository;
+        this.foodTruckModel = foodTruckModel;
+    }
     @Override
     public Boolean createFoodTruck(String userToken, String name, Menu menu, String status, IOrderbook orderbook, String location) {
         IVendor vendor = (IVendor) vendorRepository.getUserFromToken(userToken);

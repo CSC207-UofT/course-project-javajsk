@@ -7,4 +7,6 @@ public interface UserRepository {
     IUser getUserFromToken(String token);
 
     String getAuthenticationToken(String username, String password);
+
+
 }

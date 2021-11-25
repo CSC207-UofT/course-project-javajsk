@@ -15,7 +15,13 @@ public class ChangeMenuUseCase implements ChangeMenuInputBoundary{
     ErrorPopup errorDisplayer;
     FoodTruckModel foodTruckModel;
 
-
+    public ChangeMenuUseCase(VendorRepository vendorRepository,FoodTruckRepository foodTruckRepository,
+                             ErrorPopup errorDisplayer, FoodTruckModel foodTruckModel ){
+        this.vendorRepository = vendorRepository;
+        this.errorDisplayer = errorDisplayer;
+        this.foodTruckRepository = foodTruckRepository;
+        this.foodTruckModel = foodTruckModel;
+    }
     @Override
     public boolean changeMenu(String userToken, String shopID, Menu menu) {
         IVendor vendor = (IVendor) vendorRepository.getUserFromToken(userToken);

@@ -15,18 +15,11 @@ public interface AddonRepository{
      */
     IAddon getAddon(String id);
 
-    /**
-     *
-     * @param id of addon
-     * @param addon to be placed in the database
-     * @return true if addon is successfully placed in the database
-     */
-
-    boolean setAddon(String id, IAddon addon);
 
     //TODO: DOC
     boolean save(IAddon addon);
 
+    boolean createAddon(IAddon addon);
 
     /**
      *
