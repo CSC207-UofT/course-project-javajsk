@@ -1,6 +1,7 @@
 package UseCases.DataAccessInterfaces;
 
-import Entities.Vendor;
+import Entities.Interfaces.IVendor;
+import Entities.Regular.RegularVendor;
 
 /**
  * The VendorAccessInterface Interface
@@ -17,7 +18,7 @@ public interface VendorRepository {
      * @param id The associated id of the vendor.
      * @return Return the vendor associated with the id.
      */
-    public Vendor getVendor(String id);
+    public RegularVendor getVendor(String id);
 
     /**
      *  A method that changes information of the desired vendor from
@@ -50,7 +51,7 @@ public interface VendorRepository {
      * @param token The authentication token used by a vendor.
      * @return Return the associated vendor.
      */
-    public Vendor getUserFromToken(String token);
+    public RegularVendor getUserFromToken(String token);
 
     /**
      *  A method that returns whether a vendor's authentication token is currently valid.
@@ -59,4 +60,6 @@ public interface VendorRepository {
      * @return Return whether a vendor's authentication token is currently valid.
      */
     public Boolean isTokenValid(String token);
+
+    boolean save(IVendor vendor);
 }
