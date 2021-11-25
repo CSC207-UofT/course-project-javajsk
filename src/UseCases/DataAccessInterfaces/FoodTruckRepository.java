@@ -21,5 +21,4 @@ public interface FoodTruckRepository {
     IShop createFoodTruck(IShop FoodTruck);
 
     boolean save(IShop FoodTruck);
-
 }
