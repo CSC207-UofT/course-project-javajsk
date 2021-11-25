@@ -23,7 +23,8 @@ gradle-app.setting
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
-
+.idea/
+course-project-javajsk4.iml
 # AWS User-specific
 .idea/**/aws.xml
 

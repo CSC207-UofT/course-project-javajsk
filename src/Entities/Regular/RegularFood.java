@@ -1,7 +1,8 @@
-package Entities;
+package Entities.Regular;
 
 import Entities.Interfaces.IAddon;
 import Entities.Interfaces.IFood;
+import Entities.Interfaces.ISelection;
 import Entities.Interfaces.ISingleton;
 
 import java.util.ArrayList;
@@ -16,10 +17,12 @@ import java.util.List;
  */
 
 public class RegularFood implements IFood {
+    String id;
     String name;
     String description;
     float price;
     List<ISingleton> components;
+    String ID;
 
     /**
      * Construct an instance of a RegularFood, which is an object sold by a food truck vendor.
@@ -29,12 +32,24 @@ public class RegularFood implements IFood {
      * @param description Brief description of the item
      * @param components   The singleton entities that make up this RegularFood object.
      */
-    public RegularFood(String name, String description, float price, List<ISingleton> components) {
+
+    public RegularFood(String id, String name, String description, float price, List<ISingleton> components) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.components = components;
+        this.ID = id;
     }
+
+    /**
+     * Method returns the id of this RegularFood object
+     *
+     * @return id of food object
+     */
+    @Override
+    public String getId(){ return this.id; }
+
 
     /**
      * Get the name of this object
@@ -104,7 +119,7 @@ public class RegularFood implements IFood {
     }
 
     @Override
-    public boolean isValidAddons(List<HashMap<IAddon, Integer>> addons) {
+    public boolean isValidAddons(ISelection addons) {
         if(addons.size() != components.size()){
             return false;
         }

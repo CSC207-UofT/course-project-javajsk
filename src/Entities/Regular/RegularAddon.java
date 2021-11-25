@@ -1,4 +1,4 @@
-package Entities;
+package Entities.Regular;
 
 import Entities.Interfaces.IAddon;
 
@@ -27,6 +27,7 @@ public class RegularAddon implements IAddon {
     public float price;
     public ArrayList<Integer> addonTypes;
     public boolean isAvailable;
+    public String ID;
 
     /**
      * Construct an instance of RegularAddon
@@ -37,12 +38,13 @@ public class RegularAddon implements IAddon {
      * @param types arraylist of types that addon is
      */
     public RegularAddon(String addonName, String addonDesc, float addonPrice,
-                        ArrayList<Integer> types, boolean availability){
+                        ArrayList<Integer> types, boolean availability, String ID){
         this.name = addonName;
         this.description = addonDesc;
         this.price =  addonPrice;
         this.addonTypes = types;
         this.isAvailable = availability;
+        this.ID = ID;
     }
 
     /**

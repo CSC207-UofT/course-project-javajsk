@@ -1,4 +1,4 @@
-package Entities;
+package Entities.Regular;
 
 import Entities.Interfaces.IAddon;
 import Entities.Interfaces.ISingleton;
@@ -6,24 +6,37 @@ import Entities.Interfaces.ISingleton;
 import java.util.List;
 
 public class RegularSingleton implements ISingleton{
+    String id;
     String name;
     String description;
     float price;
     List<IAddon> add_ons;
+    String ID;
     /**
      * Construct an instance of a RegularFood, which is an object sold by a food truck vendor.
      *
+     * @param id          id of the item
      * @param name        Name of the item
      * @param price       Price of the item
      * @param description Brief description of the item
      * @param add_ons   A list of 0 or more add_on entities that make up a Singleton object.
      */
-    public RegularSingleton(String name, String description, float price, List<IAddon> add_ons){
+
+    public RegularSingleton(String id, String name, String description, float price, List<IAddon> add_ons){
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.add_ons = add_ons;
+        this.ID = ID;
     }
+
+    /**
+     * Get the id of this Singleton
+     *
+     * @return return the id of this Singleton
+     */
+    public String getId() { return this.id; }
 
     /**
      * Get the price of this object
@@ -64,7 +77,12 @@ public class RegularSingleton implements ISingleton{
 
     @Override
     public void setAllowedAddonTypes(List<IAddon> allowedAddonTypes) {
-        this.add_ons = add_ons;
+        this.add_ons = allowedAddonTypes;
+    }
+
+    @Override
+    public void setSingleton(RegularSingleton singleton) {
+        // TODO: implement this function
     }
 
     /**

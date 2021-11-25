@@ -11,22 +11,27 @@ import java.util.List;
  */
 public interface IFood {
     /**
-     *  A method that returns the name of this RegularFood object
+     * A method that return the id of this food object
+     */
+    public String getId();
+
+    /**
+     *  A method that returns the name of this food object
      */
     public String getName();
 
     /**
-     * A method that returns the description of this RegularFood object
+     * A method that returns the description of this food object
      */
     public String getDescription();
 
     /**
-     * A method that returns the price of this RegularFood object
+     * A method that returns the price of this food object
      */
     public float getPrice();
 
     /**
-     * A method that returns the components of this RegularFood object
+     * A method that returns the components of this food object
      */
     public List<ISingleton> getComponents();
 
@@ -38,7 +43,7 @@ public interface IFood {
 
     public void setComponents(List<ISingleton> components);
 
-    public boolean isValidAddons(List<HashMap<IAddon, Integer>> addons);
+    public boolean isValidAddons(ISelection addons);
 
     public List<List<IAddon>> getAllowedAddons();
 }
