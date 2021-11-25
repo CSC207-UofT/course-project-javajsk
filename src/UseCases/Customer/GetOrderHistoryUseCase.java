@@ -11,10 +11,11 @@ public class GetOrderHistoryUseCase implements GetOrderHistoryInputBoundary{
     OrderRepository orderRepository;
     ErrorPopup errorDisplayer;
     @Override
-    public IOrderbook getOrderHistory(String userToken, String customerID) {
+    public IOrderbook getOrderHistory(String userToken) {
         ICustomer customer = (ICustomer) customerRepository.getUserFromToken(userToken);
-        if(customer != null){
 
+        if(customer != null){
+            String customerID = customer.getID();
             return orderRepository.getOrdersByCustomer(customerID);
         }
 
