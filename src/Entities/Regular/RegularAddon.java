@@ -111,4 +111,9 @@ public class RegularAddon implements IAddon {
     public void setAvailability(boolean newAvail){
         this.isAvailable = newAvail;
     }
+
+    @Override
+    public String getID() {
+        return this.ID;
+    }
 }

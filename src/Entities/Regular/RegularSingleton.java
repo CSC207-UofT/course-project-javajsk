@@ -85,6 +85,11 @@ public class RegularSingleton implements ISingleton{
         // TODO: implement this function
     }
 
+    @Override
+    public String getID() {
+        return this.ID;
+    }
+
     /**
      * Get the name of this object
      *

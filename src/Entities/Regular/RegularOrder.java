@@ -37,4 +37,9 @@ public class RegularOrder implements IOrder {
         this.status = status;
     }
 
+    @Override
+    public String getID() {
+        return this.ID;
+    }
+
 }
