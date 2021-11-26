@@ -1,6 +1,5 @@
 package UseCases.Orders;
 
-import Entities.Interfaces.IOrder;
 import UseCases.DataAccessInterfaces.OrderRepository;
 
 public class setOrderStatusUseCase implements setOrderStatusInputBoundary{

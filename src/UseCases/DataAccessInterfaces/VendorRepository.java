@@ -18,7 +18,7 @@ public interface VendorRepository {
      * @param id The associated id of the vendor.
      * @return Return the vendor associated with the id.
      */
-    public RegularVendor getVendor(String id);
+    RegularVendor getVendor(String id);
 
 
     /**
@@ -27,7 +27,7 @@ public interface VendorRepository {
      * @param id The associated id of the vendor.
      * @return Return the authentication token used by the vendor.
      */
-    public String getAuthenticationToken(String id);
+    String getAuthenticationToken(String id);
 
     /**
      *  A method that returns the id of a vendor from an authentication token.
@@ -35,7 +35,7 @@ public interface VendorRepository {
      * @param token The authentication token used by a vendor.
      * @return Return the associated id of the vendor.
      */
-    public String getUserIDFromToken(String token);
+    String getUserIDFromToken(String token);
 
     /**
      *  A method that returns the vendor from an authentication token.
@@ -43,7 +43,11 @@ public interface VendorRepository {
      * @param token The authentication token used by a vendor.
      * @return Return the associated vendor.
      */
+<<<<<<< HEAD
     public RegularVendor getVendorFromToken(String token);
+=======
+    RegularVendor getUserFromToken(String token);
+>>>>>>> 8cb19257d126513c6fa50aa3852cfe285232df75
 
     /**
      *  A method that returns whether a vendor's authentication token is currently valid.
@@ -51,7 +55,7 @@ public interface VendorRepository {
      * @param token The authentication token used by a vendor.
      * @return Return whether a vendor's authentication token is currently valid.
      */
-    public Boolean isTokenValid(String token);
+    Boolean isTokenValid(String token);
 
     boolean save(IVendor vendor);
 }

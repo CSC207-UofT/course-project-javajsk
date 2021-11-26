@@ -36,6 +36,6 @@ public class RegularSelection implements ISelection {
 
     @Override
     public String getID() {
-        return this.getID();
+        return this.ID;
     }
 }

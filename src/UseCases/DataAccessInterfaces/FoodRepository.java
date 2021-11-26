@@ -16,7 +16,7 @@ public interface FoodRepository {
          * @param id The associated id of the food object.
          * @return Return the RegularFood object with the associated id.
          */
-        public IFood getFood(String id);
+        IFood getFood(String id);
 
         /**
          *  A method that deletes a desired food object in
@@ -26,7 +26,7 @@ public interface FoodRepository {
          *
          * @return Return whether the deletion has been made.
          */
-        public boolean deleteFood (String id);
+        boolean deleteFood(String id);
 
 
         /**
