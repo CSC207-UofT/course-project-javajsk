@@ -18,7 +18,7 @@ public interface VendorRepository {
      * @param id The associated id of the vendor.
      * @return Return the vendor associated with the id.
      */
-    RegularVendor getVendor(String id);
+    IVendor getVendor(String id);
 
 
     /**
@@ -43,7 +43,7 @@ public interface VendorRepository {
      * @param token The authentication token used by a vendor.
      * @return Return the associated vendor.
      */
-    RegularVendor getUserFromToken(String token);
+    IVendor getVendorFromToken(String token);
 
     /**
      *  A method that returns whether a vendor's authentication token is currently valid.
