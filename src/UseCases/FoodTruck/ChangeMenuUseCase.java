@@ -1,6 +1,5 @@
 package UseCases.FoodTruck;
 
-import Entities.Interfaces.ICustomer;
 import Entities.Interfaces.IShop;
 import Entities.Interfaces.IVendor;
 import Entities.Menu;

@@ -1,10 +1,8 @@
 package Entities;
-import Entities.Interfaces.IAddon;
 import Entities.Interfaces.IFood;
 import Entities.Interfaces.ISingleton;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class Menu {
     private HashMap<IFood, ISingleton> menu;
