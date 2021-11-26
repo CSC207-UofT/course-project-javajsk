@@ -1,11 +1,8 @@
 package UseCases.Addon;
-import Entities.Interfaces.IShop;
 import Entities.RegularAddon;
 import Entities.Interfaces.IAddon;
 import Entities.User;
 import Entities.RegularCart;
-import Entities.FoodTruck;
-import Entities.Menu;
 import UseCases.Addon.ErrorPopup;
 
 public class DeleteAddonUseCase implements DeleteAddonInputBoundary{

@@ -1,6 +1,5 @@
 package UseCases.Addon;
 
-import Entities.Interfaces.IAddon;
 import Entities.RegularAddon;
 import UseCases.DataAccessInterfaces.AddonRepository;
 import UseCases.Addon.ErrorPopup;

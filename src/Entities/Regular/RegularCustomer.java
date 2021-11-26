@@ -3,8 +3,6 @@ package Entities.Regular;
 import Entities.Interfaces.ICustomer;
 import Entities.Interfaces.ICart;
 
-import java.util.List;
-
 public class RegularCustomer implements ICustomer {
     String ID;
     ICart currentCart;

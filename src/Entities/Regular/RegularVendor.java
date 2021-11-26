@@ -1,12 +1,10 @@
 package Entities.Regular;
 
-import Entities.Interfaces.ICart;
 import Entities.Interfaces.IShop;
 import Entities.Interfaces.IVendor;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class RegularVendor implements IVendor {
     ArrayList<IShop> shopList;
@@ -42,7 +40,7 @@ public class RegularVendor implements IVendor {
     @Override
     public IShop getShop(String id) {
         for (IShop i:this.shopList){
-            if (i.id == id){
+            if (Objects.equals(i.getID(), id)){
                 return i;
             }
         }
@@ -51,6 +49,6 @@ public class RegularVendor implements IVendor {
 
     @Override
     public String getID() {
-        return this.getID();
+        return this.ID;
     }
 }
