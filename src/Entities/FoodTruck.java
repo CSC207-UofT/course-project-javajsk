@@ -43,7 +43,7 @@ public class FoodTruck implements IShop {
     }
 
     @Override
-    public boolean isAddonListAvailable(List<IAddon> addons) {
+    public boolean allAddonsAvailable(List<IAddon> addons) {
         for(IAddon addon: addons){
             if(!this.isAddonAvailable(addon)){
                 return false;
