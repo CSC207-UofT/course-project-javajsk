@@ -1,23 +1,35 @@
 package Entities.Interfaces;
 
-import Entities.FifoOrderBook;
 import Entities.Menu;
 
+import java.util.List;
+
 public interface IShop {
-    public Menu getMenu();
 
-    public IOrderbook getOrderBook();
+    void setAddonAvailability(IAddon add, Boolean avail);
 
-    public String getName();
+    boolean isAddonAvailable(IAddon add);
+
+    boolean isAddonListAvailable(List<IAddon> addons);
+
+    boolean isValidAddons(List<ISelection> order);
+
+    Menu getMenu();
+
+    IOrderbook getOrderBook();
+
+    String getName();
 
     // Locations will be strings for now. Might implement map feature later if we have time.
-    public String getLocation();
+    String getLocation();
 
-    public void setMenu(Menu menu);
+    void setMenu(Menu menu);
 
-    public void setOrderBook(FifoOrderBook orderBook);
+    void setOrderBook(IOrderbook orderBook);
 
-    public void setName(String name);
+    void setName(String name);
 
-    public void setLocation(String location);
+    void setLocation(String location);
+
+    String getID();
 }

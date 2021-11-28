@@ -1,18 +1,21 @@
-package Entities;
+package Entities.Regular;
 
 import Entities.Interfaces.ICart;
 import Entities.Interfaces.IOrder;
 
 public class RegularOrder implements IOrder {
     ICart cart;
-    Boolean status = false;
+
+    String ID;
+    String status;
     /**
      * Construct an instance of a RegularOrder, a cart with the
      *
      * @param cart The cart object for the order
      */
-    public RegularOrder(ICart cart){
+    public RegularOrder(ICart cart, String ID){
         this.cart = cart;
+        this.ID = ID;
     }
     /**
      * Get the cart of the order
@@ -30,8 +33,13 @@ public class RegularOrder implements IOrder {
      * @param status False for a non-completed order and true for a completed order
      */
     @Override
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String getID() {
+        return this.ID;
     }
 
 }

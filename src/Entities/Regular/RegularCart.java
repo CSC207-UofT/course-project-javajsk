@@ -1,8 +1,6 @@
-package Entities;
+package Entities.Regular;
 
-import Entities.Interfaces.IAddon;
-import Entities.Interfaces.ICart;
-import Entities.Interfaces.IFood;
+import Entities.Interfaces.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,36 +12,16 @@ import java.util.List;
 public class RegularCart implements ICart {
 
     /**
-     * A class that makes storage of addon information easier.
-     */
-    public static class foodInformation{
-        List<HashMap<IAddon, Integer>> singleFood;
-
-        public foodInformation(List<HashMap<IAddon, Integer>> data){
-            this.singleFood = data;
-        }
-
-        public float getPrice(){
-            float sum = 0;
-            for(HashMap<IAddon, Integer> singletonData : this.singleFood){
-                for(IAddon addon : singletonData.keySet()){
-                    sum += addon.getPrice() * singletonData.get(addon);
-                }
-            }
-            return sum;
-        }
-
-    }
-    /**
      * Use a hashmap to store the foods and the corresponding information about the food ordered.
      * HashMap<IAddon, Integer>[] is the information about the addons
      */
-    private HashMap<IFood,  List<foodInformation>> contents;
+    private HashMap<IFood,  List<List<ISelection>>> contents;
+    private String id;
 
     /**
      * Constructor for regularCart object
      */
-    public RegularCart(HashMap<IFood,  List<foodInformation>> contents){
+    public RegularCart(HashMap<IFood,  List<List<ISelection>>> contents){
         this.contents = contents;
     }
 
@@ -55,10 +33,12 @@ public class RegularCart implements ICart {
     public float getTotalPrice() {
         float sum = 0;
         for (IFood food: contents.keySet()) {
-            List<foodInformation> orders = contents.get(food);
+            List<List<ISelection>> orders = contents.get(food);
             sum += food.getPrice() * orders.size();
-            for(foodInformation items : orders){
-                sum += items.getPrice();
+            for(List<ISelection> items : orders){
+                for(ISelection singleSelection: items) {
+                    sum += singleSelection.getPrice();
+                }
             }
         }
         return sum;
@@ -83,6 +63,11 @@ public class RegularCart implements ICart {
             }
         }
         return false;
+    }
+
+    @Override
+    public String getId() {
+        return this.id;
     }
 
     /**
@@ -117,12 +102,12 @@ public class RegularCart implements ICart {
         }
 
         if(contents.containsKey(item)){
-            List<foodInformation> foodData = contents.get(item);
+            List<List<ISelection>> foodData = contents.get(item);
             if(foodData.size() == quantity){
                 return true;
             }
-            if(foodData.size() < quantity){
-                foodInformation last_item = foodData.get(foodData.size()-1);
+            else if(foodData.size() < quantity){
+                List<ISelection> last_item = foodData.get(foodData.size()-1);
                 for(int i = 0; i < quantity - foodData.size(); i++) {
                     foodData.add(last_item);
                 }
@@ -151,45 +136,18 @@ public class RegularCart implements ICart {
      * Note: This function will simply add to the info of the cart if the item is already present.
      */
     @Override
-    public boolean addItem(IFood item, List<HashMap<IAddon, Integer>> addonInfo) {
+    public boolean addItem(IFood item, List<ISelection> addonInfo) {
         if(contents.containsKey(item)){
-            contents.get(item).add(new foodInformation(addonInfo));
-            return true;
+            contents.get(item).add(addonInfo);
         }
         else {
-            List<foodInformation> order = new ArrayList<>();
-            order.add(new foodInformation(addonInfo));
+            List<List<ISelection>> order = new ArrayList<>();
+            order.add(addonInfo);
             contents.put(item, order);
-            return true;
         }
+        return true;
     }
 
-    /**
-     * Identical to the function addItem, except it will also take in a quantity to set the total number of foods to.
-     * @param item the food item to be added
-     * @param addonInfo the list of list of addons for the given food
-     *               i.e. if food has 3 components, the first element of the addons corresponds to the first
-     *               singleton of item.
-     * @param quantity the new target quantity (this will simply just call the setQuantity function).
-     * @return if adding the item succeeded
-     *
-     * Note: This function will simply add to the info of the cart if the item is already present.
-     */
-    public boolean addItem(IFood item, int quantity, List<HashMap<IAddon, Integer>> addonInfo) {
-        foodInformation info = new foodInformation(addonInfo);
-        if(contents.containsKey(item)){
-            contents.get(item).add(info);
-            return this.setItemQuantity(item, quantity);
-        }
-        else {
-            List<foodInformation> order = new ArrayList<>();
-            for (int i = 0; i < quantity; i++) {
-                order.add(info);
-            }
-            contents.put(item, order);
-            return true;
-        }
-    }
 
     /**
      * Sets the addons of a given item at a given index. E.g. if there are 3 burgers in the cart of the same food type
@@ -200,13 +158,13 @@ public class RegularCart implements ICart {
      * @return if the operation succeeded
      */
     @Override
-    public boolean setAddons(IFood item, int index,  List<HashMap<IAddon, Integer>> addonInfo) {
+    public boolean setAddons(IFood item, int index, List<ISelection> addonInfo) {
         if(contents.containsKey(item)){
-            List<foodInformation> order = contents.get(item);
+            List<List<ISelection>> order = contents.get(item);
             if(order.size() <= index){
                 throw new IllegalArgumentException("Index greater than size of List.");
             }
-            order.get(index).singleFood = addonInfo;
+            order.set(index, addonInfo);
             return true;
         }
         return false;
@@ -232,9 +190,9 @@ public class RegularCart implements ICart {
      * @return
      */
     @Override
-    public  List<HashMap<IAddon, Integer>> getAddons(IFood item, int index) {
+    public List<ISelection> getAddons(IFood item, int index) {
         if(contents.containsKey(item)){
-            return contents.get(item).get(index).singleFood;
+            return contents.get(item).get(index);
         }
         throw new IllegalArgumentException("No such item");
     }

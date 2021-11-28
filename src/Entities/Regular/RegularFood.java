@@ -1,11 +1,11 @@
-package Entities;
+package Entities.Regular;
 
 import Entities.Interfaces.IAddon;
 import Entities.Interfaces.IFood;
+import Entities.Interfaces.ISelection;
 import Entities.Interfaces.ISingleton;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -16,25 +16,40 @@ import java.util.List;
  */
 
 public class RegularFood implements IFood {
+    String id;
     String name;
     String description;
-    float price;
     List<ISingleton> components;
+    String ID;
 
     /**
      * Construct an instance of a RegularFood, which is an object sold by a food truck vendor.
      *
+     * @param id the id of the food item
      * @param name        Name of the item
-     * @param price       Price of the item
-     * @param description Brief description of the item
      * @param components   The singleton entities that make up this RegularFood object.
      */
-    public RegularFood(String name, String description, float price, List<ISingleton> components) {
+    public RegularFood(String id, String name, List<ISingleton> components) {
+        this.id = id;
         this.name = name;
-        this.description = description;
-        this.price = price;
         this.components = components;
+        this.ID = id;
     }
+    private void setDefaultDescription(){
+        StringBuilder description = new StringBuilder();
+        for(ISingleton component: this.components){
+            description.append(component.getName() );
+        }
+        this.description = description.toString();
+    }
+    /**
+     * Method returns the id of this RegularFood object
+     *
+     * @return id of food object
+     */
+    @Override
+    public String getId(){ return this.id; }
+
 
     /**
      * Get the name of this object
@@ -61,17 +76,19 @@ public class RegularFood implements IFood {
      *
      * @return Return the price of this object
      */
-    @Override
-    public float getPrice() {
-        if(this.price == -1){
-            float sum = 0;
-            for (ISingleton single: this.components) {
-                sum += single.getPrice();
-            }
-            return sum;
-        }
-        return this.price;
-    }
+
+    //TODO remove this method from the entity
+//    @Override
+//    public float getPrice() {
+//        if(this.price == -1){
+//            float sum = 0;
+//            for (ISingleton single: this.components) {
+//                sum += single.getPrice();
+//            }
+//            return sum;
+//        }
+//        return this.price;
+//    }
 
     /**
      * Get the components of this object
@@ -93,10 +110,10 @@ public class RegularFood implements IFood {
         this.description = description;
     }
 
-    @Override
-    public void setPrice(float price) {
-        this.price = price;
-    }
+//    @Override
+//    public void setPrice(float price) {
+//        this.price = price;
+//    }
 
     @Override
     public void setComponents(List<ISingleton> components) {
@@ -104,18 +121,19 @@ public class RegularFood implements IFood {
     }
 
     @Override
-    public boolean isValidAddons(List<HashMap<IAddon, Integer>> addons) {
+    public boolean isValidAddons(List<ISelection> addons) {
         if(addons.size() != components.size()){
             return false;
         }
         List<List<IAddon>> allowedTypes = this.getAllowedAddons();
         for(int i =0; i < addons.size(); i++){
             List<IAddon> allowedForSingleton = allowedTypes.get(i);
-            for(IAddon selectedAddon: addons.get(i).keySet()){
-                if(!allowedForSingleton.contains(selectedAddon)){
+            for (IAddon selectedAddon : addons.get(i).getUsedAddons()) {
+                if (!allowedForSingleton.contains(selectedAddon)) {
                     return false;
                 }
             }
+
         }
         return true;
     }
