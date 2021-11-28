@@ -13,7 +13,7 @@ public class removeMenuItemUseCase implements removeMenuItemInputBoundary{
 
     /**
      * Creates a use case for removing items from a shop's menu
-     * @param menuModel the outout boundary for the menu
+     * @param menuModel the output boundary for the menu
      * @param foodData the repository containing all the food data
      * @param foodTruckData the repository containing all the shop data
      */
