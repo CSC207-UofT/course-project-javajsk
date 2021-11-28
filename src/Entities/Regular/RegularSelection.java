@@ -8,7 +8,6 @@ import java.util.List;
 
 public class RegularSelection implements ISelection {
     HashMap<IAddon, Integer> singleSingleton;
-    String ID;
 
     public RegularSelection(HashMap<IAddon, Integer> selection){
         this.singleSingleton = selection;
@@ -34,9 +33,6 @@ public class RegularSelection implements ISelection {
     @Override
     public List<IAddon> getUsedAddons() {
         return (List<IAddon>) singleSingleton.keySet();
-
-    public String getID() {
-
     }
 
 }
