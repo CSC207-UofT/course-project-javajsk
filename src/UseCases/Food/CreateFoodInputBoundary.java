@@ -1,6 +1,5 @@
 package UseCases.Food;
 
-import Entities.Interfaces.IFood;
 import Entities.Interfaces.ISingleton;
 
 import java.util.List;

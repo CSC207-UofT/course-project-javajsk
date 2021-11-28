@@ -1,7 +1,5 @@
 package Entities;
 
-import Entities.Interfaces.IFood;
-import Entities.Interfaces.IOrder;
 import Entities.Interfaces.IOrderbook;
 import Entities.Interfaces.IShop;
 
