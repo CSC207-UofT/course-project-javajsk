@@ -1,6 +1,7 @@
 package Entities.Regular;
 
 import Entities.Interfaces.IAddon;
+import Entities.Interfaces.ISelection;
 import Entities.Interfaces.ISingleton;
 
 import java.util.List;
@@ -12,6 +13,8 @@ public class RegularSingleton implements ISingleton{
     float price;
     List<IAddon> add_ons;
     String ID;
+    ISelection defaultSelection;
+
     /**
      * Construct an instance of a RegularFood, which is an object sold by a food truck vendor.
      *
@@ -22,13 +25,15 @@ public class RegularSingleton implements ISingleton{
      * @param add_ons   A list of 0 or more add_on entities that make up a Singleton object.
      */
 
-    public RegularSingleton(String id, String name, String description, float price, List<IAddon> add_ons){
+    public RegularSingleton(String id, String name, String description, float price, List<IAddon> add_ons,
+                            ISelection defaultSelect){
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.add_ons = add_ons;
         this.ID = ID;
+        this.defaultSelection = defaultSelect;
     }
 
     /**
@@ -53,6 +58,11 @@ public class RegularSingleton implements ISingleton{
      */
     public String getDescription() {
         return this.description;
+    }
+
+    @Override
+    public ISelection getDefaultSelection() {
+        return defaultSelection;
     }
 
     @Override

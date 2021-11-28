@@ -27,22 +27,24 @@ public interface IFood {
     /**
      * A method that returns the price of this food object
      */
-    float getPrice();
+//    float getPrice();
 
     /**
      * A method that returns the components of this food object
      */
     List<ISingleton> getComponents();
 
+    private void setDefaultDescription(){};
+
     void setName(String name);
 
     void setDescription(String description);
 
-    void setPrice(float price);
+//    void setPrice(float price);
 
     void setComponents(List<ISingleton> components);
 
-    boolean isValidAddons(ISelection addons);
+    boolean isValidAddons(List<ISelection> addons);
 
     List<List<IAddon>> getAllowedAddons();
 }

@@ -15,13 +15,13 @@ public interface ICart {
 
     boolean setItemQuantity(IFood item, int quantity);
 
-    boolean addItem(IFood item, ISelection addons);
+    boolean addItem(IFood item, List<ISelection> addons);
 
-    boolean setAddons(IFood item, int index, ISelection addons);
+    boolean setAddons(IFood item, int index, List<ISelection> addons);
 
     int getQuantity(IFood item);
 
-    ISelection getAddons(IFood item , int index);
+    List<ISelection> getAddons(IFood item , int index);
 
     IFood[] getFoods();
 

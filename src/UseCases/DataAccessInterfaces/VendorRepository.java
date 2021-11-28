@@ -9,7 +9,7 @@ import Entities.Regular.RegularVendor;
  * This is an interface that allows for the attainment, changing, deletion, and validation
  * of vendors in the higher level data storage.
  */
-public interface VendorRepository {
+public interface VendorRepository extends UserRepository{
 
     /**
      *  A method that returns the desired vendor from
@@ -19,7 +19,6 @@ public interface VendorRepository {
      * @return Return the vendor associated with the id.
      */
     IVendor getVendor(String id);
-
 
     /**
      *  A method that returns the authentication token used by the vendor
