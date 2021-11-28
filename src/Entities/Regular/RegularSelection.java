@@ -7,35 +7,36 @@ import java.util.HashMap;
 import java.util.List;
 
 public class RegularSelection implements ISelection {
-    List<HashMap<IAddon, Integer>> singleFood;
+    HashMap<IAddon, Integer> singleSingleton;
     String ID;
 
-    public RegularSelection(List<HashMap<IAddon, Integer>> selection, String ID){
-        this.singleFood = selection;
-        this.ID = ID;
+    public RegularSelection(HashMap<IAddon, Integer> selection){
+        this.singleSingleton = selection;
     }
 
     public float getPrice(){
         float sum = 0;
-        for(HashMap<IAddon, Integer> singletonData : this.singleFood){
-            for(IAddon addon : singletonData.keySet()){
-                sum += addon.getPrice() * singletonData.get(addon);
-            }
+        for(IAddon addon : singleSingleton.keySet()){
+            sum += addon.getPrice() * singleSingleton.get(addon);
         }
         return sum;
     }
 
     @Override
     public int size() {
-        return this.singleFood.size();
+        return this.singleSingleton.size();
     }
 
-    public HashMap<IAddon, Integer> get(int index){
-        return singleFood.get(index);
+    public Integer get(IAddon addon){
+        return singleSingleton.get(addon);
     }
 
     @Override
+    public List<IAddon> getUsedAddons() {
+        return (List<IAddon>) singleSingleton.keySet();
+
     public String getID() {
-        return this.ID;
+
     }
+
 }

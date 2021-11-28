@@ -42,7 +42,7 @@ public interface IFood {
 
     void setComponents(List<ISingleton> components);
 
-    boolean isValidAddons(ISelection addons);
+    boolean isValidAddons(List<ISelection> addons);
 
     List<List<IAddon>> getAllowedAddons();
 }
