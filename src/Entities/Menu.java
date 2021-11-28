@@ -9,6 +9,13 @@ public class Menu {
 
     private HashMap<IFood, Object[]> menu;
 
+    /**
+     * The constructor for creating a new menu
+     * @param menu the contents of the new menu
+     */
+    public Menu(HashMap<IFood, Object[]> menu) {
+        this.menu = menu;
+    }
 
     /**
      * A method for adding a new food item to a menu
@@ -55,7 +62,7 @@ public class Menu {
     }
 
     /**
-     * A method for getting the price of a food item
+     * A method for getting the price of a given food item
      * @param item the food item we want the price of
      * @return the price of the food item
      */
