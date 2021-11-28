@@ -17,13 +17,11 @@ public class RegularAddon implements IAddon {
      * (a singleton)
      *
      * name is the name of the addon
-     * description is the description of the addon
      * price is the price of the addon per 1 quantity
      * addonTypes is a list of integers corresponding to types that addon applies to
      * isAvailable indicates if the addon is currently available for purchase
      */
     public String name;
-    public String description;
     public float price;
     public ArrayList<Integer> addonTypes;
     public boolean isAvailable;
@@ -33,14 +31,12 @@ public class RegularAddon implements IAddon {
      * Construct an instance of RegularAddon
      *
      * @param addonName name of addon
-     * @param addonDesc description of addon
      * @param addonPrice price of addon
      * @param types arraylist of types that addon is
      */
-    public RegularAddon(String addonName, String addonDesc, float addonPrice,
+    public RegularAddon(String addonName, float addonPrice,
                         ArrayList<Integer> types, boolean availability, String id){
         this.name = addonName;
-        this.description = addonDesc;
         this.price =  addonPrice;
         this.addonTypes = types;
         this.isAvailable = availability;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * The Addon Interface
  *
- * This is an abstract interface that allows for the name, description, price, and add-on type to be
+ * This is an abstract interface that allows for the name, price, and add-on type to be
  * accessed using getter methods.
  */
 public interface IAddon {
