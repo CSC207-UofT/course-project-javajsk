@@ -3,7 +3,6 @@ package UseCases.FoodTruck;
 import Entities.FoodTruck;
 import Entities.Interfaces.*;
 import Entities.Menu;
-import UseCases.DataAccessInterfaces.CustomerRepository;
 import UseCases.DataAccessInterfaces.FoodTruckRepository;
 import UseCases.DataAccessInterfaces.VendorRepository;
 import UseCases.OutputBoundary.ErrorPopup;

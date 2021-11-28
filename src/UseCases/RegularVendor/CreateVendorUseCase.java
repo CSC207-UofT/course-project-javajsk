@@ -1,15 +1,12 @@
 package UseCases.RegularVendor;
 
-import Entities.FoodTruck;
 import Entities.Interfaces.IShop;
 import Entities.Regular.RegularVendor;
 import UseCases.DataAccessInterfaces.VendorRepository;
 import UseCases.OutputBoundary.ErrorPopup;
 import UseCases.OutputBoundary.VendorModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CreateVendorUseCase implements CreateVendorInputBoundary{
     VendorRepository vendorRepository;

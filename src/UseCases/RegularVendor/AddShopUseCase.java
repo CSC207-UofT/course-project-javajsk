@@ -4,7 +4,6 @@ import Entities.Interfaces.IShop;
 import Entities.Regular.RegularVendor;
 import UseCases.DataAccessInterfaces.VendorRepository;
 import UseCases.OutputBoundary.ErrorPopup;
-import UseCases.OutputBoundary.FoodTruckModel;
 import UseCases.OutputBoundary.VendorModel;
 
 public class AddShopUseCase implements AddShopInputBoundary {

@@ -1,6 +1,5 @@
 package Entities.Interfaces;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -13,37 +12,37 @@ public interface IFood {
     /**
      * A method that return the id of this food object
      */
-    public String getId();
+    String getId();
 
     /**
      *  A method that returns the name of this food object
      */
-    public String getName();
+    String getName();
 
     /**
      * A method that returns the description of this food object
      */
-    public String getDescription();
+    String getDescription();
 
     /**
      * A method that returns the price of this food object
      */
-    public float getPrice();
+    float getPrice();
 
     /**
      * A method that returns the components of this food object
      */
-    public List<ISingleton> getComponents();
+    List<ISingleton> getComponents();
 
-    public void setName(String name);
+    void setName(String name);
 
-    public void setDescription(String description);
+    void setDescription(String description);
 
-    public void setPrice(float price);
+    void setPrice(float price);
 
-    public void setComponents(List<ISingleton> components);
+    void setComponents(List<ISingleton> components);
 
-    public boolean isValidAddons(List<ISelection> addons);
+    boolean isValidAddons(List<ISelection> addons);
 
-    public List<List<IAddon>> getAllowedAddons();
+    List<List<IAddon>> getAllowedAddons();
 }

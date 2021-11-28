@@ -34,6 +34,9 @@ public class RegularSelection implements ISelection {
     @Override
     public List<IAddon> getUsedAddons() {
         return (List<IAddon>) singleSingleton.keySet();
+
+    public String getID() {
+
     }
 
 }

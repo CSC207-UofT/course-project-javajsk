@@ -6,7 +6,6 @@ import Entities.Interfaces.ISelection;
 import Entities.Interfaces.ISingleton;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**

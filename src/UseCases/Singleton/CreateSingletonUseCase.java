@@ -1,16 +1,17 @@
 package UseCases.Singleton;
 
 import Entities.Interfaces.IAddon;
+
 import Entities.Interfaces.ISelection;
 import Entities.Interfaces.ISingleton;
+
 import Entities.Regular.RegularSingleton;
 import Entities.Interfaces.IVendor;
 import UseCases.DataAccessInterfaces.SingletonRepository;
-import UseCases.DataAccessInterfaces.AddonRepository;
 import UseCases.DataAccessInterfaces.VendorRepository;
 import UseCases.OutputBoundary.SingletonModel;
 import UseCases.OutputBoundary.ErrorPopup;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class CreateSingletonUseCase implements CreateSingletonInputBoundary {

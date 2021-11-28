@@ -2,6 +2,14 @@ package UseCases.Addon;
 
 import Entities.Interfaces.IAddon;
 import Entities.Interfaces.IVendor;
+
+import Entities.Interfaces.IShop;
+import Entities.Interfaces.IVendor;
+import Entities.Interfaces.IAddon;
+import Entities.FoodTruck;
+import Entities.Menu;
+
+import UseCases.Addon.ErrorPopup;
 import UseCases.DataAccessInterfaces.AddonRepository;
 import UseCases.DataAccessInterfaces.VendorRepository;
 

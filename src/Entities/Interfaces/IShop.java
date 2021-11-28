@@ -14,22 +14,22 @@ public interface IShop {
 
     boolean isValidAddons(List<ISelection> order);
 
-    public Menu getMenu();
+    Menu getMenu();
 
-    public IOrderbook getOrderBook();
+    IOrderbook getOrderBook();
 
-    public String getName();
+    String getName();
 
     // Locations will be strings for now. Might implement map feature later if we have time.
-    public String getLocation();
+    String getLocation();
 
-    public void setMenu(Menu menu);
+    void setMenu(Menu menu);
 
-    public void setOrderBook(IOrderbook orderBook);
+    void setOrderBook(IOrderbook orderBook);
 
-    public void setName(String name);
+    void setName(String name);
 
-    public void setLocation(String location);
+    void setLocation(String location);
 
     String getID();
 }

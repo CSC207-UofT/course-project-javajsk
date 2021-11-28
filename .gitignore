@@ -25,6 +25,7 @@ gradle-app.setting
 .idea/**/shelf
 .idea/
 course-project-javajsk4.iml
+course-project-javajsk.iml
 # AWS User-specific
 .idea/**/aws.xml
 

@@ -1,6 +1,5 @@
 package UseCases.OutputBoundary;
 
-import Entities.Interfaces.ICart;
 import Entities.Interfaces.IShop;
 
 public interface FoodTruckModel {
