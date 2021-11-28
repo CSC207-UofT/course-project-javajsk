@@ -34,7 +34,7 @@ public class RegularCart implements ICart {
         float sum = 0;
         for (IFood food: contents.keySet()) {
             List<List<ISelection>> orders = contents.get(food);
-            sum += food.getPrice() * orders.size();
+            sum += food.getPrice() * orders.size(); //TODO: correct food.getPrice()
             for(List<ISelection> items : orders){
                 for(ISelection singleSelection: items) {
                     sum += singleSelection.getPrice();

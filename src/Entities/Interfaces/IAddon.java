@@ -10,28 +10,22 @@ import java.util.ArrayList;
  */
 public interface IAddon {
     /**
+     * A method that returns the id of the Addon
+     * @return addon id
+     */
+    String getId();
+
+    /**
      * A method that returns the name of the Addon
      * @return name of addon
      */
     String getName();
 
     /**
-     * A method that returns the description of the Addon
-     * @return description of Addon
-     */
-    String getDescription();
-
-    /**
      * A method that returns the price of the Addon
      * @return price of Addon
      */
     float getPrice();
-
-    /**
-     * A method that sets the price of the Addon
-     * @param newPrice price of Addon
-     */
-    void setPrice(float newPrice);
 
     /**
      * A method that returns an arraylist of the types the addon is, where each type/category is
@@ -47,10 +41,14 @@ public interface IAddon {
     boolean getAvailability();
 
     /**
+     * A method that sets the price of the Addon
+     * @param newPrice price of Addon
+     */
+    void setPrice(float newPrice);
+
+    /**
      * A method that sets the availability of the Addon
      * @param newAvail whether addon is available
      */
     void setAvailability(boolean newAvail);
-
-    String getID();
 }
