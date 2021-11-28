@@ -1,8 +1,5 @@
 package Entities.Interfaces;
 
-import java.util.HashMap;
-import java.util.List;
-
 public interface ICart {
     // Consider replacing with an abstract class?
 

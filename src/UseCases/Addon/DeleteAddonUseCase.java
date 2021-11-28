@@ -1,22 +1,26 @@
 package UseCases.Addon;
+
 import Entities.Interfaces.IShop;
-import Entities.RegularAddon;
+import Entities.Interfaces.IVendor;
 import Entities.Interfaces.IAddon;
-import Entities.User;
-import Entities.RegularCart;
 import Entities.FoodTruck;
 import Entities.Menu;
+
 import UseCases.Addon.ErrorPopup;
+import UseCases.DataAccessInterfaces.AddonRepository;
+import UseCases.DataAccessInterfaces.VendorRepository;
 
 public class DeleteAddonUseCase implements DeleteAddonInputBoundary{
     ErrorPopup errorPopup;
+    VendorRepository vendorRepository;
+    AddonRepository addonRepository;
     @Override
     public boolean deleteAddon(String userToken, String AddonID) {
         IVendor vendor = vendorRepository.getVendorFromToken(userToken);
         if(vendor != null) {
-            IAddon addon = AddonRepository.getAddon(AddonID);
+            IAddon addon = addonRepository.getAddon(AddonID);
             if(addon != null) {
-                AddonRepository.deleteAddon(AddonID);
+                addonRepository.deleteAddon(AddonID);
                 return true;
             } else { errorPopup.displayError("Invalid ID"); }
         }
