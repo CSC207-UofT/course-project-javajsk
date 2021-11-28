@@ -54,4 +54,6 @@ public interface VendorRepository {
     Boolean isTokenValid(String token);
 
     boolean save(IVendor vendor);
+
+    RegularVendor getUserFromToken(String token);
 }

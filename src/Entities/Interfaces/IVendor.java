@@ -8,6 +8,7 @@ public interface IVendor extends IUser {
     List<IShop> getShops();
 
     IShop getShop(String id);
+
     String getID();
 
 }
