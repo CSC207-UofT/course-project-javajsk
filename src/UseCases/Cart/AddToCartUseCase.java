@@ -1,13 +1,13 @@
 package UseCases.Cart;
 
-import Entities.Interfaces.ICart;
-import Entities.Interfaces.ICustomer;
-import Entities.Interfaces.ISelection;
+import Entities.Interfaces.*;
 import UseCases.DataAccessInterfaces.CartRepository;
 import UseCases.DataAccessInterfaces.CustomerRepository;
 import UseCases.DataAccessInterfaces.FoodRepository;
 import UseCases.OutputBoundary.CartModel;
 import UseCases.OutputBoundary.ErrorPopup;
+
+import java.util.List;
 
 
 public class AddToCartUseCase implements AddToCartInputBoundary{
@@ -19,19 +19,25 @@ public class AddToCartUseCase implements AddToCartInputBoundary{
 
 
     @Override
-    public ICart addToCart(String cartId, String foodId, ISelection orderInfo, String token) {
+    public ICart addToCart(String cartId, String foodId, List<ISelection> orderInfo, IShop shop, String token) {
         ICustomer customer = (ICustomer) customerRepository.getUserFromToken(token);
         ICart cart = cartRepository.getCart(cartId);
         if(customer != null) {
             if(customer.getCart().equals(cart)) {
-                boolean result = cart.addItem(foodRepository.getFood(foodId), orderInfo);
-                if (result) {
-                    boolean saveSuccess = cartRepository.save(cart);
-                    if (saveSuccess) {
-                        cartModel.updateCart(cart);
-                        return cart;
+                IFood food = foodRepository.getFood(foodId);
+                if(food.isValidAddons(orderInfo) && shop.isValidAddons(orderInfo)) {
+                    boolean result = cart.addItem(food, orderInfo);
+                    if (result) {
+                        boolean saveSuccess = cartRepository.save(cart);
+                        if (saveSuccess) {
+                            cartModel.updateCart(cart);
+                            return cart;
+                        }
                     }
+                }else{
+                    errorDisplayer.displayError("Invalid selection for addons.");
                 }
+
             }else{
                 errorDisplayer.displayError("This cart is in your account.");
             }

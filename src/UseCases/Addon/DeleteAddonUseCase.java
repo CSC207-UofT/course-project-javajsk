@@ -1,5 +1,8 @@
 package UseCases.Addon;
 
+import Entities.Interfaces.IAddon;
+import Entities.Interfaces.IVendor;
+
 import Entities.Interfaces.IShop;
 import Entities.Interfaces.IVendor;
 import Entities.Interfaces.IAddon;
@@ -14,9 +17,10 @@ public class DeleteAddonUseCase implements DeleteAddonInputBoundary{
     ErrorPopup errorPopup;
     VendorRepository vendorRepository;
     AddonRepository addonRepository;
+
     @Override
     public boolean deleteAddon(String userToken, String AddonID) {
-        IVendor vendor = vendorRepository.getVendorFromToken(userToken);
+        IVendor vendor = (IVendor) vendorRepository.getUserFromToken(userToken);
         if(vendor != null) {
             IAddon addon = addonRepository.getAddon(AddonID);
             if(addon != null) {

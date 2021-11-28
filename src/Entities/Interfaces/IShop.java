@@ -2,7 +2,18 @@ package Entities.Interfaces;
 
 import Entities.Menu;
 
+import java.util.List;
+
 public interface IShop {
+
+    void setAddonAvailability(IAddon add, Boolean avail);
+
+    boolean isAddonAvailable(IAddon add);
+
+    boolean isAddonListAvailable(List<IAddon> addons);
+
+    boolean isValidAddons(List<ISelection> order);
+
     Menu getMenu();
 
     IOrderbook getOrderBook();

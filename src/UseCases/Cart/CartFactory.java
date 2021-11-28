@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CartFactory implements IFactory<ICart> {
     public ICart get(String type){
-        HashMap<IFood, List<ISelection>> contents = new HashMap<>();
+        HashMap<IFood, List<List<ISelection>>> contents = new HashMap<>();
         switch (type){
             // Switch used in case many new types of carts are introduced.
             case "Regular":

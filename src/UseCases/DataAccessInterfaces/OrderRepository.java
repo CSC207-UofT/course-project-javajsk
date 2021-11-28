@@ -26,10 +26,10 @@ public interface OrderRepository {
     boolean setOrderStatus(String id, String status);
 
     /**
-     * Method returns all the orders with the given foodtruck id
+     * Method returns all the orders with the given food truck id
      * from the higher level data system
      *
-     * @param truckId if of foodtruck
+     * @param truckId if of food truck
      * @return arraylist of orders
      */
     IOrderbook getOrdersByFoodTruck(String truckId);
