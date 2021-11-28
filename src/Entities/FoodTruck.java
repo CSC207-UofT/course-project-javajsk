@@ -12,6 +12,7 @@ public class FoodTruck implements IShop {
     HashMap<IAddon, Boolean> addonAvailability;
     String location;
     String name;
+    boolean isOpen;
 
     /**
      * @param menu Initial Menu implementation
@@ -19,12 +20,13 @@ public class FoodTruck implements IShop {
      * @param location Initial String location
      * @param name Initial String name
      */
-    public FoodTruck(Menu menu, IOrderbook orderbook, String location, String name, HashMap<IAddon, Boolean> addAvail){
+    public FoodTruck(Menu menu, IOrderbook orderbook, String location, String name, HashMap<IAddon, Boolean> addAvail, boolean isOpen){
         this.menu = menu;
         this.orderbook = orderbook;
         this.location = location;
         this.name = name;
         this.addonAvailability = addAvail;
+        this.isOpen = isOpen;
     }
 
 
@@ -35,6 +37,14 @@ public class FoodTruck implements IShop {
         }else{
             addonAvailability.put(add, avail);
         }
+    }
+    
+    public boolean isShopOpen(){
+        return this.isOpen;
+    }
+    
+    public void setShopOpenStatus(boolean newIsOpen){
+        this.isOpen = newIsOpen;
     }
 
     @Override
