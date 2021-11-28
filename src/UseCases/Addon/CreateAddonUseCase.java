@@ -19,7 +19,7 @@ public class CreateAddonUseCase implements CreateAddonInputBoundary {
                                ArrayList<Integer> types, boolean availability, String ID) {
         IVendor vendor = vendorRepository.getVendorFromToken(vendorToken);
         if (vendor != null) {
-            IAddon addon = new RegularAddon(name, description, price, types, availability, ID);
+            IAddon addon = new RegularAddon(name, price, types, availability, ID);
             addonRepository.createAddon(addon);
             return addonRepository.save(addon);
         }
