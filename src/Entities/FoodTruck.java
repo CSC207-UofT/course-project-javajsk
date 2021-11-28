@@ -67,7 +67,7 @@ public class FoodTruck implements IShop {
     @Override
     public boolean isValidAddons(List<ISelection> order) {
         for(ISelection sel: order){
-            if(!this.isAddonListAvailable(sel.getUsedAddons())){
+            if(!this.allAddonsAvailable(sel.getUsedAddons())){
                 return false;
             }
         }

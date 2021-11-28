@@ -5,7 +5,7 @@ import Entities.Interfaces.IOrderbook;
 import Entities.Menu;
 import UseCases.FoodTruck.*;
 import UseCases.FoodTruck.*;
-import org.json.JSONObject
+import org.json.JSONObject;
 
 public class FoodTruckController {
     ChangeMenuInputBoundary changeMenuInputBoundary;
@@ -27,7 +27,7 @@ public class FoodTruckController {
         String ShopId = input.getString("shopId");
         String Menu = input.getString("Menu");
 
-        this.changeMenuInputBoundary.changeMenu(userToken, ShopId);
+        //this.changeMenuInputBoundary.changeMenu(userToken, ShopId);
     }
     public void runCreateFoodTruck(String userToken, String name, Menu menu, String status,
                                    IOrderbook orderbook, String location){

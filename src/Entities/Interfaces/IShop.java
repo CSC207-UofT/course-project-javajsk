@@ -10,7 +10,7 @@ public interface IShop {
 
     boolean isAddonAvailable(IAddon add);
 
-    boolean isAddonListAvailable(List<IAddon> addons);
+    boolean allAddonsAvailable(List<IAddon> addons);
 
     boolean isValidAddons(List<ISelection> order);
 
