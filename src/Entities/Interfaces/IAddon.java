@@ -41,6 +41,12 @@ public interface IAddon {
     boolean getAvailability();
 
     /**
+     * A method that sets the id of the Addon with given id
+     * @param newId id of addon
+     */
+    void setId(String newId);
+
+    /**
      * A method that sets the price of the Addon
      * @param newPrice price of Addon
      */

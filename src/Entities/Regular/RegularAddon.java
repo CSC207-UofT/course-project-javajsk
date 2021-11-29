@@ -18,7 +18,7 @@ public class RegularAddon implements IAddon {
      *
      * name is the name of the addon
      * price is the price of the addon per 1 quantity
-     * addonTypes is a list of integers corresponding to types that addon applies to
+     * addonTypes is a list of integers corresponding to the types that addon applies to
      * isAvailable indicates if the addon is currently available for purchase
      */
     public String name;
@@ -84,6 +84,13 @@ public class RegularAddon implements IAddon {
     public boolean getAvailability() {
         return this.isAvailable;
     }
+
+    /**
+     * A method that sets the id of the Addon with given id
+     * @param newId id of addon
+     */
+    @Override
+    public void setId(String newId){ this.id = newId; }
 
     /**
      * A method that sets the price of the Addon
