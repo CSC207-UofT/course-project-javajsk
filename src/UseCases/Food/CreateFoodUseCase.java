@@ -45,9 +45,9 @@ public class CreateFoodUseCase implements CreateFoodInputBoundary {
     @Override
     public boolean createFood(String userToken, String id, String name, String desc,
                               float price, List<ISingleton> singletons){
-        IVendor vendor = vendorRepository.getUserFromToken(userToken);
+        IVendor vendor = vendorRepository.getVendorFromToken(userToken);
         if(vendor != null) {
-            IFood food = new RegularFood(id, name, desc, price, singletons);
+            IFood food = new RegularFood(id, name, singletons);
             return foodRepository.save(food);
         }
 
