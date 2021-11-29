@@ -14,6 +14,14 @@ public class SingletonController {
     DeleteSingletonInputBoundary deleteSingletonInputBoundary;
     UpdateSingletonInputBoundary updateSingletonInputBoundary;
     JSONParser parser;
+
+    /**
+     *
+     * @param createSingletonInputBoundary input boundary for creating Singletons
+     * @param deleteSingletonInputBoundary input boundary for deleting Singletons
+     * @param updateSingletonInputBoundary input boundary for updating Singletons
+     * @param parser of JSON file
+     */
     SingletonController(CreateSingletonInputBoundary createSingletonInputBoundary, DeleteSingletonInputBoundary deleteSingletonInputBoundary,
                         UpdateSingletonInputBoundary updateSingletonInputBoundary, JSONParser parser){
         this.createSingletonInputBoundary = createSingletonInputBoundary;
@@ -22,6 +30,12 @@ public class SingletonController {
         this.parser = parser;
 
     }
+
+    /**
+     *
+     * @param raw_text of data to be parsed
+     * @return true if Singleton is created
+     */
     public boolean runCreateSingleton(String raw_text){
         JSONObject object = this.parser.parse(raw_text);
         userToken = object.getString("userToken");
@@ -33,6 +47,12 @@ public class SingletonController {
         defaultSel = object.get("defaultSel");
         return createSingletonInputBoundary.createSingleton(userToken, Id, name, description, price, add_ons, defaultSel);
     }
+
+    /**
+     *
+     * @param raw_text of data to be parsed
+     * @return true if singleton is deleted
+     */
     public boolean runDeleteSingleton(String raw_text){
         JSONObject object = this.parser.parse(raw_text);
         userToken = object.getString("userToken");
@@ -40,6 +60,12 @@ public class SingletonController {
         return deleteSingletonInputBoundary.deleteSingleton(userToken, singletonID);
 
     }
+
+    /**
+     *
+     * @param raw_text of data to be parsed
+     * @return true if singleton is updated
+     */
     public boolean runUpdateSingleton(String raw_text){
         JSONObject object = this.parser.parse(raw_text);
         userToken = object.getString("userToken");

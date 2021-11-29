@@ -21,6 +21,12 @@ public class AddonController {
         this.deleteAddonInputBoundary = deleteAddonInputBoundary;
         this.parser = parser;
     }
+
+    /**
+     *
+     * @param raw_text data to be parsed
+     * @return true if addon is created
+     */
     public boolean runCreateAddon(String raw_text){
         JSONObject object = this.parser.parse(raw_text);
         token = object.getString("VendorToken");
@@ -31,7 +37,10 @@ public class AddonController {
         availability = object.getBoolean("availability");
         Id = object.getString("Id");
         return createAddonInputBoundary.createAddon(token, name, description, price, type, availability, Id);
-
+        /**
+         * @param raw_text data to be parsed
+         * @return true if addon is deleted
+          */
      public boolean runDeleteAddon(String raw_text){
          JSONObject object = this.parser.parse(raw_text);
          token = object.getString("VendorToken");
