@@ -1,7 +1,5 @@
 package UseCases.Addon;
 
-import Entities.Interfaces.IAddon;
-
 import java.util.ArrayList;
 
 public interface CreateAddonInputBoundary{
