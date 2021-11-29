@@ -26,6 +26,7 @@ public interface AddonRepository{
      * @param id of addon
      * @return True if addon is successfully deleted
      */
+    IAddon createAddon(IAddon addon);
 
     boolean deleteAddon(String id);
 
