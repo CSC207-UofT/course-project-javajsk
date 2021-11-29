@@ -1,5 +1,6 @@
 package Adapters.Controllers;
 
+import Adapters.JSONParser;
 import Entities.FoodTruck;
 import Entities.Interfaces.IFood;
 import Entities.Interfaces.IOrderbook;
@@ -15,6 +16,7 @@ public class FoodTruckController {
     CreateFoodTruckInputBoundary createFoodTruckInputBoundary;
     GetMenuInputBoundary getMenuInputBoundary;
     ProcessOrderInputBoundary processOrderInputBoundary;
+    JSONParser parser;
 
     public FoodTruckController(ChangeMenuInputBoundary changeMenuInputBoundary,CreateFoodTruckInputBoundary createFoodTruckInputBoundary,
                                GetMenuInputBoundary getMenuInputBoundary,ProcessOrderInputBoundary processOrderInputBoundary ){
@@ -25,14 +27,16 @@ public class FoodTruckController {
     }
 
     //TODO: Parse JSON from string
-    public void runChangeMenu(JSONObject input){
+    public void runChangeMenu(String raw_input){
+        JSONObject input = parser.parse(raw_input);
         String userToken = input.getString("userToken");
         String ShopId = input.getString("shopId");
         String Menu = input.getString("Menu");
 
         //this.changeMenuInputBoundary.changeMenu(userToken, ShopId);
     }
-    public void runCreateFoodTruck(JSONObject input){
+    public void runCreateFoodTruck(String raw_input){
+        JSONObject input = parser.parse(raw_input);
         String userToken = input.getString("userToken");
         String ShopId = input.getString("shopId");
         String name = input.getString("name");
@@ -41,14 +45,16 @@ public class FoodTruckController {
         //HashMap<IFood, Object[]> menu = Menu.get("menu");
 
     }
-    public void runGetMenu(JSONObject input){
+    public void runGetMenu(String raw_input){
+        JSONObject input = parser.parse(raw_input);
         String userToken = input.getString("userToken");
         String ShopId = input.getString("shopId");
         this.getMenuInputBoundary.getMenu(userToken, ShopId);
 
 
     }
-    public void runProcessOrder(JSONObject input){
+    public void runProcessOrder(String raw_input){
+        JSONObject input = parser.parse(raw_input);
         String userToken = input.getString("userToken");
         String ShopId = input.getString("shopId");
         this.processOrderInputBoundary.processOrder(userToken, ShopId);
