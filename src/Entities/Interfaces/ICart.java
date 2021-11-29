@@ -1,5 +1,7 @@
 package Entities.Interfaces;
 
+import java.util.List;
+
 public interface ICart {
     // Consider replacing with an abstract class?
 

@@ -1,5 +1,5 @@
 package UseCases.Addon;
 
 public interface ErrorPopup {
-    void displayError(String message);
+    public void displayError(String message);
 }
