@@ -1,11 +1,14 @@
 package Adapters.Controllers;
 
 import Entities.FoodTruck;
+import Entities.Interfaces.IFood;
 import Entities.Interfaces.IOrderbook;
 import Entities.Menu;
 import UseCases.FoodTruck.*;
 import UseCases.FoodTruck.*;
 import org.json.JSONObject;
+
+import java.util.HashMap;
 
 public class FoodTruckController {
     ChangeMenuInputBoundary changeMenuInputBoundary;
@@ -29,15 +32,26 @@ public class FoodTruckController {
 
         //this.changeMenuInputBoundary.changeMenu(userToken, ShopId);
     }
-    public void runCreateFoodTruck(String userToken, String name, Menu menu, String status,
-                                   IOrderbook orderbook, String location){
+    public void runCreateFoodTruck(JSONObject input){
+        String userToken = input.getString("userToken");
+        String ShopId = input.getString("shopId");
+        String name = input.getString("name");
+        JSONObject Menu = input.getJSONObject("Menu");
+        //TODO: how to manage hashmaps being passed into JSON?
+        //HashMap<IFood, Object[]> menu = Menu.get("menu");
+
+    }
+    public void runGetMenu(JSONObject input){
+        String userToken = input.getString("userToken");
+        String ShopId = input.getString("shopId");
+        this.getMenuInputBoundary.getMenu(userToken, ShopId);
 
 
     }
-    public void runGetMenu(String userToken, String shopId){
-
-    }
-    public void runProcessOrder(String userToken, String shopId){
+    public void runProcessOrder(JSONObject input){
+        String userToken = input.getString("userToken");
+        String ShopId = input.getString("shopId");
+        this.processOrderInputBoundary.processOrder(userToken, ShopId);
 
     }
 }

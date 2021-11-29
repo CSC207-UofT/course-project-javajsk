@@ -42,15 +42,7 @@ public interface VendorRepository extends UserRepository{
      * @param token The authentication token used by a vendor.
      * @return Return the associated vendor.
      */
-<<<<<<< HEAD
-<<<<<<< HEAD
     public RegularVendor getVendorFromToken(String token);
-=======
-    RegularVendor getUserFromToken(String token);
->>>>>>> 8cb19257d126513c6fa50aa3852cfe285232df75
-=======
-    IVendor getVendorFromToken(String token);
->>>>>>> cb06e7220d065ff2e4941227ef32338c140a30e8
 
     /**
      *  A method that returns whether a vendor's authentication token is currently valid.
