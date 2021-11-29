@@ -4,6 +4,7 @@ import Entities.Interfaces.*;
 import UseCases.DataAccessInterfaces.CartRepository;
 import UseCases.DataAccessInterfaces.CustomerRepository;
 import UseCases.DataAccessInterfaces.FoodRepository;
+import UseCases.DataAccessInterfaces.FoodTruckRepository;
 import UseCases.OutputBoundary.CartModel;
 import UseCases.OutputBoundary.ErrorPopup;
 
@@ -16,12 +17,14 @@ public class AddToCartUseCase implements AddToCartInputBoundary{
     FoodRepository foodRepository;
     ErrorPopup errorDisplayer;
     CartModel cartModel;
+    FoodTruckRepository foodTruckRepository;
 
 
     @Override
-    public ICart addToCart(String cartId, String foodId, List<ISelection> orderInfo, IShop shop, String token) {
+    public ICart addToCart(String cartId, String foodId, List<ISelection> orderInfo, String shopId, String token) {
         ICustomer customer = (ICustomer) customerRepository.getUserFromToken(token);
         ICart cart = cartRepository.getCart(cartId);
+        IShop shop = foodTruckRepository.getFoodTruck(shopId);
         if(customer != null) {
             if(customer.getCart().equals(cart)) {
                 IFood food = foodRepository.getFood(foodId);
