@@ -42,6 +42,20 @@ public class Menu {
     }
 
     /**
+     * A method that returns the food item with the given foodId
+     * @param foodId id of food
+     * @return food item with foodId in menu
+     */
+    public IFood getFood(String foodId){
+        for (IFood iFood : this.menu) {
+            if (iFood.getId().equals(foodId)) {
+                return iFood;
+            }
+        }
+        return null;
+    }
+
+    /**
      * A method that returns whether the menu contains a given food item
      * @param item the food item to check for
      * @return whether item is in the menu
