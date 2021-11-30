@@ -9,6 +9,7 @@ import java.util.List;
 public class RegularSingleton implements ISingleton{
     String id;
     String name;
+    float price;
     String description;
     List<IAddon> addons;
     ISelection defaultSelection;
@@ -18,14 +19,16 @@ public class RegularSingleton implements ISingleton{
      *
      * @param id id of the singleton
      * @param name name of the singleton
+     * @param price price of the item
      * @param description brief description of the addons it has
      * @param add_ons a list of 0 or more addon entities that make up a Singleton object.
      */
-    public RegularSingleton(String id, String name, String description, List<IAddon> add_ons,
+    public RegularSingleton(String id, String name, String description, float price, List<IAddon> add_ons,
                             ISelection defaultSelect){
         this.id = id;
         this.name = name;
         this.description = description;
+        this.rpice = price;
         this.addons = add_ons;
         this.defaultSelection = defaultSelect;
     }
@@ -46,6 +49,23 @@ public class RegularSingleton implements ISingleton{
         this.id = id;
     }
 
+    
+    /**
+     * Get the price of this Singleton
+     *
+     * @return the price of this Singleton
+     */
+    public String getPrice() { return this.price; }
+
+    /**
+     * Method for setting the price of a singleton
+     * @param id the price of the singleton
+     */
+    @Override
+    public void setPrice(float price) {
+        this.price = price;
+    }
+    
 
     /**
      * Get the description of this object
