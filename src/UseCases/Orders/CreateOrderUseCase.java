@@ -1,9 +1,11 @@
 package UseCases.Orders;
 
+import Entities.FoodTruck;
 import Entities.Interfaces.*;
 import Entities.Regular.RegularOrder;
 import UseCases.DataAccessInterfaces.CustomerRepository;
 import UseCases.DataAccessInterfaces.OrderRepository;
+import UseCases.DataAccessInterfaces.ShopRepository;
 import UseCases.DataAccessInterfaces.VendorRepository;
 import UseCases.OutputBoundary.OrderModel;
 
@@ -14,6 +16,7 @@ public class CreateOrderUseCase implements CreateOrderInputBoundary{
     CustomerRepository customerData;
     VendorRepository vendorData;
     OrderModel orderModel;
+    ShopRepository shopRepository;
 
     /**
      * Creates a use case for making order objects
@@ -23,21 +26,24 @@ public class CreateOrderUseCase implements CreateOrderInputBoundary{
      * @param orders the repository containing all order data
      * @param orderModel the output boundary
      */
-    public CreateOrderUseCase(CustomerRepository customers, VendorRepository vendors, OrderRepository orders, OrderModel orderModel){
+    public CreateOrderUseCase(CustomerRepository customers, VendorRepository vendors, OrderRepository orders,
+                              OrderModel orderModel, ShopRepository shopRepository){
         this.orderData = orders;
         this.customerData = customers;
         this.vendorData = vendors;
         this.orderModel = orderModel;
+        this.shopRepository = shopRepository;
     }
 
     /**
      * A method for creating new order objects
      * @param cart the cart with the items that want to be purchased
      * @param customer the customer buying the items
-     * @param foodTruck the food truck selling the items
+     * @param shopId the food truck selling the items
      * @return true if the order has been created and false if it hasn't
      */
-    public boolean createOrder(ICart cart, ICustomer customer, IShop foodTruck) {
+    public boolean createOrder(ICart cart, ICustomer customer, String shopId) {
+        IShop foodTruck = shopRepository.getShop(shopId);
         boolean validCart = validCart(cart, foodTruck);
         if (validCart){
             IOrder order = new RegularOrder(cart, null);

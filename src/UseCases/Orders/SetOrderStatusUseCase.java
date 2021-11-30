@@ -3,7 +3,7 @@ package UseCases.Orders;
 import UseCases.DataAccessInterfaces.OrderRepository;
 import UseCases.OutputBoundary.OrderModel;
 
-public class setOrderStatusUseCase implements setOrderStatusInputBoundary{
+public class SetOrderStatusUseCase implements SetOrderStatusInputBoundary {
     OrderRepository orderData;
     OrderModel orderModel;
 
@@ -11,7 +11,7 @@ public class setOrderStatusUseCase implements setOrderStatusInputBoundary{
      * Creates a use case for changing order status
      * @param orders the repository containing all order data
      */
-    public setOrderStatusUseCase(OrderRepository orders, OrderModel orderModel){
+    public SetOrderStatusUseCase(OrderRepository orders, OrderModel orderModel){
         this.orderData = orders;
         this.orderModel = orderModel;
     }

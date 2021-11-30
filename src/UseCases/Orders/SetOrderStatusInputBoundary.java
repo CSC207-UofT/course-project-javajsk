@@ -1,5 +1,5 @@
 package UseCases.Orders;
 
-public interface setOrderStatusInputBoundary {
+public interface SetOrderStatusInputBoundary {
     boolean setOrderStatus(String orderId, String status);
 }

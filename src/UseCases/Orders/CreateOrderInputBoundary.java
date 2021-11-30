@@ -6,5 +6,5 @@ import Entities.Interfaces.IShop;
 
 
 public interface CreateOrderInputBoundary {
-    boolean createOrder(ICart cart, ICustomer customer, IShop foodTruck);
+    boolean createOrder(ICart cart, ICustomer customer, String shopId);
 }
