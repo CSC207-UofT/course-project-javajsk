@@ -34,7 +34,7 @@ public interface VendorRepository extends UserRepository{
      * @param token The authentication token used by a vendor.
      * @return Return the associated id of the vendor.
      */
-    String getUserIDFromToken(String token);
+    String getUserIdFromToken(String token);
 
     /**
      *  A method that returns the vendor from an authentication token.

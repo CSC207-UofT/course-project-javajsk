@@ -25,7 +25,7 @@ public class CreateSingletonUseCase implements CreateSingletonInputBoundary {
                                    String description, float price, List<IAddon> add_ons, ISelection defaultSel) {
         IVendor vendor = (IVendor) vendorRepository.getUserFromToken(userToken);
         if(vendor != null) {
-            RegularSingleton singleton = new RegularSingleton(id, name, description, price, add_ons, defaultSel);
+            RegularSingleton singleton = new RegularSingleton(id, name, description, add_ons, defaultSel);
             singletonRepository.createSingleton(singleton);
 
             // TODO: make sure singleton is unique (somehow)

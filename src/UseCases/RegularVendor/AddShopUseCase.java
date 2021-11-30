@@ -19,11 +19,11 @@ public class AddShopUseCase implements AddShopInputBoundary {
      *
      * @param shop The shop that we want to add to the vendor's shoplist.
      * @param token The token of the vendor.
-     * @return A boolean of whether the method successfully added the shop.
+     * @return whether the method successfully added the shop.
      */
     @Override
     public boolean addShop(IShop shop, String token) {
-        RegularVendor curr_ven = vendorRepository.getUserFromToken(token);
+        RegularVendor curr_ven = (RegularVendor) vendorRepository.getUserFromToken(token);
         if (curr_ven != null){
             curr_ven.addShop(shop);
             vendorModel.updateVendor(curr_ven);
