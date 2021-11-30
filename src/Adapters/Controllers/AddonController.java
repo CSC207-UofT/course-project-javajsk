@@ -38,7 +38,7 @@ public class AddonController {
         //TODO: Need to parse types
         boolean availability = object.getBoolean("availability");
         String Id = object.getString("Id");
-        return createAddonInputBoundary.createAddon(token, name, price,description, types, availability, Id);
+        return createAddonInputBoundary.createAddon(token, name, price, types, availability, Id);
     }
         /**
          * @param raw_text data to be parsed
