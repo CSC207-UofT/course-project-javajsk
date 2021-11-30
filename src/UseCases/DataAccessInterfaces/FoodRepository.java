@@ -36,5 +36,15 @@ public interface FoodRepository {
          */
         boolean save(IFood food);
 
-        boolean createFood(IFood food);
+        // TODO: boolean createFood(IFood food);
+
+        /**
+         * A method that returns the id of a given food object if it is in the repository
+         * (A food item is considered to be in the repository if it has all the same attributes
+         * excluding id)
+         * Returns null if the food item is not in the repository
+         * @param food food item to check for
+         * @return whether food item is in repository
+         */
+        String getFoodId(IFood food);
 }

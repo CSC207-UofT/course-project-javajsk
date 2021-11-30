@@ -3,12 +3,12 @@ package UseCases.Menu;
 import Entities.Interfaces.IFood;
 import Entities.Menu;
 import UseCases.DataAccessInterfaces.FoodRepository;
-import UseCases.DataAccessInterfaces.FoodTruckRepository;
+import UseCases.DataAccessInterfaces.ShopRepository;
 import UseCases.OutputBoundary.MenuModel;
 
 public class editMenuItemUseCase implements editMenuItemInputBoundary{
     FoodRepository foodData;
-    FoodTruckRepository foodTruckData;
+    ShopRepository foodTruckData;
     MenuModel menuModel;
 
     /**
@@ -16,7 +16,7 @@ public class editMenuItemUseCase implements editMenuItemInputBoundary{
      * @param foodData the repository containing all the food data
      * @param menuModel the output boundary for the menu
      */
-    public editMenuItemUseCase(FoodRepository foodData, MenuModel menuModel, FoodTruckRepository foodTruckData){
+    public editMenuItemUseCase(FoodRepository foodData, MenuModel menuModel, ShopRepository foodTruckData){
         this.menuModel = menuModel;
         this.foodTruckData = foodTruckData;
         this.foodData = foodData;
@@ -32,7 +32,7 @@ public class editMenuItemUseCase implements editMenuItemInputBoundary{
      */
     public boolean editMenuItem(String shopId, String foodId, float price, boolean availability) {
         IFood food = foodData.getFood(foodId);
-        Menu menu = foodTruckData.getFoodTruck(shopId).getMenu();
+        Menu menu = foodTruckData.getShop(shopId).getMenu();
         if(menu.getContents().containsKey(food)){
             menu.setFood(food, price, availability);
             this.menuModel.updateMenu(menu);

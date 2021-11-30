@@ -41,7 +41,7 @@ public class Menu {
     /**
      * A method for modifying a food item to a menu
      *
-     * @param food the  food item
+     * @param food the food item
      * @param price the new price for the food item
      * @param availability the updated availability of the food item
      */
@@ -50,8 +50,6 @@ public class Menu {
         foodInfo[0] = price;
         foodInfo[1] = availability;
     }
-
-
 
     /**
      * A method for getting the food items in a menu
@@ -107,10 +105,16 @@ public class Menu {
         }
     }
 
-
-
+    /**
+     * A method that returns whether the menu contains a given food item
+     * @param item the food item to check for
+     * @return whether item is in the menu
+     */
+    public boolean hasFood(IFood item){
+       return this.menu.containsKey(item);
+    }
 }
-// incomplete
+
 
 
 
