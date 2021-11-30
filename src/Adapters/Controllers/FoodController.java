@@ -1,2 +1,4 @@
-package Adapters.Controllers;public class FoodController {
+package Adapters.Controllers;
+
+public class FoodController {
 }

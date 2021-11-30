@@ -1,2 +1,4 @@
-package Adapters.Controllers;public class UserController {
+package Adapters.Controllers;
+
+public class UserController {
 }

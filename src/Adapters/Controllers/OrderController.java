@@ -1,2 +1,4 @@
-package Adapters.Controllers;public class OrderController {
+package Adapters.Controllers;
+
+public class OrderController {
 }
