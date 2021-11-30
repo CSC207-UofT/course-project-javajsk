@@ -8,10 +8,16 @@ import java.util.Objects;
 
 public class RegularVendor implements IVendor {
     ArrayList<IShop> shopList;
-    String ID;
-    public RegularVendor(ArrayList<IShop> shopList, String ID){
+    String id;
+
+    /**
+     * Creates a RegularVendor object
+     * @param shopList the list of shops a vendor owns
+     * @param id the id of the vendor
+     */
+    public RegularVendor(ArrayList<IShop> shopList, String id){
         this.shopList = shopList;
-        this.ID = ID;
+        this.id = id;
     }
 
     /**
@@ -40,15 +46,27 @@ public class RegularVendor implements IVendor {
     @Override
     public IShop getShop(String id) {
         for (IShop i:this.shopList){
-            if (Objects.equals(i.getID(), id)){
+            if (Objects.equals(i.getId(), id)){
                 return i;
             }
         }
         return null;
     }
-
+    /**
+     * Returns the id of a vendor
+     * @return the id of a vendor
+     */
     @Override
-    public String getID() {
-        return this.ID;
+    public String getId() {
+        return this.id;
+    }
+
+    /**
+     * Method for setting the vendor id
+     * @param id the id
+     */
+    @Override
+    public void setId(String id) {
+        this.id = id;
     }
 }
