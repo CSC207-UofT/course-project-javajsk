@@ -84,11 +84,25 @@ public class CartController {
         List<ISelection> parsedSelections = this.generateOrderInfo(selections);
 
         this.addToCartInputBoundary.addToCart(cartId, foodId, parsedSelections, shopId, userToken);
-
     }
 
-    void runCreateCartInputBoundary(){
+    void runCreateCart(String input){
+        JSONObject data = this.parser.parse(input);
+        String userToken = data.getString("userToken");
+        String cartType = data.getString("cartType");
+        this.createCartInputBoundary.createCart(userToken, cartType);
+    }
 
+    void runRemoveFromCart(String input){
+        JSONObject data = this.parser.parse(input);
+        String userToken = data.getString("userToken");
+        String foodId = data.getString("foodId");
+        int index = data.getInt("index");
+
+        // TODO: Does this still make sense?
+        String cartId = data.getString("cartId");
+
+        this.removeFromCartInputBoundary.removeFromCart(cartId, foodId, index, userToken);
     }
 
 }
