@@ -1,7 +1,7 @@
 package UseCases.RegularVendor;
 
 import Entities.Interfaces.IShop;
-import Entities.Regular.RegularVendor;
+import Entities.Interfaces.IVendor;
 import UseCases.DataAccessInterfaces.FoodTruckRepository;
 import UseCases.DataAccessInterfaces.VendorRepository;
 import UseCases.OutputBoundary.ErrorPopup;
@@ -25,7 +25,7 @@ public class AddShopUseCase implements AddShopInputBoundary {
      */
     @Override
     public boolean addShop(IShop shop, String token) {
-        RegularVendor curr_ven = (RegularVendor) vendorRepository.getUserFromToken(token);
+        IVendor curr_ven = vendorRepository.getVendorFromToken(token);
         IShop shop = foodTruckRepository.getFoodTruck(shopId);
         if (curr_ven != null){
             curr_ven.addShop(shop);
