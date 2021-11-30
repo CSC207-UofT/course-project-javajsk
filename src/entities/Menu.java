@@ -60,4 +60,8 @@ public class Menu {
     public void setFoods(List<Food> foods) {
         this.foods = foods;
     }
+
+    public void addAddon(Addon addon){
+        this.addons.add(addon);
+    }
 }

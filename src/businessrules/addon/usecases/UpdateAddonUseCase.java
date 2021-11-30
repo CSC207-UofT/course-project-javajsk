@@ -2,6 +2,7 @@ package businessrules.addon.usecases;
 
 import businessrules.addon.inputboundaries.UpdateAddonInputBoundary;
 import businessrules.dai.AddonRepository;
+import businessrules.loaders.AddonLoader;
 import businessrules.outputboundary.AddonModel;
 import businessrules.outputboundary.ErrorModel;
 import entities.Addon;

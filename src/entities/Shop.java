@@ -1,11 +1,15 @@
 package entities;
 
+import org.json.JSONObject;
+
 import java.awt.*;
 
 /**
  * The type Shop.
  */
-public class Shop {
+public class Shop implements JSONable{
+
+    public String id;
     /**
      * The Menu.
      */
@@ -33,12 +37,21 @@ public class Shop {
      * @param name      the name
      * @param isOpen    the is open
      */
-    public Shop(Menu menu, OrderBook orderBook, String location, String name, boolean isOpen) {
+    public Shop(String id, Menu menu, OrderBook orderBook, String location, String name, boolean isOpen) {
+        this.id = id;
         this.menu = menu;
         this.orderBook = orderBook;
         this.location = location;
         this.name = name;
         this.isOpen = isOpen;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -136,4 +149,14 @@ public class Shop {
      */
     protected boolean isOpen;
 
+    @Override
+    public JSONObject jsonify() {
+        JSONObject shopJson = new JSONObject();
+        shopJson.put("id", this.id);
+        shopJson.put("menu", this.menu.jsonify());
+        shopJson.put("location", location);
+        shopJson.put("name", this.name);
+        shopJson.put("isOpen", this.isOpen);
+        return shopJson;
+    }
 }

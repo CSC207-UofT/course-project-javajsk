@@ -1,4 +1,4 @@
-package businessrules.addon.usecases;
+package businessrules.loaders;
 
 import entities.Addon;
 import org.json.JSONArray;

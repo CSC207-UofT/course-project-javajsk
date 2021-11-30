@@ -5,6 +5,12 @@ public abstract class User {
     protected String userName;
     protected String hashedPassword;
 
+    public User(String id, String userName, String hashedPassword) {
+        this.id = id;
+        this.userName = userName;
+        this.hashedPassword = hashedPassword;
+    }
+
     public String getId() {
         return id;
     }

@@ -16,7 +16,8 @@ public class Vendor extends User{
      *
      * @param shop the shop
      */
-    public Vendor(Shop shop) {
+    public Vendor(String id, String username, String password, Shop shop) {
+        super(id, username, password);
         this.shop = shop;
     }
 
