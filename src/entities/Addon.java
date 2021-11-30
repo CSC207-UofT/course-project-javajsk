@@ -1,11 +1,13 @@
 package entities;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
  * The type Addon.
  */
-public class Addon {
+public class Addon implements JSONable{
     /**
      * The Id.
      */
@@ -132,5 +134,19 @@ public class Addon {
      */
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public JSONObject jsonify() {
+        JSONObject final_data = new JSONObject();;
+        final_data.put("id", this.id);
+        final_data.put("name", this.name);
+        final_data.put("price", this.price);
+
+        // TODO: SEE how this works out into the JSON.
+        final_data.put("types", this.addonTypes);
+
+        final_data.put("isAvailable", this.isAvailable);
+        return final_data;
     }
 }

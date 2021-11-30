@@ -1,46 +1,36 @@
 package businessrules.addon.usecases;
 
-import businessrules.addon.inputboundaries.CreateAddonInputBoundary;
+import businessrules.addon.inputboundaries.UpdateAddonInputBoundary;
 import businessrules.dai.AddonRepository;
 import businessrules.outputboundary.AddonModel;
 import businessrules.outputboundary.ErrorModel;
 import entities.Addon;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class CreateAddonUseCase implements CreateAddonInputBoundary {
-
+public class UpdateAddonUseCase implements UpdateAddonInputBoundary {
     AddonRepository addonRepository;
     ErrorModel errorHandler;
     AddonModel addonView;
 
+
     @Override
-    public boolean createAddon(JSONObject data) {
+    public boolean updateAddon(String id, JSONObject object) {
         Addon addon;
         try {
-            addon = AddonLoader.loadAddon(data);
+            addon = AddonLoader.loadAddon(object);
         }catch (JSONException e){
             errorHandler.displayError(e.getMessage());
             return false;
         }
 
-        String id = addonRepository.createAddon(addon.jsonify());
+        boolean success = addonRepository.updateAddon(id, addon.jsonify());
 
-        if(id != null) {
-            addon.setId(id);
-            addonView.displayAddon(addon.jsonify());
+        if(success){
+            addonView.updateAddon(id, object);
             return true;
-        }else{
-            errorHandler.displayError("Unable to create addon in the repository.");
         }
+        errorHandler.displayError("Unable to save modified addon in repository.");
         return false;
-
     }
-
-
-
 }
