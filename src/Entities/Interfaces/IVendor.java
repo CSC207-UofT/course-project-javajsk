@@ -9,6 +9,12 @@ public interface IVendor extends IUser {
 
     IShop getShop(String id);
 
-    String getId();
+    /**
+     * A method that updates the vendor's shop with id shopId with the new given shop
+     * @param shopId id of shop to update
+     * @param shop updated shop
+     * @return whether shop was successfully updated
+     */
+    boolean updateShop(String shopId, IShop shop);
 
 }

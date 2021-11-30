@@ -52,4 +52,21 @@ public class RegularVendor implements IVendor {
     public String getId() {
         return this.id;
     }
+
+    /**
+     * A method that updates the vendor's shop with id shopId with the new given shop
+     * @param shopId id of shop to update
+     * @param shop updated shop
+     * @return whether shop was successfully updated
+     */
+    @Override
+    public boolean updateShop(String shopId, IShop shop){
+        for(int i = 0; i < this.shopList.size(); i++){
+           if(this.shopList.get(i).getId().equals(shopId)){
+               this.shopList.set(i, shop);
+               return true;
+           }
+        }
+        return false;
+    }
 }

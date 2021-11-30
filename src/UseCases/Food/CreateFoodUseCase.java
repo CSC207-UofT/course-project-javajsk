@@ -81,7 +81,7 @@ public class CreateFoodUseCase implements CreateFoodInputBoundary {
 
         menu.addFood(food);
         shop.setMenu(menu);
-        vendor.updateShop(shopId, shop); //TODO: add method to vendor class
+        vendor.updateShop(shopId, shop); //no need to check if true as already checked that shopId exists in vendor
 
         success = shopRepository.save(shop);
         if(!success){

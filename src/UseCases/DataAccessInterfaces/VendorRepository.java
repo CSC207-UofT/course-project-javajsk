@@ -1,5 +1,6 @@
 package UseCases.DataAccessInterfaces;
 
+import Entities.Interfaces.IShop;
 import Entities.Interfaces.IVendor;
 import Entities.Regular.RegularVendor;
 
