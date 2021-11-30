@@ -15,12 +15,12 @@ public interface ChangeFoodInputBoundary {
      * @param shopId id of shop to add food item to
      * @param foodId if of food that user wants to modify
      * @param name name of food item
-     * @param desc description of food item
      * @param price price of food item
+     * @param isAvail whether food item is available
      * @param singletons list of singletons
      * @return whether food object was successfully created and saved
      */
-    boolean setFood(String token, String shopId, String foodId, String name,
-                    String desc, float price, List<ISingleton> singletons);
+    boolean changeFood(String token, String shopId, String foodId, String name,
+                    float price, boolean isAvail, List<ISingleton> singletons);
 
 }
