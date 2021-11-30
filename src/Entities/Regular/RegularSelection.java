@@ -16,6 +16,18 @@ public class RegularSelection implements ISelection {
     public RegularSelection(HashMap<IAddon, Integer> selection){
         this.singleSingleton = selection;
     }
+    
+    /**
+    *Method for getting the price of a selection from its addons
+    *@return the price of a selection
+    */
+    public float getPrice(){
+    float sum = 0;
+        for(IAddon addon : singleSingleton.keySet()){
+            sum += addon.getPrice() * singleSingleton.get(addon);
+        }
+        return sum;
+    }
 
     /**
      * A method for getting the size of a selection
