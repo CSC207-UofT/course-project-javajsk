@@ -15,7 +15,7 @@ public interface ISelection {
      * @param addon the addon we want the amount for
      * @return the number of the addon in the selection
      */
-    Integer get(IAddon addon);
+    Integer getQuantityOfAddon(IAddon addon);
 
     /**
      * A method for getting the addons used in a selection
