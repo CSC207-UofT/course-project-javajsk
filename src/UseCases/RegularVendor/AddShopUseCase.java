@@ -1,7 +1,7 @@
 package UseCases.RegularVendor;
 
 import Entities.Interfaces.IShop;
-import Entities.Regular.RegularVendor;
+import Entities.Interfaces.IVendor;
 import UseCases.DataAccessInterfaces.FoodTruckRepository;
 import UseCases.DataAccessInterfaces.VendorRepository;
 import UseCases.OutputBoundary.ErrorPopup;
@@ -21,11 +21,11 @@ public class AddShopUseCase implements AddShopInputBoundary {
      *
      * @param shopId The id of the shop that we want to add to the vendor's shoplist.
      * @param token The token of the vendor.
-     * @return A boolean of whether the method successfully added the shop.
+     * @return whether the method successfully added the shop.
      */
     @Override
-    public boolean addShop(String shopId, String token) {
-        RegularVendor curr_ven = vendorRepository.getUserFromToken(token);
+    public boolean addShop(IShop shop, String token) {
+        IVendor curr_ven = (IVendor) vendorRepository.getUserFromToken(token);
         IShop shop = foodTruckRepository.getFoodTruck(shopId);
         if (curr_ven != null){
             curr_ven.addShop(shop);

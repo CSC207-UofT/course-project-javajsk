@@ -10,10 +10,14 @@ public class RegularVendor implements IVendor {
     ArrayList<IShop> shopList;
     String id;
 
-    public RegularVendor(ArrayList<IShop> shopList, String newId){
+    /**
+     * Creates a RegularVendor object
+     * @param shopList the list of shops a vendor owns
+     * @param id the id of the vendor
+     */
+    public RegularVendor(ArrayList<IShop> shopList, String id){
         this.shopList = shopList;
-        this.id = newId;
-    }
+        this.id = id;
 
     /**
      * Method that adds a shop to the vendor's shop list that they manage.
@@ -47,9 +51,22 @@ public class RegularVendor implements IVendor {
         }
         return null;
     }
-
+    /**
+     * Returns the id of a vendor
+     * @return the id of a vendor
+     */
     @Override
     public String getId() {
         return this.id;
+    }
+
+    /**
+     * Method for setting the vendor id
+     * @param id the id
+     */
+    @Override
+    public void setId(String id) {
+        this.id = id;
+
     }
 }
