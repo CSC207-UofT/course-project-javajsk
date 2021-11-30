@@ -17,34 +17,34 @@ public class RegularAddon implements IAddon {
      * (a singleton)
      *
      * name is the name of the addon
-     * description is the description of the addon
      * price is the price of the addon per 1 quantity
-     * addonTypes is a list of integers corresponding to types that addon applies to
+     * addonTypes is a list of integers corresponding to the types that addon applies to
      * isAvailable indicates if the addon is currently available for purchase
      */
     public String name;
-    public String description;
     public float price;
     public ArrayList<Integer> addonTypes;
     public boolean isAvailable;
-    public String ID;
+    public String id;
 
     /**
      * Construct an instance of RegularAddon
      *
      * @param addonName name of addon
-     * @param addonDesc description of addon
      * @param addonPrice price of addon
      * @param types arraylist of types that addon is
      */
-    public RegularAddon(String addonName, String addonDesc, float addonPrice,
-                        ArrayList<Integer> types, boolean availability, String ID){
+    public RegularAddon(String addonName, float addonPrice,
+                        ArrayList<Integer> types, boolean availability, String id){
         this.name = addonName;
-        this.description = addonDesc;
         this.price =  addonPrice;
         this.addonTypes = types;
         this.isAvailable = availability;
-        this.ID = ID;
+        this.id = id;
+    }
+    @Override
+    public String getId() {
+        return this.id;
     }
 
     /**
@@ -58,30 +58,12 @@ public class RegularAddon implements IAddon {
     }
 
     /**
-     * A method that returns the description of the Addon
-     * @return description of Addon
-     */
-    @Override
-    public String getDescription() {
-        return this.description;
-    }
-
-    /**
      * A method that returns the price of the Addon
      * @return price of Addon
      */
     @Override
     public float getPrice() {
         return this.price;
-    }
-  
-    /**
-     * A method that sets the price of the Addon
-     * @param newPrice price of Addon
-     */
-    @Override
-    public void setPrice(float newPrice){
-        this.price = newPrice;
     }
 
     /**
@@ -104,16 +86,27 @@ public class RegularAddon implements IAddon {
     }
 
     /**
+     * A method that sets the id of the Addon with given id
+     * @param newId id of addon
+     */
+    @Override
+    public void setId(String newId){ this.id = newId; }
+
+    /**
+     * A method that sets the price of the Addon
+     * @param newPrice price of Addon
+     */
+    @Override
+    public void setPrice(float newPrice){
+        this.price = newPrice;
+    }
+
+    /**
      * A method that sets the availability of the Addon
      * @param newAvail whether addon is available
      */
     @Override
     public void setAvailability(boolean newAvail){
         this.isAvailable = newAvail;
-    }
-
-    @Override
-    public String getID() {
-        return this.ID;
     }
 }

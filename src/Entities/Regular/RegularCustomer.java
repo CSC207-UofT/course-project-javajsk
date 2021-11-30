@@ -4,16 +4,17 @@ import Entities.Interfaces.ICustomer;
 import Entities.Interfaces.ICart;
 
 public class RegularCustomer implements ICustomer {
-    String ID;
+    String id;
     ICart currentCart;
 
-    public RegularCustomer(String ID,  ICart cartList){
-        this.ID = ID;
+    public RegularCustomer(String newId, ICart cartList){
+        this.id = newId;
         this.currentCart = cartList;
     }
+
     @Override
     public String getId(){
-        return this.ID;
+        return this.id;
     }
 
     @Override
@@ -24,10 +25,5 @@ public class RegularCustomer implements ICustomer {
     @Override
     public ICart getCart() {
         return currentCart;
-    }
-
-    @Override
-    public String getID() {
-        return this.getId();
     }
 }

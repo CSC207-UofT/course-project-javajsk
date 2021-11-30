@@ -3,8 +3,6 @@ package Entities;
 import Entities.Interfaces.*;
 import java.util.HashMap;
 import java.util.List;
-import Entities.Interfaces.IOrderbook;
-import Entities.Interfaces.IShop;
 
 
 public class FoodTruck implements IShop {
@@ -55,7 +53,7 @@ public class FoodTruck implements IShop {
     }
 
     @Override
-    public boolean allAddonsAvailable(List<IAddon> addons) {
+    public boolean isAddonListAvailable(List<IAddon> addons) {
         for(IAddon addon: addons){
             if(!this.isAddonAvailable(addon)){
                 return false;
