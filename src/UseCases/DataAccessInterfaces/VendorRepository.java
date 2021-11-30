@@ -1,7 +1,6 @@
 package UseCases.DataAccessInterfaces;
 
 import Entities.Interfaces.IVendor;
-import Entities.Regular.RegularVendor;
 
 /**
  * The VendorAccessInterface Interface

@@ -8,10 +8,11 @@ import java.util.Objects;
 
 public class RegularVendor implements IVendor {
     ArrayList<IShop> shopList;
-    String ID;
-    public RegularVendor(ArrayList<IShop> shopList, String ID){
+    String id;
+
+    public RegularVendor(ArrayList<IShop> shopList, String newId){
         this.shopList = shopList;
-        this.ID = ID;
+        this.id = newId;
     }
 
     /**
@@ -48,7 +49,7 @@ public class RegularVendor implements IVendor {
     }
 
     @Override
-    public String getID() {
-        return this.ID;
+    public String getId() {
+        return this.id;
     }
 }
