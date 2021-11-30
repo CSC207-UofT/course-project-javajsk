@@ -1,5 +1,7 @@
 package entities;
 
+import java.awt.*;
+
 /**
  * The type Shop.
  */

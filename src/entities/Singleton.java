@@ -18,6 +18,23 @@ public class Singleton {
      * The Name.
      */
     protected String name;
+    /**
+     * The Description.
+     */
+    protected String description;
+    /**
+     * The Allowed addon types.
+     */
+    protected List<Integer> allowedAddonTypes;
+    /**
+     * The Default selection.
+     */
+    protected List<Addon> defaultSelection;
+    /**
+     * The Availability.
+     */
+    protected boolean availability;
+
 
     /**
      * Gets id.
@@ -114,7 +131,7 @@ public class Singleton {
      *
      * @return the default selection
      */
-    public List<Addon1> getDefaultSelection() {
+    public List<Addon> getDefaultSelection() {
         return defaultSelection;
     }
 
@@ -123,7 +140,7 @@ public class Singleton {
      *
      * @param defaultSelection the default selection
      */
-    public void setDefaultSelection(List<Addon1> defaultSelection) {
+    public void setDefaultSelection(List<Addon> defaultSelection) {
         this.defaultSelection = defaultSelection;
     }
 
@@ -145,20 +162,5 @@ public class Singleton {
         this.availability = availability;
     }
 
-    /**
-     * The Description.
-     */
-    protected String description;
-    /**
-     * The Allowed addon types.
-     */
-    protected List<Integer> allowedAddonTypes;
-    /**
-     * The Default selection.
-     */
-    protected List<Addon1> defaultSelection;
-    /**
-     * The Availability.
-     */
-    protected boolean availability;
+
 }

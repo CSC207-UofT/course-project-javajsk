@@ -1,7 +1,5 @@
 package entities;
 
-import entities.Interfaces.Singleton;
-
 /**
  * The type Food.
  */

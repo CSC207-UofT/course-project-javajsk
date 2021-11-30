@@ -1,5 +1,4 @@
-package entities.Abstract;
-
+package entities;
 import java.util.List;
 
 /**
@@ -13,13 +12,13 @@ public class Menu {
     /**
      * The Addons.
      */
-    protected List<Addon1> addons;
+    protected List<Addon> addons;
 
-    public List<Addon1> getAddons() {
+    public List<Addon> getAddons() {
         return addons;
     }
 
-    public void setAddons(List<Addon1> addons) {
+    public void setAddons(List<Addon> addons) {
         this.addons = addons;
     }
 

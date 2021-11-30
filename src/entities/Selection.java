@@ -9,14 +9,14 @@ public class Selection {
     /**
      * The Singleton selection.
      */
-    HashMap<Addon1, Integer> singletonSelection;
+    HashMap<Addon, Integer> singletonSelection;
 
     /**
      * Gets singleton selection.
      *
      * @return the singleton selection
      */
-    public HashMap<Addon1, Integer> getSingletonSelection() {
+    public HashMap<Addon, Integer> getSingletonSelection() {
         return singletonSelection;
     }
 
@@ -25,7 +25,7 @@ public class Selection {
      *
      * @param singletonSelection the singleton selection
      */
-    public void setSingletonSelection(HashMap<Addon1, Integer> singletonSelection) {
+    public void setSingletonSelection(HashMap<Addon, Integer> singletonSelection) {
         this.singletonSelection = singletonSelection;
     }
 }
