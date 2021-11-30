@@ -28,6 +28,27 @@ public class Order {
     protected String status;
 
     /**
+     * Instantiates a new Order.
+     *
+     * @param id                 the id
+     * @param cart               the cart
+     * @param shopId             the shop id
+     * @param userId             the user id
+     * @param status             the status
+     * @param timePlaced         the time placed
+     * @param timeStatusModified the time status modified
+     */
+    public Order(String id, Cart cart, String shopId, String userId, String status, Date timePlaced, Date timeStatusModified) {
+        this.id = id;
+        this.cart = cart;
+        this.shopId = shopId;
+        this.userId = userId;
+        this.status = status;
+        this.timePlaced = timePlaced;
+        this.timeStatusModified = timeStatusModified;
+    }
+
+    /**
      * Gets id.
      *
      * @return the id

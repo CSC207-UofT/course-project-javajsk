@@ -35,6 +35,26 @@ public class Singleton {
      */
     protected boolean availability;
 
+    /**
+     * Instantiates a new Singleton.
+     *
+     * @param id                the id
+     * @param price             the price
+     * @param name              the name
+     * @param description       the description
+     * @param allowedAddonTypes the allowed addon types
+     * @param defaultSelection  the default selection
+     * @param availability      the availability
+     */
+    public Singleton(String id, float price, String name, String description, List<Integer> allowedAddonTypes, List<Addon> defaultSelection, boolean availability) {
+        this.id = id;
+        this.price = price;
+        this.name = name;
+        this.description = description;
+        this.allowedAddonTypes = allowedAddonTypes;
+        this.defaultSelection = defaultSelection;
+        this.availability = availability;
+    }
 
     /**
      * Gets id.

@@ -14,10 +14,31 @@ public class Menu {
      */
     protected List<Addon> addons;
 
+    /**
+     * Instantiates a new Menu.
+     *
+     * @param foods  the foods
+     * @param addons the addons
+     */
+    public Menu(List<Food> foods, List<Addon> addons) {
+        this.foods = foods;
+        this.addons = addons;
+    }
+
+    /**
+     * Gets addons.
+     *
+     * @return the addons
+     */
     public List<Addon> getAddons() {
         return addons;
     }
 
+    /**
+     * Sets addons.
+     *
+     * @param addons the addons
+     */
     public void setAddons(List<Addon> addons) {
         this.addons = addons;
     }

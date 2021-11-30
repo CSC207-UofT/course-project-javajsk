@@ -23,6 +23,24 @@ public class Shop {
      */
     protected String name;
 
+
+    /**
+     * Instantiates a new Shop.
+     *
+     * @param menu      the menu
+     * @param orderBook the order book
+     * @param location  the location
+     * @param name      the name
+     * @param isOpen    the is open
+     */
+    public Shop(Menu menu, OrderBook orderBook, String location, String name, boolean isOpen) {
+        this.menu = menu;
+        this.orderBook = orderBook;
+        this.location = location;
+        this.name = name;
+        this.isOpen = isOpen;
+    }
+
     /**
      * Gets menu.
      *

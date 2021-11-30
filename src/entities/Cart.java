@@ -8,6 +8,19 @@ import java.util.List;
  */
 public class Cart {
     /**
+     * Instantiates a new Cart.
+     *
+     * @param id       the id
+     * @param shopId   the shop id
+     * @param contents the contents
+     */
+    public Cart(String id, String shopId, HashMap<Food, List<Selection[]>> contents) {
+        this.id = id;
+        this.shopId = shopId;
+        this.contents = contents;
+    }
+
+    /**
      * The Id.
      */
     public String id;

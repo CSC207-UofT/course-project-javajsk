@@ -6,11 +6,43 @@ import java.util.List;
  * The type Addon.
  */
 public class Addon {
+    /**
+     * The Id.
+     */
     public String id;
+    /**
+     * The Name.
+     */
     protected String name;
+    /**
+     * The Price.
+     */
     protected float price;
+    /**
+     * The Addon types.
+     */
     protected List<Integer> addonTypes;
+    /**
+     * The Is available.
+     */
     protected boolean isAvailable;
+
+    /**
+     * Instantiates a new Addon.
+     *
+     * @param id          the id
+     * @param name        the name
+     * @param price       the price
+     * @param addonTypes  the addon types
+     * @param isAvailable the is available
+     */
+    public Addon(String id, String name, float price, List<Integer> addonTypes, boolean isAvailable) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.addonTypes = addonTypes;
+        this.isAvailable = isAvailable;
+    }
 
     /**
      * Gets name.

@@ -12,6 +12,15 @@ public class OrderBook {
     protected List<Order> ordersList;
 
     /**
+     * Instantiates a new Order book.
+     *
+     * @param ordersList the orders list
+     */
+    public OrderBook(List<Order> ordersList) {
+        this.ordersList = ordersList;
+    }
+
+    /**
      * Gets orders list.
      *
      * @return the orders list

@@ -12,6 +12,15 @@ public class Selection {
     HashMap<Addon, Integer> singletonSelection;
 
     /**
+     * Instantiates a new Selection.
+     *
+     * @param singletonSelection the singleton selection
+     */
+    public Selection(HashMap<Addon, Integer> singletonSelection) {
+        this.singletonSelection = singletonSelection;
+    }
+
+    /**
      * Gets singleton selection.
      *
      * @return the singleton selection

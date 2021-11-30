@@ -26,6 +26,23 @@ public class Food {
     protected Singleton[] components;
 
     /**
+     * Instantiates a new Food.
+     *
+     * @param id          the id
+     * @param name        the name
+     * @param description the description
+     * @param price       the price
+     * @param components  the components
+     */
+    public Food(String id, String name, String description, float price, Singleton[] components) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.components = components;
+    }
+
+    /**
      * Gets id.
      *
      * @return the id

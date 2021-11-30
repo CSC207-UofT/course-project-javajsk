@@ -14,6 +14,17 @@ public class Customer extends User {
     protected Cart currentCart;
 
     /**
+     * Instantiates a new Customer.
+     *
+     * @param orderHistory the order history
+     * @param currentCart  the current cart
+     */
+    public Customer(OrderBook orderHistory, Cart currentCart) {
+        this.orderHistory = orderHistory;
+        this.currentCart = currentCart;
+    }
+
+    /**
      * Gets order history.
      *
      * @return the order history
