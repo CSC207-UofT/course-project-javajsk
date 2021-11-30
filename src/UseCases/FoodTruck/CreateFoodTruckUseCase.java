@@ -8,6 +8,8 @@ import UseCases.DataAccessInterfaces.VendorRepository;
 import UseCases.OutputBoundary.ErrorPopup;
 import UseCases.OutputBoundary.FoodTruckModel;
 
+import java.util.HashMap;
+
 public class CreateFoodTruckUseCase implements CreateFoodTruckInputBoundary{
     ShopRepository shopRepository;
     VendorRepository vendorRepository;
@@ -21,11 +23,14 @@ public class CreateFoodTruckUseCase implements CreateFoodTruckInputBoundary{
         this.foodTruckModel = foodTruckModel;
     }
     @Override
-    public Boolean createFoodTruck(String userToken, String name, Menu menu, String status, IOrderbook orderbook, String location) {
+    public Boolean createFoodTruck(String userToken, String name, Menu menu, String status, HashMap<IAddon, Boolean> addAvail,
+                                   IOrderbook orderbook, String location, Boolean isOpen) {
         IVendor vendor = (IVendor) vendorRepository.getUserFromToken(userToken);
         if(vendor != null) {
-            FoodTruck foodTruck = new FoodTruck(menu, orderbook, status, name);
+
+            FoodTruck foodTruck = new FoodTruck(menu, orderbook, location, name,addAvail,isOpen);
             shopRepository.createShop(foodTruck);
+
             vendor.addShop(foodTruck);
             foodTruckModel.displayFoodTruck(foodTruck);
             return vendorRepository.save(vendor);
