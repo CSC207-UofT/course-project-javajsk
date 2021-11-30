@@ -15,6 +15,17 @@ public interface ISingleton {
      * @param id the id of the singleton
      */
     void setId(String id);
+    
+    /**
+     * Method for getting the price of a singleton
+     * @return the price 
+     */
+    String getPrice();
+    /**
+     * Method for setting the price of a singleton
+     * @param price the price of the singleton
+     */
+    void setPrice(float price);
 
     /**
      * A method for getting the name of a singleton
