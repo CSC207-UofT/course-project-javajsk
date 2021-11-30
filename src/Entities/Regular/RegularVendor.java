@@ -18,7 +18,6 @@ public class RegularVendor implements IVendor {
     public RegularVendor(ArrayList<IShop> shopList, String id){
         this.shopList = shopList;
         this.id = id;
-    }
 
     /**
      * Method that adds a shop to the vendor's shop list that they manage.
@@ -68,5 +67,6 @@ public class RegularVendor implements IVendor {
     @Override
     public void setId(String id) {
         this.id = id;
+
     }
 }

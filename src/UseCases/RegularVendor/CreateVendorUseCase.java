@@ -1,5 +1,6 @@
 package UseCases.RegularVendor;
 
+import Entities.Interfaces.ISelection;
 import Entities.Interfaces.IShop;
 import Entities.Regular.RegularVendor;
 import UseCases.DataAccessInterfaces.VendorRepository;
@@ -24,7 +25,8 @@ public class CreateVendorUseCase implements CreateVendorInputBoundary{
      * @return A RegularVendor object of the newly created vendor.
      */
     @Override
-    public RegularVendor createVendor(String id, ArrayList<IShop> shops) {
+    public RegularVendor createVendor(String id) {
+        ArrayList<IShop> shops = new ArrayList<IShop>();
         RegularVendor new_vendor = new RegularVendor(shops, id);
         vendorModel.displayVendor(new_vendor);
         vendorRepository.save(new_vendor);

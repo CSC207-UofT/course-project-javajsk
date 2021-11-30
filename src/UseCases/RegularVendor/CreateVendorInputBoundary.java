@@ -7,5 +7,5 @@ import java.util.ArrayList;
 
 public interface CreateVendorInputBoundary {
 
-    RegularVendor createVendor(String id, ArrayList<IShop> shops);
+    RegularVendor createVendor(String id);
 }

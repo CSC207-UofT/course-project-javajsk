@@ -3,13 +3,14 @@ package UseCases.DataAccessInterfaces;
 import Entities.Interfaces.IShop;
 import Entities.Menu;
 
-public interface FoodTruckRepository {
+public interface ShopRepository {
 
     /**
+     * A method that returns the shop object with the given id.
      * @param id The String id associated with the reference of this object in the higher level data system
-     * @return
+     * @return shop object with corresponding id
      */
-    IShop getFoodTruck(String id);
+    IShop getShop(String id);
 
     boolean setShopName(String id, String name);
 
@@ -17,7 +18,7 @@ public interface FoodTruckRepository {
 
     boolean setShopStatus(String id, Boolean status);
 
-    IShop createFoodTruck(IShop FoodTruck);
+    IShop createShop(IShop shop);
 
-    boolean save(IShop FoodTruck);
+    boolean save(IShop shop);
 }

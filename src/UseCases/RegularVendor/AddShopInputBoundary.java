@@ -4,7 +4,7 @@ import Entities.Interfaces.IShop;
 
 public interface AddShopInputBoundary {
 
-    boolean addShop(IShop shop, String token);
+    boolean addShop(String shopId, String token);
 
 }
 

@@ -12,7 +12,6 @@ import java.util.List;
  * Public class representing a Food object to be sold by a shop.
  *
  * Implements the IFood interface.
- *
  */
 
 public class RegularFood implements IFood {
@@ -20,7 +19,6 @@ public class RegularFood implements IFood {
     String name;
     String description;
     List<ISingleton> components;
-    String ID;
 
     /**
      * Construct an instance of a RegularFood, which is an object sold by a food truck vendor.
@@ -33,8 +31,12 @@ public class RegularFood implements IFood {
         this.id = id;
         this.name = name;
         this.components = components;
-        this.ID = id;
+        setDefaultDescription();
     }
+
+    /**
+     * A method that sets a default description for the food item based on its components
+     */
     private void setDefaultDescription(){
         StringBuilder description = new StringBuilder();
         for(ISingleton component: this.components){
@@ -42,6 +44,7 @@ public class RegularFood implements IFood {
         }
         this.description = description.toString();
     }
+
     /**
      * Method returns the id of this RegularFood object
      *
@@ -72,25 +75,6 @@ public class RegularFood implements IFood {
     }
 
     /**
-     * Get the price of this object
-     *
-     * @return Return the price of this object
-     */
-
-    //TODO remove this method from the entity
-//    @Override
-//    public float getPrice() {
-//        if(this.price == -1){
-//            float sum = 0;
-//            for (ISingleton single: this.components) {
-//                sum += single.getPrice();
-//            }
-//            return sum;
-//        }
-//        return this.price;
-//    }
-
-    /**
      * Get the components of this object
      *
      * @return Return a list of components of this object
@@ -100,26 +84,46 @@ public class RegularFood implements IFood {
         return this.components;
     }
 
+    /**
+     * A method that sets the id of the food item
+     * @param newId id of food item
+     */
+    @Override
+    public void setId(String newId){ this.id = newId; }
+
+    /**
+     * A method that sets the name of the food item
+     * @param name of food item
+     */
     @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * A method that sets the description of the food item
+     * @param description description of food item
+     */
     @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
-//    @Override
-//    public void setPrice(float price) {
-//        this.price = price;
-//    }
-
+    /**
+     * A method that sets the components of the food item
+     * @param components list of singletons
+     */
     @Override
     public void setComponents(List<ISingleton> components) {
         this.components = components;
     }
 
+    /**
+     * A method that returns whether a given list of addon selections
+     * are valid with this food item
+     * @param addons list of selections
+     * @return whether given list has valid addons
+     */
     @Override
     public boolean isValidAddons(List<ISelection> addons) {
         if(addons.size() != components.size()){
@@ -138,6 +142,13 @@ public class RegularFood implements IFood {
         return true;
     }
 
+    /**
+     * A method that returns a list of allowed addons for each singleton in the food
+     * item, organized as a list.
+     * So each element (list of addons) in the list corresponds to one singleton
+     * in the components of food
+     * @return list of list of allowed addons
+     */
     @Override
     public List<List<IAddon>> getAllowedAddons() {
         List<List<IAddon>> addons = new ArrayList<>();

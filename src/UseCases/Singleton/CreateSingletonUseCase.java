@@ -3,7 +3,6 @@ package UseCases.Singleton;
 import Entities.Interfaces.IAddon;
 
 import Entities.Interfaces.ISelection;
-import Entities.Interfaces.ISingleton;
 
 import Entities.Regular.RegularSingleton;
 import Entities.Interfaces.IVendor;

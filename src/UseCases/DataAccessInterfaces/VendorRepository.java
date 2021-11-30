@@ -1,7 +1,6 @@
 package UseCases.DataAccessInterfaces;
 
 import Entities.Interfaces.IVendor;
-import Entities.Regular.RegularVendor;
 
 /**
  * The VendorAccessInterface Interface
@@ -51,6 +50,9 @@ public interface VendorRepository extends UserRepository{
      * @return Return whether a vendor's authentication token is currently valid.
      */
     Boolean isTokenValid(String token);
-
+    /**
+    * Method for saving a vendor into the repository
+    * @param vendor the vendor object being saved to the repository
+    */
     boolean save(IVendor vendor);
 }

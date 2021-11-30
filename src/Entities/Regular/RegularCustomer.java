@@ -51,5 +51,4 @@ public class RegularCustomer implements ICustomer {
     public ICart getCart() {
         return currentCart;
     }
-
 }
