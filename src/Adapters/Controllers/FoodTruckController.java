@@ -12,29 +12,18 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 public class FoodTruckController {
-    ChangeMenuInputBoundary changeMenuInputBoundary;
     CreateFoodTruckInputBoundary createFoodTruckInputBoundary;
     GetMenuInputBoundary getMenuInputBoundary;
     ProcessOrderInputBoundary processOrderInputBoundary;
     JSONParser parser;
 
-    public FoodTruckController(ChangeMenuInputBoundary changeMenuInputBoundary,CreateFoodTruckInputBoundary createFoodTruckInputBoundary,
+    public FoodTruckController(CreateFoodTruckInputBoundary createFoodTruckInputBoundary,
                                GetMenuInputBoundary getMenuInputBoundary,ProcessOrderInputBoundary processOrderInputBoundary ){
-        this.changeMenuInputBoundary = changeMenuInputBoundary;
         this.createFoodTruckInputBoundary = createFoodTruckInputBoundary;
         this.getMenuInputBoundary = getMenuInputBoundary;
         this.processOrderInputBoundary = processOrderInputBoundary;
     }
 
-    //TODO: Parse JSON from string
-    public void runChangeMenu(String raw_input){
-        JSONObject input = parser.parse(raw_input);
-        String userToken = input.getString("userToken");
-        String ShopId = input.getString("shopId");
-        String Menu = input.getString("Menu");
-
-        //this.changeMenuInputBoundary.changeMenu(userToken, ShopId);
-    }
     public void runCreateFoodTruck(String raw_input){
         JSONObject input = parser.parse(raw_input);
         String userToken = input.getString("userToken");

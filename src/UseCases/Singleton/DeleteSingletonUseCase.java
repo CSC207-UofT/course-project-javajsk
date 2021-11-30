@@ -13,7 +13,7 @@ public class DeleteSingletonUseCase implements DeleteSingletonInputBoundary {
 
     @Override
     public void deleteSingleton(String userToken, String singletonID) {
-        IVendor vendor = vendorRepository.getVendorFromToken(userToken);
+        IVendor vendor = (IVendor) vendorRepository.getUserFromToken(userToken);
         if(vendor != null) {
             ISingleton singleton = singletonRepository.getSingleton(singletonID);
             if(singleton != null) {

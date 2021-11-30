@@ -1,4 +1,5 @@
 package Adapters.Controllers;
+import Adapters.JSONParser;
 import UseCases.Addon.CreateAddonInputBoundary;
 import UseCases.Addon.CreateAddonUseCase;
 import UseCases.Addon.DeleteAddonInputBoundary;
@@ -16,7 +17,7 @@ public class AddonController {
      * @param createAddonInputBoundary is the input boundary for addon
      * @param deleteAddonInputBoundary is the input boundary for addon
      */
-    AddonController(CreateAddonInputBoundary createAddonInputBoundary, DeleteAddonInputBoundary deleteAddonInputBoundary, JSONPARser parser){
+    AddonController(CreateAddonInputBoundary createAddonInputBoundary, DeleteAddonInputBoundary deleteAddonInputBoundary, JSONParser parser){
         this.createAddonInputBoundary = createAddonInputBoundary;
         this.deleteAddonInputBoundary = deleteAddonInputBoundary;
         this.parser = parser;
@@ -27,24 +28,27 @@ public class AddonController {
      * @param raw_text data to be parsed
      * @return true if addon is created
      */
-    public boolean runCreateAddon(String raw_text){
+    public boolean runCreateAddon(String raw_text) {
         JSONObject object = this.parser.parse(raw_text);
-        token = object.getString("VendorToken");
-        description = object.getString("description");
-        name = object.getString("name");
-        price = object.getFloat("price");
-        type = object.getInt("types");
-        availability = object.getBoolean("availability");
-        Id = object.getString("Id");
-        return createAddonInputBoundary.createAddon(token, name, description, price, type, availability, Id);
+        String token = object.getString("VendorToken");
+        String description = object.getString("description");
+        String name = object.getString("name");
+        float price = object.getFloat("price");
+        JSONObject types = object.getJSONObject("types");
+        //TODO: Need to parse types
+        boolean availability = object.getBoolean("availability");
+        String Id = object.getString("Id");
+        return createAddonInputBoundary.createAddon(token, name, price,description, types, availability, Id);
+    }
         /**
          * @param raw_text data to be parsed
          * @return true if addon is deleted
           */
+
      public boolean runDeleteAddon(String raw_text){
          JSONObject object = this.parser.parse(raw_text);
-         token = object.getString("VendorToken");
-         Id = object.getString("Id");
+         String token = object.getString("VendorToken");
+         String Id = object.getString("Id");
          return deleteAddonInputBoundary.deleteAddon(token, Id);
         }
 
