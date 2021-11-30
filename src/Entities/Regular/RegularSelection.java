@@ -30,7 +30,7 @@ public class RegularSelection implements ISelection {
      * @param addon the addon we want the amount for
      * @return the number of the addon in the selection
      */
-    public Integer get(IAddon addon){
+    public Integer getQuantityOfAddon(IAddon addon){
         return singleSingleton.get(addon);
     }
 
