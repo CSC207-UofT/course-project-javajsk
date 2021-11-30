@@ -56,16 +56,29 @@ public class CartController {
 
         if (!(data.has("userToken"))){
             errorHandler.displayError("No UserToken key in JSON Object.");
+            return;
         }
         if (!(data.has("cartId"))){
             errorHandler.displayError("No cartId key in JSON Object.");
+            return;
         }
-
+        if (!(data.has("foodId"))){
+            errorHandler.displayError("No foodId key in JSON Object.");
+            return;
+        }
+        if (!(data.has("shopId"))){
+            errorHandler.displayError("No shopId key in JSON Object.");
+            return;
+        }
+        if (!(data.has("orderInfo"))){
+            errorHandler.displayError("No orderInfo key in JSON Object.");
+            return;
+        }
 
         String userToken = data.getString("userToken");
         String cartId = data.getString("cartId");
         String foodId = data.getString("foodId");
-        String shopId = data.getString("shoId");
+        String shopId = data.getString("shopId");
         JSONArray selections = data.getJSONArray("orderInfo");
 
         List<ISelection> parsedSelections = this.generateOrderInfo(selections);
