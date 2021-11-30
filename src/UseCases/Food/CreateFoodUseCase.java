@@ -74,20 +74,19 @@ public class CreateFoodUseCase implements CreateFoodInputBoundary {
                 return false;
             }
             // Food is in repository but not in menu
-            IFood existingFood = foodRepository.getFood(foodRepository.getFoodId(food));
-            menu.addFood(existingFood, price, false);
+            food = foodRepository.getFood(foodRepository.getFoodId(food));
 
         // If food object does not exist in repository
         } else {
-            menu.addFood(food, price, false);
             boolean success = foodRepository.save(food);
             if(!success){
                 errorDisplay.displayError("Error. Unable to save new food item.");
                 return false;
             }
         }
-
+        menu.addFood(food, price, false);
         shop.setMenu(menu);
+        foodModel.displayFood(food);
         return shopRepository.save(shop);
     }
 }
