@@ -59,7 +59,7 @@ public class RegularSingleton implements ISingleton{
 
     /**
      * Method for setting the price of a singleton
-     * @param id the price of the singleton
+     * @param price the price of the singleton
      */
     @Override
     public void setPrice(float price) {
