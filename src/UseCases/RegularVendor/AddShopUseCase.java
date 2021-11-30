@@ -25,7 +25,7 @@ public class AddShopUseCase implements AddShopInputBoundary {
      */
     @Override
     public boolean addShop(IShop shop, String token) {
-        IVendor curr_ven = vendorRepository.getVendorFromToken(token);
+        IVendor curr_ven = (IVendor) vendorRepository.getUserFromToken(token);
         IShop shop = foodTruckRepository.getFoodTruck(shopId);
         if (curr_ven != null){
             curr_ven.addShop(shop);
