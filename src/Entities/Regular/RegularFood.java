@@ -18,18 +18,26 @@ public class RegularFood implements IFood {
     String id;
     String name;
     String description;
+    float price;
+    boolean isAvailable;
     List<ISingleton> components;
+    String shopId;
 
     /**
      * Construct an instance of a RegularFood, which is an object sold by a food truck vendor.
      *
      * @param id the id of the food item
-     * @param name        Name of the item
-     * @param components   The singleton entities that make up this RegularFood object.
+     * @param name Name of the item
+     * @param price price of food item
+     * @param avail whether food item is available
+     * @param components The singleton entities that make up this RegularFood object.
      */
-    public RegularFood(String id, String name, List<ISingleton> components) {
+    public RegularFood(String id, String name, float price, boolean avail,
+                       List<ISingleton> components) {
         this.id = id;
         this.name = name;
+        this.price = price;
+        this.isAvailable = avail;
         this.components = components;
         setDefaultDescription();
     }
@@ -83,6 +91,43 @@ public class RegularFood implements IFood {
     public List<ISingleton> getComponents() {
         return this.components;
     }
+
+    /**
+     * A method that returns the price of this food object
+     * @return price of food
+     */
+    @Override
+    public float getPrice() { return this.price; }
+
+    /**
+     * A method that returns whether the food is available for order
+     * @return whether food is available
+     */
+    @Override
+    public boolean getAvailability() {
+        return false;
+    }
+
+    /**
+     * A method that returns the shopId that the food is for
+     * @return shopId of food
+     */
+    @Override
+    public String getShopId(){ return this.shopId; }
+
+    /**
+     * A method that sets the price of this food object
+     * @param newPrice price of food
+     */
+    @Override
+    public void setPrice(float newPrice) { this.price = newPrice; }
+
+    /**
+     * A method that sets the shopId of the food object
+     * @param newShopId shopId of food
+     */
+    @Override
+    public void setShopId(String newShopId) { this.shopId = newShopId; }
 
     /**
      * A method that sets the id of the food item

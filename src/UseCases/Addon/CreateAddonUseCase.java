@@ -5,7 +5,7 @@ import Entities.Interfaces.IVendor;
 import Entities.Regular.RegularAddon;
 
 import UseCases.DataAccessInterfaces.AddonRepository;
-import UseCases.Addon.ErrorPopup;
+import UseCases.ErrorPopup;
 import UseCases.DataAccessInterfaces.VendorRepository;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class CreateAddonUseCase implements CreateAddonInputBoundary {
      */
     public Boolean createAddon(String vendorToken, String name, float price,
                                ArrayList<Integer> types, boolean availability, String id) {
-        IVendor vendor = vendorRepository.getVendorFromToken(vendorToken);
+        IVendor vendor = (IVendor) vendorRepository.getUserFromToken(vendorToken);
         if (vendor != null) {
             IAddon addon = new RegularAddon(name, price, types, availability, id);
             addonRepository.createAddon(addon);

@@ -138,7 +138,7 @@ public class FoodTruck implements IShop {
     }
 
     @Override
-    public String getID() {
+    public String getId() {
         return null;
     }
 
