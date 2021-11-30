@@ -20,7 +20,8 @@ public class FoodTruck implements IShop {
      * @param location Initial String location
      * @param name Initial String name
      */
-    public FoodTruck(Menu menu, IOrderbook orderbook, String location, String name, HashMap<IAddon, Boolean> addAvail, boolean isOpen){
+    public FoodTruck(Menu menu, IOrderbook orderbook, String location, String name, HashMap<IAddon,
+            Boolean> addAvail, boolean isOpen){
         this.menu = menu;
         this.orderbook = orderbook;
         this.location = location;
