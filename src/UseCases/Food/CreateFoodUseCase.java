@@ -51,7 +51,7 @@ public class CreateFoodUseCase implements CreateFoodInputBoundary {
     public boolean createFood(String token, String shopId, String name, String desc,
                               float price, List<ISingleton> singletons){
 
-        IVendor vendor = vendorRepository.getVendorFromToken(token);
+        IVendor vendor = (IVendor)vendorRepository.getUserFromToken(token);
         if(vendor == null) {
             errorDisplay.displayError("Vendor must be logged in.");
             return false;
@@ -64,30 +64,39 @@ public class CreateFoodUseCase implements CreateFoodInputBoundary {
         }
 
         Menu menu = shop.getMenu();
-        IFood food = new RegularFood(null, name, singletons);
+        IFood food = new RegularFood(null, name, price, false, singletons);
 
-        // Check if food object already exists in repository
-        if(foodRepository.getFoodId(food) != null){
-            // Check if food is already on the menu
-            if(menu.hasFood(food)){
-                errorDisplay.displayError("Error. This food item already exists on your menu.");
-                return false;
-            }
-            // Food is in repository but not in menu
-            food = foodRepository.getFood(foodRepository.getFoodId(food));
 
-        // If food object does not exist in repository
-        } else {
-            boolean success = foodRepository.save(food);
-            if(!success){
-                errorDisplay.displayError("Error. Unable to save new food item.");
-                return false;
-            }
+        // Check if food is already on the menu
+        if(menu.hasFood(food)){
+            errorDisplay.displayError("Error. This food item already exists on your menu.");
+            return false;
         }
-        menu.addFood(food, price, false);
+
+        boolean success = foodRepository.save(food);
+        if(!success){
+            errorDisplay.displayError("Error. Unable to save new food item.");
+            return false;
+        }
+
+        menu.addFood(food);
         shop.setMenu(menu);
+        vendor.updateShop(shopId, shop); //TODO: add method to vendor class
+
+        success = shopRepository.save(shop);
+        if(!success){
+            errorDisplay.displayError("Error. Unable to save new food item.");
+            return false;
+        }
+
+        success = vendorRepository.save(vendor);
+        if(!success){
+            errorDisplay.displayError("Error. Unable to save new food item.");
+            return false;
+        }
+
         foodModel.displayFood(food);
-        return shopRepository.save(shop);
+        return true;
     }
 }
 

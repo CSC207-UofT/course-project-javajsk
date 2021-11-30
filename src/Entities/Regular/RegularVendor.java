@@ -41,7 +41,7 @@ public class RegularVendor implements IVendor {
     @Override
     public IShop getShop(String id) {
         for (IShop i:this.shopList){
-            if (Objects.equals(i.getID(), id)){
+            if (Objects.equals(i.getId(), id)){
                 return i;
             }
         }

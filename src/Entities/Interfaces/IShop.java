@@ -31,5 +31,5 @@ public interface IShop {
 
     void setLocation(String location);
 
-    String getID();
+    String getId();
 }

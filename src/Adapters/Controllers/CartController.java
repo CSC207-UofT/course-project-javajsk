@@ -8,6 +8,7 @@ import UseCases.Cart.AddToCartInputBoundary;
 import UseCases.Cart.CreateCartInputBoundary;
 import UseCases.Cart.RemoveFromCartInputBoundary;
 import UseCases.DataAccessInterfaces.AddonRepository;
+import UseCases.ErrorPopup;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -22,6 +23,7 @@ public class CartController {
     RemoveFromCartInputBoundary removeFromCartInputBoundary;
     JSONParser parser;
     AddonRepository addonRepository;
+    ErrorPopup errorHandler;
 
     CartController(AddToCartInputBoundary addToCartInputBoundary, CreateCartInputBoundary createCartInputBoundary,
                    RemoveFromCartInputBoundary removeFromCartInputBoundary, JSONParser parser){
@@ -51,10 +53,32 @@ public class CartController {
 
     void runAddToCart(String input){
         JSONObject data = this.parser.parse(input);
+
+        if (!(data.has("userToken"))){
+            errorHandler.displayError("No UserToken key in JSON Object.");
+            return;
+        }
+        if (!(data.has("cartId"))){
+            errorHandler.displayError("No cartId key in JSON Object.");
+            return;
+        }
+        if (!(data.has("foodId"))){
+            errorHandler.displayError("No foodId key in JSON Object.");
+            return;
+        }
+        if (!(data.has("shopId"))){
+            errorHandler.displayError("No shopId key in JSON Object.");
+            return;
+        }
+        if (!(data.has("orderInfo"))){
+            errorHandler.displayError("No orderInfo key in JSON Object.");
+            return;
+        }
+
         String userToken = data.getString("userToken");
         String cartId = data.getString("cartId");
         String foodId = data.getString("foodId");
-        String shopId = data.getString("shoId");
+        String shopId = data.getString("shopId");
         JSONArray selections = data.getJSONArray("orderInfo");
 
         List<ISelection> parsedSelections = this.generateOrderInfo(selections);

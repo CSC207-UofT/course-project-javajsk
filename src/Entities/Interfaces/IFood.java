@@ -11,23 +11,54 @@ import java.util.List;
 public interface IFood {
     /**
      * A method that return the id of this food object
+     * @return id of food
      */
     String getId();
 
     /**
      *  A method that returns the name of this food object
+     * @return name of food
      */
     String getName();
 
     /**
      * A method that returns the description of this food object
+     * @return description of food
      */
     String getDescription();
 
     /**
      * A method that returns the components of this food object
+     * @return list of singleton
      */
     List<ISingleton> getComponents();
+
+
+    float getPrice();
+
+    /**
+     * A method that returns whether the food is available for order
+     * @return whether food is available
+     */
+    boolean getAvailability();
+
+    /**
+     * A method that returns the shopId that the food is for
+     * @return shopId of food
+     */
+    String getShopId();
+
+    /**
+     * A method that sets the price of this food object
+     * @param newPrice price of food
+     */
+    void setPrice(float newPrice);
+
+    /**
+     * A method that sets the shopId of the food object
+     * @param newShopId shopId of food
+     */
+    void setShopId(String newShopId);
 
     /**
      * A method that sets the id of the food item

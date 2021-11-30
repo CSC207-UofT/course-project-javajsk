@@ -3,7 +3,7 @@ package UseCases.Addon;
 import Entities.Interfaces.IVendor;
 import Entities.Interfaces.IAddon;
 
-import UseCases.Addon.ErrorPopup;
+import UseCases.ErrorPopup;
 import UseCases.DataAccessInterfaces.AddonRepository;
 import UseCases.DataAccessInterfaces.VendorRepository;
 

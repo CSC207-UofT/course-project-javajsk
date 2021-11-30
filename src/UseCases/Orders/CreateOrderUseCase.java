@@ -7,8 +7,6 @@ import UseCases.DataAccessInterfaces.OrderRepository;
 import UseCases.DataAccessInterfaces.VendorRepository;
 import UseCases.OutputBoundary.OrderModel;
 
-import java.util.HashMap;
-
 public class CreateOrderUseCase implements CreateOrderInputBoundary{
     OrderRepository orderData;
     CustomerRepository customerData;
@@ -50,15 +48,15 @@ public class CreateOrderUseCase implements CreateOrderInputBoundary{
     /**
      * Check if all the items in a cart belong to the same food truck
      * @param cart the cart we are checking
-     * @param foodTruck the food truck the cart is from
+     * @param shop the food truck the cart is from
      * @return true if the cart is all from the same food truck and false if it isn't
      */
-    private boolean validCart(ICart cart, IShop foodTruck ){
+    private boolean validCart(ICart cart, IShop shop ){
+        String id = shop.getId();
         IFood[] cartItems = cart.getFoods();
-        HashMap<IFood, Object[]> menuItems = foodTruck.getMenu().getContents();
         for(IFood item: cartItems){
-            //should it keep a list of invalid items so that the customer can be alerted
-            if(!menuItems.containsKey(item)){
+            //TODO: should it keep a list of invalid items so that the customer can be alerted
+            if(!item.getShopId().equals(id)){
                 return false;
             }
         }
