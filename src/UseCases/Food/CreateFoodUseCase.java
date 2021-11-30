@@ -1,10 +1,13 @@
 package UseCases.Food;
 
 import Entities.Interfaces.IFood;
+import Entities.Interfaces.IShop;
 import Entities.Interfaces.ISingleton;
 import Entities.Interfaces.IVendor;
+import Entities.Menu;
 import Entities.Regular.RegularFood;
 import UseCases.DataAccessInterfaces.FoodRepository;
+import UseCases.DataAccessInterfaces.ShopRepository;
 import UseCases.DataAccessInterfaces.VendorRepository;
 import UseCases.OutputBoundary.ErrorPopup;
 import UseCases.OutputBoundary.FoodModel;
@@ -17,6 +20,7 @@ import java.util.List;
 public class CreateFoodUseCase implements CreateFoodInputBoundary {
     FoodRepository foodRepository;
     VendorRepository vendorRepository;
+    ShopRepository shopRepository;
     ErrorPopup errorDisplay;
     FoodModel foodModel;
 
@@ -24,35 +28,66 @@ public class CreateFoodUseCase implements CreateFoodInputBoundary {
      * Class constructor with all attributes as required parameters
      */
     public CreateFoodUseCase(FoodRepository foodRepo, VendorRepository vendorRepo,
-                             ErrorPopup error, FoodModel foodM){
+                             ShopRepository shopRepo, ErrorPopup error, FoodModel foodM){
         this.foodRepository = foodRepo;
         this.vendorRepository = vendorRepo;
+        this.shopRepository = shopRepo;
         this.errorDisplay = error;
         this.foodModel = foodM;
     }
 
     /**
-     * Creates food object sends update to output boundary
-     *
-     * @param userToken current user's token
-     * @param id id of food object
-     * @param name name of food object
-     * @param desc description of food object
-     * @param price price of food object
+     *  A method that creates a new food item with the given parameters and returned
+     *  whether the item was successfully created
+     * @param token token of current user that is logged in
+     * @param shopId id of shop to add food item to
+     * @param name name of food item
+     * @param desc description of food item
+     * @param price price of food item
      * @param singletons list of singletons
      * @return whether food object was successfully created and saved
      */
     @Override
-    public boolean createFood(String userToken, String id, String name, String desc,
+    public boolean createFood(String token, String shopId, String name, String desc,
                               float price, List<ISingleton> singletons){
-        IVendor vendor = vendorRepository.getUserFromToken(userToken);
-        if(vendor != null) {
-            IFood food = new RegularFood(id, name, desc, price, singletons);
-            return foodRepository.save(food);
+
+        IVendor vendor = vendorRepository.getVendorFromToken(token);
+        if(vendor == null) {
+            errorDisplay.displayError("Vendor must be logged in.");
+            return false;
         }
 
-        errorDisplay.displayError("Vendor must be logged in.");
-        return false;
+        IShop shop = vendor.getShop(shopId);
+        if(shop == null) {
+            errorDisplay.displayError("Error. Could not locate shop.");
+            return false;
+        }
+
+        Menu menu = shop.getMenu();
+        IFood food = new RegularFood(null, name, singletons);
+
+        // Check if food object already exists in repository
+        if(foodRepository.getFoodId(food) != null){
+            // Check if food is already on the menu
+            if(menu.hasFood(food)){
+                errorDisplay.displayError("Error. This food item already exists on your menu.");
+                return false;
+            }
+            // Food is in repository but not in menu
+            food = foodRepository.getFood(foodRepository.getFoodId(food));
+
+        // If food object does not exist in repository
+        } else {
+            boolean success = foodRepository.save(food);
+            if(!success){
+                errorDisplay.displayError("Error. Unable to save new food item.");
+                return false;
+            }
+        }
+        menu.addFood(food, price, false);
+        shop.setMenu(menu);
+        foodModel.displayFood(food);
+        return shopRepository.save(shop);
     }
 }
 

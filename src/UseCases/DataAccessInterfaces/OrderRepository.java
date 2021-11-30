@@ -1,8 +1,7 @@
 package UseCases.DataAccessInterfaces;
 
 import Entities.Interfaces.IOrder;
-
-import java.util.ArrayList;
+import Entities.Interfaces.IOrderbook;
 
 /**
  * Order
@@ -27,13 +26,17 @@ public interface OrderRepository {
     boolean setOrderStatus(String id, String status);
 
     /**
-     * Method returns all the orders with the given foodtruck id
+     * Method returns all the orders with the given food truck id
      * from the higher level data system
      *
-     * @param truckId if of foodtruck
+     * @param truckId if of food truck
      * @return arraylist of orders
      */
-    ArrayList<IOrder> getOrdersByFoodTruck(String truckId);
+    IOrderbook getOrdersByFoodTruck(String truckId);
+
+    IOrderbook getOrdersByCustomer(String customerID);
 
     boolean save(IOrder order);
+
+    boolean createOrder(IOrder order);
 }

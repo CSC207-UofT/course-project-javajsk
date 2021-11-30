@@ -11,6 +11,8 @@ public interface ISingleton {
 
     String getDescription();
 
+    ISelection getDefaultSelection();
+
     // List can be array (Please change as per your decisions.)
     List<IAddon> getAllowedAddonTypes();
 
@@ -23,4 +25,6 @@ public interface ISingleton {
     void setAllowedAddonTypes(List<IAddon> allowedAddonTypes);
 
     void setSingleton(RegularSingleton singleton);
+
+    String getID();
 }

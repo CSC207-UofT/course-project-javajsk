@@ -1,15 +1,16 @@
 package UseCases.Singleton;
 
 import Entities.Interfaces.IAddon;
-import Entities.Interfaces.ISingleton;
+
+import Entities.Interfaces.ISelection;
+
 import Entities.Regular.RegularSingleton;
 import Entities.Interfaces.IVendor;
 import UseCases.DataAccessInterfaces.SingletonRepository;
-import UseCases.DataAccessInterfaces.AddonRepository;
 import UseCases.DataAccessInterfaces.VendorRepository;
 import UseCases.OutputBoundary.SingletonModel;
 import UseCases.OutputBoundary.ErrorPopup;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class CreateSingletonUseCase implements CreateSingletonInputBoundary {
@@ -20,10 +21,10 @@ public class CreateSingletonUseCase implements CreateSingletonInputBoundary {
 
     @Override
     public boolean createSingleton(String userToken, String id, String name,
-                                   String description, float price, List<IAddon> add_ons) {
-        IVendor vendor = vendorRepository.getVendorFromToken(userToken);
+                                   String description, float price, List<IAddon> add_ons, ISelection defaultSel) {
+        IVendor vendor = (IVendor) vendorRepository.getUserFromToken(userToken);
         if(vendor != null) {
-            RegularSingleton singleton = new RegularSingleton(id, name, description, price, add_ons);
+            RegularSingleton singleton = new RegularSingleton(id, name, description, price, add_ons, defaultSel);
             singletonRepository.createSingleton(singleton);
 
             // TODO: make sure singleton is unique (somehow)

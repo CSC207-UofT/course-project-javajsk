@@ -6,40 +6,43 @@ import Entities.Interfaces.ISelection;
 import Entities.Interfaces.ISingleton;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
  * Public class representing a Food object to be sold by a shop.
  *
  * Implements the IFood interface.
- *
  */
 
 public class RegularFood implements IFood {
     String id;
     String name;
     String description;
-    float price;
     List<ISingleton> components;
-    String ID;
 
     /**
      * Construct an instance of a RegularFood, which is an object sold by a food truck vendor.
      *
+     * @param id the id of the food item
      * @param name        Name of the item
-     * @param price       Price of the item
-     * @param description Brief description of the item
      * @param components   The singleton entities that make up this RegularFood object.
      */
-
-    public RegularFood(String id, String name, String description, float price, List<ISingleton> components) {
+    public RegularFood(String id, String name, List<ISingleton> components) {
         this.id = id;
         this.name = name;
-        this.description = description;
-        this.price = price;
         this.components = components;
-        this.ID = id;
+        setDefaultDescription();
+    }
+
+    /**
+     * A method that sets a default description for the food item based on its components
+     */
+    private void setDefaultDescription(){
+        StringBuilder description = new StringBuilder();
+        for(ISingleton component: this.components){
+            description.append(component.getName() );
+        }
+        this.description = description.toString();
     }
 
     /**
@@ -72,23 +75,6 @@ public class RegularFood implements IFood {
     }
 
     /**
-     * Get the price of this object
-     *
-     * @return Return the price of this object
-     */
-    @Override
-    public float getPrice() {
-        if(this.price == -1){
-            float sum = 0;
-            for (ISingleton single: this.components) {
-                sum += single.getPrice();
-            }
-            return sum;
-        }
-        return this.price;
-    }
-
-    /**
      * Get the components of this object
      *
      * @return Return a list of components of this object
@@ -98,43 +84,71 @@ public class RegularFood implements IFood {
         return this.components;
     }
 
+    /**
+     * A method that sets the id of the food item
+     * @param newId id of food item
+     */
+    @Override
+    public void setId(String newId){ this.id = newId; }
+
+    /**
+     * A method that sets the name of the food item
+     * @param name of food item
+     */
     @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * A method that sets the description of the food item
+     * @param description description of food item
+     */
     @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
-    @Override
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
+    /**
+     * A method that sets the components of the food item
+     * @param components list of singletons
+     */
     @Override
     public void setComponents(List<ISingleton> components) {
         this.components = components;
     }
 
+    /**
+     * A method that returns whether a given list of addon selections
+     * are valid with this food item
+     * @param addons list of selections
+     * @return whether given list has valid addons
+     */
     @Override
-    public boolean isValidAddons(ISelection addons) {
+    public boolean isValidAddons(List<ISelection> addons) {
         if(addons.size() != components.size()){
             return false;
         }
         List<List<IAddon>> allowedTypes = this.getAllowedAddons();
         for(int i =0; i < addons.size(); i++){
             List<IAddon> allowedForSingleton = allowedTypes.get(i);
-            for(IAddon selectedAddon: addons.get(i).keySet()){
-                if(!allowedForSingleton.contains(selectedAddon)){
+            for (IAddon selectedAddon : addons.get(i).getUsedAddons()) {
+                if (!allowedForSingleton.contains(selectedAddon)) {
                     return false;
                 }
             }
+
         }
         return true;
     }
 
+    /**
+     * A method that returns a list of allowed addons for each singleton in the food
+     * item, organized as a list.
+     * So each element (list of addons) in the list corresponds to one singleton
+     * in the components of food
+     * @return list of list of allowed addons
+     */
     @Override
     public List<List<IAddon>> getAllowedAddons() {
         List<List<IAddon>> addons = new ArrayList<>();

@@ -16,7 +16,7 @@ public interface FoodRepository {
          * @param id The associated id of the food object.
          * @return Return the RegularFood object with the associated id.
          */
-        public IFood getFood(String id);
+        IFood getFood(String id);
 
         /**
          *  A method that deletes a desired food object in
@@ -26,9 +26,7 @@ public interface FoodRepository {
          *
          * @return Return whether the deletion has been made.
          */
-        public boolean deleteFood (String id);
-  
-        public Boolean setFood(String id, IFood new_food);
+        boolean deleteFood(String id);
 
 
         /**
@@ -37,4 +35,16 @@ public interface FoodRepository {
          * @return whether food object was succesfully saved
          */
         boolean save(IFood food);
+
+        // TODO: boolean createFood(IFood food);
+
+        /**
+         * A method that returns the id of a given food object if it is in the repository
+         * (A food item is considered to be in the repository if it has all the same attributes
+         * excluding id)
+         * Returns null if the food item is not in the repository
+         * @param food food item to check for
+         * @return whether food item is in repository
+         */
+        String getFoodId(IFood food);
 }

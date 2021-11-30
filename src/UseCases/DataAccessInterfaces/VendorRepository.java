@@ -17,16 +17,7 @@ public interface VendorRepository extends UserRepository{
      * @param id The associated id of the vendor.
      * @return Return the vendor associated with the id.
      */
-    public IVendor getVendor(String id);
-
-    /**
-     *  A method that changes information of the desired vendor from
-     *  the higher level data storage.
-     *
-     * @param id The associated id of the vendor.
-     * @return Return the vendor associated with the id.
-     */
-    public Boolean setVendor(String id, String password, String name);
+    IVendor getVendor(String id);
 
     boolean save(IVendor vendor);
 }

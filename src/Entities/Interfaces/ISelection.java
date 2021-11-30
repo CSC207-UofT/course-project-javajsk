@@ -1,6 +1,6 @@
 package Entities.Interfaces;
 
-import java.util.HashMap;
+import java.util.List;
 
 public interface ISelection {
 
@@ -8,6 +8,8 @@ public interface ISelection {
 
     int size();
 
-    HashMap<IAddon, Integer> get(int index);
+    Integer get(IAddon addon);
+
+    List<IAddon> getUsedAddons();
 
 }

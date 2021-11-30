@@ -4,28 +4,34 @@ import Entities.Interfaces.IOrder;
 import Entities.Interfaces.IShop;
 import Entities.Interfaces.IVendor;
 import Entities.VendorOrderBook;
-import UseCases.DataAccessInterfaces.FoodTruckRepository;
+import UseCases.DataAccessInterfaces.ShopRepository;
 import UseCases.DataAccessInterfaces.VendorRepository;
 import UseCases.OutputBoundary.ErrorPopup;
 import UseCases.OutputBoundary.FoodTruckModel;
 
 public class ProcessOrderUseCase implements ProcessOrderInputBoundary {
     VendorRepository vendorRepository;
-    FoodTruckRepository foodTruckRepository;
+    ShopRepository shopRepository;
     ErrorPopup errorDisplayer;
     FoodTruckModel foodTruckModel;
-
+    public ProcessOrderUseCase(VendorRepository vendorRepository, ShopRepository shopRepository,
+                               ErrorPopup errorDisplayer, FoodTruckModel foodTruckModel ){
+        this.vendorRepository = vendorRepository;
+        this.errorDisplayer = errorDisplayer;
+        this.shopRepository = shopRepository;
+        this.foodTruckModel = foodTruckModel;
+    }
     @Override
     public Boolean processOrder(String userToken, String shopID) {
         IVendor vendor = (IVendor) vendorRepository.getUserFromToken(userToken);
         if(vendor != null){
-            IShop foodtruck = foodTruckRepository.getFoodTruck(shopID);
+            IShop foodtruck = shopRepository.getShop(shopID);
             if(foodtruck != null){
                 VendorOrderBook orderbook = (VendorOrderBook) foodtruck.getOrderBook(); //TODO: Does this casting make sense?
                 IOrder order = orderbook.getNextOrder();
-                order.setStatus(true); //TODO: We don't have Status codes yet. Its just true and false rn.
+                order.setStatus("Completed"); //TODO: We don't have Status codes yet. Its just true and false rn.
                 foodTruckModel.updateFoodTruck(foodtruck);
-                return foodTruckRepository.save(foodtruck);
+                return shopRepository.save(foodtruck);
             }
            else{
                 errorDisplayer.displayError("Invalid ShopID");
