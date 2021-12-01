@@ -13,6 +13,7 @@ import entities.Addon;
 import entities.Shop;
 import entities.Vendor;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UpdateAddonUseCase implements UpdateAddonInputBoundary {
@@ -48,7 +49,15 @@ public class UpdateAddonUseCase implements UpdateAddonInputBoundary {
 
 
         Shop shop = vendor.getShop();
-        boolean success = shop.getMenu().updateAddon(addonId, addon);
+        Addon newAddon;
+        try{
+            newAddon = AddonLoader.loadAddon(object);
+        }catch(JSONException e){
+            errorHandler.displayError("Unable to generate new addon object from given data.");
+            return false;
+        }
+
+        boolean success = shop.getMenu().updateAddon(addonId, newAddon);
 
         if(!success){
             errorHandler.displayError("No such addon in the shop's menu.");

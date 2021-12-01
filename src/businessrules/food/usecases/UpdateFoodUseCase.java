@@ -11,6 +11,7 @@ import businessrules.outputboundary.ErrorModel;
 import entities.Food;
 import entities.Shop;
 import entities.Vendor;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UpdateFoodUseCase implements UpdateFoodInputBoundary {
@@ -20,7 +21,7 @@ public class UpdateFoodUseCase implements UpdateFoodInputBoundary {
     VendorRepository vendorRepository;
     FoodModel FoodView;
     VendorLoader vendorLoader;
-    FoodLoader FoodLoader;
+    FoodLoader foodLoader;
 
     public UpdateFoodUseCase(FoodRepository FoodRepository, ErrorModel errorHandler, ShopRepository shopRepository,
                               VendorRepository vendorRepository, FoodModel FoodView) {
@@ -29,7 +30,7 @@ public class UpdateFoodUseCase implements UpdateFoodInputBoundary {
         this.shopRepository = shopRepository;
         this.vendorRepository = vendorRepository;
         this.FoodView = FoodView;
-        this.FoodLoader = new FoodLoader(FoodRepository, errorHandler);
+        this.foodLoader = new FoodLoader(FoodRepository, errorHandler);
         this.vendorLoader = new VendorLoader(vendorRepository, errorHandler);
     }
 
@@ -37,7 +38,7 @@ public class UpdateFoodUseCase implements UpdateFoodInputBoundary {
     @Override
     public boolean updateFood(String vendorToken, String FoodId, JSONObject object) {
         Vendor vendor = vendorLoader.loadVendorFromToken(vendorToken);
-        Food food = FoodLoader.loadFoodFromId(FoodId);
+        Food food = foodLoader.loadFoodFromId(FoodId);
 
         if(vendor == null || food == null){
             errorHandler.displayError("Incorrect vendorToken or FoodId.");
@@ -46,7 +47,14 @@ public class UpdateFoodUseCase implements UpdateFoodInputBoundary {
 
 
         Shop shop = vendor.getShop();
-        boolean success = shop.getMenu().updateFood(FoodId, food);
+        Food newFood;
+        try{
+            newFood = FoodLoader.loadFood(object);
+        }catch (JSONException e){
+            errorHandler.displayError("Unable to generate new food from given data.");
+            return false;
+        }
+        boolean success = shop.getMenu().updateFood(FoodId, newFood);
 
         if(!success){
             errorHandler.displayError("No such Food in the shop's menu.");
