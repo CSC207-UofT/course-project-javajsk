@@ -39,6 +39,14 @@ public class Vendor extends User{
         this.shop = shop;
     }
 
+    public boolean deleteShop(String shopId){
+        if(this.shop.getId().equals(shopId)){
+            this.shop = null;
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public JSONObject jsonify(){
         JSONObject userData = new JSONObject();

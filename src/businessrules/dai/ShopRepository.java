@@ -12,4 +12,6 @@ public interface ShopRepository {
     JSONObject readShop(String shopId);
 
     JSONObject readShopMenu(String shopId);
+
+    boolean deleteShop(String shopId);
 }
