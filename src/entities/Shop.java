@@ -2,8 +2,6 @@ package entities;
 
 import org.json.JSONObject;
 
-import java.awt.*;
-
 /**
  * The type Shop.
  */

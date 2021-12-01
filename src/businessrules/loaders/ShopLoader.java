@@ -2,7 +2,6 @@ package businessrules.loaders;
 
 import businessrules.dai.ShopRepository;
 import businessrules.outputboundary.ErrorModel;
-import entities.Food;
 import entities.Menu;
 import entities.OrderBook;
 import entities.Shop;
@@ -31,5 +30,21 @@ public class ShopLoader {
         JSONObject menuData = data.getJSONObject("menu");
         Menu menu = MenuLoader.loadMenu(menuData);
         return new Shop(id, name, location, isOpen, menu, orderBook);
+    }
+
+    public Shop loadShopFromId(String id){
+        JSONObject shopRaw = shopRepository.readShop(id);
+        if(shopRaw == null){
+            errorHandler.displayError("Unable to find shop with id: " + id);
+            return null;
+        }
+
+        try{
+            return ShopLoader.loadShop(shopRaw);
+        }catch (JSONException e){
+            errorHandler.displayError(e.getMessage());
+        }
+
+        return null;
     }
 }

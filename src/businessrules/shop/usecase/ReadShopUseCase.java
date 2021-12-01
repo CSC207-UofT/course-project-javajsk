@@ -33,7 +33,10 @@ public class ReadShopUseCase implements ReadShopInputBoundary {
             errorHandler.displayError(e.getMessage());
             return null;
         }
+
+        shopModel.displayShop(shopData); //necessary?
         return shop.jsonify();
+
     }
 }
 
