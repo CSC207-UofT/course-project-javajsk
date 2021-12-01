@@ -1,5 +1,7 @@
 package businessrules.loaders;
 
+import businessrules.dai.AddonRepository;
+import businessrules.outputboundary.ErrorModel;
 import entities.Addon;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,6 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddonLoader {
+    ErrorModel errorHandler;
+    AddonRepository addonRepository;
+
+    public AddonLoader(AddonRepository ar, ErrorModel er){
+        this.addonRepository = ar;
+        this.errorHandler = er;
+    }
 
     public static Addon loadAddon(JSONObject data) throws JSONException {
         // Possibly use a factory
@@ -24,6 +33,21 @@ public class AddonLoader {
 
         // As long as the datatypes are correct, this should work.
         return new Addon(id, name, price, types, isAvailable);
+    }
+
+    public Addon loadAddonFromId(String id){
+        JSONObject addonRaw = addonRepository.readAddon(id);
+        if(addonRaw == null){
+            errorHandler.displayError("Unable to find addon with id: " + id);
+            return null;
+        }
+
+        try {
+            return AddonLoader.loadAddon(addonRaw);
+        }catch (JSONException e){
+            errorHandler.displayError(e.getMessage());
+        }
+        return null;
     }
 
     public static List<Integer> getListFromJSONArray(JSONArray array){

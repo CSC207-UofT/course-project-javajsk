@@ -21,28 +21,18 @@ public class CreateAddonUseCase implements CreateAddonInputBoundary {
     ShopRepository shopRepository;
     ErrorModel errorHandler;
     AddonModel addonView;
+    VendorLoader vendorLoader;
+    AddonLoader addonLoader;
 
     @Override
     public boolean createAddon(String vendorToken, JSONObject data) {
-
-        JSONObject vendorRaw = vendorRepository.readUserFromToken(vendorToken);
-
-        if(vendorRaw == null){
-            errorHandler.displayError("Unable to find vendor with such token.");
+        Vendor vendor = vendorLoader.loadVendorFromToken(vendorToken);
+        if(vendor == null){
             return false;
         }
-
-        Vendor vendor;
-        try{
-            vendor = VendorLoader.loadVendor(data);
-        }catch( JSONException e){
-            errorHandler.displayError("Unable to load vendor.");
-            return false;
-        }
-
 
         Addon addon;
-        try {
+        try{
             addon = AddonLoader.loadAddon(data);
         }catch (JSONException e){
             errorHandler.displayError(e.getMessage());

@@ -64,4 +64,24 @@ public class Menu {
     public void addAddon(Addon addon){
         this.addons.add(addon);
     }
+
+    public boolean updateAddon(String addonId, Addon addon){
+        int index = -1;
+        for(int i =0; i < this.addons.size(); i++){
+            if(this.addons.get(i).getId().equals(addonId)){
+                this.addons.remove(this.addons.get(i));
+                index = i;
+            }
+        }
+        if(index == -1){
+            // in this case the addon has not been found in the list.
+            return false;
+        }
+        this.addons.add(index, addon);
+        return true;
+    }
+
+    public boolean deleteAddon(Addon addon){
+        return this.addons.remove(addon);
+    }
 }
