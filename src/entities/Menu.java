@@ -1,10 +1,12 @@
 package entities;
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
- * The type Menu.
+ * Menu entity class.
  */
-public class Menu {
+public class Menu implements JSONable{
 
     protected List<Food> foods;
     protected List<Addon> addons;
@@ -78,5 +80,15 @@ public class Menu {
 
     public boolean deleteAddon(Addon addon){
         return this.addons.remove(addon);
+    }
+
+    @Override
+    public JSONObject jsonify() {
+        JSONObject menuData = new JSONObject();
+        // TODO: SEE how this works out into the JSON.
+        menuData.put("id", this.foods);
+        menuData.put("name", this.addons);
+
+        return menuData;
     }
 }

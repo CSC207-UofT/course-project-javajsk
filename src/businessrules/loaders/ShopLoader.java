@@ -2,6 +2,7 @@ package businessrules.loaders;
 
 import businessrules.dai.ShopRepository;
 import businessrules.outputboundary.ErrorModel;
+import entities.Food;
 import entities.Menu;
 import entities.OrderBook;
 import entities.Shop;
@@ -19,7 +20,6 @@ public class ShopLoader {
     }
 
     public static Shop loadShop(JSONObject data) throws JSONException {
-        // TODO;
         // These are all assumed to exist (controller's job to check and ensure json is of correct format)
         String id = data.getString("id");
         String name = data.getString("name");
@@ -29,5 +29,11 @@ public class ShopLoader {
         OrderBook orderBook;
         Menu menu;
         return new Shop(id, name, location, isOpen, menu, orderBook);
+    }
+
+    public static Menu loadShopMenu(JSONObject data) throws JSONException {
+        //TODO: implement
+        Menu menu;
+        return menu;
     }
 }

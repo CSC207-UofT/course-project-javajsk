@@ -68,7 +68,7 @@ public class ClearMenuUseCase implements ClearMenuInputBoundary {
             errorHandler.displayError("Error. Unable to clear menu.");
         }
 
-        // menuModel.displayMenu(); TODO: need empty JSON data file to display?
+        menuModel.displayMenu(menu.jsonify());
         return true;
     }
 }
