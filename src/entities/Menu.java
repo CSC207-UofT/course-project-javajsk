@@ -1,5 +1,6 @@
 package entities;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The type Menu.
@@ -83,5 +84,17 @@ public class Menu {
 
     public boolean deleteAddon(Addon addon){
         return this.addons.remove(addon);
+    }
+
+    public boolean updateSingleton(String singletonId, Singleton singleton) {
+        for(Food food: this.foods) {
+            for(Singleton s: food.getComponents()) {
+                if(s.getId().equals(singletonId)) {
+                    s.replace(singleton);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
