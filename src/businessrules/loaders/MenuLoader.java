@@ -13,15 +13,10 @@ import java.util.List;
 public class MenuLoader {
 
     ShopRepository shopRepository;
-    FoodLoader foodLoader; //TODO: merge with branch that has FoodLoader implemented
-    AddonLoader addonLoader;
     ErrorModel errorHandler;
 
-    public MenuLoader(ShopRepository shopRepo, FoodLoader foodLoad,
-                      AddonLoader addonLoad, ErrorModel er){
+    public MenuLoader(ShopRepository shopRepo, ErrorModel er){
         this.shopRepository = shopRepo;
-        this.foodLoader = foodLoad;
-        this.addonLoader = addonLoad;
         this.errorHandler = er;
     }
 
@@ -34,13 +29,14 @@ public class MenuLoader {
 
         for(int i = 0; i < foodData.length(); i++){
             JSONObject foodRow = foodData.getJSONObject(i);
-            foodList.add(foodLoader.loadFood(foodRow));
+            //TODO: implement FoodLoader - or get from other branch
+            foodList.add(FoodLoader.loadFood(foodRow));
         }
 
         List<Addon> addonList = new ArrayList<>();
         for(int i = 0; i < addonData.length(); i++){
             JSONObject addonRow = foodData.getJSONObject(i);
-            addonList.add(addonLoader.loadAddon(addonRow));
+            addonList.add(AddonLoader.loadAddon(addonRow));
         }
 
         return new Menu(foodList, addonList);

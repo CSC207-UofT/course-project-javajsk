@@ -9,5 +9,7 @@ public interface ShopRepository {
 
     boolean clearShopMenu(String shopId);
 
+    JSONObject readShop(String shopId);
+
     JSONObject readShopMenu(String shopId);
 }

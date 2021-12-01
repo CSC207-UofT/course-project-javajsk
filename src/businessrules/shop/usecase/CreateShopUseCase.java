@@ -1,12 +1,9 @@
 package businessrules.shop.usecase;
 
-import businessrules.dai.AddonRepository;
 import businessrules.dai.ShopRepository;
 import businessrules.dai.VendorRepository;
-import businessrules.loaders.AddonLoader;
 import businessrules.loaders.ShopLoader;
 import businessrules.loaders.VendorLoader;
-import businessrules.outputboundary.AddonModel;
 import businessrules.outputboundary.ErrorModel;
 import businessrules.outputboundary.ShopModel;
 import businessrules.shop.inputboundary.CreateShopInputBoundary;
