@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,6 +21,10 @@ public class OrderBook {
         this.ordersList = ordersList;
     }
 
+    public OrderBook() {
+        this.ordersList = new ArrayList<>();
+    }
+
     /**
      * Gets orders list.
      *
@@ -36,5 +41,13 @@ public class OrderBook {
      */
     public void setOrdersList(List<Order> ordersList) {
         this.ordersList = ordersList;
+    }
+
+    public List<String> getOrderIds(){
+        List<String> finalList = new ArrayList<>();
+        for(Order order: this.ordersList){
+            finalList.add(order.getId());
+        }
+        return finalList;
     }
 }

@@ -84,4 +84,28 @@ public class Menu {
     public boolean deleteAddon(Addon addon){
         return this.addons.remove(addon);
     }
+
+    public void addFood(Food food){
+        this.foods.add(food);
+    }
+
+    public boolean deleteFood(Food food){
+        return this.foods.remove(food);
+    }
+
+    public boolean updateFood(String foodId, Food food){
+        int index = -1;
+        for(int i =0; i < this.foods.size(); i++){
+            if(this.foods.get(i).getId().equals(foodId)){
+                this.foods.remove(this.foods.get(i));
+                index = i;
+            }
+        }
+        if(index == -1){
+            // in this case the addon has not been found in the list.
+            return false;
+        }
+        this.foods.add(index, food);
+        return true;
+    }
 }
