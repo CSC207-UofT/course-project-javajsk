@@ -1,12 +1,10 @@
 package businessrules.menu.usecases;
 
-import businessrules.addon.usecases.ReadAddonUseCase;
 import businessrules.dai.ShopRepository;
-import businessrules.loaders.ShopLoader;
+import businessrules.loaders.MenuLoader;
 import businessrules.menu.inputboundaries.ReadMenuInputBoundary;
 import businessrules.outputboundary.ErrorModel;
 import businessrules.outputboundary.MenuModel;
-import entities.JSONable;
 import entities.Menu;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,7 +26,7 @@ public class ReadMenuUseCase implements ReadMenuInputBoundary {
 
         Menu menu;
         try{
-            menu = ShopLoader.loadShopMenu(menuData);
+            menu = MenuLoader.loadMenu(menuData);
         }catch (JSONException e){
             errorHandler.displayError(e.getMessage());
             return null;

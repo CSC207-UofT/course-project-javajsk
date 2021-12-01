@@ -15,10 +15,8 @@ public class ShopLoader {
     MenuLoader menuLoader;
     ErrorModel errorHandler;
 
-    public ShopLoader(ShopRepository shopRepo, MenuLoader menuLoad,
-                      ErrorModel er){
+    public ShopLoader(ShopRepository shopRepo, ErrorModel er){
         this.shopRepository = shopRepo;
-        this.menuLoader = menuLoad;
         this.errorHandler = er;
     }
 
@@ -30,8 +28,8 @@ public class ShopLoader {
         boolean isOpen = data.getBoolean("isOpen");
         // TODO: get orderbook and menu
         OrderBook orderBook;
-        JSONObject menuData = data.getJSONObject("menu")
-        Menu menu = menuLoader.loadMenu(menuData);
+        JSONObject menuData = data.getJSONObject("menu");
+        Menu menu = MenuLoader.loadMenu(menuData);
         return new Shop(id, name, location, isOpen, menu, orderBook);
     }
 }
