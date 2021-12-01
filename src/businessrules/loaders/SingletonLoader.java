@@ -21,8 +21,6 @@ public class SingletonLoader {
     }
 
     public static Singleton loadSingleton(JSONObject data) throws JSONException {
-        // Possibly use a factory
-
         // These are all assumed to exist (controller's job to check and ensure json is of correct format)
         String id = data.getString("id");
         float price = data.getFloat("price");
