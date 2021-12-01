@@ -11,11 +11,14 @@ import org.json.JSONObject;
 
 public class ShopLoader {
 
-    ErrorModel errorHandler;
     ShopRepository shopRepository;
+    MenuLoader menuLoader;
+    ErrorModel errorHandler;
 
-    public ShopLoader(ShopRepository shopRepo, ErrorModel er){
+    public ShopLoader(ShopRepository shopRepo, MenuLoader menuLoad,
+                      ErrorModel er){
         this.shopRepository = shopRepo;
+        this.menuLoader = menuLoad;
         this.errorHandler = er;
     }
 
@@ -27,13 +30,8 @@ public class ShopLoader {
         boolean isOpen = data.getBoolean("isOpen");
         // TODO: get orderbook and menu
         OrderBook orderBook;
-        Menu menu;
+        JSONObject menuData = data.getJSONObject("menu")
+        Menu menu = menuLoader.loadMenu(menuData);
         return new Shop(id, name, location, isOpen, menu, orderBook);
-    }
-
-    public static Menu loadShopMenu(JSONObject data) throws JSONException {
-        //TODO: implement
-        Menu menu;
-        return menu;
     }
 }
