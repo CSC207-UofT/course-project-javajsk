@@ -5,13 +5,8 @@ import java.util.List;
  * The type Menu.
  */
 public class Menu {
-    /**
-     * The Foods.
-     */
+
     protected List<Food> foods;
-    /**
-     * The Addons.
-     */
     protected List<Addon> addons;
 
     /**

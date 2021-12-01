@@ -10,22 +10,11 @@ import java.awt.*;
 public class Shop implements JSONable{
 
     public String id;
-    /**
-     * The Menu.
-     */
-    protected Menu menu;
-    /**
-     * The Order book.
-     */
-    protected OrderBook orderBook;
-    /**
-     * The Location.
-     */
-    protected String location;
-    /**
-     * The Name.
-     */
     protected String name;
+    protected String location;
+    protected boolean isOpen;
+    protected Menu menu;
+    protected OrderBook orderBook;
 
 
     /**
@@ -37,7 +26,7 @@ public class Shop implements JSONable{
      * @param name      the name
      * @param isOpen    the is open
      */
-    public Shop(String id, Menu menu, OrderBook orderBook, String location, String name, boolean isOpen) {
+    public Shop(String id, String name, String location, boolean isOpen, Menu menu, OrderBook orderBook) {
         this.id = id;
         this.menu = menu;
         this.orderBook = orderBook;
@@ -144,10 +133,6 @@ public class Shop implements JSONable{
         isOpen = open;
     }
 
-    /**
-     * The Is open.
-     */
-    protected boolean isOpen;
 
     @Override
     public JSONObject jsonify() {
