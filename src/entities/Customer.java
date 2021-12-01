@@ -4,24 +4,23 @@ package entities;
  * The type Customer.
  */
 public class Customer extends User {
-    /**
-     * The Order history.
-     */
+
     protected OrderBook orderHistory;
-    /**
-     * The Current cart.
-     */
     protected Cart currentCart;
 
     /**
-     * Instantiates a new Customer.
+     * Instantiates and new customer
      *
-     * @param orderHistory the order history
-     * @param currentCart  the current cart
+     * @param id id of customer
+     * @param user username of customer
+     * @param password hashed password
+     * @param orderHist orderbook of all customer's previous orders
+     * @param cart current cart of customer
      */
-    public Customer(OrderBook orderHistory, Cart currentCart) {
-        this.orderHistory = orderHistory;
-        this.currentCart = currentCart;
+    public Customer(String id, String user, String password, OrderBook orderHist, Cart cart) {
+        super(id, user, password);
+        this.orderHistory = orderHist;
+        this.currentCart = cart;
     }
 
     /**
