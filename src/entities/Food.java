@@ -1,9 +1,12 @@
 package entities;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * The type Food.
  */
-public class Food {
+public class Food implements JSONable {
     /**
      * The Id.
      */
@@ -130,5 +133,21 @@ public class Food {
      */
     public void setComponents(Singleton[] components) {
         this.components = components;
+    }
+
+    @Override
+    public JSONObject jsonify() {
+        JSONObject finalData = new JSONObject();
+        finalData.put("id", this.id);
+        finalData.put("name", this.name);
+        finalData.put("description", this.description);
+
+        JSONArray components = new JSONArray();
+        for(Singleton item : this.components){
+            components.put(item.jsonify());
+        }
+
+        finalData.put("components", components);
+        return finalData;
     }
 }
