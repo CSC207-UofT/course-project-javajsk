@@ -24,6 +24,17 @@ public class CreateAddonUseCase implements CreateAddonInputBoundary {
     VendorLoader vendorLoader;
     AddonLoader addonLoader;
 
+    public CreateAddonUseCase(AddonRepository addonRepository, VendorRepository vendorRepository,
+                              ShopRepository shopRepository, ErrorModel errorHandler, AddonModel addonView) {
+        this.addonRepository = addonRepository;
+        this.vendorRepository = vendorRepository;
+        this.shopRepository = shopRepository;
+        this.errorHandler = errorHandler;
+        this.addonView = addonView;
+        this.vendorLoader = new VendorLoader(vendorRepository, errorHandler);
+        this.addonLoader = new AddonLoader(addonRepository, errorHandler);
+    }
+
     @Override
     public boolean createAddon(String vendorToken, JSONObject data) {
         Vendor vendor = vendorLoader.loadVendorFromToken(vendorToken);

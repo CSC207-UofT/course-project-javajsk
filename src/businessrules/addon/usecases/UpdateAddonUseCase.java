@@ -24,6 +24,16 @@ public class UpdateAddonUseCase implements UpdateAddonInputBoundary {
     VendorLoader vendorLoader;
     AddonLoader addonLoader;
 
+    public UpdateAddonUseCase(AddonRepository addonRepository, ErrorModel errorHandler, ShopRepository shopRepository,
+                              VendorRepository vendorRepository, AddonModel addonView) {
+        this.addonRepository = addonRepository;
+        this.errorHandler = errorHandler;
+        this.shopRepository = shopRepository;
+        this.vendorRepository = vendorRepository;
+        this.addonView = addonView;
+        this.addonLoader = new AddonLoader(addonRepository, errorHandler);
+        this.vendorLoader = new VendorLoader(vendorRepository, errorHandler);
+    }
 
     @SuppressWarnings("DuplicatedCode")
     @Override
