@@ -1,38 +1,80 @@
 package Adapters.controllers;
 
 import UseCases.Orders.CreateOrderInputBoundary;
+import businessrules.addon.inputboundaries.CreateAddonInputBoundary;
 import businessrules.addon.inputboundaries.DeleteAddonInputBoundary;
 import businessrules.addon.inputboundaries.ReadAddonInputBoundary;
 import businessrules.addon.inputboundaries.UpdateAddonInputBoundary;
 import org.json.JSONObject;
 
 public class AddonController {
-    CreateOrderInputBoundary createOrderInputBoundary;
+    CreateAddonInputBoundary createAddonInputBoundary;
     DeleteAddonInputBoundary deleteAddonInputBoundary;
     ReadAddonInputBoundary readAddonInputBoundary;
     UpdateAddonInputBoundary updateAddonInputBoundary;
-    JSONParser jsonParser;
 
-    public AddonController(CreateOrderInputBoundary createOrderInputBoundary,DeleteAddonInputBoundary deleteAddonInputBoundary,
-                           ReadAddonInputBoundary readAddonInputBoundary,  UpdateAddonInputBoundary updateAddonInputBoundary,
-                           JSONParser jsonParser){
+    public AddonController(CreateAddonInputBoundary createAddonInputBoundary,DeleteAddonInputBoundary deleteAddonInputBoundary,
+                           ReadAddonInputBoundary readAddonInputBoundary,  UpdateAddonInputBoundary updateAddonInputBoundary){
 
-        this.createOrderInputBoundary = createOrderInputBoundary;
+        this.createAddonInputBoundary = createAddonInputBoundary;
         this.deleteAddonInputBoundary = deleteAddonInputBoundary;
-        this.jsonParser = jsonParser;
         this.readAddonInputBoundary = readAddonInputBoundary;
         this.updateAddonInputBoundary = updateAddonInputBoundary;
 
     }
 
     public void runUpdateAddon(String input){
-        JSONObject data = this.parser.parse(input);
-        String vendorToken = data.getString("vendorToken");
-        String addonId = data.getString("addonId");
-        JSONObject object = data.getJSONObject("")
+        JSONObject update_data = new JSONObject(input);
+        if(!(update_data.has("vendorToken") && update_data.has("addonID") && update_data.has("addonObject"))){
+
+            //TODO:Call presenter with error message
+        }
+        String vendorToken = update_data.getString("vendorToken");
+        String addonId = update_data.getString("addonId");
+        JSONObject addon = update_data.getJSONObject("addonObject");
 
 
-        this.updateAddonInputBoundary.updateAddon(vendorToken, addonId )
+        this.updateAddonInputBoundary.updateAddon(vendorToken, addonId,addon);
     }
+
+    public void runCreateAddon(String input){
+        JSONObject create_data = new JSONObject(input);
+        if(!create_data.has("addonID") && create_data.has("addonObject")){
+
+            //TODO:Call presenter with error message
+        }
+        String vendorToken = create_data.getString("vendorToken");
+        JSONObject new_addon = create_data.getJSONObject("addonObject");
+
+
+        this.createAddonInputBoundary.createAddon(vendorToken,new_addon);
+    }
+
+
+    public void runDeleteAddon(String input){
+        JSONObject delete_data = new JSONObject(input);
+        if(!delete_data.has("addonID") && delete_data.has("vendorToken")){
+
+            //TODO:Call presenter with error message
+        }
+        String vendorToken = delete_data.getString("vendorToken");
+        String addonId = delete_data.getString("addonId");
+
+
+        this.deleteAddonInputBoundary.deleteAddon(vendorToken,addonId);
+    }
+
+    public void runReadAddon(String input){
+        JSONObject read_data = new JSONObject(input);
+        if(!read_data.has("addonID")){
+
+            //TODO:Call presenter with error message
+        }
+        String addonId = read_data.getString("addonId");
+
+
+        this.readAddonInputBoundary.readAddon(addonId);
+    }
+
 
 }
