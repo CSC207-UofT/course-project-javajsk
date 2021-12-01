@@ -64,7 +64,7 @@ public class UpdateAddonUseCase implements UpdateAddonInputBoundary {
             return false;
         }
 
-        if(!addonRepository.updateAddon(addonId, addon.jsonify())){
+        if(!addonRepository.updateAddon(addonId, newAddon.jsonify())){
             errorHandler.displayError("Unable to save modified addon in repository.");
             return false;
         }

@@ -61,7 +61,7 @@ public class UpdateFoodUseCase implements UpdateFoodInputBoundary {
             return false;
         }
 
-        if(!FoodRepository.updateFood(FoodId, food.jsonify())){
+        if(!FoodRepository.updateFood(FoodId, newFood.jsonify())){
             errorHandler.displayError("Unable to save modified Food in repository.");
             return false;
         }
