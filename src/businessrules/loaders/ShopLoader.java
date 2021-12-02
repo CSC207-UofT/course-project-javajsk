@@ -26,8 +26,10 @@ public class ShopLoader {
         String name = data.getString("name");
         String location = data.getString("location");
         boolean isOpen = data.getBoolean("isOpen");
-        OrderBook orderBook = OrderBookLoader.loadOrderBook(data.getJSONObject("orderBook"));
-        Menu menu = menuLoader.loadMenu(data.getJSONObject("menu"));
+        JSONObject orderBookData = data.getJSONObject("orderBook");
+        JSONObject menuData = data.getJSONObject("menu");
+        OrderBook orderBook = OrderBookLoader.loadOrderBook(orderBookData);
+        Menu menu = MenuLoader.loadMenu(menuData);
         return new Shop(id, name, location, isOpen, menu, orderBook);
     }
 

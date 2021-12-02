@@ -2,13 +2,17 @@ package entities;
 import org.json.JSONObject;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Menu entity class.
  */
 public class Menu implements JSONable{
-
+    /**
+     * The Foods.
+     */
     protected List<Food> foods;
+
     protected List<Addon> addons;
 
     /**
@@ -58,19 +62,19 @@ public class Menu implements JSONable{
         this.foods = foods;
     }
 
-    public void addAddon(Addon addon){
+    public void addAddon(Addon addon) {
         this.addons.add(addon);
     }
 
-    public boolean updateAddon(String addonId, Addon addon){
+    public boolean updateAddon(String addonId, Addon addon) {
         int index = -1;
-        for(int i =0; i < this.addons.size(); i++){
-            if(this.addons.get(i).getId().equals(addonId)){
+        for (int i = 0; i < this.addons.size(); i++) {
+            if (this.addons.get(i).getId().equals(addonId)) {
                 this.addons.remove(this.addons.get(i));
                 index = i;
             }
         }
-        if(index == -1){
+        if (index == -1) {
             // in this case the addon has not been found in the list.
             return false;
         }
@@ -78,9 +82,22 @@ public class Menu implements JSONable{
         return true;
     }
 
-    public boolean deleteAddon(Addon addon){
+    public boolean deleteAddon(Addon addon) {
         return this.addons.remove(addon);
     }
+
+    public boolean updateSingleton(String singletonId, Singleton singleton) {
+        for (Food food : this.foods) {
+            for (Singleton s : food.getComponents()) {
+                if (s.getId().equals(singletonId)) {
+                    s.replace(singleton);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public JSONObject jsonify() {
@@ -102,13 +119,13 @@ public class Menu implements JSONable{
 
     public boolean updateFood(String foodId, Food food){
         int index = -1;
-        for(int i =0; i < this.foods.size(); i++){
-            if(this.foods.get(i).getId().equals(foodId)){
+        for (int i = 0; i < this.foods.size(); i++) {
+            if (this.foods.get(i).getId().equals(foodId)) {
                 this.foods.remove(this.foods.get(i));
                 index = i;
             }
         }
-        if(index == -1){
+        if (index == -1) {
             // in this case the addon has not been found in the list.
             return false;
         }

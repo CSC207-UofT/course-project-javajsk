@@ -1,11 +1,13 @@
 package entities;
 
 import java.util.List;
+import entities.Addon;
+import org.json.JSONObject;
 
 /**
  * The type Singleton.
  */
-public class Singleton {
+public class Singleton implements JSONable{
     /**
      * The Id.
      */
@@ -180,6 +182,35 @@ public class Singleton {
      */
     public void setAvailability(boolean availability) {
         this.availability = availability;
+    }
+
+    /**
+     * Replace a singleton with another
+     *
+     * @param newSingleton  the replacement singleton
+     */
+    public void replace(Singleton newSingleton) {
+        this.id = newSingleton.getId();
+        this.price = newSingleton.getPrice();
+        this.name = newSingleton.getName();
+        this.description = newSingleton.getDescription();
+        this.allowedAddonTypes = newSingleton.getAllowedAddonTypes();
+        this.defaultSelection = newSingleton.getDefaultSelection();
+        this.availability = newSingleton.isAvailability();
+    }
+
+    @Override
+    public JSONObject jsonify() {
+        JSONObject final_data = new JSONObject();;
+        final_data.put("id", this.id);
+        final_data.put("name", this.name);
+        final_data.put("price", this.price);
+        final_data.put("description,", this.description);
+
+        // TODO: put allowedAddonTypes and defaultSelection
+
+        final_data.put("availability", this.availability);
+        return final_data;
     }
 
 
