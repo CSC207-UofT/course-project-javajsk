@@ -21,32 +21,30 @@ public class UpdateFoodUseCase implements UpdateFoodInputBoundary {
     ErrorModel errorHandler;
     ShopRepository shopRepository;
     VendorRepository vendorRepository;
-    FoodModel FoodView;
+    FoodModel foodModel;
     VendorLoader vendorLoader;
     SingletonLoader singletonLoader;
     FoodLoader foodLoader;
 
     public UpdateFoodUseCase(FoodRepository FoodRepository, ErrorModel errorHandler, ShopRepository shopRepository,
-                             SingletonLoader singleLoad, ShopLoader sL, VendorRepository vendorRepository, FoodModel FoodView) {
+                             SingletonLoader singleLoad, ShopLoader sL, VendorRepository vendorRepository, FoodModel foodModel) {
         this.FoodRepository = FoodRepository;
         this.errorHandler = errorHandler;
         this.shopRepository = shopRepository;
         this.singletonLoader = singleLoad;
         this.vendorRepository = vendorRepository;
-        this.FoodView = FoodView;
+        this.foodModel = foodModel;
         this.foodLoader = new FoodLoader(FoodRepository, this.singletonLoader, errorHandler);
         this.vendorLoader = new VendorLoader(vendorRepository, sL, errorHandler);
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @Override
-    public boolean updateFood(String vendorToken, String FoodId, JSONObject object) {
+    public JSONObject updateFood(String vendorToken, String FoodId, JSONObject object) {
         Vendor vendor = vendorLoader.loadVendorFromToken(vendorToken);
         Food food = foodLoader.loadFoodFromId(FoodId);
 
         if(vendor == null || food == null){
-            errorHandler.displayError("Incorrect vendorToken or FoodId.");
-            return false;
+            return foodModel.displayError("Incorrect vendorToken or FoodId.");
         }
 
 
@@ -55,28 +53,23 @@ public class UpdateFoodUseCase implements UpdateFoodInputBoundary {
         try{
             newFood = foodLoader.loadFood(object);
         }catch (JSONException e){
-            errorHandler.displayError("Unable to generate new food from given data.");
-            return false;
+            return foodModel.displayError("Unable to generate new food from given data.");
         }
         boolean success = shop.getMenu().updateFood(FoodId, newFood);
 
         if(!success){
-            errorHandler.displayError("No such Food in the shop's menu.");
-            return false;
+            return foodModel.displayError("No such Food in the shop's menu.");
         }
 
         if(!FoodRepository.updateFood(FoodId, newFood.jsonify())){
-            errorHandler.displayError("Unable to save modified Food in repository.");
-            return false;
+            return foodModel.displayError("Unable to save modified Food in repository.");
         }
 
         if(!shopRepository.updateShop(shop.getId(), shop.jsonify())){
-            errorHandler.displayError("Unable to update shop's menu and update Food.");
-            return false;
+            return foodModel.displayError("Unable to update shop's menu and update Food.");
         }
 
-        FoodView.updateFood(FoodId, object);
-        return true;
+        return foodModel.displayFood(newFood.jsonify());
 
 
     }
