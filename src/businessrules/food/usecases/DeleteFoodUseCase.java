@@ -24,15 +24,15 @@ public class DeleteFoodUseCase implements DeleteFoodInputBoundary {
     FoodLoader foodLoader;
     SingletonLoader singletonLoader;
 
-    public DeleteFoodUseCase(FoodRepository arep, VendorRepository vr, ShopRepository sr, SingletonLoader sl,
+    public DeleteFoodUseCase(FoodRepository arep, VendorRepository vr, ShopRepository sr, SingletonLoader single,
                              ShopLoader sL, FoodModel fm, ErrorModel em){
         this.foodRepository = arep;
         this.foodModel = fm;
         this.vendorRepository = vr;
         this.errorHandler = em;
         this.shopRepository = sr;
-        this.singletonLoader = sl;
-        this.foodLoader = new FoodLoader(arep, this.singletonLoader, em);
+        this.singletonLoader = single;
+        this.foodLoader = new FoodLoader(arep, single, em);
         this.vendorLoader = new VendorLoader(vr, sL, em);
     }
 
