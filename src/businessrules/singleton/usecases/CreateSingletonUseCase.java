@@ -58,17 +58,6 @@ public class CreateSingletonUseCase implements CreateSingletonInputBoundary {
 
         singleton.setId(id);
 
-        /*Shop shop = vendor.getShop();
-        shop.getMenu().addAddon(singleton);
-
-        boolean success = shopRepository.updateShop(shop.getId(), shop.jsonify());
-
-        if(!success){
-            errorHandler.displayError("Unable to update shop in the repository.");
-            return  false;
-        }*/
-        // TODO: Come back to this section
-
         singletonView.displaySingleton(singleton.jsonify());
         return true;
 
