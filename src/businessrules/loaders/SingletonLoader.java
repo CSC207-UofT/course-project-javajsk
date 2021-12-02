@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 public class SingletonLoader {
 
-    public static Singleton loadSingleton(JSONObject object){
+    public Singleton loadSingleton(JSONObject object){
         return null;
     }
 }

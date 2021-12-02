@@ -5,6 +5,7 @@ import businessrules.dai.AddonRepository;
 import businessrules.dai.ShopRepository;
 import businessrules.dai.VendorRepository;
 import businessrules.loaders.AddonLoader;
+import businessrules.loaders.ShopLoader;
 import businessrules.loaders.VendorLoader;
 import businessrules.outputboundary.AddonModel;
 import businessrules.outputboundary.ErrorModel;
@@ -26,14 +27,14 @@ public class UpdateAddonUseCase implements UpdateAddonInputBoundary {
     AddonLoader addonLoader;
 
     public UpdateAddonUseCase(AddonRepository addonRepository, ErrorModel errorHandler, ShopRepository shopRepository,
-                              VendorRepository vendorRepository, AddonModel addonView) {
+                              VendorRepository vendorRepository, AddonModel addonView, ShopLoader sL) {
         this.addonRepository = addonRepository;
         this.errorHandler = errorHandler;
         this.shopRepository = shopRepository;
         this.vendorRepository = vendorRepository;
         this.addonView = addonView;
         this.addonLoader = new AddonLoader(addonRepository, errorHandler);
-        this.vendorLoader = new VendorLoader(vendorRepository, errorHandler);
+        this.vendorLoader = new VendorLoader(vendorRepository, sL, errorHandler);
     }
 
     @SuppressWarnings("DuplicatedCode")
@@ -51,7 +52,7 @@ public class UpdateAddonUseCase implements UpdateAddonInputBoundary {
         Shop shop = vendor.getShop();
         Addon newAddon;
         try{
-            newAddon = AddonLoader.loadAddon(object);
+            newAddon = addonLoader.loadAddon(object);
         }catch(JSONException e){
             errorHandler.displayError("Unable to generate new addon object from given data.");
             return false;

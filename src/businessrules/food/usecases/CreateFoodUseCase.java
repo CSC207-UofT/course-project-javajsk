@@ -5,6 +5,7 @@ import businessrules.dai.ShopRepository;
 import businessrules.dai.VendorRepository;
 import businessrules.food.inputboundaries.CreateFoodInputBoundary;
 import businessrules.loaders.FoodLoader;
+import businessrules.loaders.ShopLoader;
 import businessrules.loaders.VendorLoader;
 import businessrules.outputboundary.ErrorModel;
 import businessrules.outputboundary.FoodModel;
@@ -20,17 +21,19 @@ public class CreateFoodUseCase implements CreateFoodInputBoundary {
     FoodModel foodView;
     ShopRepository shopRepository;
     VendorLoader vendorLoader;
+    FoodLoader foodLoader;
     ErrorModel errorHandler;
 
 
     public CreateFoodUseCase(FoodRepository foodRepository, VendorRepository vendorRepository, FoodModel foodView,
-                             ShopRepository shopRepository, ErrorModel errorHandler) {
+                             FoodLoader fL, ShopLoader sL, ShopRepository shopRepository, ErrorModel errorHandler) {
         this.foodRepository = foodRepository;
         this.vendorRepository = vendorRepository;
         this.foodView = foodView;
         this.shopRepository = shopRepository;
         this.errorHandler = errorHandler;
-        this.vendorLoader = new VendorLoader(vendorRepository, errorHandler);
+        this.foodLoader = fL;
+        this.vendorLoader = new VendorLoader(vendorRepository, sL, errorHandler);
     }
 
     @Override
@@ -44,7 +47,7 @@ public class CreateFoodUseCase implements CreateFoodInputBoundary {
         Food food;
 
         try{
-            food = FoodLoader.loadFood(data);
+            food = foodLoader.loadFood(data);
         }catch (JSONException e){
             errorHandler.displayError(e.getMessage());
             return false;

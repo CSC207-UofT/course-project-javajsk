@@ -10,26 +10,30 @@ import org.json.JSONObject;
 
 public class FoodLoader {
     ErrorModel errorHandler;
+    SingletonLoader singletonLoader;
     FoodRepository foodRepository;
+    FoodLoader foodLoader;
 
-    public FoodLoader(FoodRepository foodRepository, ErrorModel errorHandler){
+    public FoodLoader(FoodRepository foodRepository, SingletonLoader singletonLoader, ErrorModel errorHandler){
         this.errorHandler = errorHandler;
+        this.singletonLoader = singletonLoader;
         this.foodRepository = foodRepository;
+        this.foodLoader = new FoodLoader(this.foodRepository, this.singletonLoader, this.errorHandler);
     }
 
-    public static Food loadFood(JSONObject object) throws JSONException {
+    public Food loadFood(JSONObject object) throws JSONException {
         String id = object.getString("id");
         String name = object.getString("name");
         float price = object.getFloat("price");
         String desc = object.getString("description");
-        Singleton[] components = loadComponnets(object.getJSONArray("components"));
+        Singleton[] components = loadComponents(object.getJSONArray("components"));
         return new Food(id, name, desc, price, components);
     }
 
-    public static Singleton[] loadComponnets(JSONArray data){
+    public Singleton[] loadComponents(JSONArray data){
         Singleton[] finalData = new Singleton[data.length()];
         for(int i =0; i < data.length(); i++){
-            finalData[i] = SingletonLoader.loadSingleton(data.getJSONObject(i));
+            finalData[i] = singletonLoader.loadSingleton(data.getJSONObject(i));
         }
         return finalData;
     }
@@ -42,7 +46,7 @@ public class FoodLoader {
         }
 
         try {
-            return FoodLoader.loadFood(foodRaw);
+            return foodLoader.loadFood(foodRaw);
         }catch (JSONException e){
             errorHandler.displayError(e.getMessage());
         }

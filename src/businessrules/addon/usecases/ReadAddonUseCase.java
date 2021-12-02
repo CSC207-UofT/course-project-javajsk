@@ -12,7 +12,15 @@ import org.json.JSONObject;
 public class ReadAddonUseCase implements ReadAddonInputBoundary {
     AddonRepository addonRepository;
     AddonModel addonModel;
+    AddonLoader addonLoader;
     ErrorModel errorHandler;
+
+    public ReadAddonUseCase(AddonRepository aR, AddonModel aM, AddonLoader aL, ErrorModel eH) {
+        this.addonRepository = aR;
+        this.addonModel = aM;
+        this.addonLoader = aL;
+        this.errorHandler = eH;
+    }
 
     @Override
     public JSONObject readAddon(String id) {
@@ -21,7 +29,7 @@ public class ReadAddonUseCase implements ReadAddonInputBoundary {
 
         Addon addon;
         try {
-            addon = AddonLoader.loadAddon(data);
+            addon = addonLoader.loadAddon(data);
         }catch (JSONException e){
             errorHandler.displayError(e.getMessage());
             return null;
