@@ -1,14 +1,11 @@
 package entities;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.List;
 
 /**
  * The type Vendor.
  */
-public class Vendor extends User implements JSONable{
+public class Vendor extends User{
     /**
      * The Shop.
      */
@@ -42,12 +39,22 @@ public class Vendor extends User implements JSONable{
         this.shop = shop;
     }
 
+    public boolean deleteShop(String shopId){
+        if(this.shop.getId().equals(shopId)){
+            this.shop = null;
+            return true;
+        }
+        return false;
+    }
+
     @Override
-    public JSONObject jsonify() {
-        JSONObject finalValue = new JSONObject();
-        finalValue.put("username", super.userName);
-        finalValue.put("password", super.hashedPassword);
-        finalValue.put("shop", shop.jsonify());
-        return finalValue;
+    public JSONObject jsonify(){
+        JSONObject userData = new JSONObject();
+        userData.put("id", this.id);
+        userData.put("userName", this.userName);
+        userData.put("hashedPassword", this.hashedPassword);
+        userData.put("shop", this.shop.jsonify());
+
+        return userData;
     }
 }
