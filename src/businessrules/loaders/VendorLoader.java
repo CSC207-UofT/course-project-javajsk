@@ -9,18 +9,20 @@ import org.json.JSONObject;
 
 public class VendorLoader {
     VendorRepository vendorRepository;
+    ShopLoader shopLoader;
     ErrorModel errorHandler;
 
-    public VendorLoader(VendorRepository vr, ErrorModel em){
+    public VendorLoader(VendorRepository vr, ShopLoader sL, ErrorModel em){
         this.vendorRepository = vr;
+        this.shopLoader = sL;
         this.errorHandler = em;
     }
 
-    public static Vendor loadVendor(JSONObject data) throws JSONException {
+    public Vendor loadVendor(JSONObject data) throws JSONException {
         String id = data.getString("id");
         String username = data.getString("username");
         String password = data.getString("password");
-        Shop shop = ShopLoader.loadShop(data.getJSONObject("shop"));
+        Shop shop = shopLoader.loadShop(data.getJSONObject("shop"));
         return new Vendor(id,username, password, shop);
     }
 
@@ -34,7 +36,7 @@ public class VendorLoader {
         }
 
         try{
-            return VendorLoader.loadVendor(vendorRaw);
+            return loadVendor(vendorRaw);
         }catch( JSONException e){
             errorHandler.displayError("Unable to load vendor from repository information.");
         }

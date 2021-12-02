@@ -90,6 +90,8 @@ public class Menu implements JSONable{
         menuData.put("name", this.addons);
 
         return menuData;
+    }
+
     public void addFood(Food food){
         this.foods.add(food);
     }
