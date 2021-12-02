@@ -40,7 +40,7 @@ public class ShopController {
 
     public void runCreateShop(String input){
         JSONObject create_data = new JSONObject(input);
-        if(!create_data.has("shopID") && create_data.has("shopObject")){
+        if(!(create_data.has("shopID") && create_data.has("shopObject"))){
 
             //TODO:Call presenter with error message
         }
@@ -54,7 +54,7 @@ public class ShopController {
 
     public void runDeleteShop(String input){
         JSONObject delete_data = new JSONObject(input);
-        if(!delete_data.has("shopID") && delete_data.has("vendorToken")){
+        if(!(delete_data.has("shopID") && delete_data.has("vendorToken"))){
 
             //TODO:Call presenter with error message
         }

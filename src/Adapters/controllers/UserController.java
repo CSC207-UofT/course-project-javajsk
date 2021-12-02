@@ -40,7 +40,7 @@ public class UserController {
 
     public void runCreateUser(String input){
         JSONObject create_data = new JSONObject(input);
-        if(!create_data.has("userID") && create_data.has("userObject")){
+        if(!(create_data.has("userID") && create_data.has("userObject"))){
 
             //TODO:Call presenter with error message
         }
@@ -54,7 +54,7 @@ public class UserController {
 
     public void runDeleteUser(String input){
         JSONObject delete_data = new JSONObject(input);
-        if(!delete_data.has("userID") && delete_data.has("vendorToken")){
+        if(!(delete_data.has("userID") && delete_data.has("vendorToken"))){
 
             //TODO:Call presenter with error message
         }

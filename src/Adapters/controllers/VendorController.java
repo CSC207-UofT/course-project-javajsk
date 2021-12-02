@@ -40,7 +40,7 @@ public class VendorController {
 
     public void runCreateVendor(String input){
         JSONObject create_data = new JSONObject(input);
-        if(!create_data.has("vendorID") && create_data.has("vendorObject")){
+        if(!(create_data.has("vendorID") && create_data.has("vendorObject"))){
 
             //TODO:Call presenter with error message
         }
@@ -54,7 +54,7 @@ public class VendorController {
 
     public void runDeleteVendor(String input){
         JSONObject delete_data = new JSONObject(input);
-        if(!delete_data.has("vendorID") && delete_data.has("vendorToken")){
+        if(!(delete_data.has("vendorID") && delete_data.has("vendorToken"))){
 
             //TODO:Call presenter with error message
         }

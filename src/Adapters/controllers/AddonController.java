@@ -39,7 +39,7 @@ public class AddonController {
 
     public void runCreateAddon(String input){
         JSONObject create_data = new JSONObject(input);
-        if(!create_data.has("addonID") && create_data.has("addonObject")){
+        if(!(create_data.has("addonID") && create_data.has("addonObject"))){
 
             //TODO:Call presenter with error message
         }
@@ -53,7 +53,7 @@ public class AddonController {
 
     public void runDeleteAddon(String input){
         JSONObject delete_data = new JSONObject(input);
-        if(!delete_data.has("addonID") && delete_data.has("vendorToken")){
+        if(!(delete_data.has("addonID") && delete_data.has("vendorToken"))){
 
             //TODO:Call presenter with error message
         }

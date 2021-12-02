@@ -13,13 +13,11 @@ public class ReadFoodUseCase implements ReadFoodInputBoundary {
     FoodRepository foodRepository;
     FoodModel foodModel;
     FoodLoader foodLoader;
-    ErrorModel errorHandler;
 
     public ReadFoodUseCase(FoodRepository foodRepo, FoodModel foodMod, FoodLoader foodLoad, ErrorModel error) {
         this.foodRepository = foodRepo;
         this.foodModel = foodMod;
         this.foodLoader = foodLoad;
-        this.errorHandler = error;
     }
 
     @Override

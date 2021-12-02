@@ -2,6 +2,7 @@ package businessrules.loaders;
 
 import businessrules.dai.VendorRepository;
 import businessrules.outputboundary.ErrorModel;
+import businessrules.outputboundary.VendorModel;
 import entities.Shop;
 import entities.Vendor;
 import org.json.JSONException;
@@ -9,13 +10,13 @@ import org.json.JSONObject;
 
 public class VendorLoader {
     VendorRepository vendorRepository;
+    VendorModel vendorModel;
     ShopLoader shopLoader;
-    ErrorModel errorHandler;
 
-    public VendorLoader(VendorRepository vr, ShopLoader sL, ErrorModel em){
+    public VendorLoader(VendorRepository vr, ShopLoader sL, VendorModel vm){
+        this.vendorModel = vm;
         this.vendorRepository = vr;
         this.shopLoader = sL;
-        this.errorHandler = em;
     }
 
     public Vendor loadVendor(JSONObject data) throws JSONException {

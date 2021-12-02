@@ -18,7 +18,7 @@ public class MenuController {
 
     public void runClearMenu(String input){
         JSONObject delete_data = new JSONObject(input);
-        if(delete_data.has("vendorToken")){
+        if(!delete_data.has("vendorToken")){
 
             //TODO:Call presenter with error message
         }

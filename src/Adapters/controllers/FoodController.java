@@ -40,7 +40,7 @@ public class FoodController {
 
     public void runCreateFood(String input){
         JSONObject create_data = new JSONObject(input);
-        if(!create_data.has("foodID") && create_data.has("foodObject")){
+        if(!(create_data.has("foodID") && create_data.has("foodObject"))){
 
             //TODO:Call presenter with error message
         }
@@ -54,7 +54,7 @@ public class FoodController {
 
     public void runDeleteFood(String input){
         JSONObject delete_data = new JSONObject(input);
-        if(!delete_data.has("foodID") && delete_data.has("vendorToken")){
+        if(!(delete_data.has("foodID") && delete_data.has("vendorToken"))){
 
             //TODO:Call presenter with error message
         }

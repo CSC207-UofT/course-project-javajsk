@@ -3,9 +3,8 @@ package businessrules.outputboundary;
 import org.json.JSONObject;
 
 public interface VendorModel {
-    void displayVendor(JSONObject vendor);
+    JSONObject displayVendor(JSONObject vendor);
 
-    void updateVendor(String id, JSONObject vendor);
+    JSONObject displayError(String error);
 
-    void deleteVendor(String id);
 }

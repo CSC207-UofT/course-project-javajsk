@@ -22,7 +22,6 @@ public class CreateFoodUseCase implements CreateFoodInputBoundary {
     ShopRepository shopRepository;
     VendorLoader vendorLoader;
     FoodLoader foodLoader;
-    ErrorModel errorHandler;
     FoodModel foodModel;
 
 
@@ -33,7 +32,6 @@ public class CreateFoodUseCase implements CreateFoodInputBoundary {
         this.vendorRepository = vendorRepository;
         this.foodView = foodView;
         this.shopRepository = shopRepository;
-        this.errorHandler = errorHandler;
         this.foodLoader = fL;
         this.foodModel = foodModel;
         this.vendorLoader = new VendorLoader(vendorRepository, sL, errorHandler);

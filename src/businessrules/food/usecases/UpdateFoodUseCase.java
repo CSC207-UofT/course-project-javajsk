@@ -18,7 +18,6 @@ import org.json.JSONObject;
 
 public class UpdateFoodUseCase implements UpdateFoodInputBoundary {
     FoodRepository FoodRepository;
-    ErrorModel errorHandler;
     ShopRepository shopRepository;
     VendorRepository vendorRepository;
     FoodModel foodModel;
@@ -26,10 +25,9 @@ public class UpdateFoodUseCase implements UpdateFoodInputBoundary {
     SingletonLoader singletonLoader;
     FoodLoader foodLoader;
 
-    public UpdateFoodUseCase(FoodRepository FoodRepository, ErrorModel errorHandler, ShopRepository shopRepository,
+    public UpdateFoodUseCase(FoodRepository FoodRepository, ShopRepository shopRepository,
                              SingletonLoader singleLoad, ShopLoader sL, VendorRepository vendorRepository, FoodModel foodModel) {
         this.FoodRepository = FoodRepository;
-        this.errorHandler = errorHandler;
         this.shopRepository = shopRepository;
         this.singletonLoader = singleLoad;
         this.vendorRepository = vendorRepository;

@@ -40,7 +40,7 @@ public class CustomerController {
 
     public void runCreateCustomer(String input){
         JSONObject create_data = new JSONObject(input);
-        if(!create_data.has("customerID") && create_data.has("customerObject")){
+        if(!(create_data.has("customerID") && create_data.has("customerObject"))){
 
             //TODO:Call presenter with error message
         }
@@ -54,7 +54,7 @@ public class CustomerController {
 
     public void runDeleteCustomer(String input){
         JSONObject delete_data = new JSONObject(input);
-        if(!delete_data.has("customerID") && delete_data.has("vendorToken")){
+        if(!(delete_data.has("customerID") && delete_data.has("vendorToken"))){
 
             //TODO:Call presenter with error message
         }
