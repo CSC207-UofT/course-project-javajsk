@@ -1,5 +1,9 @@
 package businessrules.dai;
 
-public interface VendorRepository extends UserRepository {
+import org.json.JSONObject;
 
+public interface VendorRepository extends UserRepository {
+    boolean createVendor(String username, String hashedPassword);
+
+    boolean updateVendor(String id, JSONObject info);
 }

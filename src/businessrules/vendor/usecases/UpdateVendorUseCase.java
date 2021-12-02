@@ -55,7 +55,7 @@ public class UpdateVendorUseCase implements UpdateVendorInputBoundary {
             return false;
         }
 
-        vendorModel.updateVendor(vendor.jsonify());
+        vendorModel.updateVendor(vendor.getId(), vendor.jsonify());
         return true;
     }
 }
