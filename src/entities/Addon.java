@@ -138,7 +138,7 @@ public class Addon implements JSONable{
 
     @Override
     public JSONObject jsonify() {
-        JSONObject final_data = new JSONObject();;
+        JSONObject final_data = new JSONObject();
         final_data.put("id", this.id);
         final_data.put("name", this.name);
         final_data.put("price", this.price);

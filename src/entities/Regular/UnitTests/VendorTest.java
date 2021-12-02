@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,13 +28,49 @@ class VendorTest {
     @Test
     void getShop() {
        Shop new_shop = vendor.getShop();
-       assertEquals(new_shop, shop);
+       assertEquals(shop, new_shop);
     }
 
     @Test
     void setShop() {
         Shop new_shop = new Shop("12121", menu, orderBook, "Bay Street", "NewTruck", true);
         vendor.setShop(new_shop);
-        assertEquals(vendor.getShop(), new_shop);
+        assertEquals(new_shop, vendor.getShop());
+    }
+
+    @Test
+    void getId() {
+       String id = vendor.getId();
+       assertEquals("11111", id);
+    }
+
+    @Test
+    void setId() {
+        vendor.setId("99999");
+        assertEquals("99999", vendor.id);
+    }
+
+    @Test
+    void getUserName() {
+        String username = vendor.getUserName();
+        assertEquals("Username", username);
+    }
+
+    @Test
+    void setUserName() {
+        vendor.setUserName("new_username");
+        assertEquals("new_username", vendor.getUserName());
+    }
+
+    @Test
+    void getHashedPassword() {
+        String password = vendor.getHashedPassword();
+        assertEquals("Password", password);
+    }
+
+    @Test
+    void setHashedPassword() {
+        vendor.setHashedPassword("new_password");
+        assertEquals("new_password", vendor.getHashedPassword());
     }
 }

@@ -1,10 +1,12 @@
 package entities;
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
  * The type Menu.
  */
-public class Menu {
+public class Menu implements JSONable{
     /**
      * The Foods.
      */
@@ -107,5 +109,14 @@ public class Menu {
         }
         this.foods.add(index, food);
         return true;
+    }
+
+    @Override
+    public JSONObject jsonify() {
+        JSONObject final_data = new JSONObject();
+        final_data.put("foods", this.foods);
+        final_data.put("addons", this.addons);
+
+        return final_data;
     }
 }

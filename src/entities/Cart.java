@@ -1,12 +1,14 @@
 package entities;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.List;
 
 /**
  * The type Cart.
  */
-public class Cart {
+public class Cart implements JSONable{
     /**
      * Instantiates a new Cart.
      *
@@ -89,4 +91,13 @@ public class Cart {
      */
     protected HashMap<Food, List<Selection[]>> contents;
 
+    @Override
+    public JSONObject jsonify() {
+        JSONObject final_data = new JSONObject();
+        final_data.put("id", this.id);
+        final_data.put("shopId", this.shopId);
+        final_data.put("contents", this.contents);
+
+        return final_data;
+    }
 }
