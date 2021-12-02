@@ -14,13 +14,11 @@ import org.json.JSONObject;
 public class ReadMenuUseCase implements ReadMenuInputBoundary {
     ShopRepository shopRepository;
     MenuModel menuModel;
-    ErrorModel errorHandler;
     ShopLoader shopLoader;
 
     public ReadMenuUseCase(ShopRepository shopRepo, MenuModel menuMod, ErrorModel er, ShopLoader shopLoader){
         this.shopRepository = shopRepo;
         this.menuModel = menuMod;
-        this.errorHandler = er;
     }
 
     @Override
@@ -31,8 +29,7 @@ public class ReadMenuUseCase implements ReadMenuInputBoundary {
         try{
             shop = this.shopLoader.loadShop(shopData);
         }catch (JSONException e){
-            return this.menuModel.dis(e.getMessage());
-            return null;
+            return this.menuModel.displayError(e.getMessage());
         }
 
         Menu menu = shop.getMenu();
