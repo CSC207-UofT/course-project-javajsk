@@ -5,7 +5,6 @@ import businessrules.dai.CustomerRepository;
 import businessrules.loaders.CartLoader;
 import businessrules.loaders.OrderBookLoader;
 import businessrules.outputboundary.CustomerModel;
-import businessrules.outputboundary.ErrorModel;
 import entities.Cart;
 import entities.Customer;
 import entities.OrderBook;

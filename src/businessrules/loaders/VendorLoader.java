@@ -1,7 +1,7 @@
 package businessrules.loaders;
 
 import businessrules.dai.VendorRepository;
-import businessrules.outputboundary.ErrorModel;
+import businessrules.outputboundary.VendorModel;
 import entities.Shop;
 import entities.Vendor;
 import org.json.JSONException;
@@ -10,12 +10,12 @@ import org.json.JSONObject;
 public class VendorLoader {
     VendorRepository vendorRepository;
     ShopLoader shopLoader;
-    ErrorModel errorHandler;
+    VendorModel vendorModel;
 
-    public VendorLoader(VendorRepository vr, ShopLoader sL, ErrorModel em){
+    public VendorLoader(VendorRepository vr, ShopLoader sL, VendorModel vm){
         this.vendorRepository = vr;
         this.shopLoader = sL;
-        this.errorHandler = em;
+        this.vendorModel = vm;
     }
 
     public Vendor loadVendor(JSONObject data) throws JSONException {
@@ -31,14 +31,14 @@ public class VendorLoader {
         JSONObject vendorRaw = vendorRepository.readUserFromToken(vendorToken);
 
         if(vendorRaw == null){
-            errorHandler.displayError("Unable to find vendor with such token.");
+            vendorModel.displayError("Unable to find vendor with such token.");
             return null;
         }
 
         try{
             return loadVendor(vendorRaw);
         }catch( JSONException e){
-            errorHandler.displayError("Unable to load vendor from repository information.");
+            vendorModel.displayError("Unable to load vendor from repository information.");
         }
         return null;
     }

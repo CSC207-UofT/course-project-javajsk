@@ -1,5 +1,7 @@
 package businessrules.addon.inputboundaries;
 
+import org.json.JSONObject;
+
 public interface DeleteAddonInputBoundary {
-    boolean deleteAddon(String vendorToken, String addonId);
+    JSONObject deleteAddon(String vendorToken, String addonId);
 }

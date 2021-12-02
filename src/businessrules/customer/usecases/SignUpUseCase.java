@@ -4,10 +4,7 @@ import businessrules.customer.inputboundaries.SignUpCustomerInputBoundary;
 import businessrules.dai.CustomerRepository;
 import businessrules.dai.Hasher;
 import businessrules.outputboundary.CustomerModel;
-import businessrules.outputboundary.ErrorModel;
-import entities.Cart;
 import entities.Customer;
-import entities.Order;
 import entities.OrderBook;
 import org.json.JSONObject;
 
