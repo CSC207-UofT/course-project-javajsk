@@ -26,6 +26,7 @@ public class AddonLoader {
         String id = data.getString("id");
         String name = data.getString("name");
         float price = data.getFloat("price");
+
         boolean isAvailable = data.getBoolean("isAvailable");
 
         // TODO: see how this works based on Addon's jsonify command.

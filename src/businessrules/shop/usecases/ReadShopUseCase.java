@@ -1,10 +1,10 @@
-package businessrules.shop.usecase;
+package businessrules.shop.usecases;
 
 import businessrules.dai.ShopRepository;
 import businessrules.outputboundary.ErrorModel;
 import businessrules.outputboundary.ShopModel;
 import businessrules.loaders.ShopLoader;
-import businessrules.shop.inputboundary.ReadShopInputBoundary;
+import businessrules.shop.inputboundaries.ReadShopInputBoundary;
 import entities.Shop;
 import org.json.JSONException;
 import org.json.JSONObject;

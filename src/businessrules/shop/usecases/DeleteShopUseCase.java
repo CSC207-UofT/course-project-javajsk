@@ -1,16 +1,13 @@
-package businessrules.shop.usecase;
+package businessrules.shop.usecases;
 
-import businessrules.dai.AddonRepository;
 import businessrules.dai.ShopRepository;
 import businessrules.dai.VendorRepository;
 import businessrules.loaders.ShopLoader;
 import businessrules.loaders.VendorLoader;
-import businessrules.outputboundary.AddonModel;
 import businessrules.outputboundary.ErrorModel;
 import businessrules.outputboundary.ShopModel;
 import businessrules.outputboundary.VendorModel;
-import businessrules.shop.inputboundary.DeleteShopInputBoundary;
-import entities.Addon;
+import businessrules.shop.inputboundaries.DeleteShopInputBoundary;
 import entities.Shop;
 import entities.Vendor;
 

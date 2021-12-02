@@ -1,4 +1,4 @@
-package businessrules.shop.usecase;
+package businessrules.shop.usecases;
 
 import businessrules.dai.ShopRepository;
 import businessrules.dai.VendorRepository;
@@ -6,7 +6,7 @@ import businessrules.loaders.ShopLoader;
 import businessrules.loaders.VendorLoader;
 import businessrules.outputboundary.ErrorModel;
 import businessrules.outputboundary.ShopModel;
-import businessrules.shop.inputboundary.UpdateShopInputBoundary;
+import businessrules.shop.inputboundaries.UpdateShopInputBoundary;
 import entities.Shop;
 import entities.Vendor;
 import org.json.JSONObject;
