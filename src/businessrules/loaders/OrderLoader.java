@@ -14,11 +14,12 @@ import java.util.Date;
 
 public class OrderLoader {
     OrderRepository orderRepository;
-    CartLoader cartLoader;
     OrderModel orderModel;
+    CartLoader cartLoader;
 
-    public OrderLoader(OrderRepository oR, CartLoader cL) {
+    public OrderLoader(OrderRepository oR, OrderModel oM, CartLoader cL) {
         this.orderRepository = oR;
+        this.orderModel = oM;
         this.cartLoader = cL;
     }
 
@@ -48,13 +49,13 @@ public class OrderLoader {
     public Order loadOrderFromId(String id){
         JSONObject orderData = orderRepository.readOrder(id);
         if (orderData == null){
-//            errorHandler.displayError("Unable to find order with id: " + id);
+            orderModel.displayError("Unable to find order with id: " + id);
             return null;
         }
         try {
             return loadOrder(orderData);
         }catch (JSONException e){
-//            errorHandler.displayError(e.getMessage());
+            orderModel.displayError(e.getMessage());
         }
         return null;
     }
