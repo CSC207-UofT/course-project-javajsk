@@ -1,11 +1,13 @@
 package entities;
 
+import org.json.JSONObject;
+
 import java.util.Date;
 
 /**
  * The type Order.
  */
-public class Order {
+public class Order implements JSONable{
     /**
      * The Id.
      */
@@ -21,11 +23,20 @@ public class Order {
     /**
      * The User id.
      */
-    protected String userId;
+    protected String customerId;
     /**
      * The Status.
      */
     protected String status;
+
+    /**
+     * The Time placed.
+     */
+    protected Date timePlaced;
+    /**
+     * The Time status modified.
+     */
+    protected Date timeStatusModified;
 
     /**
      * Instantiates a new Order.
@@ -33,16 +44,16 @@ public class Order {
      * @param id                 the id
      * @param cart               the cart
      * @param shopId             the shop id
-     * @param userId             the user id
+     * @param customerId         the customer id
      * @param status             the status
      * @param timePlaced         the time placed
      * @param timeStatusModified the time status modified
      */
-    public Order(String id, Cart cart, String shopId, String userId, String status, Date timePlaced, Date timeStatusModified) {
+    public Order(String id, Cart cart, String shopId, String customerId, String status, Date timePlaced, Date timeStatusModified) {
         this.id = id;
         this.cart = cart;
         this.shopId = shopId;
-        this.userId = userId;
+        this.customerId = customerId;
         this.status = status;
         this.timePlaced = timePlaced;
         this.timeStatusModified = timeStatusModified;
@@ -103,21 +114,21 @@ public class Order {
     }
 
     /**
-     * Gets user id.
+     * Gets customer id.
      *
-     * @return the user id
+     * @return the customer id
      */
-    public String getUserId() {
-        return userId;
+    public String getCustomerId() {
+        return customerId;
     }
 
     /**
-     * Sets user id.
+     * Sets customer id.
      *
-     * @param userId the user id
+     * @param customerId the customer id
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     /**
@@ -174,12 +185,17 @@ public class Order {
         this.timeStatusModified = timeStatusModified;
     }
 
-    /**
-     * The Time placed.
-     */
-    protected Date timePlaced;
-    /**
-     * The Time status modified.
-     */
-    protected Date timeStatusModified;
+
+    public JSONObject jsonify(){
+        JSONObject final_data = new JSONObject();
+        final_data.put("id", this.id);
+        final_data.put("cart", this.cart.jsonify());
+        final_data.put("status", this.status);
+        final_data.put("shopId", this.shopId);
+        final_data.put("customerId", this.customerId);
+        final_data.put("timePlaced", this.timePlaced);
+        final_data.put("timeStatusModified", this.timeStatusModified);
+        return final_data;
+
+    }
 }

@@ -4,29 +4,36 @@ import businessrules.dai.FoodRepository;
 import businessrules.food.inputboundaries.ReadFoodInputBoundary;
 import businessrules.loaders.FoodLoader;
 import businessrules.outputboundary.FoodModel;
-import businessrules.outputboundary.ErrorModel;
 import entities.Food;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ReadFoodUseCase implements ReadFoodInputBoundary {
-    FoodRepository FoodRepository;
-    FoodModel FoodModel;
+    FoodRepository foodRepository;
+    FoodModel foodModel;
+    FoodLoader foodLoader;
     ErrorModel errorHandler;
+
+    public ReadFoodUseCase(FoodRepository foodRepo, FoodModel foodMod, FoodLoader foodLoad, ErrorModel error) {
+        this.foodRepository = foodRepo;
+        this.foodModel = foodMod;
+        this.foodLoader = foodLoad;
+        this.errorHandler = error;
+    }
 
     @Override
     public JSONObject readFood(String id) {
 
-        JSONObject data = FoodRepository.readFood(id);
+        JSONObject data = foodRepository.readFood(id);
 
         Food food;
         try {
-            food = FoodLoader.loadFood(data);
+            food = foodLoader.loadFood(data);
         }catch (JSONException e){
             errorHandler.displayError(e.getMessage());
             return null;
         }
-        FoodModel.displayFood(food.jsonify());
+        foodModel.displayFood(food.jsonify());
         return food.jsonify();
     }
 }

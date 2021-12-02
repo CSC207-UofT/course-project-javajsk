@@ -1,7 +1,7 @@
 package businessrules.loaders;
 
 import businessrules.dai.AddonRepository;
-import businessrules.outputboundary.ErrorModel;
+import businessrules.outputboundary.AddonModel;
 import entities.Addon;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,21 +11,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddonLoader {
-    ErrorModel errorHandler;
     AddonRepository addonRepository;
+    AddonModel addonModel;
 
-    public AddonLoader(AddonRepository ar, ErrorModel er){
+    public AddonLoader(AddonRepository ar, AddonModel am){
         this.addonRepository = ar;
-        this.errorHandler = er;
+        this.addonModel = am;
     }
 
-    public static Addon loadAddon(JSONObject data) throws JSONException {
+    public Addon loadAddon(JSONObject data) throws JSONException {
         // Possibly use a factory
 
         // These are all assumed to exist (controller's job to check and ensure json is of correct format)
         String id = data.getString("id");
         String name = data.getString("name");
         float price = data.getFloat("price");
+
         boolean isAvailable = data.getBoolean("isAvailable");
 
         // TODO: see how this works based on Addon's jsonify command.
@@ -38,14 +39,14 @@ public class AddonLoader {
     public Addon loadAddonFromId(String id){
         JSONObject addonRaw = addonRepository.readAddon(id);
         if(addonRaw == null){
-            errorHandler.displayError("Unable to find addon with id: " + id);
+            addonModel.displayError("Unable to find addon with id: " + id);
             return null;
         }
 
         try {
-            return AddonLoader.loadAddon(addonRaw);
+            return loadAddon(addonRaw);
         }catch (JSONException e){
-            errorHandler.displayError(e.getMessage());
+            addonModel.displayError(e.getMessage());
         }
         return null;
     }

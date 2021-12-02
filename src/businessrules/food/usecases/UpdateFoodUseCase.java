@@ -5,9 +5,10 @@ import businessrules.dai.ShopRepository;
 import businessrules.dai.VendorRepository;
 import businessrules.food.inputboundaries.UpdateFoodInputBoundary;
 import businessrules.loaders.FoodLoader;
+import businessrules.loaders.ShopLoader;
+import businessrules.loaders.SingletonLoader;
 import businessrules.loaders.VendorLoader;
 import businessrules.outputboundary.FoodModel;
-import businessrules.outputboundary.ErrorModel;
 import entities.Food;
 import entities.Shop;
 import entities.Vendor;
@@ -21,17 +22,19 @@ public class UpdateFoodUseCase implements UpdateFoodInputBoundary {
     VendorRepository vendorRepository;
     FoodModel FoodView;
     VendorLoader vendorLoader;
+    SingletonLoader singletonLoader;
     FoodLoader foodLoader;
 
     public UpdateFoodUseCase(FoodRepository FoodRepository, ErrorModel errorHandler, ShopRepository shopRepository,
-                              VendorRepository vendorRepository, FoodModel FoodView) {
+                             SingletonLoader singleLoad, ShopLoader sL, VendorRepository vendorRepository, FoodModel FoodView) {
         this.FoodRepository = FoodRepository;
         this.errorHandler = errorHandler;
         this.shopRepository = shopRepository;
+        this.singletonLoader = singleLoad;
         this.vendorRepository = vendorRepository;
         this.FoodView = FoodView;
-        this.foodLoader = new FoodLoader(FoodRepository, errorHandler);
-        this.vendorLoader = new VendorLoader(vendorRepository, errorHandler);
+        this.foodLoader = new FoodLoader(FoodRepository, this.singletonLoader, errorHandler);
+        this.vendorLoader = new VendorLoader(vendorRepository, sL, errorHandler);
     }
 
     @SuppressWarnings("DuplicatedCode")
@@ -49,7 +52,7 @@ public class UpdateFoodUseCase implements UpdateFoodInputBoundary {
         Shop shop = vendor.getShop();
         Food newFood;
         try{
-            newFood = FoodLoader.loadFood(object);
+            newFood = foodLoader.loadFood(object);
         }catch (JSONException e){
             errorHandler.displayError("Unable to generate new food from given data.");
             return false;

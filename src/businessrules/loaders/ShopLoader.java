@@ -1,7 +1,7 @@
 package businessrules.loaders;
 
 import businessrules.dai.ShopRepository;
-import businessrules.outputboundary.ErrorModel;
+import businessrules.outputboundary.ShopModel;
 import entities.Menu;
 import entities.OrderBook;
 import entities.Shop;
@@ -11,15 +11,16 @@ import org.json.JSONObject;
 public class ShopLoader {
 
     ShopRepository shopRepository;
+    ShopModel shopModel;
     MenuLoader menuLoader;
-    ErrorModel errorHandler;
 
-    public ShopLoader(ShopRepository shopRepo, ErrorModel er){
+    public ShopLoader(ShopRepository shopRepo, ShopModel sM, MenuLoader mL){
         this.shopRepository = shopRepo;
-        this.errorHandler = er;
+        this.shopModel = sM;
+        this.menuLoader = mL;
     }
 
-    public static Shop loadShop(JSONObject data) throws JSONException {
+    public Shop loadShop(JSONObject data) throws JSONException {
         // These are all assumed to exist (controller's job to check and ensure json is of correct format)
         String id = data.getString("id");
         String name = data.getString("name");
@@ -35,14 +36,14 @@ public class ShopLoader {
     public Shop loadShopFromId(String id){
         JSONObject shopRaw = shopRepository.readShop(id);
         if(shopRaw == null){
-            errorHandler.displayError("Unable to find shop with id: " + id);
+            shopModel.displayError("Unable to find shop with id: " + id);
             return null;
         }
 
         try{
-            return ShopLoader.loadShop(shopRaw);
+            return loadShop(shopRaw);
         }catch (JSONException e){
-            errorHandler.displayError(e.getMessage());
+            shopModel.displayError(e.getMessage());
         }
 
         return null;

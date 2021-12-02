@@ -43,7 +43,6 @@ public class SingletonLoader {
             errorHandler.displayError("Unable to find Singleton with id: " + id);
             return null;
         }
-
         try {
             return SingletonLoader.loadSingleton(SingletonRaw);
         } catch (JSONException e) {

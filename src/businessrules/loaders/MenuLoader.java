@@ -1,7 +1,6 @@
 package businessrules.loaders;
 
 import businessrules.dai.ShopRepository;
-import businessrules.outputboundary.ErrorModel;
 import entities.*;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,15 +12,16 @@ import java.util.List;
 public class MenuLoader {
 
     ShopRepository shopRepository;
-    ErrorModel errorHandler;
+    FoodLoader foodLoader;
+    AddonLoader addonLoader;
 
-    public MenuLoader(ShopRepository shopRepo, ErrorModel er){
+    public MenuLoader(ShopRepository shopRepo, FoodLoader fL, AddonLoader aL){
         this.shopRepository = shopRepo;
-        this.errorHandler = er;
+        this.foodLoader = fL;
+        this.addonLoader = aL;
     }
 
-    public static Menu loadMenu(JSONObject data) throws JSONException {
-        //TODO: implement
+    public Menu loadMenu(JSONObject data) throws JSONException {
         JSONArray foodData = data.getJSONArray("foods");
         JSONArray addonData = data.getJSONArray("addons");
 
@@ -29,14 +29,13 @@ public class MenuLoader {
 
         for(int i = 0; i < foodData.length(); i++){
             JSONObject foodRow = foodData.getJSONObject(i);
-            //TODO: implement FoodLoader - or get from other branch
-            foodList.add(FoodLoader.loadFood(foodRow));
+            foodList.add(foodLoader.loadFood(foodRow));
         }
 
         List<Addon> addonList = new ArrayList<>();
         for(int i = 0; i < addonData.length(); i++){
             JSONObject addonRow = foodData.getJSONObject(i);
-            addonList.add(AddonLoader.loadAddon(addonRow));
+            addonList.add(addonLoader.loadAddon(addonRow));
         }
 
         return new Menu(foodList, addonList);

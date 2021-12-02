@@ -5,37 +5,41 @@ import businessrules.dai.ShopRepository;
 import businessrules.dai.VendorRepository;
 import businessrules.food.inputboundaries.DeleteFoodInputBoundary;
 import businessrules.loaders.FoodLoader;
+import businessrules.loaders.ShopLoader;
+import businessrules.loaders.SingletonLoader;
 import businessrules.loaders.VendorLoader;
 import businessrules.outputboundary.FoodModel;
-import businessrules.outputboundary.ErrorModel;
 import entities.Food;
 import entities.Shop;
 import entities.Vendor;
 
 public class DeleteFoodUseCase implements DeleteFoodInputBoundary {
-    FoodRepository FoodRepository;
-    FoodModel FoodModel;
+    FoodRepository foodRepository;
+    FoodModel foodModel;
     ErrorModel errorHandler;
     VendorRepository vendorRepository;
     ShopRepository shopRepository;
     VendorLoader vendorLoader;
-    FoodLoader FoodLoader;
+    FoodLoader foodLoader;
+    SingletonLoader singletonLoader;
 
-    public DeleteFoodUseCase(FoodRepository arep, VendorRepository vr, ShopRepository sr,
-                              FoodModel am, ErrorModel em){
-        this.FoodRepository = arep;
+    public DeleteFoodUseCase(FoodRepository arep, VendorRepository vr, ShopRepository sr, SingletonLoader single,
+                             ShopLoader sL, FoodModel fm, ErrorModel em){
+        this.foodRepository = arep;
+        this.foodModel = fm;
         this.vendorRepository = vr;
         this.errorHandler = em;
         this.shopRepository = sr;
-        this.FoodLoader = new FoodLoader(arep, em);
-        this.vendorLoader = new VendorLoader(vr, em);
+        this.singletonLoader = single;
+        this.foodLoader = new FoodLoader(arep, single, em);
+        this.vendorLoader = new VendorLoader(vr, sL, em);
     }
 
     @SuppressWarnings("DuplicatedCode")
     @Override
     public boolean deleteFood(String vendorToken, String id) {
         Vendor vendor = vendorLoader.loadVendorFromToken(vendorToken);
-        Food food = FoodLoader.loadFoodFromId(id);
+        Food food = foodLoader.loadFoodFromId(id);
         if(vendor == null || food == null ){
             errorHandler.displayError("Incorrect vendorToken or FoodId.");
             return false;
@@ -55,8 +59,8 @@ public class DeleteFoodUseCase implements DeleteFoodInputBoundary {
             return false;
         }
 
-        if(FoodRepository.deleteFood(id)){
-            FoodModel.deleteFood(id);
+        if(foodRepository.deleteFood(id)){
+            foodModel.deleteFood(id);
             return true;
         }
         return false;

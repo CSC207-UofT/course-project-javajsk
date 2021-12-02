@@ -1,12 +1,30 @@
 package entities;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.List;
 
 /**
  * The type Cart.
  */
-public class Cart {
+public class Cart implements JSONable{
+
+    /**
+    * The Id.
+     */
+    public String id;
+    /**
+     * The Shop id.
+     */
+    protected String shopId;
+
+    /**
+     * The Contents.
+     */
+    protected HashMap<Food, List<Selection[]>> contents;
+
     /**
      * Instantiates a new Cart.
      *
@@ -20,15 +38,6 @@ public class Cart {
         this.contents = contents;
     }
 
-
-    /**
-     * The Id.
-     */
-    public String id;
-    /**
-     * The Shop id.
-     */
-    protected String shopId;
 
     /**
      * Gets id.
@@ -84,9 +93,26 @@ public class Cart {
         this.contents = contents;
     }
 
-    /**
-     * The Contents.
-     */
-    protected HashMap<Food, List<Selection[]>> contents;
+    @Override
+    public JSONObject jsonify() {
+        JSONObject final_data = new JSONObject();
+        final_data.put("id", this.id);
+        final_data.put("shopId", this.shopId);
+        JSONObject cartContents = new JSONObject();
+        for(Food key: this.contents.keySet()){
+            JSONArray foodSelection = new JSONArray();
+            for(Selection[] selections: this.contents.get(key)){
+                JSONArray singletonSelection = new JSONArray();
+                for(Selection selection: selections){
+                    singletonSelection.put(selection.jsonify());
 
+                }
+                foodSelection.put(singletonSelection);
+            }
+
+            cartContents.put(key.getId(), foodSelection);
+        }
+        final_data.put("contents", cartContents);
+        return final_data;
+    }
 }

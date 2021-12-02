@@ -1,10 +1,8 @@
 package businessrules.menu.usecases;
 
 import businessrules.dai.ShopRepository;
-import businessrules.loaders.MenuLoader;
 import businessrules.loaders.ShopLoader;
 import businessrules.menu.inputboundaries.ReadMenuInputBoundary;
-import businessrules.outputboundary.ErrorModel;
 import businessrules.outputboundary.MenuModel;
 import entities.Menu;
 import entities.Shop;

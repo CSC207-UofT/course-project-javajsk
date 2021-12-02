@@ -4,7 +4,6 @@ import businessrules.addon.inputboundaries.ReadAddonInputBoundary;
 import businessrules.dai.AddonRepository;
 import businessrules.loaders.AddonLoader;
 import businessrules.outputboundary.AddonModel;
-import businessrules.outputboundary.ErrorModel;
 import entities.Addon;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,7 +11,13 @@ import org.json.JSONObject;
 public class ReadAddonUseCase implements ReadAddonInputBoundary {
     AddonRepository addonRepository;
     AddonModel addonModel;
-    ErrorModel errorHandler;
+    AddonLoader addonLoader;
+
+    public ReadAddonUseCase(AddonRepository aR, AddonModel aM, AddonLoader aL) {
+        this.addonRepository = aR;
+        this.addonModel = aM;
+        this.addonLoader = aL;
+    }
 
     @Override
     public JSONObject readAddon(String id) {
@@ -21,10 +26,9 @@ public class ReadAddonUseCase implements ReadAddonInputBoundary {
 
         Addon addon;
         try {
-            addon = AddonLoader.loadAddon(data);
+            addon = addonLoader.loadAddon(data);
         }catch (JSONException e){
-            errorHandler.displayError(e.getMessage());
-            return null;
+            return addonModel.displayError(e.getMessage());
         }
         addonModel.displayAddon(addon.jsonify());
         return addon.jsonify();

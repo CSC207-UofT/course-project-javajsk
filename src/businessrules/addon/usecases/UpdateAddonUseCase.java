@@ -7,7 +7,6 @@ import businessrules.dai.VendorRepository;
 import businessrules.loaders.AddonLoader;
 import businessrules.loaders.VendorLoader;
 import businessrules.outputboundary.AddonModel;
-import businessrules.outputboundary.ErrorModel;
 
 import entities.Addon;
 import entities.Shop;
@@ -17,66 +16,56 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UpdateAddonUseCase implements UpdateAddonInputBoundary {
-    AddonRepository addonRepository;
-    ErrorModel errorHandler;
-    ShopRepository shopRepository;
     VendorRepository vendorRepository;
-    AddonModel addonView;
+    AddonRepository addonRepository;
+    ShopRepository shopRepository;
+    AddonModel addonModel;
     VendorLoader vendorLoader;
     AddonLoader addonLoader;
 
-    public UpdateAddonUseCase(AddonRepository addonRepository, ErrorModel errorHandler, ShopRepository shopRepository,
-                              VendorRepository vendorRepository, AddonModel addonView) {
-        this.addonRepository = addonRepository;
-        this.errorHandler = errorHandler;
-        this.shopRepository = shopRepository;
-        this.vendorRepository = vendorRepository;
-        this.addonView = addonView;
-        this.addonLoader = new AddonLoader(addonRepository, errorHandler);
-        this.vendorLoader = new VendorLoader(vendorRepository, errorHandler);
+    public UpdateAddonUseCase(VendorRepository vR, AddonRepository aR, ShopRepository sR,
+                              AddonModel aV, VendorLoader vL, AddonLoader aL) {
+        this.vendorRepository = vR;
+        this.addonRepository = aR;
+        this.shopRepository = sR;
+        this.addonModel = aV;
+        this.vendorLoader = vL;
+        this.addonLoader = aL;
     }
 
     @SuppressWarnings("DuplicatedCode")
     @Override
-    public boolean updateAddon(String vendorToken, String addonId, JSONObject object) {
+    public JSONObject updateAddon(String vendorToken, String addonId, JSONObject object) {
         Vendor vendor = vendorLoader.loadVendorFromToken(vendorToken);
         Addon addon = addonLoader.loadAddonFromId(addonId);
 
         if(vendor == null || addon == null){
-            errorHandler.displayError("Incorrect vendorToken or addonId.");
-            return false;
+            return addonModel.displayError("Incorrect vendorToken or addonId.");
         }
 
 
         Shop shop = vendor.getShop();
         Addon newAddon;
         try{
-            newAddon = AddonLoader.loadAddon(object);
+            newAddon = addonLoader.loadAddon(object);
         }catch(JSONException e){
-            errorHandler.displayError("Unable to generate new addon object from given data.");
-            return false;
+            return addonModel.displayError("Unable to generate new addon object from given data.");
         }
 
         boolean success = shop.getMenu().updateAddon(addonId, newAddon);
 
         if(!success){
-            errorHandler.displayError("No such addon in the shop's menu.");
-            return false;
+            return addonModel.displayError("No such addon in the shop's menu.");
         }
 
         if(!addonRepository.updateAddon(addonId, newAddon.jsonify())){
-            errorHandler.displayError("Unable to save modified addon in repository.");
-            return false;
+            return addonModel.displayError("Unable to save modified addon in repository.");
         }
 
         if(!shopRepository.updateShop(shop.getId(), shop.jsonify())){
-            errorHandler.displayError("Unable to update shop's menu and update addon.");
-            return false;
+            return addonModel.displayError("Unable to update shop's menu and update addon.");
         }
 
-        addonView.updateAddon(addonId, object);
-        return true;
-
-
+       return addonModel.displayAddon(object);
     }
 }
