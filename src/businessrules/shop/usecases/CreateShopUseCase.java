@@ -4,7 +4,6 @@ import businessrules.dai.ShopRepository;
 import businessrules.dai.VendorRepository;
 import businessrules.loaders.ShopLoader;
 import businessrules.loaders.VendorLoader;
-import businessrules.outputboundary.ErrorModel;
 import businessrules.outputboundary.ShopModel;
 import businessrules.shop.inputboundaries.CreateShopInputBoundary;
 import entities.Shop;

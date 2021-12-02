@@ -9,7 +9,6 @@ import businessrules.loaders.ShopLoader;
 import businessrules.loaders.SingletonLoader;
 import businessrules.loaders.VendorLoader;
 import businessrules.outputboundary.FoodModel;
-import businessrules.outputboundary.ErrorModel;
 import entities.Food;
 import entities.Shop;
 import entities.Vendor;

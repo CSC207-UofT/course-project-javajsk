@@ -4,7 +4,6 @@ import businessrules.dai.FoodRepository;
 import businessrules.food.inputboundaries.ReadFoodInputBoundary;
 import businessrules.loaders.FoodLoader;
 import businessrules.outputboundary.FoodModel;
-import businessrules.outputboundary.ErrorModel;
 import entities.Food;
 import org.json.JSONException;
 import org.json.JSONObject;

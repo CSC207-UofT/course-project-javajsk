@@ -5,7 +5,6 @@ import businessrules.dai.VendorRepository;
 import businessrules.loaders.ShopLoader;
 import businessrules.loaders.VendorLoader;
 import businessrules.menu.inputboundaries.ClearMenuInputBoundary;
-import businessrules.outputboundary.ErrorModel;
 import businessrules.outputboundary.MenuModel;
 import entities.Food;
 import entities.Menu;
