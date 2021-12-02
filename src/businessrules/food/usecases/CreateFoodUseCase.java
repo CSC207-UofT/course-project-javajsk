@@ -23,41 +23,41 @@ public class CreateFoodUseCase implements CreateFoodInputBoundary {
     VendorLoader vendorLoader;
     FoodLoader foodLoader;
     ErrorModel errorHandler;
+    FoodModel foodModel;
 
 
     public CreateFoodUseCase(FoodRepository foodRepository, VendorRepository vendorRepository, FoodModel foodView,
-                             FoodLoader fL, ShopLoader sL, ShopRepository shopRepository, ErrorModel errorHandler) {
+                             FoodLoader fL, ShopLoader sL, ShopRepository shopRepository, ErrorModel errorHandler,
+                             FoodModel foodModel) {
         this.foodRepository = foodRepository;
         this.vendorRepository = vendorRepository;
         this.foodView = foodView;
         this.shopRepository = shopRepository;
         this.errorHandler = errorHandler;
         this.foodLoader = fL;
+        this.foodModel = foodModel;
         this.vendorLoader = new VendorLoader(vendorRepository, sL, errorHandler);
     }
 
     @Override
-    public boolean createFood(String vendorToken, JSONObject data) {
+    public JSONObject createFood(String vendorToken, JSONObject data) {
         Vendor vendor = vendorLoader.loadVendorFromToken(vendorToken);
 
         if(vendor == null){
-            return false;
+            return foodModel.displayError("Invalid vendorToken");
         }
 
         Food food;
-
         try{
             food = foodLoader.loadFood(data);
         }catch (JSONException e){
-            errorHandler.displayError(e.getMessage());
-            return false;
+            return foodModel.displayError(e.getMessage());
         }
 
         String id = foodRepository.createFood(food.jsonify());
 
         if(id == null){
-            errorHandler.displayError("Unable to create addon in the repository.");
-            return false;
+            return foodModel.displayError("Unable to create addon in the repository.");
         }
 
         food.setId(id);
@@ -66,11 +66,9 @@ public class CreateFoodUseCase implements CreateFoodInputBoundary {
         shop.getMenu().addFood(food);
 
         if(!shopRepository.updateShop(shop.getId(), shop.jsonify())){
-            errorHandler.displayError("Unable to update shop in the repository.");
-            return  false;
+            return foodModel.displayError("Unable to update shop in the repository.");
         }
 
-        foodView.displayFood(food.jsonify());
-        return true;
+        return foodModel.displayFood(food.jsonify());
     }
 }

@@ -31,10 +31,8 @@ public class ReadFoodUseCase implements ReadFoodInputBoundary {
         try {
             food = foodLoader.loadFood(data);
         }catch (JSONException e){
-            errorHandler.displayError(e.getMessage());
-            return null;
+            return foodModel.displayError(e.getMessage());
         }
-        foodModel.displayFood(food.jsonify());
-        return food.jsonify();
+        return foodModel.displayFood(food.jsonify());
     }
 }

@@ -13,6 +13,7 @@ import businessrules.outputboundary.ErrorModel;
 import entities.Food;
 import entities.Shop;
 import entities.Vendor;
+import org.json.JSONObject;
 
 public class DeleteFoodUseCase implements DeleteFoodInputBoundary {
     FoodRepository foodRepository;
@@ -38,32 +39,29 @@ public class DeleteFoodUseCase implements DeleteFoodInputBoundary {
 
     @SuppressWarnings("DuplicatedCode")
     @Override
-    public boolean deleteFood(String vendorToken, String id) {
+    public JSONObject deleteFood(String vendorToken, String id) {
         Vendor vendor = vendorLoader.loadVendorFromToken(vendorToken);
         Food food = foodLoader.loadFoodFromId(id);
         if(vendor == null || food == null ){
-            errorHandler.displayError("Incorrect vendorToken or FoodId.");
-            return false;
+            return foodModel.displayError("Incorrect vendorToken or FoodId.");
         }
         Shop shop = vendor.getShop();
 
         boolean deleteSuccess = shop.getMenu().deleteFood(food);
 
         if(!deleteSuccess){
-            errorHandler.displayError("No such Food in any shop owned by you.");
-            return false;
+            return foodModel.displayError("No such Food in any shop owned by you.");
         }
 
         boolean updateSuccess = shopRepository.updateShop(shop.getId(), shop.jsonify());
         if(!updateSuccess){
-            errorHandler.displayError("Unable to update shop's menu and remove Food.");
-            return false;
+            return foodModel.displayError("Unable to update shop's menu and remove Food.");
         }
 
         if(foodRepository.deleteFood(id)){
-            foodModel.deleteFood(id);
-            return true;
+            return foodModel.displayFood(new JSONObject());
+            //TODO: What to return to UI when deleting objects?
         }
-        return false;
+        return foodModel.displayError("Unable to delete food.");
     }
 }
