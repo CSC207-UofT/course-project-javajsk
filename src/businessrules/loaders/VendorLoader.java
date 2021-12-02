@@ -1,6 +1,5 @@
 package businessrules.loaders;
 
-import businessrules.dai.UserRepository;
 import businessrules.dai.VendorRepository;
 import businessrules.outputboundary.ErrorModel;
 import entities.Shop;

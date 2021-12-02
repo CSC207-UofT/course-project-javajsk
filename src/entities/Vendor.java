@@ -1,6 +1,6 @@
 package entities;
 
-import java.util.List;
+import org.json.JSONObject;
 
 /**
  * The type Vendor.
@@ -37,5 +37,24 @@ public class Vendor extends User{
      */
     public void setShop(Shop shop) {
         this.shop = shop;
+    }
+
+    public boolean deleteShop(String shopId){
+        if(this.shop.getId().equals(shopId)){
+            this.shop = null;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public JSONObject jsonify(){
+        JSONObject userData = new JSONObject();
+        userData.put("id", this.id);
+        userData.put("userName", this.userName);
+        userData.put("hashedPassword", this.hashedPassword);
+        userData.put("shop", this.shop.jsonify());
+
+        return userData;
     }
 }

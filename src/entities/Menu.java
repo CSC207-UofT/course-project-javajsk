@@ -4,16 +4,11 @@ import org.json.JSONObject;
 import java.util.List;
 
 /**
- * The type Menu.
+ * Menu entity class.
  */
 public class Menu implements JSONable{
-    /**
-     * The Foods.
-     */
+
     protected List<Food> foods;
-    /**
-     * The Addons.
-     */
     protected List<Addon> addons;
 
     /**
@@ -87,6 +82,14 @@ public class Menu implements JSONable{
         return this.addons.remove(addon);
     }
 
+    @Override
+    public JSONObject jsonify() {
+        JSONObject menuData = new JSONObject();
+        // TODO: SEE how this works out into the JSON.
+        menuData.put("id", this.foods);
+        menuData.put("name", this.addons);
+
+        return menuData;
     public void addFood(Food food){
         this.foods.add(food);
     }
