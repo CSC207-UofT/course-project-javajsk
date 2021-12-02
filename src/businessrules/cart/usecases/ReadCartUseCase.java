@@ -2,7 +2,7 @@ package businessrules.cart.usecases;
 
 import businessrules.cart.inputboundaries.ReadCartInputBoundary;
 import businessrules.loaders.CustomerLoader;
-import businessrules.outputboundary.CustomerModel;
+import businessrules.outputboundary.CartModel;
 import entities.Cart;
 import entities.Customer;
 import org.json.JSONException;
@@ -10,11 +10,11 @@ import org.json.JSONObject;
 
 public class ReadCartUseCase implements ReadCartInputBoundary {
 
-    CustomerModel customerModel;
+    CartModel cartModel;
     CustomerLoader customerLoader;
 
-    public ReadCartUseCase(CustomerModel cM, CustomerLoader cL) {
-        this.customerModel = cM;
+    public ReadCartUseCase(CartModel cM, CustomerLoader cL) {
+        this.cartModel = cM;
         this.customerLoader = cL;
     }
 
@@ -25,8 +25,8 @@ public class ReadCartUseCase implements ReadCartInputBoundary {
         try {
             cart = customer.getCurrentCart();
         }catch (JSONException e){
-            return customerModel.displayError(e.getMessage());
+            return cartModel.displayError(e.getMessage());
         }
-        return customerModel.displayCustomer(cart.jsonify());
+        return cartModel.displayCart(cart.jsonify());
     }
 }
