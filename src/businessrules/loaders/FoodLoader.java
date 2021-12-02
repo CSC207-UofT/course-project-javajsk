@@ -1,7 +1,6 @@
 package businessrules.loaders;
 
 import businessrules.dai.FoodRepository;
-import businessrules.outputboundary.ErrorModel;
 import entities.Food;
 import entities.Singleton;
 import org.json.JSONArray;

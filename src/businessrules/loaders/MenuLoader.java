@@ -1,7 +1,6 @@
 package businessrules.loaders;
 
 import businessrules.dai.ShopRepository;
-import businessrules.outputboundary.ErrorModel;
 import entities.*;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,13 +14,11 @@ public class MenuLoader {
     ShopRepository shopRepository;
     FoodLoader foodLoader;
     AddonLoader addonLoader;
-    ErrorModel errorHandler;
 
-    public MenuLoader(ShopRepository shopRepo, FoodLoader fL, AddonLoader aL, ErrorModel er){
+    public MenuLoader(ShopRepository shopRepo, FoodLoader fL, AddonLoader aL){
         this.shopRepository = shopRepo;
         this.foodLoader = fL;
         this.addonLoader = aL;
-        this.errorHandler = er;
     }
 
     public Menu loadMenu(JSONObject data) throws JSONException {

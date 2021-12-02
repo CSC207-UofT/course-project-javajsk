@@ -7,7 +7,6 @@ import businessrules.food.inputboundaries.CreateFoodInputBoundary;
 import businessrules.loaders.FoodLoader;
 import businessrules.loaders.ShopLoader;
 import businessrules.loaders.VendorLoader;
-import businessrules.outputboundary.ErrorModel;
 import businessrules.outputboundary.FoodModel;
 import entities.Food;
 import entities.Shop;
