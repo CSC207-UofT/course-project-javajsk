@@ -11,8 +11,6 @@ import businessrules.outputboundary.ErrorModel;
 import entities.Addon;
 import entities.Shop;
 import entities.Vendor;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class DeleteAddonUseCase implements DeleteAddonInputBoundary {
     AddonRepository addonRepository;

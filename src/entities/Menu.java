@@ -1,17 +1,14 @@
 package entities;
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
- * The type Menu.
+ * Menu entity class.
  */
-public class Menu {
-    /**
-     * The Foods.
-     */
+public class Menu implements JSONable{
+
     protected List<Food> foods;
-    /**
-     * The Addons.
-     */
     protected List<Addon> addons;
 
     /**
@@ -83,5 +80,37 @@ public class Menu {
 
     public boolean deleteAddon(Addon addon){
         return this.addons.remove(addon);
+    }
+
+    @Override
+    public JSONObject jsonify() {
+        JSONObject menuData = new JSONObject();
+        // TODO: SEE how this works out into the JSON.
+        menuData.put("id", this.foods);
+        menuData.put("name", this.addons);
+
+        return menuData;
+    public void addFood(Food food){
+        this.foods.add(food);
+    }
+
+    public boolean deleteFood(Food food){
+        return this.foods.remove(food);
+    }
+
+    public boolean updateFood(String foodId, Food food){
+        int index = -1;
+        for(int i =0; i < this.foods.size(); i++){
+            if(this.foods.get(i).getId().equals(foodId)){
+                this.foods.remove(this.foods.get(i));
+                index = i;
+            }
+        }
+        if(index == -1){
+            // in this case the addon has not been found in the list.
+            return false;
+        }
+        this.foods.add(index, food);
+        return true;
     }
 }

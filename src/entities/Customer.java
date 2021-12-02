@@ -1,25 +1,31 @@
 package entities;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * The type Customer.
  */
-public class Customer extends User {
+
+public class Customer extends User implements JSONable{
     /**
      * The Order history.
      */
     protected OrderBook orderHistory;
-    /**
-     * The Current cart.
-     */
     protected Cart currentCart;
 
     /**
-     * Instantiates a new Customer.
+     * Instantiates and new customer
      *
-     * @param orderHistory the order history
-     * @param currentCart  the current cart
+     * @param id id of customer
+     * @param user username of customer
+     * @param password hashed password
+     * @param orderHist orderbook of all customer's previous orders
+     * @param cart current cart of customer
      */
-    public Customer(OrderBook orderHistory, Cart currentCart) {
+
+    public Customer(String id, String username, String hashedPassword, OrderBook orderHistory, Cart currentCart) {
+        super(id, username, hashedPassword);
         this.orderHistory = orderHistory;
         this.currentCart = currentCart;
     }
@@ -58,5 +64,15 @@ public class Customer extends User {
      */
     public void setCurrentCart(Cart currentCart) {
         this.currentCart = currentCart;
+    }
+
+    @Override
+    public JSONObject jsonify() {
+        JSONObject finalValue = new JSONObject();
+        finalValue.put("username", super.userName);
+        finalValue.put("password", super.hashedPassword);
+        finalValue.put("cart", currentCart.jsonify());
+        finalValue.put("orderHistory", new JSONArray(this.orderHistory.getOrderIds()));
+        return finalValue;
     }
 }

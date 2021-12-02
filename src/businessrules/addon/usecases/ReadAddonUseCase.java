@@ -26,7 +26,7 @@ public class ReadAddonUseCase implements ReadAddonInputBoundary {
             errorHandler.displayError(e.getMessage());
             return null;
         }
-
+        addonModel.displayAddon(addon.jsonify());
         return addon.jsonify();
     }
 }
