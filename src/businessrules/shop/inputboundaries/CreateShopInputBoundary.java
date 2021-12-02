@@ -1,4 +1,4 @@
-package businessrules.shop.inputboundary;
+package businessrules.shop.inputboundaries;
 
 import org.json.JSONObject;
 
