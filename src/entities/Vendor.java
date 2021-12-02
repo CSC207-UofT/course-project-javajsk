@@ -1,11 +1,14 @@
 package entities;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
  * The type Vendor.
  */
-public class Vendor extends User{
+public class Vendor extends User implements JSONable{
     /**
      * The Shop.
      */
@@ -37,5 +40,14 @@ public class Vendor extends User{
      */
     public void setShop(Shop shop) {
         this.shop = shop;
+    }
+
+    @Override
+    public JSONObject jsonify() {
+        JSONObject finalValue = new JSONObject();
+        finalValue.put("username", super.userName);
+        finalValue.put("password", super.hashedPassword);
+        finalValue.put("shop", shop.jsonify());
+        return finalValue;
     }
 }

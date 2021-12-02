@@ -15,7 +15,7 @@ public class SingletonLoader {
     ErrorModel errorHandler;
     SingletonRepository SingletonRepository;
 
-    public SingletonLoader(SingletonRepository ar, ErrorModel er){
+    public SingletonLoader(SingletonRepository ar, ErrorModel er) {
         this.SingletonRepository = ar;
         this.errorHandler = er;
     }
@@ -37,30 +37,30 @@ public class SingletonLoader {
         return new Singleton(id, price, name, description, allowedAddonTypes, defaultSelection, availability);
     }
 
-    public Singleton loadSingletonFromId(String id){
+    public Singleton loadSingletonFromId(String id) {
         JSONObject SingletonRaw = SingletonRepository.readSingleton(id);
-        if(SingletonRaw == null){
+        if (SingletonRaw == null) {
             errorHandler.displayError("Unable to find Singleton with id: " + id);
             return null;
         }
 
         try {
             return SingletonLoader.loadSingleton(SingletonRaw);
-        }catch (JSONException e){
+        } catch (JSONException e) {
             errorHandler.displayError(e.getMessage());
         }
         return null;
     }
 
-    public static List<Integer> getListFromJSONArray(JSONArray array){
+    public static List<Integer> getListFromJSONArray(JSONArray array) {
         ArrayList<Integer> arr = new ArrayList<>();
-        for(Object value : array){
+        for (Object value : array) {
             arr.add((int) value);
         }
         return arr;
     }
 
-    public static List<Addon> getAddonListFromJSONArray(JSONArray array){
+    public static List<Addon> getAddonListFromJSONArray(JSONArray array) {
         ArrayList<Addon> arr = new ArrayList<>();
         // TODO: implement this method
         return arr;
