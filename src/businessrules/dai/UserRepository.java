@@ -8,4 +8,6 @@ public interface UserRepository {
     JSONObject readUserFromToken(String userToken);
 
     String getUserToken(String username, String password);
+
+    boolean isUsernameUnique(String username);
 }

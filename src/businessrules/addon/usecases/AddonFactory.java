@@ -4,6 +4,15 @@ import businessrules.addon.Factory;
 import entities.Addon;
 import org.json.JSONObject;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+// NOTE: --------------------------------------------------------
+// This file is not actual code and is simply an example of how a factory may be implemented.
+
+
 public class AddonFactory implements Factory<Addon> {
 
     @Override
