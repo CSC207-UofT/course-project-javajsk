@@ -15,7 +15,6 @@ public class CreateShopUseCase implements CreateShopInputBoundary {
 
     ShopRepository shopRepository;
     VendorRepository vendorRepository;
-    ErrorModel errorHandler;
     ShopModel shopView;
     VendorLoader vendorLoader;
     ShopLoader shopLoader;
@@ -23,39 +22,35 @@ public class CreateShopUseCase implements CreateShopInputBoundary {
     /**
      * Constructor
      */
-    public CreateShopUseCase(ShopRepository shopRepo, VendorRepository vendorRepo,
-                             ErrorModel er, ShopModel shopMod, VendorLoader vendLoad,
-                             ShopLoader shopLoad){
-        this.shopRepository = shopRepo;
-        this.vendorRepository = vendorRepo;
-        this.errorHandler = er;
-        this.shopView = shopMod;
-        this.vendorLoader = vendLoad;
-        this.shopLoader = shopLoad;
+    public CreateShopUseCase(ShopRepository sR, VendorRepository vR, ShopModel sM,
+                             VendorLoader vL, ShopLoader sL){
+        this.shopRepository = sR;
+        this.vendorRepository = vR;
+        this.shopView = sM;
+        this.vendorLoader = vL;
+        this.shopLoader = sL;
 
     }
 
 
     @Override
-    public boolean createShop(String vendorToken, JSONObject data) {
+    public JSONObject createShop(String vendorToken, JSONObject data) {
         Vendor vendor = vendorLoader.loadVendorFromToken(vendorToken);
         if(vendor == null){
-            return false;
+            return shopView.displayError("Invalid vendor token");
         }
 
         Shop shop;
         try{
-            shop = ShopLoader.loadShop(data);
+            shop = shopLoader.loadShop(data);
         }catch (JSONException e){
-            errorHandler.displayError(e.getMessage());
-            return false;
+            return shopView.displayError(e.getMessage());
         }
 
         String id = shopRepository.createShop(shop.jsonify());
 
         if(id == null) {
-            errorHandler.displayError("Unable to create shop in repository.");
-            return false;
+            return shopView.displayError("Unable to create shop in repository.");
         }
 
         shop.setId(id);
@@ -63,11 +58,9 @@ public class CreateShopUseCase implements CreateShopInputBoundary {
 
         boolean success = vendorRepository.updateUser(vendor.getId(), vendor.jsonify());
         if(!success){
-            errorHandler.displayError("Unable to update vendor in the repository");
-            return false;
+            return shopView.displayError("Unable to update vendor in the repository");
         }
 
-        shopView.displayShop(shop.jsonify());
-        return true;
+        return shopView.displayShop(shop.jsonify());
     }
 }

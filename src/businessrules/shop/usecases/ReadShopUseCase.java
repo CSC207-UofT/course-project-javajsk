@@ -11,14 +11,12 @@ import org.json.JSONObject;
 public class ReadShopUseCase implements ReadShopInputBoundary {
     ShopRepository shopRepository;
     ShopModel shopModel;
-    ErrorModel errorHandler;
+    ShopLoader shopLoader;
 
-    public ReadShopUseCase(ShopRepository shopRepo,
-                           ShopModel shopMod,
-                           ErrorModel er){
-        this.shopRepository = shopRepo;
-        this.shopModel = shopMod;
-        this.errorHandler = er;
+    public ReadShopUseCase(ShopRepository sR, ShopModel sM, ShopLoader sL){
+        this.shopRepository = sR;
+        this.shopModel = sM;
+        this.shopLoader = sL;
     }
 
     @Override
@@ -27,14 +25,12 @@ public class ReadShopUseCase implements ReadShopInputBoundary {
 
         Shop shop;
         try {
-            shop = ShopLoader.loadShop(shopData);
+            shop = shopLoader.loadShop(shopData);
         }catch (JSONException e){
-            errorHandler.displayError(e.getMessage());
-            return null;
+            return shopModel.displayError(e.getMessage());
         }
 
-        shopModel.displayShop(shopData); //necessary?
-        return shop.jsonify();
+        return shopModel.displayShop(shop.jsonify());
 
     }
 }

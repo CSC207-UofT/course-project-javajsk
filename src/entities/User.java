@@ -2,7 +2,7 @@ package entities;
 
 import org.json.JSONObject;
 
-public abstract class User {
+public abstract class User implements JSONable{
     public String id;
     protected String userName;
     protected String hashedPassword;
