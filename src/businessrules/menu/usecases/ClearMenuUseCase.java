@@ -62,7 +62,7 @@ public class ClearMenuUseCase implements ClearMenuInputBoundary {
         menu.setFoods(emptyAddonList);
 
         //Clear menu in repository
-        boolean isCleared = shopRepository.clearShopMenu(vendor.getShop().getId());
+        boolean isCleared = shopRepository.updateShop(vendor.getShop().getId(), vendor.getShop().jsonify());
         if(!isCleared){
             errorHandler.displayError("Error. Unable to clear menu.");
         }

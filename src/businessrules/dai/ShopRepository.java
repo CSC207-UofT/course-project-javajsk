@@ -7,8 +7,6 @@ public interface ShopRepository {
 
     boolean updateShop(String shopId, JSONObject shop);
 
-    boolean clearShopMenu(String shopId);
-
     JSONObject readShop(String shopId);
 
     boolean deleteShop(String shopId);
