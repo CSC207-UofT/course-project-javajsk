@@ -1,8 +1,8 @@
 package UseCases.Orders;
 
-import Entities.Interfaces.ICart;
-import Entities.Interfaces.ICustomer;
-import Entities.Interfaces.IShop;
+import entities.Interfaces.ICart;
+import entities.Interfaces.ICustomer;
+import entities.Interfaces.IShop;
 
 
 public interface CreateOrderInputBoundary {

@@ -1,8 +1,8 @@
 package UseCases.Orders;
 
-import Entities.FoodTruck;
-import Entities.Interfaces.*;
-import Entities.Regular.RegularOrder;
+import entities.FoodTruck;
+import entities.Interfaces.*;
+import entities.Regular.RegularOrder;
 import UseCases.DataAccessInterfaces.CustomerRepository;
 import UseCases.DataAccessInterfaces.OrderRepository;
 import UseCases.DataAccessInterfaces.ShopRepository;
