@@ -14,15 +14,6 @@ public class Customer extends User implements JSONable{
     protected OrderBook orderHistory;
     protected Cart currentCart;
 
-    /**
-     * Instantiates and new customer
-     *
-     * @param id id of customer
-     * @param user username of customer
-     * @param password hashed password
-     * @param orderHist orderbook of all customer's previous orders
-     * @param cart current cart of customer
-     */
 
     public Customer(String id, String username, String hashedPassword, OrderBook orderHistory, Cart currentCart) {
         super(id, username, hashedPassword);
