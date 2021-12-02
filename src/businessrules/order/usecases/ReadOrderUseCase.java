@@ -1,11 +1,7 @@
 package businessrules.order.usecases;
 
-import businessrules.dai.AddonRepository;
-import businessrules.dai.CustomerRepository;
-import businessrules.dai.FoodRepository;
 import businessrules.dai.OrderRepository;
 import businessrules.loaders.OrderLoader;
-import businessrules.loaders.SingletonLoader;
 import businessrules.order.inputboundaries.ReadOrderInputBoundary;
 import businessrules.outputboundary.OrderModel;
 import entities.Order;
@@ -14,7 +10,7 @@ import org.json.JSONObject;
 
 public class ReadOrderUseCase implements ReadOrderInputBoundary {
     OrderRepository orderRepository;
-    OrderModel orderView;
+    OrderModel orderModel;
     OrderLoader orderLoader;
 
     /**
@@ -24,7 +20,7 @@ public class ReadOrderUseCase implements ReadOrderInputBoundary {
      */
     public ReadOrderUseCase(OrderRepository oR, OrderModel oM, OrderLoader oL) {
         this.orderRepository = oR;
-        this.orderView = oM;
+        this.orderModel = oM;
         this.orderLoader = oL;
     }
 
@@ -41,11 +37,11 @@ public class ReadOrderUseCase implements ReadOrderInputBoundary {
         try {
             order = orderLoader.loadOrder(orderData);
         }catch (JSONException e){
-            orderView.displayError(e.getMessage());
+            orderModel.displayError(e.getMessage());
             return null;
         }
 
-        return order.jsonify();
+        return orderModel.displayOrder(order.jsonify());
 
     }
 }
