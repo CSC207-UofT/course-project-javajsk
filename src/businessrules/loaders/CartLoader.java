@@ -1,6 +1,5 @@
 package businessrules.loaders;
 
-import businessrules.dai.AddonRepository;
 import businessrules.dai.CustomerRepository;
 import businessrules.dai.FoodRepository;
 import entities.Cart;
@@ -18,10 +17,11 @@ import java.util.List;
 public class CartLoader {
 
     CustomerRepository customerRepository;
+    FoodRepository foodRepository;
     CustomerLoader customerLoader;
     FoodLoader foodLoader;
     SelectionLoader selectionLoader;
-    FoodRepository foodRepository;
+
 
 
     public CartLoader(CustomerRepository cR, FoodRepository fR, CustomerLoader cL, FoodLoader fL, SelectionLoader sL){
