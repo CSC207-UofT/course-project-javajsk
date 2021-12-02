@@ -14,19 +14,20 @@ public class ShopLoader {
     MenuLoader menuLoader;
     ErrorModel errorHandler;
 
-    public ShopLoader(ShopRepository shopRepo, ErrorModel er){
+    public ShopLoader(ShopRepository shopRepo, MenuLoader mL, ErrorModel er){
         this.shopRepository = shopRepo;
+        this.menuLoader = mL;
         this.errorHandler = er;
     }
 
-    public static Shop loadShop(JSONObject data) throws JSONException {
+    public Shop loadShop(JSONObject data) throws JSONException {
         // These are all assumed to exist (controller's job to check and ensure json is of correct format)
         String id = data.getString("id");
         String name = data.getString("name");
         String location = data.getString("location");
         boolean isOpen = data.getBoolean("isOpen");
         OrderBook orderBook = OrderBookLoader.loadOrderBook(data.getJSONObject("orderBook"));
-        Menu menu = MenuLoader.loadMenu(data.getJSONObject("menu"));
+        Menu menu = menuLoader.loadMenu(data.getJSONObject("menu"));
         return new Shop(id, name, location, isOpen, menu, orderBook);
     }
 
@@ -38,7 +39,7 @@ public class ShopLoader {
         }
 
         try{
-            return ShopLoader.loadShop(shopRaw);
+            return loadShop(shopRaw);
         }catch (JSONException e){
             errorHandler.displayError(e.getMessage());
         }

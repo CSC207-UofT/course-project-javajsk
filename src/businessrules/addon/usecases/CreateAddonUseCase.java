@@ -5,6 +5,7 @@ import businessrules.dai.AddonRepository;
 import businessrules.dai.ShopRepository;
 import businessrules.dai.VendorRepository;
 import businessrules.loaders.AddonLoader;
+import businessrules.loaders.ShopLoader;
 import businessrules.loaders.VendorLoader;
 import businessrules.outputboundary.AddonModel;
 import businessrules.outputboundary.ErrorModel;
@@ -24,15 +25,15 @@ public class CreateAddonUseCase implements CreateAddonInputBoundary {
     VendorLoader vendorLoader;
     AddonLoader addonLoader;
 
-    public CreateAddonUseCase(AddonRepository addonRepository, VendorRepository vendorRepository,
-                              ShopRepository shopRepository, ErrorModel errorHandler, AddonModel addonView) {
-        this.addonRepository = addonRepository;
-        this.vendorRepository = vendorRepository;
-        this.shopRepository = shopRepository;
-        this.errorHandler = errorHandler;
-        this.addonView = addonView;
-        this.vendorLoader = new VendorLoader(vendorRepository, errorHandler);
-        this.addonLoader = new AddonLoader(addonRepository, errorHandler);
+    public CreateAddonUseCase(AddonRepository aR, VendorRepository vR,
+                              ShopRepository sR, ShopLoader sL, ErrorModel error, AddonModel addonMod) {
+        this.addonRepository = aR;
+        this.vendorRepository = vR;
+        this.shopRepository = sR;
+        this.errorHandler = error;
+        this.addonView = addonMod;
+        this.vendorLoader = new VendorLoader(vR, sL, error);
+        this.addonLoader = new AddonLoader(aR, error);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class CreateAddonUseCase implements CreateAddonInputBoundary {
 
         Addon addon;
         try{
-            addon = AddonLoader.loadAddon(data);
+            addon = addonLoader.loadAddon(data);
         }catch (JSONException e){
             errorHandler.displayError(e.getMessage());
             return false;
@@ -69,11 +70,8 @@ public class CreateAddonUseCase implements CreateAddonInputBoundary {
             return  false;
         }
 
-
         addonView.displayAddon(addon.jsonify());
         return true;
-
-
     }
 
 

@@ -19,7 +19,7 @@ public class AddonLoader {
         this.errorHandler = er;
     }
 
-    public static Addon loadAddon(JSONObject data) throws JSONException {
+    public Addon loadAddon(JSONObject data) throws JSONException {
         // Possibly use a factory
 
         // These are all assumed to exist (controller's job to check and ensure json is of correct format)
@@ -44,7 +44,7 @@ public class AddonLoader {
         }
 
         try {
-            return AddonLoader.loadAddon(addonRaw);
+            return loadAddon(addonRaw);
         }catch (JSONException e){
             errorHandler.displayError(e.getMessage());
         }
