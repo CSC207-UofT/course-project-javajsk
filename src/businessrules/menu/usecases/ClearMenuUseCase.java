@@ -10,6 +10,7 @@ import businessrules.outputboundary.MenuModel;
 import entities.Food;
 import entities.Menu;
 import entities.Vendor;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,6 @@ public class ClearMenuUseCase implements ClearMenuInputBoundary {
     MenuModel menuModel;
     ShopLoader shopLoader;
     VendorLoader vendorLoader;
-    ErrorModel errorHandler;
 
     public ClearMenuUseCase(VendorRepository vendorRepo, ShopRepository shopRepo, MenuModel menuMod,
                              ShopLoader shopLoad, VendorLoader vendorLoad, ErrorModel error){
@@ -36,7 +36,6 @@ public class ClearMenuUseCase implements ClearMenuInputBoundary {
         this.menuModel = menuMod;
         this.shopLoader = shopLoad;
         this.vendorLoader = vendorLoad;
-        this.errorHandler = error;
     }
 
     /**
@@ -45,12 +44,11 @@ public class ClearMenuUseCase implements ClearMenuInputBoundary {
      * @return whether menu was successfully created
      */
     @Override
-    public boolean clearMenu(String vendorToken) {
+    public JSONObject clearMenu(String vendorToken) {
 
         Vendor vendor = vendorLoader.loadVendorFromToken(vendorToken);
         if(vendor == null){
-            errorHandler.displayError("Error. Could not identify vendor.");
-            return false;
+            return this.menuModel.displayError("Error. Could not identify vendor.");
         }
 
         //Clear menu in entity objects
@@ -64,10 +62,9 @@ public class ClearMenuUseCase implements ClearMenuInputBoundary {
         //Clear menu in repository
         boolean isCleared = shopRepository.clearShopMenu(vendor.getShop().getId());
         if(!isCleared){
-            errorHandler.displayError("Error. Unable to clear menu.");
+            return this.menuModel.displayError("Error. Unable to clear menu.");
         }
 
-        menuModel.displayMenu(menu.jsonify());
-        return true;
+        return menuModel.displayMenu(menu.jsonify());
     }
 }

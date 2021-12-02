@@ -3,9 +3,9 @@ package businessrules.outputboundary;
 import org.json.JSONObject;
 
 public interface ShopModel {
-    void displayShop(JSONObject shop);
+    public JSONObject displayShop(JSONObject data);
 
-    void updateShop(String id, JSONObject shop);
+    public JSONObject displayError(String error);
 
-    void deleteShop(String id);
+
 }

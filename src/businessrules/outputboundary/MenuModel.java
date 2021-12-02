@@ -3,7 +3,7 @@ package businessrules.outputboundary;
 import org.json.JSONObject;
 
 public interface MenuModel {
-    void displayMenu(JSONObject menu);
+    public JSONObject displayMenu(JSONObject data);
 
-    void clearMenu(String id, JSONObject menu);
+    public JSONObject displayError(String error);
 }
