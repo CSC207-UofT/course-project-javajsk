@@ -15,40 +15,26 @@ import org.json.JSONObject;
  * The type Update customer use case.
  */
 public class UpdateCustomerUseCase implements UpdateCustomerInputBoundary {
-    /**
-     * The Customer repository.
-     */
     CustomerRepository customerRepository;
-    /**
-     * The Error handler.
-     */
-    ErrorModel errorHandler;
-    /**
-     * The Customer model.
-     */
     CustomerModel customerModel;
 
     /**
      * Instantiates a new Update customer use case.
      *
-     * @param customerRepository the customer repository
-     * @param errorHandler       the error handler
-     * @param customerModel      the customer model
+     * @param cR the customer repository
+     * @param cM      the customer model
      */
-    public UpdateCustomerUseCase(CustomerRepository customerRepository, ErrorModel errorHandler,
-                                 CustomerModel customerModel) {
-        this.customerRepository = customerRepository;
-        this.errorHandler = errorHandler;
-        this.customerModel = customerModel;
+    public UpdateCustomerUseCase(CustomerRepository cR, CustomerModel cM) {
+        this.customerRepository = cR;
+        this.customerModel = cM;
     }
 
     @Override
-    public boolean updateCustomer(String userToken, JSONObject newData) {
+    public JSONObject updateCustomer(String userToken, JSONObject newData) {
         JSONObject customerInfo = customerRepository.readUserFromToken(userToken);
 
         if(!customerInfo.getString("id").equals(newData.getString("id"))){
-            errorHandler.displayError("Incorrect id value passed.");
-            return false;
+            return customerModel.displayError("Incorrect id value passed.");
         }
 
         Customer customer;
@@ -58,25 +44,20 @@ public class UpdateCustomerUseCase implements UpdateCustomerInputBoundary {
             String password = newData.getString("password");
             Cart cart = CartLoader.loadCart(newData.getJSONObject("cart"));
             if(cart == null){
-                errorHandler.displayError("Cart was unable to load.");
-                return false;
+                return customerModel.displayError("Cart was unable to load.");
             }
             OrderBook book = OrderBookLoader.loadOrderBook(newData.getJSONObject("orderhistory"));
 
             customer = new Customer(id,username,password,book, cart);
 
-
         }catch (JSONException e){
-            errorHandler.displayError("Unable to generate customer object.");
-            return false;
+            return customerModel.displayError("Unable to generate customer object.");
         }
 
         if(!customerRepository.updateCustomer(customer.getId(), customer.jsonify())){
-            errorHandler.displayError("Failed to update customer object in repository.");
-            return false;
+            return customerModel.displayError("Failed to update customer object in repository.");
         }
 
-        customerModel.updateCustomer(customer.jsonify());
-        return true;
+       return customerModel.displayCustomer(customer.jsonify());
     }
 }

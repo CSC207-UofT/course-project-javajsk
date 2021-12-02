@@ -10,33 +10,28 @@ import org.json.JSONObject;
 
 public class SignUpUseCase implements SignUpCustomerInputBoundary {
     CustomerRepository customerRepository;
-    ErrorModel errorHandler;
     Hasher passwordHasher;
     CustomerModel customerModel;
 
-    public SignUpUseCase(CustomerRepository customerRepository, ErrorModel errorHandler, Hasher passwordHasher,
-                         CustomerModel customerModel) {
-        this.customerRepository = customerRepository;
-        this.errorHandler = errorHandler;
-        this.passwordHasher = passwordHasher;
-        this.customerModel = customerModel;
+    public SignUpUseCase(CustomerRepository cR, Hasher pH, CustomerModel cM) {
+        this.customerRepository = cR;
+        this.passwordHasher = pH;
+        this.customerModel = cM;
     }
 
     @Override
-    public boolean signUp(JSONObject data) {
+    public JSONObject signUp(JSONObject data) {
         String username = data.getString("username");
         String password = data.getString("password");
         String passwordConfirmation = data.getString("passwordConfirmation");
 
 
         if(!customerRepository.isUsernameUnique(username)){
-            errorHandler.displayError("Username is already taken!");
-            return false;
+            return customerModel.displayError("Username is already taken.");
         }
 
         if(!password.equals(passwordConfirmation)){
-            errorHandler.displayError("Passwords must match!");
-            return false;
+            return customerModel.displayError("Passwords do not match.");
         }
 
         // Strategy design pattern.
@@ -45,12 +40,9 @@ public class SignUpUseCase implements SignUpCustomerInputBoundary {
         Customer customer = new Customer("", username, password, new OrderBook(), null);
 
         if(!customerRepository.createCustomer(username, hashedPassword)){
-            errorHandler.displayError("Unable to save customer information in repository.");
+            return customerModel.displayError("Unable to save customer information in repository.");
         }
 
-        customerModel.displayCustomer(customer.jsonify());
-        return true;
-
-
+        return customerModel.displayCustomer(customer.jsonify());
     }
 }
