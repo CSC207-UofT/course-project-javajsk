@@ -1,11 +1,13 @@
 package entities;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 /**
  * The type Selection.
  */
-public class Selection {
+public class Selection implements JSONable{
     /**
      * The Singleton selection.
      */
@@ -36,5 +38,15 @@ public class Selection {
      */
     public void setSingletonSelection(HashMap<Addon, Integer> singletonSelection) {
         this.singletonSelection = singletonSelection;
+    }
+
+
+    @Override
+    public JSONObject jsonify() {
+        JSONObject rawData = new JSONObject();
+        for(Addon addon: this.singletonSelection.keySet()){
+            rawData.put(addon.getId(), this.singletonSelection.get(addon));
+        }
+        return rawData;
     }
 }
