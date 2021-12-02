@@ -23,7 +23,8 @@ public class ShopController {
         this.updateShopInputBoundary = updateShopInputBoundary;
     }
 
-    public void runUpdateShop(String input){
+    public JSONObject runUpdateShop(String input){
+
         JSONObject update_data = new JSONObject(input);
         if(!(update_data.has("vendorToken") && update_data.has("shopId") &&
                 update_data.has("shopObject"))){
@@ -35,10 +36,10 @@ public class ShopController {
         JSONObject shopObject = update_data.getJSONObject("shopObject");
 
 
-        this.updateShopInputBoundary.updateShop(vendorToken, shopId,shopObject);
+        return this.updateShopInputBoundary.updateShop(vendorToken, shopId,shopObject);
     }
 
-    public void runCreateShop(String input){
+    public JSONObject runCreateShop(String input){
         JSONObject create_data = new JSONObject(input);
         if(!(create_data.has("shopID") && create_data.has("shopObject"))){
 
@@ -48,11 +49,11 @@ public class ShopController {
         JSONObject new_shop = create_data.getJSONObject("shopObject");
 
 
-        this.createShopInputBoundary.createShop(vendorToken,new_shop);
+        return this.createShopInputBoundary.createShop(vendorToken,new_shop);
     }
 
 
-    public void runDeleteShop(String input){
+    public JSONObject runDeleteShop(String input){
         JSONObject delete_data = new JSONObject(input);
         if(!(delete_data.has("shopID") && delete_data.has("vendorToken"))){
 
@@ -62,10 +63,10 @@ public class ShopController {
         String shopId = delete_data.getString("shopId");
 
 
-        this.deleteShopInputBoundary.deleteShop(vendorToken,shopId);
+        return this.deleteShopInputBoundary.deleteShop(vendorToken,shopId);
     }
 
-    public void runReadShop(String input){
+    public JSONObject runReadShop(String input){
         JSONObject read_data = new JSONObject(input);
         if(!read_data.has("shopId")){
 
@@ -74,6 +75,6 @@ public class ShopController {
         String shopId = read_data.getString("shopId");
 
 
-        this.readShopInputBoundary.readShop(shopId);
+        return this.readShopInputBoundary.readShop(shopId);
     }
 }

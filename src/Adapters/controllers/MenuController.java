@@ -16,7 +16,7 @@ public class MenuController {
     }
 
 
-    public void runClearMenu(String input){
+    public JSONObject runClearMenu(String input){
         JSONObject delete_data = new JSONObject(input);
         if(!delete_data.has("vendorToken")){
 
@@ -25,7 +25,7 @@ public class MenuController {
         String vendorToken = delete_data.getString("vendorToken");
 
 
-        this.clearMenuUseCase.clearMenu(vendorToken);
+        return this.clearMenuUseCase.clearMenu(vendorToken);
     }
 
     public void runReadMenu(String input){

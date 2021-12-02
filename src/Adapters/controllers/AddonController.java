@@ -23,7 +23,8 @@ public class AddonController {
 
     }
 
-    public void runUpdateAddon(String input){
+    public JSONObject runUpdateAddon(String input){
+
         JSONObject update_data = new JSONObject(input);
         if(!(update_data.has("vendorToken") && update_data.has("addonID") && update_data.has("addonObject"))){
 
@@ -33,11 +34,10 @@ public class AddonController {
         String addonId = update_data.getString("addonId");
         JSONObject addon = update_data.getJSONObject("addonObject");
 
-
-        this.updateAddonInputBoundary.updateAddon(vendorToken, addonId,addon);
+        return this.updateAddonInputBoundary.updateAddon(vendorToken, addonId,addon);
     }
 
-    public void runCreateAddon(String input){
+    public JSONObject runCreateAddon(String input){
         JSONObject create_data = new JSONObject(input);
         if(!(create_data.has("addonID") && create_data.has("addonObject"))){
 
@@ -47,11 +47,11 @@ public class AddonController {
         JSONObject new_addon = create_data.getJSONObject("addonObject");
 
 
-        this.createAddonInputBoundary.createAddon(vendorToken,new_addon);
+        return this.createAddonInputBoundary.createAddon(vendorToken,new_addon);
     }
 
 
-    public void runDeleteAddon(String input){
+    public JSONObject runDeleteAddon(String input){
         JSONObject delete_data = new JSONObject(input);
         if(!(delete_data.has("addonID") && delete_data.has("vendorToken"))){
 
@@ -61,10 +61,10 @@ public class AddonController {
         String addonId = delete_data.getString("addonId");
 
 
-        this.deleteAddonInputBoundary.deleteAddon(vendorToken,addonId);
+        return this.deleteAddonInputBoundary.deleteAddon(vendorToken,addonId);
     }
 
-    public void runReadAddon(String input){
+    public JSONObject runReadAddon(String input){
         JSONObject read_data = new JSONObject(input);
         if(!read_data.has("addonID")){
 
@@ -73,7 +73,7 @@ public class AddonController {
         String addonId = read_data.getString("addonId");
 
 
-        this.readAddonInputBoundary.readAddon(addonId);
+        return this.readAddonInputBoundary.readAddon(addonId);
     }
 
 

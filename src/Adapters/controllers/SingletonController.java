@@ -23,7 +23,7 @@ public class SingletonController {
         this.updateSingletonInputBoundary = updateSingletonInputBoundary;
     }
 
-    public void runUpdateSingleton(String input){
+    public JSONObject runUpdateSingleton(String input){
         JSONObject update_data = new JSONObject(input);
         if(!(update_data.has("vendorToken") && update_data.has("singletonId") &&
                 update_data.has("singletonObject"))){
@@ -35,10 +35,10 @@ public class SingletonController {
         JSONObject singletonObject = update_data.getJSONObject("singletonObject");
 
 
-        this.updateSingletonInputBoundary.updateSingleton(vendorToken, singletonId,singletonObject);
+        return this.updateSingletonInputBoundary.updateSingleton(vendorToken, singletonId,singletonObject);
     }
 
-    public void runCreateSingleton(String input){
+    public JSONObject runCreateSingleton(String input){
         JSONObject create_data = new JSONObject(input);
         if(!(create_data.has("singletonID") && create_data.has("singletonObject"))){
 
@@ -48,11 +48,11 @@ public class SingletonController {
         JSONObject new_singleton = create_data.getJSONObject("singletonObject");
 
 
-        this.createSingletonInputBoundary.createSingleton(vendorToken,new_singleton);
+        return this.createSingletonInputBoundary.createSingleton(vendorToken,new_singleton);
     }
 
 
-    public void runDeleteSingleton(String input){
+    public JSONObject runDeleteSingleton(String input){
         JSONObject delete_data = new JSONObject(input);
         if(!(delete_data.has("singletonID") && delete_data.has("vendorToken"))){
 
@@ -62,10 +62,11 @@ public class SingletonController {
         String singletonId = delete_data.getString("singletonId");
 
 
-        this.deleteSingletonInputBoundary.deleteSingleton(vendorToken,singletonId);
+        return this.deleteSingletonInputBoundary.deleteSingleton(vendorToken,singletonId);
     }
 
-    public void runReadSingleton(String input){
+    public JSONObject runReadSingleton(String input){
+
         JSONObject read_data = new JSONObject(input);
         if(!read_data.has("singletonId")){
 
@@ -74,6 +75,6 @@ public class SingletonController {
         String singletonId = read_data.getString("singletonId");
 
 
-        this.readSingletonInputBoundary.readSingleton(singletonId);
+        return this.readSingletonInputBoundary.readSingleton(singletonId);
     }
 }

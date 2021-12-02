@@ -23,7 +23,7 @@ public class OrderController {
         this.updateOrderInputBoundary = updateOrderInputBoundary;
     }
 
-    public void runUpdateOrder(String input){
+    public JSONObject runUpdateOrder(String input){
         JSONObject update_data = new JSONObject(input);
         if(!(update_data.has("vendorToken") && update_data.has("orderId") &&
                 update_data.has("orderObject"))){
@@ -35,10 +35,10 @@ public class OrderController {
         JSONObject orderObject = update_data.getJSONObject("orderObject");
 
 
-        this.updateOrderInputBoundary.updateOrder(vendorToken, orderId,orderObject);
+        return this.updateOrderInputBoundary.updateOrder(vendorToken, orderId,orderObject);
     }
 
-    public void runCreateOrder(String input){
+    public JSONObject runCreateOrder(String input){
         JSONObject create_data = new JSONObject(input);
         if(!(create_data.has("orderID") && create_data.has("orderObject"))){
 
@@ -48,11 +48,11 @@ public class OrderController {
         JSONObject new_order = create_data.getJSONObject("orderObject");
 
 
-        this.createOrderInputBoundary.createOrder(vendorToken,new_order);
+        return this.createOrderInputBoundary.createOrder(vendorToken,new_order);
     }
 
 
-    public void runDeleteOrder(String input){
+    public JSONObject runDeleteOrder(String input){
         JSONObject delete_data = new JSONObject(input);
         if(!(delete_data.has("orderID") && delete_data.has("vendorToken"))){
 
@@ -62,10 +62,10 @@ public class OrderController {
         String orderId = delete_data.getString("orderId");
 
 
-        this.deleteOrderInputBoundary.deleteOrder(vendorToken,orderId);
+        return this.deleteOrderInputBoundary.deleteOrder(vendorToken,orderId);
     }
 
-    public void runReadOrder(String input){
+    public JSONObject runReadOrder(String input){
         JSONObject read_data = new JSONObject(input);
         if(!read_data.has("orderId")){
 
@@ -74,6 +74,6 @@ public class OrderController {
         String orderId = read_data.getString("orderId");
 
 
-        this.readOrderInputBoundary.readOrder(orderId);
+        return this.readOrderInputBoundary.readOrder(orderId);
     }
 }

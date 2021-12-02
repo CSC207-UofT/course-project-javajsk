@@ -23,7 +23,7 @@ public class UserController {
         this.updateUserInputBoundary = updateUserInputBoundary;
     }
 
-    public void runUpdateUser(String input){
+    public JSONObject runUpdateUser(String input){
         JSONObject update_data = new JSONObject(input);
         if(!(update_data.has("vendorToken") && update_data.has("userId") &&
                 update_data.has("userObject"))){
@@ -35,10 +35,10 @@ public class UserController {
         JSONObject userObject = update_data.getJSONObject("userObject");
 
 
-        this.updateUserInputBoundary.updateUser(vendorToken, userId,userObject);
+        return this.updateUserInputBoundary.updateUser(vendorToken, userId,userObject);
     }
 
-    public void runCreateUser(String input){
+    public JSONObject runCreateUser(String input){
         JSONObject create_data = new JSONObject(input);
         if(!(create_data.has("userID") && create_data.has("userObject"))){
 
@@ -48,11 +48,11 @@ public class UserController {
         JSONObject new_user = create_data.getJSONObject("userObject");
 
 
-        this.createUserInputBoundary.createUser(vendorToken,new_user);
+        return this.createUserInputBoundary.createUser(vendorToken,new_user);
     }
 
 
-    public void runDeleteUser(String input){
+    public JSONObject runDeleteUser(String input){
         JSONObject delete_data = new JSONObject(input);
         if(!(delete_data.has("userID") && delete_data.has("vendorToken"))){
 
@@ -62,10 +62,11 @@ public class UserController {
         String userId = delete_data.getString("userId");
 
 
-        this.deleteUserInputBoundary.deleteUser(vendorToken,userId);
+        return this.deleteUserInputBoundary.deleteUser(vendorToken,userId);
     }
 
-    public void runReadUser(String input){
+    public JSONObject runReadUser(String input){
+
         JSONObject read_data = new JSONObject(input);
         if(!read_data.has("userId")){
 
@@ -74,6 +75,6 @@ public class UserController {
         String userId = read_data.getString("userId");
 
 
-        this.readUserInputBoundary.readUser(userId);
+        return this.readUserInputBoundary.readUser(userId);
     }
 }

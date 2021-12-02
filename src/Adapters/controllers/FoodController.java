@@ -23,7 +23,7 @@ public class FoodController {
         this.updateFoodInputBoundary = updateFoodInputBoundary;
     }
 
-    public void runUpdateFood(String input){
+    public JSONObject runUpdateFood(String input){
         JSONObject update_data = new JSONObject(input);
         if(!(update_data.has("vendorToken") && update_data.has("foodId") &&
                 update_data.has("foodObject"))){
@@ -35,10 +35,10 @@ public class FoodController {
         JSONObject foodObject = update_data.getJSONObject("foodObject");
 
 
-        this.updateFoodInputBoundary.updateFood(vendorToken, foodId,foodObject);
+        return this.updateFoodInputBoundary.updateFood(vendorToken, foodId,foodObject);
     }
 
-    public void runCreateFood(String input){
+    public JSONObject runCreateFood(String input){
         JSONObject create_data = new JSONObject(input);
         if(!(create_data.has("foodID") && create_data.has("foodObject"))){
 
@@ -48,11 +48,11 @@ public class FoodController {
         JSONObject new_food = create_data.getJSONObject("foodObject");
 
 
-        this.createFoodInputBoundary.createFood(vendorToken,new_food);
+        return this.createFoodInputBoundary.createFood(vendorToken,new_food);
     }
 
 
-    public void runDeleteFood(String input){
+    public JSONObject runDeleteFood(String input){
         JSONObject delete_data = new JSONObject(input);
         if(!(delete_data.has("foodID") && delete_data.has("vendorToken"))){
 
@@ -62,10 +62,10 @@ public class FoodController {
         String foodId = delete_data.getString("foodId");
 
 
-        this.deleteFoodInputBoundary.deleteFood(vendorToken,foodId);
+        return this.deleteFoodInputBoundary.deleteFood(vendorToken,foodId);
     }
 
-    public void runReadFood(String input){
+    public JSONObject runReadFood(String input){
         JSONObject read_data = new JSONObject(input);
         if(!read_data.has("foodId")){
 
@@ -74,6 +74,6 @@ public class FoodController {
         String foodId = read_data.getString("foodId");
 
 
-        this.readFoodInputBoundary.readFood(foodId);
+        return this.readFoodInputBoundary.readFood(foodId);
     }
 }
