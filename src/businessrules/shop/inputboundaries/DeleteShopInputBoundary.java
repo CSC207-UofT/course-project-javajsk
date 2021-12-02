@@ -1,5 +1,7 @@
 package businessrules.shop.inputboundaries;
 
+import org.json.JSONObject;
+
 public interface DeleteShopInputBoundary {
-    boolean deleteShop(String vendorToken, String shopId);
+    JSONObject deleteShop(String vendorToken, String shopId);
 }

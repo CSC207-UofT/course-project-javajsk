@@ -4,7 +4,6 @@ import businessrules.dai.ShopRepository;
 import businessrules.dai.VendorRepository;
 import businessrules.loaders.ShopLoader;
 import businessrules.loaders.VendorLoader;
-import businessrules.outputboundary.ErrorModel;
 import businessrules.outputboundary.ShopModel;
 import businessrules.shop.inputboundaries.UpdateShopInputBoundary;
 import entities.Shop;
@@ -17,46 +16,36 @@ public class UpdateShopUseCase implements UpdateShopInputBoundary {
     ShopModel shopModel;
     VendorLoader vendorLoader;
     ShopLoader shopLoader;
-    ErrorModel errorHandler;
 
-    /**
-     * Constructor
-     */
-    public UpdateShopUseCase(ShopRepository shopRepo, VendorRepository vendorRepo,
-                             ShopModel shopMod, VendorLoader vendorLoad, ShopLoader shopLoad,
-                             ErrorModel errorHandler) {
-        this.shopRepository = shopRepo;
-        this.vendorRepository = vendorRepo;
-        this.shopModel = shopMod;
-        this.vendorLoader = vendorLoad;
-        this.shopLoader = shopLoad;
-        this.errorHandler = errorHandler;
+    public UpdateShopUseCase(ShopRepository sR, VendorRepository vR,
+                             ShopModel sM, VendorLoader vL, ShopLoader sL) {
+        this.shopRepository = sR;
+        this.vendorRepository = vR;
+        this.shopModel = sM;
+        this.vendorLoader = vL;
+        this.shopLoader = sL;
     }
 
     @Override
-    public boolean updateShop(String vendorToken, String shopId, JSONObject shopData) {
+    public JSONObject updateShop(String vendorToken, String shopId, JSONObject shopData) {
         Vendor vendor = vendorLoader.loadVendorFromToken(vendorToken);
         Shop shop = shopLoader.loadShopFromId(shopId);
 
         if(vendor == null || shop == null){
-            errorHandler.displayError("Error. Invalid vendor token or shop id");
-            return false;
+            return shopModel.displayError("Error. Invalid vendor token or shop id");
         }
 
-        Shop newShop = ShopLoader.loadShop(shopData);
+        Shop newShop = shopLoader.loadShop(shopData);
         newShop.setId(shopId); //id of shop should not be changing
 
         vendor.setShop(newShop);
 
         if(!shopRepository.updateShop(shopId, shopData)){
-            errorHandler.displayError("Error. Unable to update shop.");
-            return false;
+            return shopModel.displayError("Error. Unable to update shop.");
         } else if(!vendorRepository.updateUser(vendor.getId(), vendor.jsonify())){
-            errorHandler.displayError("Error. Unable to update shop for vendor");
-            return false;
+            return shopModel.displayError("Error. Unable to update shop for vendor");
         }
 
-        shopModel.updateShop(shopId, shopData);
-        return true;
+        return shopModel.displayShop(shopData);
     }
 }
