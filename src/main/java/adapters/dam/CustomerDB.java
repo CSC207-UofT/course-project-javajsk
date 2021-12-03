@@ -18,11 +18,6 @@ public class CustomerDB implements CustomerRepository {
     }
 
     @Override
-    public boolean delete(String id) {
-        return false;
-    }
-
-    @Override
     public String create(Customer item) {
         return null;
     }

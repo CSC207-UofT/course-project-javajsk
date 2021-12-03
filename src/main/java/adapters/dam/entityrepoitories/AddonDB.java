@@ -28,11 +28,6 @@ public class AddonDB implements Repository<Addon> {
     }
 
     @Override
-    public boolean delete(String id) {
-        return false;
-    }
-
-    @Override
     public String create(Addon item) {
         return null;
     }
@@ -47,7 +42,7 @@ public class AddonDB implements Repository<Addon> {
         return null;
     }
 
-    private Addon loadAddonFromJSON(JSONObject addonObj){
+    public Addon loadAddonFromJSON(JSONObject addonObj){
         if(!addonObj.has("id") || !addonObj.has("name") || !addonObj.has("price") ||
                 !addonObj.has("addonTypes") || !addonObj.has("isAvailable") || !addonObj.has("shopId")  ){
             return null;

@@ -24,10 +24,6 @@ public class FoodDB implements Repository<Food> {
         return false;
     }
 
-    @Override
-    public boolean delete(String id) {
-        return false;
-    }
 
     @Override
     public String create(Food item) {
@@ -45,6 +41,6 @@ public class FoodDB implements Repository<Food> {
     }
 
     public Food loadFoodFromJSON(JSONObject rawData){
-
+        return null;
     }
 }

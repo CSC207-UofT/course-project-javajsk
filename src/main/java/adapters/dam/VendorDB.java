@@ -18,11 +18,6 @@ public class VendorDB implements VendorRepository {
     }
 
     @Override
-    public boolean delete(String id) {
-        return false;
-    }
-
-    @Override
     public String create(Vendor item) {
         return null;
     }

@@ -17,6 +17,11 @@ import java.util.List;
 
 public class CartDB implements Repository<Cart> {
     DBGateway databaseConnector;
+
+    public CartDB(DBGateway databaseConnector) {
+        this.databaseConnector = databaseConnector;
+    }
+
     @Override
     public Cart read(String id) {
         return null;
@@ -27,10 +32,6 @@ public class CartDB implements Repository<Cart> {
         return false;
     }
 
-    @Override
-    public boolean delete(String id) {
-        return false;
-    }
 
     @Override
     public String create(Cart item) {
@@ -47,7 +48,7 @@ public class CartDB implements Repository<Cart> {
         return null;
     }
 
-    private Cart loadCartFromJSON(JSONObject object){
+    public Cart loadCartFromJSON(JSONObject object){
         if(!object.has("id") || !object.has("shopId") || !object.has("contents") ){
             return null;
         }
@@ -87,7 +88,7 @@ public class CartDB implements Repository<Cart> {
         return selectionData;
     }
 
-    private Selection parseSelection(JSONObject rawSelection) throws JSONException{
+    public Selection parseSelection(JSONObject rawSelection) throws JSONException{
         Iterator<String> str = rawSelection.keys();
         AddonDB addonLoader = new AddonDB(databaseConnector);
         HashMap<Addon, Integer> finalValue = new HashMap<>();
