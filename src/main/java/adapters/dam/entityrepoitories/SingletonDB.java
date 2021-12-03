@@ -2,6 +2,7 @@ package adapters.dam.entityrepoitories;
 
 import adapters.dam.DBGateway;
 import businessrules.dai.Repository;
+import entities.Order;
 import entities.Selection;
 import entities.Singleton;
 import org.json.JSONArray;
@@ -13,32 +14,59 @@ import java.util.List;
 
 public class SingletonDB implements Repository<Singleton> {
     DBGateway dbConnector;
+    final String tableName = "Singleton";
+
     static final String[] keys = {"id","price","name","description",
             "allowedAddonTypes","defaultSelection",
             "availability","shopId"};
+
+    public SingletonDB(DBGateway dbConnector) {
+        this.dbConnector = dbConnector;
+    }
+
     @Override
     public Singleton read(String id) {
-        return null;
+        return loadSingletonFromJSON(dbConnector.read(tableName, id));
     }
 
     @Override
     public boolean update(String id, Singleton item) {
-        return false;
+        return dbConnector.update(tableName, id, loadJSONFromSingleton(item));
+
     }
+
 
     @Override
     public String create(Singleton item) {
-        return null;
+        return dbConnector.create(tableName, loadJSONFromSingleton(item));
     }
 
     @Override
     public List<Singleton> readMultiple(String parameter, String needle) {
-        return null;
+        List<Singleton> singletonList = new ArrayList<>();
+        List<JSONObject> rawSingletons = dbConnector.readMultiple(tableName, parameter, needle);
+        for(JSONObject rawSingleton: rawSingletons){
+            singletonList.add(loadSingletonFromJSON(rawSingleton));
+        }
+        return singletonList;
     }
+
 
     @Override
     public Singleton findOneByFieldName(String fieldName, String needle) {
-        return null;
+        return loadSingletonFromJSON(dbConnector.readOne(tableName,fieldName,needle));
+    }
+    public static JSONObject loadJSONFromSingleton(Singleton singleton){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", singleton.getId());
+        jsonObject.put("price", singleton.getPrice());
+        jsonObject.put("name", singleton.getName());
+        jsonObject.put("description", singleton.getDescription());
+        jsonObject.put("allowedAddonTypes", singleton.getAllowedAddonTypes());
+        jsonObject.put("defaultSelection", CartDB.loadJSONfromSelection(singleton.getDefaultSelection()));
+        jsonObject.put("availability", singleton.isAvailable());
+        jsonObject.put("shopId", singleton.getShopId());
+        return jsonObject;
     }
 
     public Singleton loadSingletonFromJSON(JSONObject rawSingleton){

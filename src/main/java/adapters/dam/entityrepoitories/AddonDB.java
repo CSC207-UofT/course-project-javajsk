@@ -12,6 +12,7 @@ import java.util.List;
 
 public class AddonDB implements Repository<Addon> {
     DBGateway databaseConnector;
+    final String tableName = "Addon";
 
     public AddonDB(DBGateway databaseConnector) {
         this.databaseConnector = databaseConnector;
@@ -19,27 +20,46 @@ public class AddonDB implements Repository<Addon> {
 
     @Override
     public Addon read(String id) {
-        return null;
+        JSONObject rawData = databaseConnector.read(tableName, id);
+        return loadAddonFromJSON(rawData);
     }
 
     @Override
     public boolean update(String id, Addon item) {
-        return false;
+        return databaseConnector.update(tableName,id, loadJSONfromAddon(item));
     }
 
     @Override
     public String create(Addon item) {
-        return null;
+        return databaseConnector.create(tableName, loadJSONfromAddon(item));
     }
 
     @Override
     public List<Addon> readMultiple(String parameter, String needle) {
-        return null;
+        List<Addon> addonList = new ArrayList<>();
+        List<JSONObject> rawAddons = databaseConnector.readMultiple(tableName, parameter, needle);
+        for(JSONObject rawAddon: rawAddons){
+            addonList.add(loadAddonFromJSON(rawAddon));
+        }
+        return addonList;
     }
 
     @Override
     public Addon findOneByFieldName(String fieldName, String needle) {
-        return null;
+        return loadAddonFromJSON(databaseConnector.readOne(tableName, fieldName, needle));
+    }
+
+
+    public static JSONObject loadJSONfromAddon(Addon addon){
+        JSONObject finalObject = new JSONObject();
+        assert !addon.getId().equals("N/A");
+        finalObject.put("id", addon.getId() );
+        finalObject.put("price", addon.getPrice());
+        finalObject.put("name", addon.getName());
+        finalObject.put("addonTypes", addon.getAddonTypes());
+        finalObject.put("isAvailable", addon.isAvailable());
+        finalObject.put("shopId", addon.getShopId());
+        return finalObject;
     }
 
     public Addon loadAddonFromJSON(JSONObject addonObj){

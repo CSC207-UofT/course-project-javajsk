@@ -12,42 +12,61 @@ import java.util.List;
 
 public class ShopDB implements Repository<Shop> {
     DBGateway dbGateway;
+    final String tableName = "Shop";
     @Override
     public Shop read(String id) {
-        return null;
+        return loadShopFromJSON(dbGateway.read(tableName, id));
     }
 
     @Override
     public boolean update(String id, Shop item) {
-        return false;
+        return dbGateway.update(tableName, id, loadJSONFromShop(item));
+
     }
 
 
     @Override
     public String create(Shop item) {
-        return null;
+        return dbGateway.create(tableName, loadJSONFromShop(item));
     }
 
     @Override
     public List<Shop> readMultiple(String parameter, String needle) {
-        return null;
+        List<Shop> shopList = new ArrayList<>();
+        List<JSONObject> rawShops = dbGateway.readMultiple(tableName, parameter, needle);
+        for(JSONObject rawShop: rawShops){
+            shopList.add(loadShopFromJSON(rawShop));
+        }
+        return shopList;
     }
+
 
     @Override
     public Shop findOneByFieldName(String fieldName, String needle) {
-        return null;
+        return loadShopFromJSON(dbGateway.readOne(tableName,fieldName,needle));
+    }
+
+
+    public JSONObject loadJSONFromShop(Shop shop){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", shop.getId());
+        jsonObject.put("name", shop.getName());
+        jsonObject.put("location", shop.getLocation());
+        jsonObject.put("menu", loadJSONfromMenu(shop.getMenu()));
+        jsonObject.put("isOpen", shop.isOpen());
+        return jsonObject;
     }
 
     public Shop loadShopFromJSON(JSONObject rawShop){
+        OrderDB orderLoader = new OrderDB(dbGateway);
         try{
             String id = rawShop.getString("id");
             String name = rawShop.getString("name");
             String location = rawShop.getString("location");
-            Boolean isOpen = rawShop.getBoolean("isOpen");
+            boolean isOpen = rawShop.getBoolean("isOpen");
             JSONObject rawMenu = rawShop.getJSONObject("menu");
-            // TODO: Change to load from db raw list of orders.
-            JSONArray rawOrderBook = rawShop.getJSONArray("orders");
-            OrderBook orderBook = loadOrderBookFromJSON(rawOrderBook);
+            List<Order> orderList = orderLoader.readMultiple("shopId", id);
+            OrderBook orderBook = new OrderBook(orderList);
             Menu menu = loadMenuFromJSON(rawMenu);
             return new Shop(id, name, location, isOpen, menu, orderBook);
         }catch(JSONException e){
@@ -63,11 +82,11 @@ public class ShopDB implements Repository<Shop> {
             JSONArray rawAddons = rawMenu.getJSONArray("addons");
             List<Food> foods = new ArrayList<>();
             for (int i = 0; i < rawFoods.length(); i++) {
-                foods.add(foodLoader.loadFoodFromJSON(rawFoods.getJSONObject(i)));
+                foods.add(foodLoader.read(rawFoods.getString(i)));
             }
             List<Addon> addons = new ArrayList<>();
             for (int i = 0; i < rawFoods.length(); i++) {
-                addons.add(addonLoader.loadAddonFromJSON(rawFoods.getJSONObject(i)));
+                addons.add(addonLoader.read(rawFoods.getString(i)));
             }
             return new Menu(foods, addons);
         }catch (JSONException e){
@@ -75,12 +94,19 @@ public class ShopDB implements Repository<Shop> {
         }
     }
 
-    public OrderBook loadOrderBookFromJSON(JSONArray rawOrderBook){
-        OrderDB orderLoader = new OrderDB(dbGateway);
-        List<Order> orderList = new ArrayList<>();
-        for(int i=0;i<rawOrderBook.length();i++){
-            orderList.add(orderLoader.loadOrderFromJSON(rawOrderBook.getJSONObject(i)));
+    public static JSONObject loadJSONfromMenu(Menu menu){
+        JSONObject jsonObject = new JSONObject();
+        JSONArray foods = new JSONArray();
+        JSONArray addons = new JSONArray();
+        for(Food food: menu.getFoods()){
+            foods.put(food.getId());
         }
-        return new OrderBook(orderList);
+        for(Addon addon: menu.getAddons()){
+            addons.put(addon.getId());
+        }
+        jsonObject.put("foods", foods);
+        jsonObject.put("addons", addons);
+        return jsonObject;
     }
+
 }

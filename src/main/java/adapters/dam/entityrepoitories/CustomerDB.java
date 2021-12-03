@@ -1,34 +1,34 @@
-package adapters.dam;
+package adapters.dam.entityrepoitories;
 
-import businessrules.dai.VendorRepository;
+import businessrules.dai.CustomerRepository;
+import entities.Customer;
 import entities.User;
-import entities.Vendor;
 
 import java.util.List;
 
-public class VendorDB implements VendorRepository {
+public class CustomerDB implements CustomerRepository {
     @Override
-    public Vendor read(String id) {
+    public Customer read(String id) {
         return null;
     }
 
     @Override
-    public boolean update(String id, Vendor item) {
+    public boolean update(String id, Customer item) {
         return false;
     }
 
     @Override
-    public String create(Vendor item) {
+    public String create(Customer item) {
         return null;
     }
 
     @Override
-    public List<Vendor> readMultiple(String parameter, String needle) {
+    public List<Customer> readMultiple(String parameter, String needle) {
         return null;
     }
 
     @Override
-    public Vendor findOneByFieldName(String fieldName, String needle) {
+    public Customer findOneByFieldName(String fieldName, String needle) {
         return null;
     }
 
