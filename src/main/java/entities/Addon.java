@@ -144,4 +144,5 @@ public class Addon{
     public void setShopId(String shopId) {
         this.shopId = shopId;
     }
+
 }
