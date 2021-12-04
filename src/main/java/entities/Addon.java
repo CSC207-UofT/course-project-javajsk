@@ -146,7 +146,7 @@ public class Addon{
     public void setShopId(String shopId) {
         this.shopId = shopId;
     }
-
+    @Override
     public String toString(){
         JSONObject finalObject = new JSONObject();
         assert !this.id.equals("N/A");

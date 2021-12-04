@@ -45,6 +45,7 @@ public class Selection {
         return this.singletonSelection.keySet();
     }
 
+    @Override
     public String toString(){
         JSONObject jsonObject = new JSONObject();
         HashMap<Addon, Integer> singletonSelection = this.singletonSelection;

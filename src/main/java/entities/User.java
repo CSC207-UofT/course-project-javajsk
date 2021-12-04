@@ -37,7 +37,7 @@ public abstract class User{
     public void setHashedPassword(String hashedPassword) {
         this.hashedPassword = hashedPassword;
     }
-
+    @Override
     public String toString(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", this.id);

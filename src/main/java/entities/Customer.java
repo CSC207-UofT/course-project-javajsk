@@ -63,7 +63,7 @@ public class Customer extends User {
     public void emptyCart(){
         this.currentCart.empty();
     }
-
+    @Override
     public String toString(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("orderHistory", this.orderHistory.toString());

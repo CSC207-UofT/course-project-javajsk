@@ -51,6 +51,7 @@ public class Vendor extends User{
         }
         return false;
     }
+    @Override
     public String toString(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", this.id);

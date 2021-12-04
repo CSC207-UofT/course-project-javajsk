@@ -143,7 +143,7 @@ public class Shop{
         isOpen = open;
     }
 
-
+    @Override
     public String toString(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id",this.id);

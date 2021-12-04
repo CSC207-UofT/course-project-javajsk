@@ -180,6 +180,7 @@ public class Menu{
         return availFoods;
     }
 
+    @Override
     public String toString(){
         JSONObject jsonObject = new JSONObject();
         JSONArray foods = new JSONArray();
