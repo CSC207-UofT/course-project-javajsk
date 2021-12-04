@@ -1,5 +1,8 @@
 package entities;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -141,6 +144,34 @@ public class Cart{
         }
         selections.remove(oldSel);
         selections.add(index, newSel);
+    }
+
+    @Override
+    public String toString() {
+        JSONObject finalValue = new JSONObject();
+        assert !this.id.equals("N/A");
+        finalValue.put("id", this.id);
+        finalValue.put("shopId", this.shopId);
+        JSONObject contentsJson = new JSONObject();
+        HashMap<Food, List<Selection[]>> contents = this.contents;
+        for(Food food: contents.keySet()){
+            List<Selection[]> selections = contents.get(food);
+            JSONArray selectionsJson = new JSONArray();
+            for(Selection[] selectionArr: selections){
+                selectionsJson.put(loadJSONfromSelectionLst(selectionArr));
+            }
+            contentsJson.put(food.getId(), selectionsJson);
+        }
+        finalValue.put("contents", contentsJson);
+        return finalValue.toString();
+    }
+
+    public static JSONArray loadJSONfromSelectionLst(Selection[] input){
+        JSONArray jsonSelectionList = new JSONArray();
+        for(Selection sel: input){
+            jsonSelectionList.put(sel.toString());
+        }
+        return jsonSelectionList;
     }
 
 }

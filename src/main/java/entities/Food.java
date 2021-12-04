@@ -1,5 +1,9 @@
 package entities;
 
+import adapters.dam.entityrepoitories.SingletonDB;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * The type Food.
  */
@@ -173,5 +177,18 @@ public class Food {
             }
         }
         return true;
+    }
+    public String toString(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", this.id);
+        jsonObject.put("name", this.name);
+        jsonObject.put("description", this.description);
+        jsonObject.put("price", this.price);
+        JSONArray arr = new JSONArray();
+        for(Singleton sel: this.components){
+            arr.put(SingletonDB.loadJSONFromSingleton(sel));
+        }
+        jsonObject.put("components", arr);
+        return jsonObject.toString();
     }
 }
