@@ -6,8 +6,8 @@ import businessrules.food.inputboundaries.CreateFood;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import EntitiesUnitTest.Food;
-import EntitiesUnitTest.Vendor;
+import entities.Food;
+import entities.Vendor;
 
 import java.util.List;
 

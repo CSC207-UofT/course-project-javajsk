@@ -1,7 +1,7 @@
 package businessrules.menu.inputboundaries;
 
 import businessrules.outputboundaries.ResponseObject;
-import EntitiesUnitTest.Addon;
+import entities.Addon;
 
 public interface SetAddonAvailability {
     ResponseObject setAddonAvailability(String vendorToken, Addon addon, boolean newAvailability);

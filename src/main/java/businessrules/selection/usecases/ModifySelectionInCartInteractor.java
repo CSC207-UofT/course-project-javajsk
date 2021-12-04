@@ -7,10 +7,10 @@ import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.selection.inputboundaries.ModifySelectionInCart;
-import EntitiesUnitTest.Cart;
-import EntitiesUnitTest.Customer;
-import EntitiesUnitTest.Food;
-import EntitiesUnitTest.Selection;
+import entities.Cart;
+import entities.Customer;
+import entities.Food;
+import entities.Selection;
 
 public class ModifySelectionInCartInteractor implements ModifySelectionInCart {
     CustomerRepository customerRepository;

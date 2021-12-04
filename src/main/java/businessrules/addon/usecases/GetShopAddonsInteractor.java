@@ -5,7 +5,7 @@ import businessrules.dai.Repository;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import EntitiesUnitTest.Addon;
+import entities.Addon;
 
 import java.util.List;
 

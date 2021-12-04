@@ -1,4 +1,4 @@
-package EntitiesUnitTest;
+package entities;
 
 public abstract class User{
     public String id;

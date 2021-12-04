@@ -5,8 +5,8 @@ import businessrules.menu.inputboundaries.GetAvailableAddons;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import EntitiesUnitTest.Addon;
-import EntitiesUnitTest.Shop;
+import entities.Addon;
+import entities.Shop;
 
 import java.util.List;
 

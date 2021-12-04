@@ -1,4 +1,4 @@
-package EntitiesUnitTest;
+package entities;
 
 /**
  * The type Shop.

@@ -5,8 +5,8 @@ import businessrules.order.inputboundaries.GetShopOrders;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import EntitiesUnitTest.Order;
-import EntitiesUnitTest.Vendor;
+import entities.Order;
+import entities.Vendor;
 
 public class GetShopOrdersInteractor implements GetShopOrders {
     VendorRepository vendorRepository;

@@ -7,10 +7,10 @@ import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
-import EntitiesUnitTest.Food;
-import EntitiesUnitTest.Menu;
-import EntitiesUnitTest.Shop;
-import EntitiesUnitTest.Vendor;
+import entities.Food;
+import entities.Menu;
+import entities.Shop;
+import entities.Vendor;
 
 public class AddFoodToMenuInteractor implements AddFoodToMenu {
     VendorRepository vendorRepository;

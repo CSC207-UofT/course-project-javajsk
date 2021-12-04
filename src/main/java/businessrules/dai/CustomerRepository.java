@@ -1,6 +1,6 @@
 package businessrules.dai;
 
-import EntitiesUnitTest.Customer;
+import entities.Customer;
 
 public interface CustomerRepository extends UserRepository,Repository<Customer>{
 }

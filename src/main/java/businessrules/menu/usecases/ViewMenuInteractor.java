@@ -5,8 +5,8 @@ import businessrules.menu.inputboundaries.ViewMenu;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import EntitiesUnitTest.Menu;
-import EntitiesUnitTest.Shop;
+import entities.Menu;
+import entities.Shop;
 
 public class ViewMenuInteractor implements ViewMenu {
     Repository<Shop> shopRepository;

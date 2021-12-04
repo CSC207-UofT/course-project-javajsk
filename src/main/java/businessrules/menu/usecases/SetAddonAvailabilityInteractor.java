@@ -7,10 +7,10 @@ import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
-import EntitiesUnitTest.Addon;
-import EntitiesUnitTest.Menu;
-import EntitiesUnitTest.Shop;
-import EntitiesUnitTest.Vendor;
+import entities.Addon;
+import entities.Menu;
+import entities.Shop;
+import entities.Vendor;
 
 public class SetAddonAvailabilityInteractor implements SetAddonAvailability {
     ObjectBoundary<Menu> menuObjectBoundary;

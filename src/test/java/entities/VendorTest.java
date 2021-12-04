@@ -1,9 +1,5 @@
-package EntitiesUnitTest;
+package entities;
 
-import entities.Menu;
-import entities.OrderBook;
-import entities.Shop;
-import entities.Vendor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

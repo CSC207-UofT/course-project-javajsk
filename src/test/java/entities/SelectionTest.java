@@ -1,7 +1,5 @@
-package EntitiesUnitTest;
+package entities;
 
-import entities.Addon;
-import entities.Selection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

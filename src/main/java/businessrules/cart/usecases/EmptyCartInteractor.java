@@ -5,8 +5,8 @@ import businessrules.dai.CustomerRepository;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import EntitiesUnitTest.Cart;
-import EntitiesUnitTest.Customer;
+import entities.Cart;
+import entities.Customer;
 
 public class EmptyCartInteractor implements EmptyCart {
     CustomerRepository customerRepository;

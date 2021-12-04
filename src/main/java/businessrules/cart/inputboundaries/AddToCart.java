@@ -1,7 +1,7 @@
 package businessrules.cart.inputboundaries;
 
 import businessrules.outputboundaries.ResponseObject;
-import EntitiesUnitTest.Selection;
+import entities.Selection;
 
 public interface AddToCart {
     ResponseObject addToCart(String userToken, String shopId,

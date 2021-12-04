@@ -7,9 +7,9 @@ import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
 import businessrules.selection.inputboundaries.ModifyDefaultSelection;
-import EntitiesUnitTest.Selection;
-import EntitiesUnitTest.Singleton;
-import EntitiesUnitTest.Vendor;
+import entities.Selection;
+import entities.Singleton;
+import entities.Vendor;
 
 public class ModifyDefaultSelectionInteractor implements ModifyDefaultSelection {
     VendorRepository vendorRepository;

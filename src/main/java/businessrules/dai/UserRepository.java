@@ -1,6 +1,6 @@
 package businessrules.dai;
 
-import EntitiesUnitTest.User;
+import entities.User;
 
 public interface UserRepository {
     User getUserFromToken(String userToken);

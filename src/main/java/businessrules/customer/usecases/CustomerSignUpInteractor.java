@@ -7,7 +7,7 @@ import businessrules.outputboundaries.CustomerBoundary;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import EntitiesUnitTest.Customer;
+import entities.Customer;
 
 public class CustomerSignUpInteractor implements CustomerSignUp {
     CustomerRepository customerRepository;

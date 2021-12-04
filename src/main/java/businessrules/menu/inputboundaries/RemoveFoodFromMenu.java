@@ -1,7 +1,7 @@
 package businessrules.menu.inputboundaries;
 
 import businessrules.outputboundaries.ResponseObject;
-import EntitiesUnitTest.Food;
+import entities.Food;
 
 public interface RemoveFoodFromMenu {
     ResponseObject removeFood(String vendorToken, Food food);

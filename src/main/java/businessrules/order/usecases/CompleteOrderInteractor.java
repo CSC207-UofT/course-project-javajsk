@@ -4,8 +4,8 @@ import businessrules.dai.Repository;
 import businessrules.dai.VendorRepository;
 import businessrules.order.inputboundaries.CompleteOrder;
 import businessrules.outputboundaries.*;
-import EntitiesUnitTest.Order;
-import EntitiesUnitTest.Vendor;
+import entities.Order;
+import entities.Vendor;
 
 import java.util.List;
 

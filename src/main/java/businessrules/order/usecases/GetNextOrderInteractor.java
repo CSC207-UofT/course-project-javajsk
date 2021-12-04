@@ -5,8 +5,8 @@ import businessrules.order.inputboundaries.GetNextOrder;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import EntitiesUnitTest.Order;
-import EntitiesUnitTest.Vendor;
+import entities.Order;
+import entities.Vendor;
 
 public class GetNextOrderInteractor implements GetNextOrder {
     VendorRepository vendorRepository;

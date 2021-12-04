@@ -5,8 +5,8 @@ import businessrules.menu.inputboundaries.GetAvailableFoods;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import EntitiesUnitTest.Food;
-import EntitiesUnitTest.Shop;
+import entities.Food;
+import entities.Shop;
 
 import java.util.List;
 
