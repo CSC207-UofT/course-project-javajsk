@@ -1,28 +1,45 @@
-package businessrules.outputboundaries;
+package presenters;
+
+import businessrules.outputboundaries.CustomerBoundary;
+import businessrules.outputboundaries.ResponseObject;
 
 /**
- * Output boundary for customer entity
+ * Presenter for Customer
  */
-public interface CustomerBoundary {
+public class CustomerPresenter implements CustomerBoundary{
     /**
      * A method that returns a responseObject containing information to display the user token
+     *
      * @param token token of user
      * @return responseObject containing information to display token
      */
-    ResponseObject displayToken(String token);
+    @Override
+    public ResponseObject displayToken(String token) {
+        return new ResponseObject(200, "", token);
+    }
 
     /**
      * A method that returns a responseObject containing information to display an error message
+     *
      * @param message error message to add to response object
      * @return response object containing information to display error message
      */
-    ResponseObject error(String message);
+    @Override
+    public ResponseObject error(String message) {
+        return new ResponseObject(406, message, null);
+        // 406 is http status code for not acceptable
+    }
 
     /**
      * A method that returns a responseObject containing information to display an error message due to
      * unauthorized access
+     *
      * @param message message to add to response object
      * @return response object containing information to display message
      */
-    ResponseObject unauthorizedAccess(String message);
+    @Override
+    public ResponseObject unauthorizedAccess(String message) {
+        return new ResponseObject(403, message, null);
+        // 403 is http status code for forbidden
+    }
 }
