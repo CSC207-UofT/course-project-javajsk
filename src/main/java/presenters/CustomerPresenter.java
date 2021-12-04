@@ -39,7 +39,7 @@ public class CustomerPresenter implements CustomerBoundary{
      */
     @Override
     public ResponseObject unauthorizedAccess(String message) {
-        return new ResponseObject(401, message, null);
-        // 401 is http status code of unauthorized
+        return new ResponseObject(403, message, null);
+        // 403 is http status code for forbidden
     }
 }
