@@ -1,5 +1,8 @@
 package entities;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -175,5 +178,21 @@ public class Menu{
             }
         }
         return availFoods;
+    }
+
+    @Override
+    public String toString(){
+        JSONObject jsonObject = new JSONObject();
+        JSONArray foods = new JSONArray();
+        JSONArray addons = new JSONArray();
+        for(Food food: this.foods){
+            foods.put(food.getId());
+        }
+        for(Addon addon: this.addons){
+            addons.put(addon.getId());
+        }
+        jsonObject.put("foods", foods);
+        jsonObject.put("addons", addons);
+        return jsonObject.toString();
     }
 }

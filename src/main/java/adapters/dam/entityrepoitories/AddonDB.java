@@ -51,15 +51,7 @@ public class AddonDB implements Repository<Addon> {
 
 
     public static JSONObject loadJSONfromAddon(Addon addon){
-        JSONObject finalObject = new JSONObject();
-        assert !addon.getId().equals("N/A");
-        finalObject.put("id", addon.getId() );
-        finalObject.put("price", addon.getPrice());
-        finalObject.put("name", addon.getName());
-        finalObject.put("addonTypes", addon.getAddonTypes());
-        finalObject.put("isAvailable", addon.isAvailable());
-        finalObject.put("shopId", addon.getShopId());
-        return finalObject;
+        return new JSONObject(addon.toString());
     }
 
     public Addon loadAddonFromJSON(JSONObject addonObj){

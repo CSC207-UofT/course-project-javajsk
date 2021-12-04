@@ -53,17 +53,8 @@ public class FoodDB implements Repository<Food> {
     }
 
     public static JSONObject loadJSONFromFood(Food food){
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("id", food.getId());
-        jsonObject.put("name", food.getName());
-        jsonObject.put("description", food.getDescription());
-        jsonObject.put("price", food.getPrice());
-        JSONArray arr = new JSONArray();
-        for(Singleton sel: food.getComponents()){
-            arr.put(SingletonDB.loadJSONFromSingleton(sel));
-        }
-        jsonObject.put("components", arr);
-        return jsonObject;
+        return new JSONObject(food.toString());
+
     }
 
     public Food loadFoodFromJSON(JSONObject rawData){

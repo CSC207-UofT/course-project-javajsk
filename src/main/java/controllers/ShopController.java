@@ -21,14 +21,12 @@ public class ShopController {
         this.modifyShop = modifyShop;
     }
     @PutMapping("/changeshopstatus/{vendorToken}/{newStatus}")
-    public Shop runChangeShopStatus(@PathVariable String vendorToken,
+    public ResponseObject runChangeShopStatus(@PathVariable String vendorToken,
                                     @PathVariable Boolean newStatus){
-        ResponseObject response = changeShopStatus.changeShopStatus(vendorToken, newStatus);
-        return (Shop) response.getContents();
+        return changeShopStatus.changeShopStatus(vendorToken, newStatus);
     }
     @PutMapping("/modifyshop/{vendorToken}")
-    public Shop runModifyShop(@RequestBody Shop shop, @PathVariable String vendorToken ){
-        ResponseObject response = modifyShop.modifyShop(vendorToken, shop);
-        return (Shop) response.getContents();
+    public ResponseObject runModifyShop(@RequestBody Shop shop, @PathVariable String vendorToken ){
+        return modifyShop.modifyShop(vendorToken, shop);
     }
 }

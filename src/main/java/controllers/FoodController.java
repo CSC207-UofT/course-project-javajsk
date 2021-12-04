@@ -34,20 +34,18 @@ public class FoodController {
         return (Food) response.getContents();
     }
     @PostMapping("/CreateFood/{vendorToken}")
-    public Food runCreateFood(@PathVariable String vendorToken, @RequestBody Food food){
-        ResponseObject response = createFood.createFood(vendorToken,food);
-        return (Food) response.getContents();
+    public ResponseObject runCreateFood(@PathVariable String vendorToken, @RequestBody Food food){
+        return createFood.createFood(vendorToken,food);
     }
     @GetMapping("/GetShopFoods/{shopId}")
-    public Food runGetShopFoods(@PathVariable String shopId){
-        ResponseObject responseObject = getShopFoods.getShopFoods(shopId);
-        return (Food) responseObject.getContents();
+    public ResponseObject runGetShopFoods(@PathVariable String shopId){
+        return getShopFoods.getShopFoods(shopId);
     }
     @PutMapping("/ModifyFood/{vendorToken}/{foodId}")
-    public Food runModifyFood(@PathVariable String vendorToken, @PathVariable String foodId,
+    public ResponseObject runModifyFood(@PathVariable String vendorToken, @PathVariable String foodId,
                               @RequestBody Food food){
-        ResponseObject response = modifyFood.modifyFood(vendorToken, foodId, food);
-        return (Food) response.getContents();
+        return modifyFood.modifyFood(vendorToken, foodId, food);
     }
+
 
 }

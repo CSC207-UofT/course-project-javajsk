@@ -1,5 +1,7 @@
 package entities;
 
+import org.json.JSONObject;
+
 /**
  * The type Vendor.
  */
@@ -48,6 +50,14 @@ public class Vendor extends User{
             return true;
         }
         return false;
+    }
+    @Override
+    public String toString(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", this.id);
+        jsonObject.put("shops", this.shop.toString());
+
+        return jsonObject.toString();
     }
 
 }

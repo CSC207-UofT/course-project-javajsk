@@ -1,5 +1,8 @@
 package entities;
 
+import adapters.dam.entityrepoitories.CartDB;
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
@@ -219,6 +222,20 @@ public class Singleton{
             }
         }
         return true;
+    }
+
+    @Override
+    public String toString(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", this.id);
+        jsonObject.put("price", this.price);
+        jsonObject.put("name", this.name);
+        jsonObject.put("description", this.description);
+        jsonObject.put("allowedAddonTypes", this.allowedAddonTypes);
+        jsonObject.put("defaultSelection", this.defaultSelection.toString());
+        jsonObject.put("availability", this.availability);
+        jsonObject.put("shopId", this.shopId);
+        return jsonObject.toString();
     }
 
 

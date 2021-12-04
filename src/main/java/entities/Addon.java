@@ -1,5 +1,7 @@
 package entities;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
@@ -143,6 +145,19 @@ public class Addon{
 
     public void setShopId(String shopId) {
         this.shopId = shopId;
+    }
+
+    @Override
+    public String toString(){
+        JSONObject finalObject = new JSONObject();
+        assert !this.id.equals("N/A");
+        finalObject.put("id", this.id );
+        finalObject.put("price", this.price);
+        finalObject.put("name", this.name);
+        finalObject.put("addonTypes", this.addonTypes);
+        finalObject.put("isAvailable", this.isAvailable);
+        finalObject.put("shopId", this.shopId);
+        return finalObject.toString();
     }
 
 }
