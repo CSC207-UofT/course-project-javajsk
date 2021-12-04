@@ -8,6 +8,7 @@ import businessrules.outputboundaries.ResponseObject;
 import businessrules.shop.inputboundaries.ChangeShopStatus;
 import entities.Shop;
 import entities.Vendor;
+import org.springframework.context.annotation.Configuration;
 
 public class ChangeShopStatusInteractor implements ChangeShopStatus {
     VendorRepository vendorRepository;
@@ -15,7 +16,6 @@ public class ChangeShopStatusInteractor implements ChangeShopStatus {
     RepositoryBoundary repositoryBoundary;
     ObjectBoundary<Shop> shopObjectBoundary;
 
-    @Override
     public ResponseObject changeShopStatus(String vendorToken, boolean newStatus) {
 
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);

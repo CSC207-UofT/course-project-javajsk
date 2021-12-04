@@ -16,8 +16,7 @@ public class CustomerSignUpInteractor implements CustomerSignUp {
     ObjectBoundary<Customer> customerObjectBoundary;
     Hasher hasher;
 
-    @Override
-    public ResponseObject login(String username, String password, String passwordConf) {
+    public ResponseObject signUp(String username, String password, String passwordConf) {
         if(!password.equals(passwordConf)){
             customerBoundary.error("Passwords do not match.");
         }
