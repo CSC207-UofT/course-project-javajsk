@@ -12,6 +12,11 @@ import java.util.List;
 
 public class ShopDB implements Repository<Shop> {
     DBGateway dbGateway;
+
+    public ShopDB(DBGateway dbGateway) {
+        this.dbGateway = dbGateway;
+    }
+
     final String tableName = "Shop";
     @Override
     public Shop read(String id) {
