@@ -7,10 +7,10 @@ import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
-import entities.Food;
-import entities.Menu;
-import entities.Shop;
-import entities.Vendor;
+import EntitiesUnitTest.Food;
+import EntitiesUnitTest.Menu;
+import EntitiesUnitTest.Shop;
+import EntitiesUnitTest.Vendor;
 
 @SuppressWarnings("DuplicatedCode")
 public class RemoveFoodFromMenuInteractor implements RemoveFoodFromMenu {

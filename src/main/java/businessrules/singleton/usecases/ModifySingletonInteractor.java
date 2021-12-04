@@ -7,8 +7,8 @@ import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
 import businessrules.singleton.inputboundaries.ModifySingleton;
-import entities.Singleton;
-import entities.Vendor;
+import EntitiesUnitTest.Singleton;
+import EntitiesUnitTest.Vendor;
 
 public class ModifySingletonInteractor implements ModifySingleton {
     VendorRepository vendorRepository;

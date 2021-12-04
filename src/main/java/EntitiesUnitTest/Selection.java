@@ -1,4 +1,4 @@
-package entities;
+package EntitiesUnitTest;
 
 import java.util.HashMap;
 import java.util.Set;

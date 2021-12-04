@@ -1,7 +1,7 @@
 package businessrules.shop.inputboundaries;
 
 import businessrules.outputboundaries.ResponseObject;
-import entities.Shop;
+import EntitiesUnitTest.Shop;
 
 public interface ModifyShop {
     ResponseObject modifyShop(String vendorToken, Shop shop);

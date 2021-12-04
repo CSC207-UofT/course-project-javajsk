@@ -6,8 +6,8 @@ import businessrules.order.inputboundaries.GetUserPastOrders;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import entities.Customer;
-import entities.Order;
+import EntitiesUnitTest.Customer;
+import EntitiesUnitTest.Order;
 
 import java.util.List;
 

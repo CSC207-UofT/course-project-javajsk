@@ -1,6 +1,4 @@
-package entities;
-import org.junit.Assert.*;
-import org.junit.Assert;
+package EntitiesUnitTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

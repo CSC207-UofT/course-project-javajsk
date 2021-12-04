@@ -1,4 +1,4 @@
-package entities;
+package EntitiesUnitTest;
 
 /**
  * The type Food.

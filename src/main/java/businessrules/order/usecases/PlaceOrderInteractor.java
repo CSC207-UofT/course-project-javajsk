@@ -7,9 +7,9 @@ import businessrules.outputboundaries.CustomerBoundary;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import entities.Cart;
-import entities.Customer;
-import entities.Order;
+import EntitiesUnitTest.Cart;
+import EntitiesUnitTest.Customer;
+import EntitiesUnitTest.Order;
 
 import java.util.Date;
 

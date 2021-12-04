@@ -4,7 +4,7 @@ import businessrules.dai.Repository;
 import businessrules.food.inputboundaries.GetShopFoods;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import entities.Food;
+import EntitiesUnitTest.Food;
 
 import java.util.List;
 

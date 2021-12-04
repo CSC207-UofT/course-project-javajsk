@@ -7,8 +7,8 @@ import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
 import businessrules.shop.inputboundaries.ModifyShop;
-import entities.Shop;
-import entities.Vendor;
+import EntitiesUnitTest.Shop;
+import EntitiesUnitTest.Vendor;
 
 public class ModifyShopInteractor implements ModifyShop {
     VendorRepository vendorRepository;

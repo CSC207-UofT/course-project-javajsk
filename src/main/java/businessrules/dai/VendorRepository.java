@@ -1,6 +1,6 @@
 package businessrules.dai;
 
-import entities.Vendor;
+import EntitiesUnitTest.Vendor;
 
 public interface VendorRepository extends UserRepository, Repository<Vendor>{
 }

@@ -2,7 +2,7 @@ package adapters.dam.entityrepoitories;
 
 import adapters.dam.DBGateway;
 import businessrules.dai.Repository;
-import entities.*;
+import EntitiesUnitTest.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

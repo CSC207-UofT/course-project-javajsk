@@ -1,15 +1,13 @@
-package entities;
-import entities.*;
+package EntitiesUnitTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import entities.Selection;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import entities.AddonTest;
+
 class CartTest {
     Cart cart;
     HashMap<Food, List<Selection[]>> contents;
