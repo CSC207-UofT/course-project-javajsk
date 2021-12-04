@@ -12,6 +12,9 @@ import entities.Menu;
 import entities.Shop;
 import entities.Vendor;
 
+/**
+ * Use case for setting the availability of an addon on a menu of a repository
+ */
 public class SetAddonAvailabilityInteractor implements SetAddonAvailability {
     ObjectBoundary<Menu> menuObjectBoundary;
     VendorRepository vendorRepository;
@@ -19,6 +22,30 @@ public class SetAddonAvailabilityInteractor implements SetAddonAvailability {
     VendorBoundary vendorBoundary;
     Repository<Shop> shopRepository;
 
+    /**
+     * Instantiates a use case for setting the availability of an addon on a menu
+     * @param mOB the menu object boundary
+     * @param vR the vendor repository
+     * @param rB the repository boundary
+     * @param vB the vendor boundary
+     * @param sR the shop repository
+     */
+    public SetAddonAvailabilityInteractor(ObjectBoundary<Menu> mOB, VendorRepository vR, RepositoryBoundary rB,
+                                          VendorBoundary vB, Repository<Shop> sR) {
+        this.menuObjectBoundary = mOB;
+        this.vendorRepository = vR;
+        this.repositoryBoundary = rB;
+        this.vendorBoundary = vB;
+        this.shopRepository = sR;
+    }
+
+    /**
+     * Method for setting add on availability
+     * @param vendorToken the vendor token
+     * @param addon the addon entity
+     * @param newAvailability the new availability
+     * @return a response object
+     */
     @Override
     public ResponseObject setAddonAvailability(String vendorToken, Addon addon, boolean newAvailability) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);

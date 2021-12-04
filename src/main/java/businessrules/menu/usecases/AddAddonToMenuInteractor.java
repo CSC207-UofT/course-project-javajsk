@@ -12,6 +12,9 @@ import entities.Menu;
 import entities.Shop;
 import entities.Vendor;
 
+/**
+ * Use case for adding an addon to a menu of a repository
+ */
 public class AddAddonToMenuInteractor implements AddAddonToMenu {
     VendorRepository vendorRepository;
     RepositoryBoundary repositoryBoundary;
@@ -19,7 +22,29 @@ public class AddAddonToMenuInteractor implements AddAddonToMenu {
     Repository<Shop> shopRepository;
     ObjectBoundary<Menu> menuObjectBoundary;
 
+    /**
+     * Instantiates a use case for adding an addon to a menu
+     * @param vR the vendor repository
+     * @param rB the repository boundary
+     * @param vB the vendor boundary
+     * @param sR the shop repository
+     * @param mOB the menu object boundary
+     */
+    public AddAddonToMenuInteractor(VendorRepository vR, RepositoryBoundary rB, VendorBoundary vB,
+                                    Repository<Shop> sR, ObjectBoundary<Menu> mOB) {
+        this.vendorRepository = vR;
+        this.repositoryBoundary = rB;
+        this.vendorBoundary = vB;
+        this.shopRepository = sR;
+        this.menuObjectBoundary = mOB;
+    }
 
+    /**
+     * Method for adding an addon to a menu
+     * @param vendorToken the vendor token
+     * @param addon the addon entity
+     * @return a response object
+     */
     @Override
     public ResponseObject addAddon(String vendorToken, Addon addon) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);

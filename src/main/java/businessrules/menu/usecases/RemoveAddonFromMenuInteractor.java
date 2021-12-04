@@ -12,6 +12,9 @@ import entities.Menu;
 import entities.Shop;
 import entities.Vendor;
 
+/**
+ * Use case for removing an addon entity from a menu entry in a repository
+ */
 @SuppressWarnings("DuplicatedCode")
 public class RemoveAddonFromMenuInteractor implements RemoveAddonFromMenu {
     VendorRepository vendorRepository;
@@ -20,6 +23,29 @@ public class RemoveAddonFromMenuInteractor implements RemoveAddonFromMenu {
     Repository<Shop> shopRepository;
     ObjectBoundary<Menu> menuObjectBoundary;
 
+    /**
+     * Instantiates a use case for removing an addon entity from a menu entry
+     * @param vR vendor repository
+     * @param rB repository boundary
+     * @param vB vendor boundary
+     * @param sR shop repository
+     * @param mOB menu object boundary
+     */
+    public RemoveAddonFromMenuInteractor(VendorRepository vR, RepositoryBoundary rB, VendorBoundary vB,
+                                         Repository<Shop> sR, ObjectBoundary<Menu> mOB) {
+        this.vendorRepository = vR;
+        this.repositoryBoundary = rB;
+        this.vendorBoundary = vB;
+        this.shopRepository = sR;
+        this.menuObjectBoundary = mOB;
+    }
+
+    /**
+     * Methof for removing an addon entity
+     * @param vendorToken vendor token
+     * @param addon addon entity
+     * @return a response object
+     */
     @Override
     public ResponseObject removeAddon(String vendorToken, Addon addon) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);

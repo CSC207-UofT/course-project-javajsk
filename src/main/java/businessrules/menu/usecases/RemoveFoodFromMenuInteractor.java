@@ -12,6 +12,9 @@ import entities.Menu;
 import entities.Shop;
 import entities.Vendor;
 
+/**
+ * Use case for removing a food entity from a menu entry in a repository
+ */
 @SuppressWarnings("DuplicatedCode")
 public class RemoveFoodFromMenuInteractor implements RemoveFoodFromMenu {
     VendorRepository vendorRepository;
@@ -20,6 +23,29 @@ public class RemoveFoodFromMenuInteractor implements RemoveFoodFromMenu {
     Repository<Shop> shopRepository;
     ObjectBoundary<Menu> menuObjectBoundary;
 
+    /**
+     * Instantiates a use case for removing a food entity from a meny
+     * @param vR the vendor repository
+     * @param rB the repository boundary
+     * @param vB the vendor boundary
+     * @param sR the shop repository
+     * @param mOB the menu object boundary
+     */
+    public RemoveFoodFromMenuInteractor(VendorRepository vR, RepositoryBoundary rB, VendorBoundary vB,
+                                        Repository<Shop> sR, ObjectBoundary<Menu> mOB) {
+        this.vendorRepository = vR;
+        this.repositoryBoundary = rB;
+        this.vendorBoundary = vB;
+        this.shopRepository = sR;
+        this.menuObjectBoundary = mOB;
+    }
+
+    /**
+     * Method for removing food entities from a menu
+     * @param vendorToken vendor token
+     * @param food the food entity
+     * @return a response object
+     */
     @Override
     public ResponseObject removeFood(String vendorToken, Food food) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);

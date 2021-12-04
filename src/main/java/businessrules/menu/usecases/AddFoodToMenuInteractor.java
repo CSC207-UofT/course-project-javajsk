@@ -12,6 +12,9 @@ import entities.Menu;
 import entities.Shop;
 import entities.Vendor;
 
+/**
+ * Use case for adding a food entity to a menu entry in a repository
+ */
 public class AddFoodToMenuInteractor implements AddFoodToMenu {
     VendorRepository vendorRepository;
     RepositoryBoundary repositoryBoundary;
@@ -19,7 +22,29 @@ public class AddFoodToMenuInteractor implements AddFoodToMenu {
     Repository<Shop> shopRepository;
     ObjectBoundary<Menu> menuObjectBoundary;
 
+    /**
+     * Instantiates a use case for adding a food entity to a menu
+     * @param vR the vendor repository
+     * @param rB the repository boundary
+     * @param vB the vendor boundary
+     * @param sR the shop repository
+     * @param mOB the menu object boundary
+     */
+    public AddFoodToMenuInteractor(VendorRepository vR, RepositoryBoundary rB, VendorBoundary vB,
+                                   Repository<Shop> sR, ObjectBoundary<Menu> mOB) {
+        this.vendorRepository = vR;
+        this.repositoryBoundary = rB;
+        this.vendorBoundary = vB;
+        this.shopRepository = sR;
+        this.menuObjectBoundary = mOB;
+    }
 
+    /**
+     * Method for adding a food entity to the menu
+     * @param vendorToken the vendor token
+     * @param food the food entity
+     * @return a response object
+     */
     @Override
     public ResponseObject addFood(String vendorToken, Food food) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
