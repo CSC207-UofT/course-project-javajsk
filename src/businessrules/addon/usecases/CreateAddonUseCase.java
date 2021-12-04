@@ -15,6 +15,9 @@ import entities.Vendor;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Use Case for creating an Addon entity and updating to repository
+ */
 public class CreateAddonUseCase implements CreateAddonInputBoundary {
 
     AddonRepository addonRepository;
@@ -25,6 +28,16 @@ public class CreateAddonUseCase implements CreateAddonInputBoundary {
     VendorLoader vendorLoader;
     AddonLoader addonLoader;
 
+    /**
+     * Constructs an instance of the CreateAddonUseCase
+     * @param aR addon repository instance
+     * @param vR vendor repository instance
+     * @param sR shop repository instance
+     * @param aM addon model
+     * @param vM vendor model
+     * @param vL vendor loader
+     * @param aL addon loader
+     */
     public CreateAddonUseCase(AddonRepository aR, VendorRepository vR, ShopRepository sR,
                               AddonModel aM, VendorModel vM,
                               VendorLoader vL, AddonLoader aL) {
@@ -37,6 +50,12 @@ public class CreateAddonUseCase implements CreateAddonInputBoundary {
         this.addonLoader = aL;
     }
 
+    /**
+     * A method that creates an Addon entity and returns its JSONObject representation
+     * @param vendorToken token of current vendor
+     * @param data information to create the addon with
+     * @return JSONObject representing the addon object
+     */
     @Override
     public JSONObject createAddon(String vendorToken, JSONObject data) {
         Vendor vendor = vendorLoader.loadVendorFromToken(vendorToken);

@@ -14,6 +14,9 @@ import entities.Shop;
 import entities.Vendor;
 import org.json.JSONObject;
 
+/**
+ * Use case for deleting an addon instance
+ */
 public class DeleteAddonUseCase implements DeleteAddonInputBoundary {
     AddonRepository addonRepository;
     VendorRepository vendorRepository;
@@ -24,6 +27,16 @@ public class DeleteAddonUseCase implements DeleteAddonInputBoundary {
     ShopLoader shopLoader;
     AddonLoader addonLoader;
 
+    /**
+     * Constructs an instance of the CreateAddonUseCase
+     * @param aR addon repository instance
+     * @param vr vendor repository instance
+     * @param sr shop repository instance
+     * @param am addon model
+     * @param vm vendor model
+     * @param vl vendor loader
+     * @param al addon loader
+     */
     public DeleteAddonUseCase(AddonRepository aR, VendorRepository vr, ShopRepository sr,
                               VendorModel vm, AddonModel am, VendorLoader vl, ShopLoader sl, AddonLoader al){
         this.addonRepository = aR;
@@ -36,6 +49,12 @@ public class DeleteAddonUseCase implements DeleteAddonInputBoundary {
         this.addonLoader = al;
     }
 
+    /**
+     * A method that deletes an instance/entry of an addon
+     * @param vendorToken token of current vendor
+     * @param id id of addon
+     * @return JSONObject containing empty data or error message for display
+     */
     @SuppressWarnings("DuplicatedCode")
     @Override
     public JSONObject deleteAddon(String vendorToken, String id) {

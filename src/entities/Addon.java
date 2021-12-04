@@ -5,28 +5,23 @@ import org.json.JSONObject;
 import java.util.List;
 
 /**
- * The type Addon.
+ * The Addon Entity - represents toppings/ingredients that can be added to a food
  */
 public class Addon implements JSONable{
     /**
-     * The Id.
+     * Attributes:
+     *
+     * id - id of addon
+     * name - name of addon
+     * price - price addon for 1 quantity
+     * addonTypes - list of integers that represent the types of addon this is
+     * isAvailable - whether addon is available for order
+     *
      */
     public String id;
-    /**
-     * The Name.
-     */
     protected String name;
-    /**
-     * The Price.
-     */
     protected float price;
-    /**
-     * The Addon types.
-     */
     protected List<Integer> addonTypes;
-    /**
-     * The Is available.
-     */
     protected boolean isAvailable;
 
     /**
@@ -47,7 +42,7 @@ public class Addon implements JSONable{
     }
 
     /**
-     * Gets name.
+     * A method that returns the name of the addon.
      *
      * @return the name
      */
@@ -56,7 +51,7 @@ public class Addon implements JSONable{
     }
 
     /**
-     * Sets name.
+     * A method that sets the name of the addon.
      *
      * @param name the name
      */
@@ -65,7 +60,7 @@ public class Addon implements JSONable{
     }
 
     /**
-     * Gets price.
+     * A method that returns the price of the addon.
      *
      * @return the price
      */
@@ -74,7 +69,7 @@ public class Addon implements JSONable{
     }
 
     /**
-     * Sets price.
+     * A method that sets the price of the addon.
      *
      * @param price the price
      */
@@ -83,43 +78,43 @@ public class Addon implements JSONable{
     }
 
     /**
-     * Gets addon types.
+     * A method that returns the addon types of the addon.
      *
-     * @return the addon types
+     * @return the addonTypes
      */
     public List<Integer> getAddonTypes() {
         return addonTypes;
     }
 
     /**
-     * Sets addon types.
+     * A method that sets the addon types of the addon.
      *
-     * @param addonTypes the addon types
+     * @param addonTypes the price
      */
     public void setAddonTypes(List<Integer> addonTypes) {
         this.addonTypes = addonTypes;
     }
 
     /**
-     * Is available boolean.
+     * A method that returns whether the addon is available
      *
-     * @return the boolean
+     * @return the availability of the addon
      */
-    public boolean isAvailable() {
+    public boolean getAvailability() {
         return isAvailable;
     }
 
     /**
-     * Sets available.
+     * A method that sets the availability of the addon.
      *
-     * @param available the available
+     * @param available the price
      */
-    public void setAvailable(boolean available) {
+    public void setAvailability(boolean available) {
         isAvailable = available;
     }
 
     /**
-     * Gets id.
+     * A method that returns the id of the addon.
      *
      * @return the id
      */
@@ -128,7 +123,7 @@ public class Addon implements JSONable{
     }
 
     /**
-     * Sets id.
+     * A method that sets the id of the addon.
      *
      * @param id the id
      */
@@ -136,9 +131,13 @@ public class Addon implements JSONable{
         this.id = id;
     }
 
+    /**
+     * A method that returns the corresponding JSON object of the addon
+     * @return addon as a JSONObject
+     */
     @Override
     public JSONObject jsonify() {
-        JSONObject final_data = new JSONObject();;
+        JSONObject final_data = new JSONObject();
         final_data.put("id", this.id);
         final_data.put("name", this.name);
         final_data.put("price", this.price);

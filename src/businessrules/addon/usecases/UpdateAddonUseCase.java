@@ -23,6 +23,15 @@ public class UpdateAddonUseCase implements UpdateAddonInputBoundary {
     VendorLoader vendorLoader;
     AddonLoader addonLoader;
 
+    /**
+     * Constructs updateAddonUseCase instance
+     * @param vR vendor repository
+     * @param aR addon repository
+     * @param sR shop repository
+     * @param aV addon model
+     * @param vL vendor loader
+     * @param aL addon loader
+     */
     public UpdateAddonUseCase(VendorRepository vR, AddonRepository aR, ShopRepository sR,
                               AddonModel aV, VendorLoader vL, AddonLoader aL) {
         this.vendorRepository = vR;
@@ -33,6 +42,13 @@ public class UpdateAddonUseCase implements UpdateAddonInputBoundary {
         this.addonLoader = aL;
     }
 
+    /**
+     * A method that updates an addon with given id and data
+     * @param vendorToken token of current vendor
+     * @param addonId id of addon to update
+     * @param object data to update addon
+     * @return data containing error message or updated addon data
+     */
     @SuppressWarnings("DuplicatedCode")
     @Override
     public JSONObject updateAddon(String vendorToken, String addonId, JSONObject object) {
