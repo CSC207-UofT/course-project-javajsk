@@ -11,18 +11,32 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+/**
+ * Use Case for clearing a cart
+ */
 public class ClearCartUseCase implements ClearCartInputBoundary {
 
     CustomerRepository customerRepository;
     CartModel cartModel;
     CustomerLoader customerLoader;
 
+    /**
+     * Instantiates a ClearCartUseCase
+     * @param cR customer repository
+     * @param cM cart model
+     * @param cL customer loader
+     */
     public ClearCartUseCase(CustomerRepository cR, CartModel cM, CustomerLoader cL) {
         this.customerRepository = cR;
         this.cartModel = cM;
         this.customerLoader = cL;
     }
 
+    /**
+     * A method for emptying the data in cart
+     * @param customerToken token of current customer
+     * @return JSON object containing error information or cart with empty components
+     */
     @Override
     public JSONObject clearCart(String customerToken) {
         Customer customer = customerLoader.loadCustomerFromToken(customerToken);

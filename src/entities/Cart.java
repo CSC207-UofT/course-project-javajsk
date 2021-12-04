@@ -7,22 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * The type Cart.
+ * The Cart entity to represent what a customer wants to order.
  */
 public class Cart implements JSONable{
 
-    /**
-    * The Id.
-     */
     public String id;
-    /**
-     * The Shop id.
-     */
     protected String shopId;
-
-    /**
-     * The Contents.
-     */
     protected HashMap<Food, List<Selection[]>> contents;
 
     /**
@@ -40,7 +30,7 @@ public class Cart implements JSONable{
 
 
     /**
-     * Gets id.
+     * A method that returns the id of the cart
      *
      * @return the id
      */
@@ -49,7 +39,7 @@ public class Cart implements JSONable{
     }
 
     /**
-     * Sets id.
+     * A method that sets the id of the cart
      *
      * @param id the id
      */
@@ -58,25 +48,25 @@ public class Cart implements JSONable{
     }
 
     /**
-     * Gets shop id.
+     * A method that returns the shop id of the cart
      *
-     * @return the shop id
+     * @return the id
      */
     public String getShopId() {
         return shopId;
     }
 
     /**
-     * Sets shop id.
+     * A method that sets the shop id of the cart
      *
-     * @param shopId the shop id
+     * @param id the id
      */
-    public void setShopId(String shopId) {
-        this.shopId = shopId;
+    public void setShopId(String id) {
+        this.shopId = id;
     }
 
     /**
-     * Gets contents.
+     * A method that returns the contents of the cart
      *
      * @return the contents
      */
@@ -85,14 +75,18 @@ public class Cart implements JSONable{
     }
 
     /**
-     * Sets contents.
+     * A method that sets the contents of the cart.
      *
-     * @param contents the contents
+     * @param contents the contents of the cart
      */
     public void setContents(HashMap<Food, List<Selection[]>> contents) {
         this.contents = contents;
     }
 
+    /**
+     * A method that returns the corresponding JSON object of the addon
+     * @return addon as a JSONObject
+     */
     @Override
     public JSONObject jsonify() {
         JSONObject final_data = new JSONObject();
