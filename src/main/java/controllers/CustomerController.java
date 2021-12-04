@@ -28,7 +28,7 @@ public class CustomerController {
     @PutMapping("/CustomerLogin/{username}/{password}/{confirmed_password}")
     public Customer runCustomerSignup(@PathVariable String username, @PathVariable String password,
                                       @PathVariable String confirmed_password){
-        ResponseObject response = customerSignUp.signup(username, password, confirmed_password);
+        ResponseObject response = customerSignUp.signUp(username, password, confirmed_password);
         return (Customer) response.getContents();
     }
     @PutMapping("/ModifyCustomer/{userToken}/{username}/{password}/{confirmed_password}")
