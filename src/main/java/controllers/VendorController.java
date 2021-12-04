@@ -21,22 +21,19 @@ public class VendorController {
         this.modifyVendor = modifyVendor;
     }
     @PutMapping("/VendorLogin/{username}/{password}")
-    public Vendor runVendorLogin(@PathVariable String username, @PathVariable String password){
-        ResponseObject response = vendorLogin.login(username, password);
-        return (Vendor) response.getContents();
+    public ResponseObject runVendorLogin(@PathVariable String username, @PathVariable String password){
+        return vendorLogin.login(username, password);
     }
     @PutMapping("/VendorLogin/{username}/{password}/{confirmed_password}/{shop_name}/{location}")
-    public Vendor runVendorSignup(@PathVariable String username, @PathVariable String password,
+    public ResponseObject runVendorSignup(@PathVariable String username, @PathVariable String password,
                                   @PathVariable String confirmed_password, @PathVariable String location,
                                   @PathVariable String shop_name){
-        ResponseObject response = vendorSignUp.signUp(username, password, confirmed_password, shop_name, location);
-        return (Vendor) response.getContents();
+        return vendorSignUp.signUp(username, password, confirmed_password, shop_name, location);
     }
     @PutMapping("/ModifyVendor/{userToken}/{username}/{password}/{confirmed_password}")
-    public Vendor runModifyVendor(@PathVariable String username, @PathVariable String password,
+    public ResponseObject runModifyVendor(@PathVariable String username, @PathVariable String password,
                                       @PathVariable String confirmed_password, @PathVariable String userToken){
-        ResponseObject response = modifyVendor.modifyVendor(userToken, username, password, confirmed_password);
-        return (Vendor) response.getContents();
+        return modifyVendor.modifyVendor(userToken, username, password, confirmed_password);
 
     }
 }

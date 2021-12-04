@@ -1,11 +1,11 @@
 package businessrules.outputboundaries;
 
 public class ResponseObject {
-    String status;
+    int status;
     String message;
     Object contents;
 
-    public ResponseObject(String status, String message, Object contents) {
+    public ResponseObject(int status, String message, Object contents) {
         this.status = status;
         this.message = message;
         this.contents = contents;
@@ -28,11 +28,11 @@ public class ResponseObject {
         this.contents = contents;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

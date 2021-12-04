@@ -21,21 +21,18 @@ public class CustomerController {
         this.modifyCustomer = modifyCustomer;
     }
     @PutMapping("/CustomerLogin/{username}/{password}")
-    public Customer runCustomerLogin(@PathVariable String username, @PathVariable String password){
-        ResponseObject response = customerLogin.login(username, password);
-        return (Customer) response.getContents();
+    public ResponseObject runCustomerLogin(@PathVariable String username, @PathVariable String password){
+        return customerLogin.login(username, password);
     }
     @PutMapping("/CustomerLogin/{username}/{password}/{confirmed_password}")
-    public Customer runCustomerSignup(@PathVariable String username, @PathVariable String password,
+    public ResponseObject runCustomerSignup(@PathVariable String username, @PathVariable String password,
                                       @PathVariable String confirmed_password){
-        ResponseObject response = customerSignUp.signUp(username, password, confirmed_password);
-        return (Customer) response.getContents();
+        return customerSignUp.signUp(username, password, confirmed_password);
     }
     @PutMapping("/ModifyCustomer/{userToken}/{username}/{password}/{confirmed_password}")
-    public Customer runModifyCustomer(@PathVariable String username, @PathVariable String password,
+    public ResponseObject runModifyCustomer(@PathVariable String username, @PathVariable String password,
                                       @PathVariable String confirmed_password, @PathVariable String userToken){
-        ResponseObject response = modifyCustomer.modify(userToken, username, password, confirmed_password);
-        return (Customer) response.getContents();
+        return modifyCustomer.modify(userToken, username, password, confirmed_password);
 
     }
 }
