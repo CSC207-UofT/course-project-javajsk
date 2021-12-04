@@ -1,4 +1,4 @@
-package UnitTest;
+package EntitiesUnitTest;
 
 import entities.Addon;
 import entities.Selection;

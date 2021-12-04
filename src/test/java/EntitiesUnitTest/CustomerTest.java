@@ -1,9 +1,8 @@
-package UnitTest;
+package EntitiesUnitTest;
 
 import entities.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Or;
 
 import java.util.ArrayList;
 import java.util.Date;

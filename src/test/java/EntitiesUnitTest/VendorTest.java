@@ -1,4 +1,4 @@
-package UnitTest;
+package EntitiesUnitTest;
 
 import entities.Menu;
 import entities.OrderBook;
