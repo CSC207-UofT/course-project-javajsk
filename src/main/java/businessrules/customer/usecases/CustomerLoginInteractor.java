@@ -10,7 +10,7 @@ public class CustomerLoginInteractor implements CustomerLogin {
     CustomerRepository customerRepository;
     CustomerBoundary customerBoundary;
     RepositoryBoundary repositoryBoundary;
-    @Override
+
     public ResponseObject login(String username, String password) {
         String token = customerRepository.authenticateUser(username, password);
 

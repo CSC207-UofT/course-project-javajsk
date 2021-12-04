@@ -7,8 +7,11 @@ import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
 import businessrules.shop.inputboundaries.ModifyShop;
-import EntitiesUnitTest.Shop;
-import EntitiesUnitTest.Vendor;
+
+import entities.Shop;
+import entities.Vendor;
+import org.springframework.context.annotation.Configuration;
+
 
 public class ModifyShopInteractor implements ModifyShop {
     VendorRepository vendorRepository;
@@ -17,7 +20,6 @@ public class ModifyShopInteractor implements ModifyShop {
     VendorBoundary vendorBoundary;
     ObjectBoundary<Shop> shopObjectBoundary;
 
-    @Override
     public ResponseObject modifyShop(String vendorToken, Shop shop) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
         if(vendor == null){
