@@ -146,6 +146,7 @@ public class Addon{
     public void setShopId(String shopId) {
         this.shopId = shopId;
     }
+
     @Override
     public String toString(){
         JSONObject finalObject = new JSONObject();
@@ -158,4 +159,5 @@ public class Addon{
         finalObject.put("shopId", this.shopId);
         return finalObject.toString();
     }
+
 }

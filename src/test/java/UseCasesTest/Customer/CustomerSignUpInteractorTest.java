@@ -25,7 +25,7 @@ class CustomerSignUpInteractorTest {
 
     @Test
     void login() {
-        ResponseObject response = customerSignUp.login("new_username", "new_password",
+        ResponseObject response = customerSignUp.signUp("new_username", "new_password",
                 "new_password");
     }
 }

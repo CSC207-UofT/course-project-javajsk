@@ -18,6 +18,7 @@ public class AddonController {
         this.getShopAddons = getShopAddons;
         this.modifyAddon = modifyAddon;
     }
+
     @PostMapping("/CreateAddon/{vendorToken}")
     public ResponseObject runCreateAddon(@PathVariable String vendorToken, @RequestBody Addon addon){
         return createAddon.createAddon(vendorToken, addon);
