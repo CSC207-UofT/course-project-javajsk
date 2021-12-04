@@ -1,34 +1,34 @@
 package businessrules.outputboundaries;
 
 /**
- * The output boundary for repository entities
+ * Output boundary for repository entities
  */
 public interface RepositoryBoundary {
     /**
-     * Method for getting information when a repository cannot be created
+     * A method that returns a responseObject containing error message when object creation failed
      * @param message error message
-     * @return a response object
+     * @return responseObject with information to display
      */
     ResponseObject creationFailed(String message);
 
     /**
-     * Method for getting information when an invalid query is made
+     * A method that returns a responseObject containing error message when query is not found
      * @param message error message
-     * @return a response object
+     * @return responseObject with information to display
      */
     ResponseObject queryNotFound(String message);
 
     /**
-     * Method for getting information when repository cannot be modified
+     * A method that returns a responseObject containing error message when modification fails
      * @param message error message
-     * @return a response object
+     * @return responseObject with information to display
      */
     ResponseObject modificationFailed(String message);
 
     /**
-     * Method for getting information when there's invalid input
+     * A method that returns a responseObject containing error message when input is invalid
      * @param message error message
-     * @return a response object
+     * @return responseObject with information to display
      */
     ResponseObject invalidInput(String message);
 }

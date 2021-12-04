@@ -1,5 +1,6 @@
 package businessrules.shop.usecases;
 
+import entities.Shop;
 import businessrules.dai.Repository;
 import businessrules.dai.VendorRepository;
 import businessrules.outputboundaries.ObjectBoundary;
@@ -7,8 +8,9 @@ import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
 import businessrules.shop.inputboundaries.ModifyShop;
-import entities.Shop;
+
 import entities.Vendor;
+
 
 public class ModifyShopInteractor implements ModifyShop {
     VendorRepository vendorRepository;
@@ -17,7 +19,6 @@ public class ModifyShopInteractor implements ModifyShop {
     VendorBoundary vendorBoundary;
     ObjectBoundary<Shop> shopObjectBoundary;
 
-    @Override
     public ResponseObject modifyShop(String vendorToken, Shop shop) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
         if(vendor == null){

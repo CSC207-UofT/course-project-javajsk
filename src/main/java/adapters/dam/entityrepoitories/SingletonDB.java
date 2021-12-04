@@ -2,7 +2,6 @@ package adapters.dam.entityrepoitories;
 
 import adapters.dam.DBGateway;
 import businessrules.dai.Repository;
-import entities.Order;
 import entities.Selection;
 import entities.Singleton;
 import org.json.JSONArray;
