@@ -74,23 +74,20 @@ public class MenuController{
         return (Menu) response.getContents();
     }
     @PutMapping("/SetAddonAvailability/{vendorToken}/{availability}")
-    public Menu runSetAddonAvailability(@PathVariable String vendorToken, @PathVariable Boolean availability,
+    public ResponseObject runSetAddonAvailability(@PathVariable String vendorToken, @PathVariable Boolean availability,
                                         @RequestBody Addon addon){
-        ResponseObject response = setAddonAvailability.setAddonAvailability(vendorToken, addon, availability);
-        return (Menu) response.getContents();
+        return setAddonAvailability.setAddonAvailability(vendorToken, addon, availability);
 
     }
     @PutMapping("/SetAddonAvailability/{vendorToken}/{availability}")
-    public Menu runSetSingletonAvailability(@PathVariable String vendorToken, @PathVariable Boolean availability,
+    public ResponseObject runSetSingletonAvailability(@PathVariable String vendorToken, @PathVariable Boolean availability,
                                         @RequestBody Singleton singleton){
-        ResponseObject response = setSingletonAvailability.setSingletonAvailability(vendorToken, singleton, availability);
-        return (Menu) response.getContents();
+        return setSingletonAvailability.setSingletonAvailability(vendorToken, singleton, availability);
 
     }
     @GetMapping("/ViewMenu/{shopId}")
-    public Menu runViewMenu(@PathVariable String shopId){
-       ResponseObject response =  viewMenu.viewMenu(shopId);
-        return (Menu) response.getContents();
+    public ResponseObject runViewMenu(@PathVariable String shopId){
+        return viewMenu.viewMenu(shopId);
     }
 
 

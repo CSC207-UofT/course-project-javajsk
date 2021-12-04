@@ -1,5 +1,7 @@
 package entities;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Set;
 
@@ -41,6 +43,16 @@ public class Selection {
 
     public Set<Addon> getSelectedAddons(){
         return this.singletonSelection.keySet();
+    }
+
+    @Override
+    public String toString(){
+        JSONObject jsonObject = new JSONObject();
+        HashMap<Addon, Integer> singletonSelection = this.singletonSelection;
+        for(Addon addon: this.singletonSelection.keySet()){
+            jsonObject.put(addon.getId(), singletonSelection.get(addon));
+        }
+        return jsonObject.toString();
     }
 
 }

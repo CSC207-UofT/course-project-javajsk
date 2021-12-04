@@ -96,50 +96,18 @@ public class CartDB implements Repository<Cart> {
      * @return the JSON object
      */
     public static JSONObject loadJSONFromCart(Cart cart){
-        JSONObject finalValue = new JSONObject();
-        assert !cart.getId().equals("N/A");
-        finalValue.put("id", cart.getId());
-        finalValue.put("shopId", cart.getShopId());
-        JSONObject contentsJson = new JSONObject();
-        HashMap<Food, List<Selection[]>> contents = cart.getContents();
-        for(Food food: contents.keySet()){
-            List<Selection[]> selections = contents.get(food);
-            JSONArray selectionsJson = new JSONArray();
-            for(Selection[] selectionArr: selections){
-                selectionsJson.put(loadJSONfromSelectionLst(selectionArr));
-            }
-            contentsJson.put(food.getId(), selectionsJson);
-        }
-        finalValue.put("contents", contentsJson);
-        return finalValue;
+        return new JSONObject(cart.toString());
     }
-
-    /**
-     * Method for converting a list selection entities to a JSON array
-     * @param input the list of selection entities
-     * @return the JSON array
-     */
-    public static JSONArray loadJSONfromSelectionLst(Selection[] input){
-        JSONArray jsonSelectionList = new JSONArray();
-        for(Selection sel: input){
-            jsonSelectionList.put(loadJSONfromSelection(sel));
-        }
-        return jsonSelectionList;
-    }
+  
 
 
-    /**
+  /**
      * Method for converting a selection entity to a JSON object
      * @param selection the selection entity
      * @return the JSON object
      */
     public static JSONObject loadJSONfromSelection(Selection selection){
-        JSONObject jsonObject = new JSONObject();
-        HashMap<Addon, Integer> singletonSelection = selection.getSingletonSelection();
-        for(Addon addon: selection.getSelectedAddons()){
-            jsonObject.put(addon.getId(), singletonSelection.get(addon));
-        }
-        return jsonObject;
+        return new JSONObject(selection.toString());
     }
 
     /**

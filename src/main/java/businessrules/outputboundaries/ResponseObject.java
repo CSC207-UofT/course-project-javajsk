@@ -67,7 +67,4 @@ public class ResponseObject {
     public void setStatus(int newStatus) {
         this.status = newStatus;
     }
-
-
-
 }

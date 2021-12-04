@@ -91,17 +91,8 @@ public class OrderDB implements Repository<Order> {
      * @return the corresponding JSON object
      */
     public JSONObject loadJSONFromOrder(Order order){
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("id", order.getId());
-        jsonObject.put("cartId", order.getCart().getId());
-        jsonObject.put("shopId", order.getShopId());
-        jsonObject.put("customerId", order.getCustomerId());
-        jsonObject.put("status", order.getStatus());
 
-        // TOOD: FIX THIS DATE SHIT.
-        jsonObject.put("timePlaced", order.getTimePlaced());
-        jsonObject.put("timeStatusModified", order.getTimeStatusModified());
-        return jsonObject;
+        return new JSONObject(order.toString());
     }
 
     /**

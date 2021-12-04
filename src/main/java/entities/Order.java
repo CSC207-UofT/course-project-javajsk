@@ -1,5 +1,7 @@
 package entities;
 
+import org.json.JSONObject;
+
 import java.util.Date;
 
 /**
@@ -183,6 +185,21 @@ public class Order{
      */
     public void setTimeStatusModified(Date timeStatusModified) {
         this.timeStatusModified = timeStatusModified;
+    }
+
+    @Override
+    public String toString(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", this.id);
+        jsonObject.put("cartId", this.cart.id);
+        jsonObject.put("shopId", this.shopId);
+        jsonObject.put("customerId", this.customerId);
+        jsonObject.put("status", this.status);
+
+        // TOOD: FIX THIS DATE SHIT.
+        jsonObject.put("timePlaced", this.timePlaced);
+        jsonObject.put("timeStatusModified", this.timeStatusModified);
+        return jsonObject.toString();
     }
 
 }
