@@ -6,10 +6,10 @@ import businessrules.dai.Repository;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import entities.Cart;
-import entities.Customer;
-import entities.Food;
-import entities.Selection;
+import EntitiesUnitTest.Cart;
+import EntitiesUnitTest.Customer;
+import EntitiesUnitTest.Food;
+import EntitiesUnitTest.Selection;
 
 public class AddToCartInteractor implements AddToCart {
     Repository<Food> foodRepository;

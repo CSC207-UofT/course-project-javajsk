@@ -7,7 +7,7 @@ import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
 import businessrules.vendor.inputboundaries.ModifyVendor;
-import entities.Vendor;
+import EntitiesUnitTest.Vendor;
 
 public class ModifyVendorInteractor implements ModifyVendor {
     VendorRepository vendorRepository;

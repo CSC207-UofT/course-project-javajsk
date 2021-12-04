@@ -4,7 +4,7 @@ import businessrules.dai.Repository;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.singleton.inputboundaries.GetShopSingletons;
-import entities.Singleton;
+import EntitiesUnitTest.Singleton;
 
 import java.util.List;
 

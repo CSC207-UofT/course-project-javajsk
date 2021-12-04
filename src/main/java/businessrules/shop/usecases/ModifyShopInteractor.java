@@ -7,9 +7,11 @@ import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
 import businessrules.shop.inputboundaries.ModifyShop;
+
 import entities.Shop;
 import entities.Vendor;
 import org.springframework.context.annotation.Configuration;
+
 
 public class ModifyShopInteractor implements ModifyShop {
     VendorRepository vendorRepository;

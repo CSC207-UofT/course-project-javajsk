@@ -7,7 +7,7 @@ import businessrules.outputboundaries.CustomerBoundary;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import entities.Customer;
+import EntitiesUnitTest.Customer;
 
 public class ModifyCustomerInteractor implements ModifyCustomer {
     CustomerRepository customerRepository;

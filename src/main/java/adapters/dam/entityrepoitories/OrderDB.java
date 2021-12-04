@@ -2,8 +2,8 @@ package adapters.dam.entityrepoitories;
 
 import adapters.dam.DBGateway;
 import businessrules.dai.Repository;
-import entities.Cart;
-import entities.Order;
+import EntitiesUnitTest.Cart;
+import EntitiesUnitTest.Order;
 import org.json.JSONException;
 import org.json.JSONObject;
 

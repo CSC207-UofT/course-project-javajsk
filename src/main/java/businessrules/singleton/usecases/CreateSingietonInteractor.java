@@ -7,8 +7,8 @@ import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
 import businessrules.singleton.inputboundaries.CreateSingleton;
-import entities.Singleton;
-import entities.Vendor;
+import EntitiesUnitTest.Singleton;
+import EntitiesUnitTest.Vendor;
 
 import java.util.List;
 

@@ -8,8 +8,8 @@ import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
 import businessrules.vendor.inputboundaries.VendorSignUp;
-import entities.Shop;
-import entities.Vendor;
+import EntitiesUnitTest.Shop;
+import EntitiesUnitTest.Vendor;
 
 public class VendorSignUpInteractor implements VendorSignUp {
     VendorRepository vendorRepository;

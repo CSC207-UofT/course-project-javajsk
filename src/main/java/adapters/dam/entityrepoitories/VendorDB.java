@@ -1,8 +1,8 @@
 package adapters.dam.entityrepoitories;
 
 import businessrules.dai.VendorRepository;
-import entities.User;
-import entities.Vendor;
+import EntitiesUnitTest.User;
+import EntitiesUnitTest.Vendor;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package entities;
+package EntitiesUnitTest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -129,6 +129,7 @@ public class Cart{
     public void empty(){
         this.contents = new HashMap<>();
     }
+
     public void modifySelection(Food food, Selection[] oldSel, Selection[] newSel){
         if(!this.contents.containsKey(food)){
             return;
