@@ -10,6 +10,7 @@ import businessrules.outputboundaries.ResponseObject;
 import entities.Customer;
 import entities.Order;
 
+import java.util.Date;
 import java.util.List;
 
 public class CancelOrderInteractor implements CancelOrder {
@@ -37,6 +38,7 @@ public class CancelOrderInteractor implements CancelOrder {
         }
 
         order.setStatus(Order.Status.CANCELLED);
+        order.setTimeStatusModified(new Date());
 
         List<Order> userOrders = orderRepository.readMultiple("customerId", customer.getId() );
         return orderObjectBoundary.showObjectList(userOrders);

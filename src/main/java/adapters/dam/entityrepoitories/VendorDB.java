@@ -1,6 +1,7 @@
 package adapters.dam.entityrepoitories;
 
 import adapters.dam.DBGateway;
+import adapters.dam.TokenSigner;
 import businessrules.dai.VendorRepository;
 import entities.Customer;
 import entities.Shop;
@@ -16,6 +17,7 @@ public class VendorDB implements VendorRepository {
     DBGateway databaseConnector;
 
     final String tableName = "Vendor";
+    TokenSigner tokenSigner;
 
     public VendorDB(DBGateway databaseConnector) {
         this.databaseConnector = databaseConnector;
@@ -31,7 +33,6 @@ public class VendorDB implements VendorRepository {
         return databaseConnector.update(tableName, id, loadJSONFromVendor(item));
 
     }
-
 
     @Override
     public String create(Vendor item) {
@@ -53,16 +54,25 @@ public class VendorDB implements VendorRepository {
         return loadVendorFromJSON(databaseConnector.readOne(tableName,fieldName, needle));
     }
 
-
-
     @Override
-    public User getUserFromToken(String userToken) {
-        return null;
+    public Vendor getUserFromToken(String userToken) {
+        String userId = tokenSigner.getIdFromToken(userToken);
+        if(userId.contains("ERROR")){
+            return null;
+        }
+        return read(userId);
     }
 
     @Override
     public String authenticateUser(String username, String password) {
-        return null;
+        Vendor vendor = findOneByFieldName("username", username);
+        if(vendor == null){
+            return null;
+        }
+        if(!vendor.getHashedPassword().equals(password)){
+            return null;
+        }
+        return tokenSigner.generateToken(vendor.getId());
     }
 
     public Vendor loadVendorFromJSON(JSONObject jsonObject) {

@@ -59,7 +59,7 @@ public class OrderDB implements Repository<Order> {
         jsonObject.put("customerId", order.getCustomerId());
         jsonObject.put("status", order.getStatus());
 
-        // TOOD: FIX THIS DATE SHIT.
+        // TODO: FIX THIS DATE SHIT.
         jsonObject.put("timePlaced", order.getTimePlaced());
         jsonObject.put("timeStatusModified", order.getTimeStatusModified());
         return jsonObject;
@@ -74,6 +74,8 @@ public class OrderDB implements Repository<Order> {
             String shopId = rawOrder.getString("shopId");
             String customerId = rawOrder.getString("customerId");
             Order.Status status = rawOrder.getEnum(Order.Status.class, "status");
+
+            //TODO: FIX DATES.
             Date timePlaced = new Date();
             Date timeStatusModified = new Date();
             return new Order(id, cart, shopId, customerId, status, timePlaced, timeStatusModified);

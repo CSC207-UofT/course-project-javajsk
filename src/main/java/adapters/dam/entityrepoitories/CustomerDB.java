@@ -1,6 +1,7 @@
 package adapters.dam.entityrepoitories;
 
 import adapters.dam.DBGateway;
+import adapters.dam.TokenSigner;
 import businessrules.dai.CustomerRepository;
 import entities.*;
 import org.json.JSONException;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class CustomerDB implements CustomerRepository {
     DBGateway databaseConnector;
-
+    TokenSigner tokenSigner;
     final String tableName = "Customer";
 
     public CustomerDB(DBGateway databaseConnector) {
@@ -53,12 +54,23 @@ public class CustomerDB implements CustomerRepository {
 
     @Override
     public User getUserFromToken(String userToken) {
-        return null;
+        String userId = tokenSigner.getIdFromToken(userToken);
+        if(userId.contains("ERROR")){
+            return null;
+        }
+        return read(userId);
     }
 
     @Override
     public String authenticateUser(String username, String password) {
-        return null;
+        Customer customer = findOneByFieldName("username", username);
+        if(customer == null){
+            return null;
+        }
+        if(!customer.getHashedPassword().equals(password)){
+            return null;
+        }
+        return tokenSigner.generateToken(customer.getId());
     }
 
     public static JSONObject loadJSONFromCustomer(Customer customer){

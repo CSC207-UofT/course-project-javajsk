@@ -10,6 +10,7 @@ import businessrules.outputboundaries.VendorBoundary;
 import entities.Order;
 import entities.Vendor;
 
+import java.util.Date;
 import java.util.List;
 
 public class SetOrderInprogressInteracator implements SetOrderInprogress {
@@ -38,6 +39,7 @@ public class SetOrderInprogressInteracator implements SetOrderInprogress {
         }
 
         order.setStatus(Order.Status.IN_PROGRESS);
+        order.setTimeStatusModified(new Date());
 
         List<Order> userOrders = orderRepository.readMultiple("shopId", vendor.getShop().getId() );
         return orderObjectBoundary.showObjectList(userOrders);

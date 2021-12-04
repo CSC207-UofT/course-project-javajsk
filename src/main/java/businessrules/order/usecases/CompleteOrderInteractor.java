@@ -7,6 +7,7 @@ import businessrules.outputboundaries.*;
 import entities.Order;
 import entities.Vendor;
 
+import java.util.Date;
 import java.util.List;
 
 public class CompleteOrderInteractor implements CompleteOrder {
@@ -35,6 +36,7 @@ public class CompleteOrderInteractor implements CompleteOrder {
         }
 
         order.setStatus(Order.Status.CANCELLED);
+        order.setTimeStatusModified(new Date());
 
         List<Order> userOrders = orderRepository.readMultiple("shopId", vendor.getShop().getId() );
         return orderObjectBoundary.showObjectList(userOrders);
