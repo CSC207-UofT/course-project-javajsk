@@ -11,12 +11,24 @@ import entities.Shop;
 import entities.Vendor;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Use case for changing the status of a shop
+ */
 public class ChangeShopStatusInteractor implements ChangeShopStatus {
     VendorRepository vendorRepository;
     Repository<Shop> shopRepository;
     RepositoryBoundary repositoryBoundary;
     ObjectBoundary<Shop> shopObjectBoundary;
 
+    /**
+     * Method that modifies the status of the specified shop
+     * by replacing it with newStatus. Should only be called by a
+     * Vendor.
+     *
+     * @param vendorToken the vendor that owns the shop
+     * @param newStatus   the new status of the shop
+     * @return            JSONObject representing the shop
+     */
     public ResponseObject changeShopStatus(String vendorToken, boolean newStatus) {
 
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);

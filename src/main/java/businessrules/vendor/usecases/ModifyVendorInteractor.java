@@ -9,6 +9,9 @@ import businessrules.outputboundaries.VendorBoundary;
 import businessrules.vendor.inputboundaries.ModifyVendor;
 import entities.Vendor;
 
+/**
+ * Use case for modifying a Vendor
+ */
 public class ModifyVendorInteractor implements ModifyVendor {
     VendorRepository vendorRepository;
     RepositoryBoundary repositoryBoundary;
@@ -16,6 +19,15 @@ public class ModifyVendorInteractor implements ModifyVendor {
     ObjectBoundary<Vendor> vendorObjectBoundary;
     Hasher hasher;
 
+    /**
+     * Method that modifies a Vendor
+     *
+     * @param vendorToken   token of the Vendor being modified
+     * @param username      new username of the Vendor
+     * @param password      new password of the Vendor
+     * @param passwordConf  new password of the Vendor confirmed
+     * @return              JSONObject representing the modified Vendor
+     */
     @Override
     public ResponseObject modifyVendor(String vendorToken, String username, String password, String passwordConf) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
