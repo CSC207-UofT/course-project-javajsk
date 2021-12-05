@@ -1,10 +1,9 @@
-package controllers;
+package com.javajsk.uoftruck.controllers;
 
 import businessrules.customer.inputboundaries.CustomerLogin;
 import businessrules.customer.inputboundaries.CustomerSignUp;
 import businessrules.customer.inputboundaries.ModifyCustomer;
 import businessrules.outputboundaries.ResponseObject;
-import entities.Customer;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 

@@ -1,15 +1,11 @@
-package controllers;
+package com.javajsk.uoftruck.controllers;
 
 import org.springframework.web.bind.annotation.*;
-import adapters.dam.entityrepoitories.ShopDB;
-import adapters.dam.entityrepoitories.VendorDB;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.shop.inputboundaries.ChangeShopStatus;
 import businessrules.shop.inputboundaries.ModifyShop;
 import entities.Shop;
-import org.json.JSONObject;
 
-@RestController
 public class ShopController {
 
 

@@ -1,11 +1,10 @@
-package controllers;
+package com.javajsk.uoftruck.controllers;
 
 import businessrules.addon.inputboundaries.CreateAddon;
 import businessrules.addon.inputboundaries.GetShopAddons;
 import businessrules.addon.inputboundaries.ModifyAddon;
 import businessrules.outputboundaries.ResponseObject;
 import entities.Addon;
-import entities.Food;
 import org.springframework.web.bind.annotation.*;
 
 public class AddonController {

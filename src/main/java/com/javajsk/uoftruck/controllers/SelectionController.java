@@ -1,9 +1,8 @@
-package controllers;
+package com.javajsk.uoftruck.controllers;
 
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.selection.inputboundaries.ModifyDefaultSelection;
 import businessrules.selection.inputboundaries.ModifySelectionInCart;
-import businessrules.selection.usecases.ModifyDefaultSelectionInteractor;
 import entities.Selection;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

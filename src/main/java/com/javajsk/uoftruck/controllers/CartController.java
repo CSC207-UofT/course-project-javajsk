@@ -1,4 +1,4 @@
-package controllers;
+package com.javajsk.uoftruck.controllers;
 
 import businessrules.cart.inputboundaries.AddToCart;
 import businessrules.cart.inputboundaries.EmptyCart;
@@ -8,8 +8,6 @@ import businessrules.outputboundaries.ResponseObject;
 import entities.Cart;
 import entities.Food;
 import entities.Selection;
-import entities.Singleton;
-import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 public class CartController {

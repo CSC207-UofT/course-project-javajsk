@@ -7,6 +7,7 @@ import entities.Customer;
 import entities.Shop;
 import entities.User;
 import entities.Vendor;
+import framework.MongoDB;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,12 +16,11 @@ import java.util.List;
 
 public class VendorDB implements VendorRepository {
     DBGateway databaseConnector;
-
     final String tableName = "Vendor";
     TokenSigner tokenSigner;
 
-    public VendorDB(DBGateway databaseConnector) {
-        this.databaseConnector = databaseConnector;
+    public VendorDB(DBGateway db) {
+        this.databaseConnector = db;
     }
 
     @Override

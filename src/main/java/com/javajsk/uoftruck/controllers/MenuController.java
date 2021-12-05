@@ -1,4 +1,4 @@
-package controllers;
+package com.javajsk.uoftruck.controllers;
 
 import businessrules.menu.inputboundaries.*;
 import businessrules.outputboundaries.ResponseObject;

@@ -3,6 +3,7 @@ package adapters.dam.entityrepoitories;
 import adapters.dam.DBGateway;
 import businessrules.dai.Repository;
 import entities.*;
+import framework.MongoDB;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,8 +15,8 @@ public class ShopDB implements Repository<Shop> {
     DBGateway dbGateway;
     final String tableName = "Shop";
 
-    public ShopDB(DBGateway dbGateway) {
-        this.dbGateway = dbGateway;
+    public ShopDB(DBGateway db) {
+        this.dbGateway = db;
     }
 
 
