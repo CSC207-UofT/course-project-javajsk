@@ -1,9 +1,8 @@
-package controllers;
+package com.javajsk.uoftruck.controllers;
 
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.selection.inputboundaries.ModifyDefaultSelection;
 import businessrules.selection.inputboundaries.ModifySelectionInCart;
-import businessrules.selection.usecases.ModifyDefaultSelectionInteractor;
 import entities.Selection;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,16 +19,14 @@ public class SelectionController {
     }
 
     @PostMapping("/ModifyDefaultSelection/{vendorToken}/{singletonId}")
-    public Selection runModifyDefaultSelection(@PathVariable String singletonId, @PathVariable String vendorToken,
+    public ResponseObject runModifyDefaultSelection(@PathVariable String singletonId, @PathVariable String vendorToken,
                                                @RequestBody Selection selection){
-        ResponseObject response = modifyDefaultSelection.modifyDefaultSelection(vendorToken, singletonId, selection);
-        return (Selection) response.getContents();
+        return modifyDefaultSelection.modifyDefaultSelection(vendorToken, singletonId, selection);
     }
 
     @PostMapping("/ModifySelectionInCart/{vendorToken}/{foodId}")
-    public Selection runModifySelectionInCart(@PathVariable String foodId, @PathVariable String vendorToken,
+    public ResponseObject runModifySelectionInCart(@PathVariable String foodId, @PathVariable String vendorToken,
                                                @RequestBody Selection[] original, @RequestBody Selection[] new_singletons){
-        ResponseObject response = modifySelectionInCart.modifySelection(vendorToken, foodId, original, new_singletons);
-        return (Selection) response.getContents();
+        return modifySelectionInCart.modifySelection(vendorToken, foodId, original, new_singletons);
     }
 }

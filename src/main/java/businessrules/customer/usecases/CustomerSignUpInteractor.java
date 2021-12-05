@@ -9,6 +9,9 @@ import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import entities.Customer;
 
+/**
+ * Use case for signing up a customer and adding it to a repository
+ */
 public class CustomerSignUpInteractor implements CustomerSignUp {
     CustomerRepository customerRepository;
     RepositoryBoundary repositoryBoundary;
@@ -16,6 +19,32 @@ public class CustomerSignUpInteractor implements CustomerSignUp {
     ObjectBoundary<Customer> customerObjectBoundary;
     Hasher hasher;
 
+    /**
+     * Instantiates a customer sign up use case
+     * @param cR the customer repository
+     * @param rB the repository boundary
+     * @param cB the customer boundary
+     * @param cOB the customer object boundary
+     * @param h the hasher
+     */
+    public CustomerSignUpInteractor(CustomerRepository cR, RepositoryBoundary rB,
+                                    CustomerBoundary cB, ObjectBoundary<Customer> cOB, Hasher h) {
+
+        this.customerRepository = cR;
+        this.repositoryBoundary = rB;
+        this.customerBoundary = cB;
+        this.customerObjectBoundary = cOB;
+        this.hasher = h;
+    }
+
+    /**
+     * Method for signing up as a customer
+     * @param username the new username
+     * @param password the new password
+     * @param passwordConf the password confirmation
+     * @return a response object
+     */
+    @Override
     public ResponseObject signUp(String username, String password, String passwordConf) {
         if(!password.equals(passwordConf)){
             customerBoundary.error("Passwords do not match.");

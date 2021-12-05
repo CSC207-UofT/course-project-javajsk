@@ -17,6 +17,14 @@ public class RemoveFromCartInteractor implements RemoveFromCart {
     Repository<Food> foodRepository;
     ObjectBoundary<Cart> cartObjectBoundary;
 
+    public RemoveFromCartInteractor(CustomerRepository customerRepository, RepositoryBoundary repositoryBoundary,
+                                    Repository<Food> foodRepository, ObjectBoundary<Cart> cartObjectBoundary) {
+        this.customerRepository = customerRepository;
+        this.repositoryBoundary = repositoryBoundary;
+        this.foodRepository = foodRepository;
+        this.cartObjectBoundary = cartObjectBoundary;
+    }
+
     @Override
     public ResponseObject removeFromCart(String userToken, Food food, Selection[] selections) {
         Customer customer = (Customer) customerRepository.getUserFromToken(userToken);

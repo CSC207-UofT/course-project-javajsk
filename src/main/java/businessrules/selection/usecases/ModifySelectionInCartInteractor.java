@@ -12,6 +12,9 @@ import entities.Customer;
 import entities.Food;
 import entities.Selection;
 
+/**
+ * Use case for modifying the selection within a cart
+ */
 public class ModifySelectionInCartInteractor implements ModifySelectionInCart {
     CustomerRepository customerRepository;
     Repository<Food> foodRepository;
@@ -19,6 +22,16 @@ public class ModifySelectionInCartInteractor implements ModifySelectionInCart {
     CustomerBoundary customerBoundary;
     ObjectBoundary<Cart> cartObjectBoundary;
 
+    /**
+     * Method that modifies the selections in a cart and
+     * returns a JSONObject representing the modified cart
+     *
+     * @param userToken         token representing the user that owns the cart
+     * @param foodId            the food that has the selections
+     * @param originalSelection The original selection
+     * @param selections        The selection that will replace the original selection
+     * @return                  JSONObject representing the current cart (after updating)
+     */
     @Override
     public ResponseObject modifySelection(String userToken, String foodId, Selection[] originalSelection,
                                           Selection[] selections) {

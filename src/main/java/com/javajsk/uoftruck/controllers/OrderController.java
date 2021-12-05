@@ -1,8 +1,7 @@
-package controllers;
+package com.javajsk.uoftruck.controllers;
 
 import businessrules.order.inputboundaries.*;
 import businessrules.outputboundaries.ResponseObject;
-import entities.Order;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,45 +29,38 @@ public class OrderController {
         this.setOrderInprogress = setOrderInprogress;
     }
     @PutMapping("/CancelOrder/{userToken}/{orderId}")
-    public Order runCancelOrder(@PathVariable String orderId, @PathVariable String userToken){
-        ResponseObject response = cancelOrder.cancelOrder(userToken, orderId);
-        return (Order) response.getContents();
+    public ResponseObject runCancelOrder(@PathVariable String orderId, @PathVariable String userToken){
+        return cancelOrder.cancelOrder(userToken, orderId);
     }
 
     @PutMapping("/CompleteOrder/{vendorToken}/{orderId}")
-    public Order runCompleteOrder(@PathVariable String orderId, @PathVariable String vendorToken){
-        ResponseObject response = completeOrder.completeOrder(vendorToken, orderId);
-        return (Order) response.getContents();
+    public ResponseObject runCompleteOrder(@PathVariable String orderId, @PathVariable String vendorToken){
+        return completeOrder.completeOrder(vendorToken, orderId);
     }
 
     @GetMapping("/GetNextOrder/{vendorToken}")
-    public Order runCompleteOrder(@PathVariable String vendorToken){
-        ResponseObject response = getNextOrder.getNextOrder(vendorToken);
-        return (Order) response.getContents();
+    public ResponseObject runCompleteOrder(@PathVariable String vendorToken){
+        return getNextOrder.getNextOrder(vendorToken);
     }
 
     @GetMapping("/GetShopOrders/{vendorToken}")
-    public Order runGetShopOrders(@PathVariable String vendorToken){
-        ResponseObject response = getShopOrders.getShopOrders(vendorToken);
-        return (Order) response.getContents();
+    public ResponseObject runGetShopOrders(@PathVariable String vendorToken){
+        return getShopOrders.getShopOrders(vendorToken);
     }
 
     @GetMapping("/GetUsersPastOrders/{userToken}")
-    public Order runGetUsersPastOrders(@PathVariable String userToken){
-        ResponseObject response = getUserPastOrders.getUserPastOrders(userToken);
-        return (Order) response.getContents();
+    public ResponseObject runGetUsersPastOrders(@PathVariable String userToken){
+        return getUserPastOrders.getUserPastOrders(userToken);
     }
 
     @PostMapping("/PlaceOrder/{userToken}")
-    public Order runPlaceOrder(@PathVariable String userToken){
-        ResponseObject response = placeOrder.placeOrder(userToken);
-        return (Order) response.getContents();
+    public ResponseObject runPlaceOrder(@PathVariable String userToken){
+        return placeOrder.placeOrder(userToken);
     }
 
     @PostMapping("/SetOrderInProgress/{vendorToken}/{orderId}")
-    public Order runPlaceOrder(@PathVariable String vendorToken, @PathVariable String orderId){
-        ResponseObject response = setOrderInprogress.setOrderInprogress(vendorToken, orderId);
-        return (Order) response.getContents();
+    public ResponseObject runPlaceOrder(@PathVariable String vendorToken, @PathVariable String orderId){
+        return setOrderInprogress.setOrderInprogress(vendorToken, orderId);
     }
 
 }

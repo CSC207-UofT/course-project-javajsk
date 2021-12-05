@@ -1,4 +1,4 @@
-package controllers;
+package com.javajsk.uoftruck.controllers;
 
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.singleton.inputboundaries.CreateSingleton;
@@ -21,21 +21,18 @@ public class SingletonController {
     }
 
     @PostMapping("/CreateSingleton/{vendorToken}")
-    public Singleton runCreateSingleton(@PathVariable String vendorToken, @RequestBody Singleton singleton){
-        ResponseObject response = createSingleton.createSingleton(vendorToken, singleton);
-        return (Singleton) response.getContents();
+    public ResponseObject runCreateSingleton(@PathVariable String vendorToken, @RequestBody Singleton singleton){
+        return createSingleton.createSingleton(vendorToken, singleton);
     }
 
     @GetMapping("/GetShopSingletons/{shopId}")
-    public Singleton runGetShopSingletons(@PathVariable String shopId){
-        ResponseObject response = getShopSingletons.getShopSingletons(shopId);
-        return (Singleton) response.getContents();
+    public ResponseObject runGetShopSingletons(@PathVariable String shopId){
+        return getShopSingletons.getShopSingletons(shopId);
     }
 
     @PutMapping("/ModifySingleton/{vendorToken}/{singletonId}")
-    public Singleton runModifySingleton(@PathVariable String vendorToken, @PathVariable String singletonId,
+    public ResponseObject runModifySingleton(@PathVariable String vendorToken, @PathVariable String singletonId,
                                         @RequestBody Singleton singleton){
-        ResponseObject response = modifySingleton.modifySingleton(vendorToken, singletonId, singleton);
-        return (Singleton) response.getContents();
+        return modifySingleton.modifySingleton(vendorToken, singletonId, singleton);
     }
 }

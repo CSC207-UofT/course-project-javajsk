@@ -10,10 +10,31 @@ import entities.Shop;
 
 import java.util.List;
 
+/**
+ * Use case for getting available addons of a shop from a repository
+ */
 public class GetAvailableAddonsInteractor implements GetAvailableAddons {
     Repository<Shop> shopRepository;
     RepositoryBoundary repositoryBoundary;
     ObjectBoundary<Addon> addonObjectBoundary;
+
+    /**
+     * Instantiates a use case for getting a shop's available addons
+     * @param sR the shop repository
+     * @param rB the repository boundary
+     * @param aOB the addon object boundary
+     */
+    public GetAvailableAddonsInteractor(Repository<Shop> sR, RepositoryBoundary rB, ObjectBoundary<Addon> aOB) {
+        this.shopRepository = sR;
+        this.repositoryBoundary = rB;
+        this.addonObjectBoundary = aOB;
+    }
+
+    /**
+     * Method for getting available addons
+     * @param shopId the shop id
+     * @return a response object
+     */
     @Override
     public ResponseObject getAvailableAddons(String shopId) {
         Shop shop = shopRepository.read(shopId);

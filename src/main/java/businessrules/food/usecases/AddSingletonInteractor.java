@@ -11,6 +11,9 @@ import entities.Food;
 import entities.Singleton;
 import entities.Vendor;
 
+/**
+ * Use case for adding a singleton to a repository
+ */
 public class AddSingletonInteractor implements AddSingleton {
     VendorRepository vendorRepository;
     Repository<Food> foodRepository;
@@ -18,6 +21,31 @@ public class AddSingletonInteractor implements AddSingleton {
     ObjectBoundary<Food> foodObjectBoundary;
     VendorBoundary vendorBoundary;
 
+
+    /**
+     * Instantiates a use case for adding singleton entities to a repository
+     * @param vR the vendor repository
+     * @param fR the food repository
+     * @param rB the repository boundary
+     * @param fOB the food object boundary
+     * @param vB the vendor boundary
+     */
+    public AddSingletonInteractor(VendorRepository vR, Repository<Food> fR, RepositoryBoundary rB,
+                                  ObjectBoundary<Food> fOB, VendorBoundary vB) {
+        this.vendorRepository = vR;
+        this.foodRepository = fR;
+        this.repositoryBoundary = rB;
+        this.foodObjectBoundary = fOB;
+        this.vendorBoundary = vB;
+    }
+
+    /**
+     * Method for adding a new singleton
+     * @param vendorToken the token of the vendor
+     * @param foodId the food id
+     * @param singleton the singleton entity
+     * @return a response object
+     */
     @Override
     public ResponseObject addSingleton(String vendorToken, String foodId, Singleton singleton) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);

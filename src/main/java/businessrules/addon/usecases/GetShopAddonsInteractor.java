@@ -13,6 +13,14 @@ public class GetShopAddonsInteractor implements GetShopAddons {
     Repository<Addon> addonRepository;
     RepositoryBoundary repositoryBoundary;
     ObjectBoundary<Addon> addonObjectBoundary;
+
+    public GetShopAddonsInteractor(Repository<Addon> addonRepository, RepositoryBoundary repositoryBoundary,
+                                   ObjectBoundary<Addon> addonObjectBoundary) {
+        this.addonRepository = addonRepository;
+        this.repositoryBoundary = repositoryBoundary;
+        this.addonObjectBoundary = addonObjectBoundary;
+    }
+
     @Override
     public ResponseObject getShopAddons(String shopId) {
 

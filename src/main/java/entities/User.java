@@ -1,5 +1,7 @@
 package entities;
 
+import org.json.JSONObject;
+
 public abstract class User{
     public String id;
     protected String userName;
@@ -33,5 +35,14 @@ public abstract class User{
 
     public void setHashedPassword(String hashedPassword) {
         this.hashedPassword = hashedPassword;
+    }
+    @Override
+    public String toString(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", this.id);
+        jsonObject.put("username", this.userName);
+        jsonObject.put("hashedPassword", this.hashedPassword);
+
+        return jsonObject.toString();
     }
 }
