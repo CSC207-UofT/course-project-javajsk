@@ -1,7 +1,6 @@
 package com.javajsk.uoftruck.controllers;
 
 import adapters.dam.entityrepoitories.*;
-import businessrules.dai.CustomerRepository;
 import businessrules.dai.Repository;
 import businessrules.dai.VendorRepository;
 import businessrules.menu.inputboundaries.*;
@@ -17,7 +16,6 @@ import presenters.ObjectPresenter;
 import presenters.RepositoryPresenter;
 import presenters.VendorPresenter;
 
-import java.util.List;
 @RestController
 public class MenuController{
 
@@ -34,7 +32,6 @@ public class MenuController{
     MongoDB db = new MongoDB();
     Repository<Shop> shopRepository = new ShopDB(db);
     Repository<Singleton> singletonRepository = new SingletonDB(db);
-    CustomerRepository customerRepository = new CustomerDB(db);
     VendorRepository vendorRepository = new VendorDB(db);
     VendorBoundary vendorBoundary = new VendorPresenter();
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();

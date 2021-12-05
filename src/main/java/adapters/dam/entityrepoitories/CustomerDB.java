@@ -54,7 +54,8 @@ public class CustomerDB implements CustomerRepository {
 
     @Override
     public User getUserFromToken(String userToken) {
-        String userId = tokenSigner.getIdFromToken(userToken);
+        String info = tokenSigner.getIdFromToken(userToken);
+        String userId = info.split(",")[0];
         if(userId.contains("ERROR")){
             return null;
         }
@@ -70,7 +71,8 @@ public class CustomerDB implements CustomerRepository {
         if(!customer.getHashedPassword().equals(password)){
             return null;
         }
-        return tokenSigner.generateToken(customer.getId());
+        String token_parameter = customer.getId() + "," +customer.getUserName();
+        return tokenSigner.generateToken(token_parameter);
     }
 
     public static JSONObject loadJSONFromCustomer(Customer customer){

@@ -1,6 +1,5 @@
 package entities;
 
-import adapters.dam.entityrepoitories.CartDB;
 import org.json.JSONObject;
 
 public abstract class User{

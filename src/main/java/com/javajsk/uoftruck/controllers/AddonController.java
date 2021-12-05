@@ -26,15 +26,18 @@ public class AddonController {
     CreateAddon createAddon;
     GetShopAddons getShopAddons;
     ModifyAddon modifyAddon;
-    MongoDB db = new MongoDB();
-    Repository<Addon> addonRepository = new AddonDB(db);
-    VendorRepository vendorRepository = new VendorDB(db);
+    MongoDB db;
+    Repository<Addon> addonRepository;
+    VendorRepository vendorRepository;
     VendorBoundary vendorBoundary = new VendorPresenter();
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
     ObjectBoundary<Addon> addonObjectBoundary = new ObjectPresenter<Addon>();
 
 
     public AddonController() {
+        this.db = new MongoDB();
+        this.addonRepository = new AddonDB(db);
+        this.vendorRepository = new VendorDB(db);
         this.createAddon = new CreateAddonInteractor(addonRepository, vendorRepository, vendorBoundary,
                 repositoryBoundary, addonObjectBoundary);
         this.getShopAddons = new GetShopAddonsInteractor(addonRepository, repositoryBoundary, addonObjectBoundary);

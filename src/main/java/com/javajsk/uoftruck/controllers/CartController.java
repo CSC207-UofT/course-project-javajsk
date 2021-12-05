@@ -1,9 +1,7 @@
 package com.javajsk.uoftruck.controllers;
 
-import adapters.dam.entityrepoitories.AddonDB;
 import adapters.dam.entityrepoitories.CustomerDB;
 import adapters.dam.entityrepoitories.FoodDB;
-import adapters.dam.entityrepoitories.VendorDB;
 import businessrules.cart.inputboundaries.AddToCart;
 import businessrules.cart.inputboundaries.EmptyCart;
 import businessrules.cart.inputboundaries.RemoveFromCart;
@@ -14,12 +12,10 @@ import businessrules.cart.usecases.RemoveFromCartInteractor;
 import businessrules.cart.usecases.ViewCartInteractor;
 import businessrules.dai.CustomerRepository;
 import businessrules.dai.Repository;
-import businessrules.dai.VendorRepository;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
-import entities.Addon;
 import entities.Cart;
 import entities.Food;
 import entities.Selection;
