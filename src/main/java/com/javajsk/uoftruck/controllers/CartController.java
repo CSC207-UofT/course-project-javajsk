@@ -11,6 +11,7 @@ import businessrules.cart.inputboundaries.ViewCart;
 import businessrules.cart.usecases.AddToCartInteractor;
 import businessrules.cart.usecases.EmptyCartInteractor;
 import businessrules.cart.usecases.RemoveFromCartInteractor;
+import businessrules.cart.usecases.ViewCartInteractor;
 import businessrules.dai.CustomerRepository;
 import businessrules.dai.Repository;
 import businessrules.dai.VendorRepository;
@@ -44,11 +45,11 @@ public class CartController {
 
     CartController(){
         addToCart = new AddToCartInteractor(foodRepository, cartObjectBoundary, customerRepository, repositoryBoundary);
-        emptyCart = new EmptyCartInteractor();
-        removeFromCart = new RemoveFromCartInteractor();
-
+        emptyCart = new EmptyCartInteractor(customerRepository, repositoryBoundary, cartObjectBoundary);
+        removeFromCart = new RemoveFromCartInteractor(customerRepository, repositoryBoundary, foodRepository, cartObjectBoundary);
+        viewCart = new ViewCartInteractor(cartObjectBoundary, customerRepository, repositoryBoundary);
     }
-    @PutMapping("/AddtoCart/{userToken}/{shopID}/{foodId}")
+    @PutMapping("/AddtoCart/{userToken}/{foodId}/{shopId}")
     public Cart runAddToCart(@PathVariable String userToken, @PathVariable String shopId,
                              @PathVariable String foodId, @RequestBody Selection[] selection){
         ResponseObject response = addToCart.addToCart(userToken, shopId, foodId, selection);
