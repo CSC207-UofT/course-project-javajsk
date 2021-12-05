@@ -4,39 +4,32 @@ import adapters.dam.TokenSigner;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.security.Key;
-import java.security.SecureRandom;
 
 public class JWTSigner implements TokenSigner {
+    static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);;
 
-
+    public JWTSigner() {
+    }
 
     @Override
     public String generateToken(String userId) {
-        String random_token = randomString(5);
-        return userId + random_token;
+
+        return Jwts.builder().setSubject(userId).signWith(key).compact();
     }
 
     @Override
     public String getIdFromToken(String token) {
         try {
-            return token.substring(0, token.length() - 5);
+            return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().getSubject();
         }catch (Exception e){
             return "ERROR: " + e.getMessage();
         }
     }
-
-
-    String randomString(int len){
-        String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        SecureRandom rnd = new SecureRandom();
-        StringBuilder sb = new StringBuilder(len);
-        for(int i = 0; i < len; i++)
-            sb.append(AB.charAt(rnd.nextInt(AB.length())));
-        return sb.toString();
-    }
-
 
 }

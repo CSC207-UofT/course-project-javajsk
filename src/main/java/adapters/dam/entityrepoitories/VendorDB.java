@@ -3,9 +3,7 @@ package adapters.dam.entityrepoitories;
 import adapters.dam.DBGateway;
 import adapters.dam.TokenSigner;
 import businessrules.dai.VendorRepository;
-import entities.Customer;
 import entities.Shop;
-import entities.User;
 import entities.Vendor;
 import framework.JWTSigner;
 import org.json.JSONException;
@@ -18,11 +16,13 @@ public class VendorDB implements VendorRepository {
     DBGateway databaseConnector;
 
     final String tableName = "Vendor";
-    TokenSigner tokenSigner = new JWTSigner();
+    TokenSigner tokenSigner;
 
     public VendorDB(DBGateway databaseConnector) {
         this.databaseConnector = databaseConnector;
+        this.tokenSigner = new JWTSigner();
     }
+
 
     @Override
     public Vendor read(String id) {
@@ -59,7 +59,8 @@ public class VendorDB implements VendorRepository {
     }
     @Override
     public Vendor getUserFromToken(String userToken) {
-        String userId = tokenSigner.getIdFromToken(userToken);
+        String info = tokenSigner.getIdFromToken(userToken);
+        String userId = info.split(",")[0];
         if(userId.contains("ERROR")){
             return null;
         }
@@ -75,7 +76,8 @@ public class VendorDB implements VendorRepository {
         if(!vendor.getHashedPassword().equals(password)){
             return null;
         }
-        return tokenSigner.generateToken(vendor.getId());
+        String token_parameter = vendor.getId() + "," +vendor.getUserName();
+        return tokenSigner.generateToken(token_parameter);
     }
 
     public Vendor loadVendorFromJSON(JSONObject jsonObject) {

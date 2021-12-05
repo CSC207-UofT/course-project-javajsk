@@ -13,7 +13,6 @@ import businessrules.dai.CustomerRepository;
 import businessrules.dai.Hasher;
 import businessrules.dai.Repository;
 import businessrules.outputboundaries.*;
-import entities.Cart;
 import entities.Customer;
 import entities.Food;
 import framework.MongoDB;

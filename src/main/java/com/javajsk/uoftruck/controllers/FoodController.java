@@ -18,7 +18,6 @@ import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
-import entities.Cart;
 import entities.Food;
 import entities.Singleton;
 import framework.MongoDB;
