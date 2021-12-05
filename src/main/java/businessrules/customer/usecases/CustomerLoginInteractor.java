@@ -16,17 +16,12 @@ public class CustomerLoginInteractor implements CustomerLogin {
     RepositoryBoundary repositoryBoundary;
     Hasher hasher;
 
-    /**
-     * Instantiates the use case for logging in a customer
-     * @param cR the customer repository
-     * @param cB the customer boundary
-     * @param rB the repository boundary
-     */
-    public CustomerLoginInteractor(CustomerRepository cR, CustomerBoundary cB,
-                                   RepositoryBoundary rB) {
-        this.customerRepository = cR;
-        this.customerBoundary = cB;
-        this.repositoryBoundary = rB;
+    public CustomerLoginInteractor(CustomerRepository customerRepository, CustomerBoundary customerBoundary,
+                                   RepositoryBoundary repositoryBoundary, Hasher hasher) {
+        this.customerRepository = customerRepository;
+        this.customerBoundary = customerBoundary;
+        this.repositoryBoundary = repositoryBoundary;
+        this.hasher = hasher;
     }
 
     /**

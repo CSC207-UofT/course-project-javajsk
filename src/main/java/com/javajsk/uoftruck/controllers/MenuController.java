@@ -1,14 +1,21 @@
 package com.javajsk.uoftruck.controllers;
 
+import adapters.dam.entityrepoitories.*;
+import businessrules.dai.CustomerRepository;
+import businessrules.dai.Repository;
 import businessrules.dai.VendorRepository;
 import businessrules.menu.inputboundaries.*;
-import businessrules.menu.usecases.AddAddonToMenuInteractor;
+import businessrules.menu.usecases.*;
+import businessrules.outputboundaries.ObjectBoundary;
+import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import entities.Addon;
-import entities.Food;
-import entities.Menu;
-import entities.Singleton;
+import businessrules.outputboundaries.VendorBoundary;
+import entities.*;
+import framework.MongoDB;
 import org.springframework.web.bind.annotation.*;
+import presenters.ObjectPresenter;
+import presenters.RepositoryPresenter;
+import presenters.VendorPresenter;
 
 import java.util.List;
 @RestController
@@ -23,6 +30,29 @@ public class MenuController{
     SetAddonAvailability setAddonAvailability;
     SetSingletonAvailability setSingletonAvailability;
     ViewMenu viewMenu;
+
+    MongoDB db = new MongoDB();
+    Repository<Shop> shopRepository = new ShopDB(db);
+    Repository<Singleton> singletonRepository = new SingletonDB(db);
+    CustomerRepository customerRepository = new CustomerDB(db);
+    VendorRepository vendorRepository = new VendorDB(db);
+    VendorBoundary vendorBoundary = new VendorPresenter();
+    RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
+    ObjectBoundary<Menu> menuObjectBoundary = new ObjectPresenter<Menu>();
+    ObjectBoundary<Addon> addonObjectBoundary = new ObjectPresenter<>();
+    ObjectBoundary<Food> foodObjectBoundary = new ObjectPresenter<>();
+
+    public MenuController(){
+        this.addAddonToMenu = new AddAddonToMenuInteractor(vendorRepository, repositoryBoundary, vendorBoundary, shopRepository, menuObjectBoundary);
+        this.addFoodToMenu = new AddFoodToMenuInteractor(vendorRepository, repositoryBoundary, vendorBoundary, shopRepository, menuObjectBoundary);
+        this.getAvailableAddons = new GetAvailableAddonsInteractor(shopRepository, repositoryBoundary, addonObjectBoundary);
+        this.getAvailableFoods = new GetAvailableFoodsInteractor(shopRepository, repositoryBoundary, foodObjectBoundary);
+        this.removeAddonFromMenu = new RemoveAddonFromMenuInteractor(vendorRepository, repositoryBoundary, vendorBoundary, shopRepository, menuObjectBoundary);
+        this.removeFoodFromMenu = new RemoveFoodFromMenuInteractor(vendorRepository, repositoryBoundary, vendorBoundary, shopRepository, menuObjectBoundary);
+        this.setAddonAvailability = new SetAddonAvailabilityInteractor(menuObjectBoundary, vendorRepository, repositoryBoundary, vendorBoundary, shopRepository);
+        this.setSingletonAvailability = new SetSingletonAvailabilityInteractor(menuObjectBoundary, vendorRepository, repositoryBoundary, vendorBoundary,singletonRepository, shopRepository);
+        this.viewMenu =new ViewMenuInteractor(shopRepository, repositoryBoundary, menuObjectBoundary);
+    }
 
     @PutMapping("/AddAddontoMenu/{vendorToken}")
     public ResponseObject runAddAddontoMenu(@PathVariable String vendorToken, @RequestBody Addon addon){
