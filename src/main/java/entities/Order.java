@@ -5,12 +5,12 @@ import org.json.JSONObject;
 import java.util.Date;
 
 /**
- * The type Order.
+ * The order entity
  */
 public class Order{
     public enum Status{IN_PROGRESS, PLACED, COMPLETED, CANCELLED}
     /**
-     * The Id.
+     * The order id.
      */
     public String id;
     /**
@@ -18,24 +18,24 @@ public class Order{
      */
     protected Cart cart;
     /**
-     * The Shop id.
+     * The id of the shop the order is for
      */
     protected String shopId;
     /**
-     * The User id.
+     * The id of the user who placed the order
      */
     protected String customerId;
     /**
-     * The Status.
+     * The order status.
      */
     protected Status status;
 
     /**
-     * The Time placed.
+     * The time the order is placed.
      */
     protected Date timePlaced;
     /**
-     * The Time status modified.
+     * The time the order status is modified.
      */
     protected Date timeStatusModified;
 
@@ -62,7 +62,7 @@ public class Order{
     }
 
     /**
-     * Gets id.
+     * Gets order id.
      *
      * @return the id
      */
@@ -71,7 +71,7 @@ public class Order{
     }
 
     /**
-     * Sets id.
+     * Sets order id.
      *
      * @param id the id
      */

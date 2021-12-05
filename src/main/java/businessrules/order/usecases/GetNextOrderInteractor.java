@@ -8,11 +8,31 @@ import businessrules.outputboundaries.ResponseObject;
 import entities.Order;
 import entities.Vendor;
 
+/**
+ * Use case for getting the next order entry of a repository
+ */
 public class GetNextOrderInteractor implements GetNextOrder {
     VendorRepository vendorRepository;
     RepositoryBoundary repositoryBoundary;
     ObjectBoundary<Order> orderObjectBoundary;
 
+    /**
+     * Instantiates a use case for getting the next order entry of a repository
+     * @param vR the vendor repository
+     * @param rB the repository boundary
+     * @param oOB the order object boundary
+     */
+    public GetNextOrderInteractor(VendorRepository vR, RepositoryBoundary rB, ObjectBoundary<Order> oOB) {
+        this.vendorRepository = vR;
+        this.repositoryBoundary = rB;
+        this.orderObjectBoundary = oOB;
+    }
+
+    /**
+     * Method for getting the next incomplete order
+     * @param vendorToken the vendor token
+     * @return a response object
+     */
     @Override
     public ResponseObject getNextOrder(String vendorToken) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);

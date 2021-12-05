@@ -2,7 +2,8 @@ package businessrules.outputboundaries;
 
 import java.util.List;
 
-/**
+public interface ObjectBoundary <T>{
+    /**
  * General Output boundary for all entity objects
  * @param <T> generic data type to account for different entities
  */

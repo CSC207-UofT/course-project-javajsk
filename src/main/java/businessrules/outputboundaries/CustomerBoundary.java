@@ -1,8 +1,8 @@
 package businessrules.outputboundaries;
 
 /**
- * Output boundary for customer entity
- */
+*Interface for customer output boundaries
+*/
 public interface CustomerBoundary {
     /**
      * A method that returns a responseObject containing information to display the user token

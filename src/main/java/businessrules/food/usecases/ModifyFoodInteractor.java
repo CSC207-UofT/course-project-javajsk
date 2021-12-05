@@ -10,12 +10,40 @@ import businessrules.outputboundaries.VendorBoundary;
 import entities.Food;
 import entities.Vendor;
 
+/**
+ * Use case for modifying a food entry in a repository
+ */
 public class ModifyFoodInteractor implements ModifyFood {
     VendorRepository vendorRepository;
     Repository<Food> foodRepository;
     RepositoryBoundary repositoryBoundary;
     ObjectBoundary<Food> foodObjectBoundary;
     VendorBoundary vendorBoundary;
+
+    /**
+     * Instantiates a use case for modifying a food entry in a repository
+     * @param vR the vendor repository
+     * @param fR the food repository
+     * @param rB the repository boundary
+     * @param fOB the food object boundary
+     * @param vB the vendor boundary
+     */
+    public ModifyFoodInteractor(VendorRepository vR, Repository<Food> fR, RepositoryBoundary rB,
+                                ObjectBoundary<Food> fOB, VendorBoundary vB) {
+        this.vendorRepository = vR;
+        this.foodRepository = fR;
+        this.repositoryBoundary = rB;
+        this.foodObjectBoundary = fOB;
+        this.vendorBoundary = vB;
+    }
+
+    /**
+     * Method for modifying a food entry
+     * @param vendorToken the vendor token
+     * @param foodId the food id
+     * @param food the food entity
+     * @return a response object
+     */
     @Override
     public ResponseObject modifyFood(String vendorToken, String foodId, Food food) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);

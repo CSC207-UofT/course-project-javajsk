@@ -1,7 +1,7 @@
 package businessrules.outputboundaries;
 
 /**
- * Output boundary for repository
+ * Output boundary for repository entities
  */
 public interface RepositoryBoundary {
     /**

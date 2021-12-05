@@ -9,6 +9,9 @@ import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import entities.Customer;
 
+/**
+ * Use case for modifying a customer in a repository
+ */
 public class ModifyCustomerInteractor implements ModifyCustomer {
     CustomerRepository customerRepository;
     ObjectBoundary<Customer> customerObjectBoundary;
@@ -16,6 +19,31 @@ public class ModifyCustomerInteractor implements ModifyCustomer {
     CustomerBoundary customerBoundary;
     Hasher hasher;
 
+    /**
+     * Instantiates a use case for modifying a customer
+     * @param cR the customer repository
+     * @param cOB the customer object boundary
+     * @param rB the repository boundary
+     * @param cB the customer boundary
+     * @param h the password hasher
+     */
+    public ModifyCustomerInteractor(CustomerRepository cR, ObjectBoundary<Customer> cOB, RepositoryBoundary rB,
+                                    CustomerBoundary cB, Hasher h) {
+        this.customerRepository = cR;
+        this.customerObjectBoundary = cOB;
+        this.repositoryBoundary = rB;
+        this.customerBoundary = cB;
+        this.hasher = h;
+    }
+
+    /**
+     * Method for modifying a customer
+     * @param userToken the customer token
+     * @param username the customer username
+     * @param password the customer password
+     * @param passwordConf the password confirmation
+     * @return a response object
+     */
     @Override
     public ResponseObject modify(String userToken, String username, String password, String passwordConf) {
         Customer customer = (Customer) customerRepository.getUserFromToken(userToken);

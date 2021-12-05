@@ -9,6 +9,9 @@ import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
 import entities.*;
 
+/**
+ * Use case for setting the availability of a singleton in a menu of a repository
+ */
 public class SetSingletonAvailabilityInteractor implements SetSingletonAvailability {
     ObjectBoundary<Menu> menuObjectBoundary;
     VendorRepository vendorRepository;
@@ -17,7 +20,32 @@ public class SetSingletonAvailabilityInteractor implements SetSingletonAvailabil
     Repository<Singleton> singletonRepository;
     Repository<Shop> shopRepository;
 
+    /**
+     * Instantiates a use case for setting the availability of a singleton in a menu
+     * @param mOB the menu object boundary
+     * @param vR the vendor repository
+     * @param rB the repository boundary
+     * @param vB the vendor boundary
+     * @param singR the singleton repository
+     * @param sR the shop repository
+     */
+    public SetSingletonAvailabilityInteractor(ObjectBoundary<Menu> mOB, VendorRepository vR, RepositoryBoundary rB,
+                                              VendorBoundary vB, Repository<Singleton> singR, Repository<Shop> sR) {
+        this.menuObjectBoundary = mOB;
+        this.vendorRepository = vR;
+        this.repositoryBoundary = rB;
+        this.vendorBoundary = vB;
+        this.singletonRepository = singR;
+        this.shopRepository = sR;
+    }
 
+    /**
+     * Method for setting the availability of a singleton
+     * @param vendorToken the vendor token
+     * @param singleton the singleton entity
+     * @param newAvailability the new availability
+     * @return a response object
+     */
     @Override
     public ResponseObject setSingletonAvailability(String vendorToken, Singleton singleton, boolean newAvailability) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
