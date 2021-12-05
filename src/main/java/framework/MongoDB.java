@@ -59,10 +59,13 @@ public class MongoDB implements DBGateway {
         try {
             MongoCollection<Document> collection = database.getCollection(table);
             Document filter = new Document("_id", new ObjectId(id));
+            System.out.println("filter: "+filter);
             Document newDoc = Document.parse(newDat.toString());
-            collection.findOneAndUpdate(filter, newDoc);
+            System.out.println("filter: "+newDoc);
+            collection.replaceOne(filter, newDoc); //TODO: findOneAndUpdate doesn't seem to work...
             //TODO This exception clause needs to be modified.
         }catch (Exception e){
+            System.out.println(e.getMessage());
             return false;
         }
         return true;
