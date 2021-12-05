@@ -33,7 +33,7 @@ public class RAMSingletonRepository implements Repository<Singleton> {
         for (Singleton singleton:singletonList){
             if (singleton.getId().equals(id)){
                 singletonList.add(item);
-                singletonList.remove(item);
+                singletonList.remove(singleton);
                 return true;
             }
         }

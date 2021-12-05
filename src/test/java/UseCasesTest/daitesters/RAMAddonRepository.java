@@ -34,7 +34,7 @@ public class RAMAddonRepository implements Repository<Addon> {
             for (Addon addon: addonlist){
                 if (addon.getId().equals(id)){
                     addonlist.add(item);
-                    addonlist.remove(item);
+                    addonlist.remove(addon);
                     return true;
                 }
             }
