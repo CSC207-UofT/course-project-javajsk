@@ -20,21 +20,18 @@ public class AddonController {
     }
 
     @PostMapping("/CreateAddon/{vendorToken}")
-    public Addon runCreateAddon(@PathVariable String vendorToken, @RequestBody Addon addon){
-        ResponseObject response = createAddon.createAddon(vendorToken, addon);
-        return (Addon) response.getContents();
+    public ResponseObject runCreateAddon(@PathVariable String vendorToken, @RequestBody Addon addon){
+        return createAddon.createAddon(vendorToken, addon);
     }
 
     @GetMapping("/GetShopAddons/{shopId}")
-    public Addon runGetShopAddons(@PathVariable String shopId){
-        ResponseObject response = getShopAddons.getShopAddons(shopId);
-        return (Addon) response.getContents();
+    public ResponseObject runGetShopAddons(@PathVariable String shopId){
+        return getShopAddons.getShopAddons(shopId);
     }
 
-    @PutMapping("/ModifyAddonInteractor/{vendorToken}/{foodId}")
-    public Addon runModifyAddon(@PathVariable String vendorToken, @PathVariable String addonId,
+    @PutMapping("/ModifyAddonInteractor/{vendorToken}/{addonId}")
+    public ResponseObject runModifyAddon(@PathVariable String vendorToken, @PathVariable String addonId,
                                 @RequestBody Addon addon){
-        ResponseObject response = modifyAddon.modifyAddon(vendorToken, addonId, addon);
-        return (Addon) response.getContents();
+        return modifyAddon.modifyAddon(vendorToken, addonId, addon);
     }
 }

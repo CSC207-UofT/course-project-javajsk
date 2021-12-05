@@ -1,10 +1,12 @@
 package entities;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Order book.
+ * The Order book entity
  */
 public class OrderBook {
     /**
@@ -21,6 +23,9 @@ public class OrderBook {
         this.ordersList = ordersList;
     }
 
+    /**
+     * Instantiates an empty order book
+     */
     public OrderBook() {
         this.ordersList = new ArrayList<>();
     }
@@ -43,6 +48,10 @@ public class OrderBook {
         this.ordersList = ordersList;
     }
 
+    /**
+     * Method for getting order ids
+     * @return a list of order ids
+     */
     public List<String> getOrderIds(){
         List<String> finalList = new ArrayList<>();
         for(Order order: this.ordersList){
@@ -51,6 +60,10 @@ public class OrderBook {
         return finalList;
     }
 
+    /**
+     * Method for getting orders with in progress statuses
+     * @return a list of in progress orders
+     */
     public List<Order> getIncompleteOrders(){
         List<Order> incomplete = new ArrayList<>();
         for(Order order : this.ordersList){
@@ -61,6 +74,10 @@ public class OrderBook {
         return incomplete;
     }
 
+    /**
+     * Method for getting the next incomplete order
+     * @return the next order
+     */
     public Order getNextOrder(){
         if(this.ordersList.size() == 0){
             return null;
@@ -68,4 +85,5 @@ public class OrderBook {
         List<Order> incompleteOrders = this.getIncompleteOrders();
         return incompleteOrders.get(0);
     }
+
 }

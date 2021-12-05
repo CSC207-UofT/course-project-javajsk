@@ -9,6 +9,7 @@ import entities.Cart;
 import entities.Food;
 import entities.Selection;
 import entities.Singleton;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 public class CartController {
@@ -31,21 +32,18 @@ public class CartController {
         return (Cart) response.getContents();
     }
     @PutMapping("/EmptyCart/{userToken}")
-    public Cart runEmptyCart(@PathVariable String userToken){
-        ResponseObject response = emptyCart.emptyCart(userToken);
-        return (Cart) response.getContents();
+    public ResponseObject runEmptyCart(@PathVariable String userToken){
+        return emptyCart.emptyCart(userToken);
     }
 
     @PutMapping("/RemovefromCart/{userToken}")
-    public Cart runRemoveFromCart(@PathVariable String userToken, @RequestBody Food food,
+    public ResponseObject runRemoveFromCart(@PathVariable String userToken, @RequestBody Food food,
                                   @RequestBody Selection[] selection){
-        ResponseObject response = removeFromCart.removeFromCart(userToken, food, selection);
-        return (Cart) response.getContents();
+        return removeFromCart.removeFromCart(userToken, food, selection);
     }
     @GetMapping("/ViewCart/{userToken}")
-    public Cart runViewCart(@PathVariable String userToken){
-        ResponseObject response = viewCart.viewCart(userToken);
-        return (Cart) response.getContents();
+    public ResponseObject runViewCart(@PathVariable String userToken){
+        return viewCart.viewCart(userToken);
     }
 
 }

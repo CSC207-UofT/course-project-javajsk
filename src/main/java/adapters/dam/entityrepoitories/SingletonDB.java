@@ -56,16 +56,7 @@ public class SingletonDB implements Repository<Singleton> {
         return loadSingletonFromJSON(dbConnector.readOne(tableName,fieldName,needle));
     }
     public static JSONObject loadJSONFromSingleton(Singleton singleton){
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("id", singleton.getId());
-        jsonObject.put("price", singleton.getPrice());
-        jsonObject.put("name", singleton.getName());
-        jsonObject.put("description", singleton.getDescription());
-        jsonObject.put("allowedAddonTypes", singleton.getAllowedAddonTypes());
-        jsonObject.put("defaultSelection", CartDB.loadJSONfromSelection(singleton.getDefaultSelection()));
-        jsonObject.put("availability", singleton.isAvailable());
-        jsonObject.put("shopId", singleton.getShopId());
-        return jsonObject;
+        return new JSONObject(singleton.toString());
     }
 
     public Singleton loadSingletonFromJSON(JSONObject rawSingleton){

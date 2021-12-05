@@ -1,5 +1,7 @@
 package entities;
 
+import org.json.JSONObject;
+
 /**
  * The type Customer.
  */
@@ -60,6 +62,14 @@ public class Customer extends User {
 
     public void emptyCart(){
         this.currentCart.empty();
+    }
+    @Override
+    public String toString(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("orderHistory", this.orderHistory.toString());
+        jsonObject.put("cart", this.currentCart.toString());
+
+        return jsonObject.toString();
     }
 
 }

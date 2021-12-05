@@ -54,13 +54,7 @@ public class ShopDB implements Repository<Shop> {
 
 
     public JSONObject loadJSONFromShop(Shop shop){
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("id", shop.getId());
-        jsonObject.put("name", shop.getName());
-        jsonObject.put("location", shop.getLocation());
-        jsonObject.put("menu", loadJSONfromMenu(shop.getMenu()));
-        jsonObject.put("isOpen", shop.isOpen());
-        return jsonObject;
+        return new JSONObject(shop.toString());
     }
 
     public Shop loadShopFromJSON(JSONObject rawShop){
@@ -98,21 +92,6 @@ public class ShopDB implements Repository<Shop> {
         }catch (JSONException e){
             return null;
         }
-    }
-
-    public static JSONObject loadJSONfromMenu(Menu menu){
-        JSONObject jsonObject = new JSONObject();
-        JSONArray foods = new JSONArray();
-        JSONArray addons = new JSONArray();
-        for(Food food: menu.getFoods()){
-            foods.put(food.getId());
-        }
-        for(Addon addon: menu.getAddons()){
-            addons.put(addon.getId());
-        }
-        jsonObject.put("foods", foods);
-        jsonObject.put("addons", addons);
-        return jsonObject;
     }
 
 }
