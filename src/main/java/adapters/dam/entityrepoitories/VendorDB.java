@@ -7,17 +7,18 @@ import entities.Customer;
 import entities.Shop;
 import entities.User;
 import entities.Vendor;
+import framework.JWTSigner;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import java.util.ArrayList;
 import java.util.List;
-
 public class VendorDB implements VendorRepository {
     DBGateway databaseConnector;
 
     final String tableName = "Vendor";
-    TokenSigner tokenSigner;
+    TokenSigner tokenSigner = new JWTSigner();
 
     public VendorDB(DBGateway databaseConnector) {
         this.databaseConnector = databaseConnector;
@@ -51,9 +52,11 @@ public class VendorDB implements VendorRepository {
 
     @Override
     public Vendor findOneByFieldName(String fieldName, String needle) {
-        return loadVendorFromJSON(databaseConnector.readOne(tableName,fieldName, needle));
+        if(databaseConnector.readOne(tableName, fieldName, needle) != null) {
+            return loadVendorFromJSON(databaseConnector.readOne(tableName, fieldName, needle));
+        }
+        return  null;
     }
-
     @Override
     public Vendor getUserFromToken(String userToken) {
         String userId = tokenSigner.getIdFromToken(userToken);

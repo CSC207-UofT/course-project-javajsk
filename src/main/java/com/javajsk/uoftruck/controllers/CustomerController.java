@@ -1,25 +1,21 @@
-package controllers;
+package com.javajsk.uoftruck.controllers;
 
 import businessrules.customer.inputboundaries.CustomerLogin;
 import businessrules.customer.inputboundaries.CustomerSignUp;
 import businessrules.customer.inputboundaries.ModifyCustomer;
 import businessrules.outputboundaries.ResponseObject;
-import entities.Customer;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class CustomerController {
 
     CustomerLogin customerLogin;
     CustomerSignUp customerSignUp;
     ModifyCustomer modifyCustomer;
 
-    public CustomerController(CustomerLogin customerLogin, CustomerSignUp customerSignUp, ModifyCustomer modifyCustomer) {
 
-        this.customerLogin = customerLogin;
-        this.customerSignUp = customerSignUp;
-        this.modifyCustomer = modifyCustomer;
-    }
     @PutMapping("/CustomerLogin/{username}/{password}")
     public ResponseObject runCustomerLogin(@PathVariable String username, @PathVariable String password){
         return customerLogin.login(username, password);

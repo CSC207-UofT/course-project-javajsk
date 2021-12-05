@@ -1,18 +1,17 @@
-package controllers;
+package com.javajsk.uoftruck.controllers;
 
+import businessrules.dai.VendorRepository;
 import businessrules.menu.inputboundaries.*;
+import businessrules.menu.usecases.AddAddonToMenuInteractor;
 import businessrules.outputboundaries.ResponseObject;
 import entities.Addon;
 import entities.Food;
 import entities.Menu;
 import entities.Singleton;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@RestController
 public class MenuController{
 
     AddAddonToMenu addAddonToMenu;
@@ -25,55 +24,38 @@ public class MenuController{
     SetSingletonAvailability setSingletonAvailability;
     ViewMenu viewMenu;
 
-    public MenuController(AddAddonToMenu addonToMenu, AddFoodToMenu addFoodToMenu,
-                          GetAvailableAddons getAvailableAddons, GetAvailableFoods getAvailableFoods,
-                          RemoveAddonFromMenu removeAddonFromMenu, RemoveFoodFromMenu removeFoodFromMenu,
-                          SetAddonAvailability setAddonAvailability, SetSingletonAvailability setSingletonAvailability,
-                          ViewMenu viewMenu) {
-        this.addAddonToMenu = addonToMenu;
-        this.addFoodToMenu = addFoodToMenu;
-        this.getAvailableAddons = getAvailableAddons;
-        this.getAvailableFoods = getAvailableFoods;
-        this.removeAddonFromMenu = removeAddonFromMenu;
-        this.removeFoodFromMenu = removeFoodFromMenu;
-        this.setAddonAvailability = setAddonAvailability;
-        this.setSingletonAvailability = setSingletonAvailability;
-        this.viewMenu = viewMenu;
-    }
     @PutMapping("/AddAddontoMenu/{vendorToken}")
-    public Menu runAddAddontoMenu(@PathVariable String vendorToken, @RequestBody Addon addon){
+    public ResponseObject runAddAddontoMenu(@PathVariable String vendorToken, @RequestBody Addon addon){
         ResponseObject response = addAddonToMenu.addAddon(vendorToken, addon);
-        return (Menu) response.getContents();
+        return response;
     }
     @PutMapping("/AddFoodtoMenu/{vendorToken}")
-    public Menu runAddFoodtoMenu(@PathVariable String vendorToken, @RequestBody Food food){
+    public ResponseObject runAddFoodtoMenu(@PathVariable String vendorToken, @RequestBody Food food){
         ResponseObject response = addFoodToMenu.addFood(vendorToken, food);
-        return (Menu) response.getContents();
+        return response;
     }
     @GetMapping("/GetAvailableAddons/{shopId}")
-    public List<Addon> runGetAvailableAddons(@PathVariable String shopId){
+    public ResponseObject runGetAvailableAddons(@PathVariable String shopId){
         ResponseObject response = getAvailableAddons.getAvailableAddons(shopId);
-        //TODO: Check return type here
-        return (List<Addon>) response.getContents();
+        return response;
     }
 
-    @GetMapping("/GetAvailableAddons/{shopId}")
-    public List<Food> runGetAvailableFoods(@PathVariable String shopId){
+    @GetMapping("/GetAvailableAddons1/{shopId}")
+    public ResponseObject runGetAvailableFoods(@PathVariable String shopId){
         ResponseObject response = getAvailableFoods.getAvailableFoods(shopId);
-        //TODO: Check return type here
-        return (List<Food>) response.getContents();
+        return response;
     }
     @PutMapping("/RemoveAddonfromMenu/{vendorToken}")
-    public Menu runRemoveAddonFromMenu(@PathVariable String vendorToken, @RequestBody Addon addon){
+    public ResponseObject runRemoveAddonFromMenu(@PathVariable String vendorToken, @RequestBody Addon addon){
         ResponseObject response = removeAddonFromMenu.removeAddon(vendorToken, addon);
-        return (Menu) response.getContents();
+        return response;
     }
     @PutMapping("/RemoveFoodfromMenu/{vendorToken}")
-    public Menu runRemoveFoodFromMenu(@PathVariable String vendorToken, @RequestBody Food food){
+    public ResponseObject runRemoveFoodFromMenu(@PathVariable String vendorToken, @RequestBody Food food){
         ResponseObject response = removeFoodFromMenu.removeFood(vendorToken, food);
-        return (Menu) response.getContents();
+        return response;
     }
-    @PutMapping("/SetAddonAvailability/{vendorToken}/{availability}")
+    @PutMapping("/SetAddonAvailability1/{vendorToken}/{availability}")
     public ResponseObject runSetAddonAvailability(@PathVariable String vendorToken, @PathVariable Boolean availability,
                                         @RequestBody Addon addon){
         return setAddonAvailability.setAddonAvailability(vendorToken, addon, availability);
