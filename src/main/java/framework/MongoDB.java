@@ -11,6 +11,7 @@ import org.bson.types.ObjectId;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.aop.scope.ScopedObject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.print.Doc;
 import java.util.ArrayList;
@@ -71,6 +72,7 @@ public class MongoDB implements DBGateway {
     public String create(String table, JSONObject data) {
         try{
             MongoCollection<Document> collection = database.getCollection(table);
+            data.remove("id");
             Document insertion = Document.parse(data.toString());
             collection.insertOne(insertion);
             return insertion.getObjectId("_id").toString();

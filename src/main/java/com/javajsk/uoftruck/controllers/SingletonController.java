@@ -1,4 +1,4 @@
-package controllers;
+package com.javajsk.uoftruck.controllers;
 
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.singleton.inputboundaries.CreateSingleton;

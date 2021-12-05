@@ -17,6 +17,14 @@ public class AddToCartInteractor implements AddToCart {
     CustomerRepository customerRepository;
     RepositoryBoundary repositoryBoundary;
 
+    public AddToCartInteractor(Repository<Food> foodRepository, ObjectBoundary<Cart> cartObjectBoundary,
+                               CustomerRepository customerRepository, RepositoryBoundary repositoryBoundary) {
+        this.foodRepository = foodRepository;
+        this.cartObjectBoundary = cartObjectBoundary;
+        this.customerRepository = customerRepository;
+        this.repositoryBoundary = repositoryBoundary;
+    }
+
     // This is required.
     @SuppressWarnings("DuplicatedCode")
     @Override
