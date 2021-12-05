@@ -61,10 +61,11 @@ public class MongoDB implements DBGateway {
             MongoCollection<Document> collection = database.getCollection(table);
             Document filter = new Document("_id", new ObjectId(id));
             Document newDoc = Document.parse(newDat.toString());
-            collection.findOneAndReplace(filter, newDoc);
+            System.out.println("filter: "+ newDoc);
+            collection.replaceOne(filter, newDoc);
             //TODO This exception clause needs to be modified.
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return false;
         }
         return true;
@@ -130,8 +131,5 @@ public class MongoDB implements DBGateway {
             System.out.println(e.getMessage());
             return null;
         }
-
     }
-
-
 }

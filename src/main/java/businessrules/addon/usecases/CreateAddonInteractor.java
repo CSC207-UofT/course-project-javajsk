@@ -17,13 +17,22 @@ public class CreateAddonInteractor implements CreateAddon {
     RepositoryBoundary repositoryBoundary;
     ObjectBoundary<Addon> addonObjectBoundary;
 
+    public CreateAddonInteractor(Repository<Addon> addonRepository, VendorRepository vendorRepository,
+                                 VendorBoundary vendorBoundary, RepositoryBoundary repositoryBoundary,
+                                 ObjectBoundary<Addon> addonObjectBoundary) {
+        this.addonRepository = addonRepository;
+        this.vendorRepository = vendorRepository;
+        this.vendorBoundary = vendorBoundary;
+        this.repositoryBoundary = repositoryBoundary;
+        this.addonObjectBoundary = addonObjectBoundary;
+    }
+
     @Override
     public ResponseObject createAddon(String vendorToken, Addon addon) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
         if(vendor == null){
             return vendorBoundary.vendorNotFound();
         }
-
         String addonId = addonRepository.create(addon);
 
         if(addonId == null){

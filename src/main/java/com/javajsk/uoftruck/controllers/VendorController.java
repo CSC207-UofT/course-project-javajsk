@@ -28,7 +28,6 @@ import presenters.VendorPresenter;
 
 @RestController
 public class VendorController {
-
     VendorLogin vendorLogin;
     VendorSignUp vendorSignUp;
     ModifyVendor modifyVendor;
@@ -36,7 +35,7 @@ public class VendorController {
     VendorRepository vendorRepository = new VendorDB(db);
     Hasher hasher = new SHA512Hasher();
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
-    ObjectBoundary<Vendor> vendorObjectBoundary = new ObjectPresenter<>();
+    ObjectBoundary<Vendor> vendorObjectBoundary = new ObjectPresenter<Vendor>();
     Repository<Shop> shopRepository = new ShopDB(db);
     VendorBoundary vendorBoundary = new VendorPresenter();
 
@@ -54,13 +53,13 @@ public class VendorController {
     }
     @PutMapping("/VendorSignUp/{username}/{password}/{confirmed_password}/{shop_name}/{location}")
     public ResponseObject runVendorSignup(@PathVariable String username, @PathVariable String password,
-                                  @PathVariable String confirmed_password, @PathVariable String location,
-                                  @PathVariable String shop_name){
+                                          @PathVariable String confirmed_password, @PathVariable String location,
+                                          @PathVariable String shop_name){
         return vendorSignUp.signUp(username, password, confirmed_password, shop_name, location);
     }
     @PutMapping("/ModifyVendor/{userToken}/{username}/{password}/{confirmed_password}")
     public ResponseObject runModifyVendor(@PathVariable String username, @PathVariable String password,
-                                      @PathVariable String confirmed_password, @PathVariable String userToken){
-        return modifyVendor.modifyVendor(userToken, username, password, confirmed_password);
+                                          @PathVariable String confirmed_password, @PathVariable String userToken){
+        return modifyVendor.modifyVendor(userToken, username, password, confirmed_password)
     }
 }

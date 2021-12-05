@@ -17,6 +17,16 @@ public class ModifyAddonInteractor implements ModifyAddon {
     VendorRepository vendorRepository;
     VendorBoundary vendorBoundary;
 
+    public ModifyAddonInteractor(Repository<Addon> addonRepository, ObjectBoundary<Addon> addonObjectBoundary,
+                                 RepositoryBoundary repositoryBoundary, VendorRepository vendorRepository,
+                                 VendorBoundary vendorBoundary) {
+        this.addonRepository = addonRepository;
+        this.addonObjectBoundary = addonObjectBoundary;
+        this.repositoryBoundary = repositoryBoundary;
+        this.vendorRepository = vendorRepository;
+        this.vendorBoundary = vendorBoundary;
+    }
+
     @Override
     public ResponseObject modifyAddon(String vendorToken, String id, Addon addon) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);

@@ -1,18 +1,22 @@
 package com.javajsk.uoftruck.controllers;
 
+import adapters.dam.entityrepoitories.*;
+import businessrules.dai.Repository;
+import businessrules.dai.VendorRepository;
 import businessrules.menu.inputboundaries.*;
+import businessrules.menu.usecases.*;
+import businessrules.outputboundaries.ObjectBoundary;
+import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import entities.Addon;
-import entities.Food;
-import entities.Menu;
-import entities.Singleton;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import businessrules.outputboundaries.VendorBoundary;
+import entities.*;
+import framework.MongoDB;
+import org.springframework.web.bind.annotation.*;
+import presenters.ObjectPresenter;
+import presenters.RepositoryPresenter;
+import presenters.VendorPresenter;
 
-import java.util.List;
-
+@RestController
 public class MenuController{
 
     AddAddonToMenu addAddonToMenu;
@@ -24,62 +28,66 @@ public class MenuController{
     SetAddonAvailability setAddonAvailability;
     SetSingletonAvailability setSingletonAvailability;
     ViewMenu viewMenu;
+    MongoDB db = new MongoDB();
+    Repository<Shop> shopRepository = new ShopDB(db);
+    Repository<Singleton> singletonRepository = new SingletonDB(db);
+    VendorRepository vendorRepository = new VendorDB(db);
+    VendorBoundary vendorBoundary = new VendorPresenter();
+    RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
+    ObjectBoundary<Menu> menuObjectBoundary = new ObjectPresenter<Menu>();
+    ObjectBoundary<Addon> addonObjectBoundary = new ObjectPresenter<>();
+    ObjectBoundary<Food> foodObjectBoundary = new ObjectPresenter<>();
 
-    public MenuController(AddAddonToMenu addonToMenu, AddFoodToMenu addFoodToMenu,
-                          GetAvailableAddons getAvailableAddons, GetAvailableFoods getAvailableFoods,
-                          RemoveAddonFromMenu removeAddonFromMenu, RemoveFoodFromMenu removeFoodFromMenu,
-                          SetAddonAvailability setAddonAvailability, SetSingletonAvailability setSingletonAvailability,
-                          ViewMenu viewMenu) {
-        this.addAddonToMenu = addonToMenu;
-        this.addFoodToMenu = addFoodToMenu;
-        this.getAvailableAddons = getAvailableAddons;
-        this.getAvailableFoods = getAvailableFoods;
-        this.removeAddonFromMenu = removeAddonFromMenu;
-        this.removeFoodFromMenu = removeFoodFromMenu;
-        this.setAddonAvailability = setAddonAvailability;
-        this.setSingletonAvailability = setSingletonAvailability;
-        this.viewMenu = viewMenu;
+    public MenuController(){
+        this.addAddonToMenu = new AddAddonToMenuInteractor(vendorRepository, repositoryBoundary, vendorBoundary, shopRepository, menuObjectBoundary);
+        this.addFoodToMenu = new AddFoodToMenuInteractor(vendorRepository, repositoryBoundary, vendorBoundary, shopRepository, menuObjectBoundary);
+        this.getAvailableAddons = new GetAvailableAddonsInteractor(shopRepository, repositoryBoundary, addonObjectBoundary);
+        this.getAvailableFoods = new GetAvailableFoodsInteractor(shopRepository, repositoryBoundary, foodObjectBoundary);
+        this.removeAddonFromMenu = new RemoveAddonFromMenuInteractor(vendorRepository, repositoryBoundary, vendorBoundary, shopRepository, menuObjectBoundary);
+        this.removeFoodFromMenu = new RemoveFoodFromMenuInteractor(vendorRepository, repositoryBoundary, vendorBoundary, shopRepository, menuObjectBoundary);
+        this.setAddonAvailability = new SetAddonAvailabilityInteractor(menuObjectBoundary, vendorRepository, repositoryBoundary, vendorBoundary, shopRepository);
+        this.setSingletonAvailability = new SetSingletonAvailabilityInteractor(menuObjectBoundary, vendorRepository, repositoryBoundary, vendorBoundary,singletonRepository, shopRepository);
+        this.viewMenu =new ViewMenuInteractor(shopRepository, repositoryBoundary, menuObjectBoundary);
     }
+
     @PutMapping("/AddAddontoMenu/{vendorToken}")
-    public Menu runAddAddontoMenu(@PathVariable String vendorToken, @RequestBody Addon addon){
+    public ResponseObject runAddAddontoMenu(@PathVariable String vendorToken, @RequestBody Addon addon){
         ResponseObject response = addAddonToMenu.addAddon(vendorToken, addon);
-        return (Menu) response.getContents();
+        return response;
     }
     @PutMapping("/AddFoodtoMenu/{vendorToken}")
-    public Menu runAddFoodtoMenu(@PathVariable String vendorToken, @RequestBody Food food){
+    public ResponseObject runAddFoodtoMenu(@PathVariable String vendorToken, @RequestBody Food food){
         ResponseObject response = addFoodToMenu.addFood(vendorToken, food);
-        return (Menu) response.getContents();
+        return response;
     }
     @GetMapping("/GetAvailableAddons/{shopId}")
-    public List<Addon> runGetAvailableAddons(@PathVariable String shopId){
+    public ResponseObject runGetAvailableAddons(@PathVariable String shopId){
         ResponseObject response = getAvailableAddons.getAvailableAddons(shopId);
-        //TODO: Check return type here
-        return (List<Addon>) response.getContents();
+        return response;
     }
 
-    @GetMapping("/GetAvailableAddons/{shopId}")
-    public List<Food> runGetAvailableFoods(@PathVariable String shopId){
+    @GetMapping("/GetAvailableAddons1/{shopId}")
+    public ResponseObject runGetAvailableFoods(@PathVariable String shopId){
         ResponseObject response = getAvailableFoods.getAvailableFoods(shopId);
-        //TODO: Check return type here
-        return (List<Food>) response.getContents();
+        return response;
     }
     @PutMapping("/RemoveAddonfromMenu/{vendorToken}")
-    public Menu runRemoveAddonFromMenu(@PathVariable String vendorToken, @RequestBody Addon addon){
+    public ResponseObject runRemoveAddonFromMenu(@PathVariable String vendorToken, @RequestBody Addon addon){
         ResponseObject response = removeAddonFromMenu.removeAddon(vendorToken, addon);
-        return (Menu) response.getContents();
+        return response;
     }
     @PutMapping("/RemoveFoodfromMenu/{vendorToken}")
-    public Menu runRemoveFoodFromMenu(@PathVariable String vendorToken, @RequestBody Food food){
+    public ResponseObject runRemoveFoodFromMenu(@PathVariable String vendorToken, @RequestBody Food food){
         ResponseObject response = removeFoodFromMenu.removeFood(vendorToken, food);
-        return (Menu) response.getContents();
+        return response;
     }
-    @PutMapping("/SetAddonAvailability/{vendorToken}/{availability}")
+    @PutMapping("/SetAddonAvailability1/{vendorToken}/{availability}")
     public ResponseObject runSetAddonAvailability(@PathVariable String vendorToken, @PathVariable Boolean availability,
                                         @RequestBody Addon addon){
         return setAddonAvailability.setAddonAvailability(vendorToken, addon, availability);
 
     }
-    @PutMapping("/SetAddonAvailability/{vendorToken}/{availability}")
+    @PutMapping("/SetSingletonAvailability/{vendorToken}/{availability}")
     public ResponseObject runSetSingletonAvailability(@PathVariable String vendorToken, @PathVariable Boolean availability,
                                         @RequestBody Singleton singleton){
         return setSingletonAvailability.setSingletonAvailability(vendorToken, singleton, availability);
@@ -89,6 +97,4 @@ public class MenuController{
     public ResponseObject runViewMenu(@PathVariable String shopId){
         return viewMenu.viewMenu(shopId);
     }
-
-
 }
