@@ -7,6 +7,7 @@ import businessrules.outputboundaries.*;
 import entities.Order;
 import entities.Vendor;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -60,7 +61,9 @@ public class CompleteOrderInteractor implements CompleteOrder {
             return vendorBoundary.unauthorizedAccess("You do not own this order.");
         }
 
+        order.setTimeStatusModified(new Date());
         order.setStatus(Order.Status.COMPLETED);
+
 
         List<Order> userOrders = orderRepository.readMultiple("shopId", vendor.getShop().getId() );
         return orderObjectBoundary.showObjectList(userOrders);
