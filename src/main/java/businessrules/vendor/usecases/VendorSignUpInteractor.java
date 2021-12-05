@@ -42,22 +42,11 @@ public class VendorSignUpInteractor implements VendorSignUp {
     public ResponseObject signUp(String username, String password, String passwordConf,
                                  String shopName, String shopLocation) {
 
-        System.out.println("Interactor running");
-        System.out.println(this.vendorRepository);
-        System.out.println(this.hasher);
-        System.out.println(this.repositoryBoundary);
-        System.out.println(this.vendorObjectBoundary);
-        System.out.println(this.shopRepository);
-        System.out.println(this.vendorBoundary);
-
         if(!password.equals(passwordConf)){
             vendorBoundary.error("Passwords do not match.");
         }
 
-
-        System.out.println(vendorRepository.findOneByFieldName("username", username));
         Vendor vendor = vendorRepository.findOneByFieldName("username", username);
-
 
         if(vendor != null){
             return vendorBoundary.error("Username is already taken!");

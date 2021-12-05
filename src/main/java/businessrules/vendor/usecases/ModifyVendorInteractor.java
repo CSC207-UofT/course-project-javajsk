@@ -36,6 +36,11 @@ public class ModifyVendorInteractor implements ModifyVendor {
         if(!password.equals(passwordConf)){
             return vendorBoundary.error("Passwords must match.");
         }
+
+        if(vendorRepository.findOneByFieldName("username", username) != null){
+            return vendorBoundary.error("Username is already taken.");
+        }
+
         vendor.setUserName(username);
         String cypherText = hasher.hash(password);
         vendor.setHashedPassword(cypherText);
