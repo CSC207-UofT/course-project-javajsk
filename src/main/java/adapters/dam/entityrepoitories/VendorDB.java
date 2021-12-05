@@ -3,21 +3,20 @@ package adapters.dam.entityrepoitories;
 import adapters.dam.DBGateway;
 import adapters.dam.TokenSigner;
 import businessrules.dai.VendorRepository;
-import entities.Customer;
 import entities.Shop;
-import entities.User;
 import entities.Vendor;
-import framework.MongoDB;
+import framework.JWTSigner;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
 public class VendorDB implements VendorRepository {
     DBGateway databaseConnector;
     final String tableName = "Vendor";
-    TokenSigner tokenSigner;
+    TokenSigner tokenSigner = new JWTSigner();
 
     public VendorDB(DBGateway db) {
         this.databaseConnector = db;
@@ -31,7 +30,6 @@ public class VendorDB implements VendorRepository {
     @Override
     public boolean update(String id, Vendor item) {
         return databaseConnector.update(tableName, id, loadJSONFromVendor(item));
-
     }
 
     @Override
@@ -51,7 +49,10 @@ public class VendorDB implements VendorRepository {
 
     @Override
     public Vendor findOneByFieldName(String fieldName, String needle) {
-        return loadVendorFromJSON(databaseConnector.readOne(tableName,fieldName, needle));
+        if (databaseConnector.readOne(tableName, fieldName, needle) != null) {
+            return loadVendorFromJSON(databaseConnector.readOne(tableName, fieldName, needle));
+        }
+        return null;
     }
 
     @Override

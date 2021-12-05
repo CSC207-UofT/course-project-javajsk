@@ -19,7 +19,6 @@ public class ShopDB implements Repository<Shop> {
         this.dbGateway = db;
     }
 
-
     @Override
     public Shop read(String id) {
         return loadShopFromJSON(dbGateway.read(tableName, id));
@@ -30,7 +29,6 @@ public class ShopDB implements Repository<Shop> {
         return dbGateway.update(tableName, id, loadJSONFromShop(item));
 
     }
-
 
     @Override
     public String create(Shop item) {

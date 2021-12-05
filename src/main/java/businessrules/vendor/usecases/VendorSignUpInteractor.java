@@ -26,15 +26,16 @@ public class VendorSignUpInteractor implements VendorSignUp {
     ObjectBoundary<Vendor> vendorObjectBoundary;
     Repository<Shop> shopRepository;
     VendorBoundary vendorBoundary;
-    DBGateway db = new MongoDB();
 
-    public VendorSignUpInteractor(){
-        this.vendorRepository = new VendorDB(db);
-        this.hasher = new SHA512Hasher();
-        this.repositoryBoundary = new RepositoryPresenter();
-        this.vendorObjectBoundary = new ObjectPresenter<Vendor>();
-        this.shopRepository = new ShopDB(db);
-        this.vendorBoundary = new VendorPresenter();
+    public VendorSignUpInteractor(VendorRepository vendorRepository, Hasher hasher,
+                                  RepositoryBoundary repositoryBoundary, ObjectBoundary<Vendor> vendorObjectBoundary,
+                                  Repository<Shop> shopRepository, VendorBoundary vendorBoundary) {
+        this.vendorRepository = vendorRepository;
+        this.hasher = hasher;
+        this.repositoryBoundary = repositoryBoundary;
+        this.vendorObjectBoundary = vendorObjectBoundary;
+        this.shopRepository = shopRepository;
+        this.vendorBoundary = vendorBoundary;
     }
 
     @Override
@@ -42,7 +43,6 @@ public class VendorSignUpInteractor implements VendorSignUp {
                                  String shopName, String shopLocation) {
 
         System.out.println("Interactor running");
-        System.out.println(this.vendorRepository);
         System.out.println(this.vendorRepository);
         System.out.println(this.hasher);
         System.out.println(this.repositoryBoundary);
@@ -54,23 +54,18 @@ public class VendorSignUpInteractor implements VendorSignUp {
             vendorBoundary.error("Passwords do not match.");
         }
 
-        System.out.println("step 1");
 
+        System.out.println(vendorRepository.findOneByFieldName("username", username));
         Vendor vendor = vendorRepository.findOneByFieldName("username", username);
 
-        System.out.println("step 2");
 
         if(vendor != null){
-            vendorBoundary.error("Username is already taken!");
+            return vendorBoundary.error("Username is already taken!");
         }
-
-        System.out.println("step 3");
 
         String cypherText = hasher.hash(password);
 
-        Vendor vendorNew = new Vendor("N/A", username,password, shopName, shopLocation);
-
-        System.out.println("step 4");
+        Vendor vendorNew = new Vendor("N/A", username, cypherText, shopName, shopLocation);
 
         Shop shop = vendorNew.getShop();
 
