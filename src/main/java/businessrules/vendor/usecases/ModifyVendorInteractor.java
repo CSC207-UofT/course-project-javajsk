@@ -28,11 +28,7 @@ public class ModifyVendorInteractor implements ModifyVendor {
         this.vendorObjectBoundary = vendorObjectBoundary;
         this.hasher = hasher;
     }
-
-    @Override
-    public ResponseObject modifyVendor(String vendorToken, String username, String password, String passwordConf) {
-        Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-
+    
     @Override
     public ResponseObject modifyVendor(String vendorToken, String username, String password, String passwordConf) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
