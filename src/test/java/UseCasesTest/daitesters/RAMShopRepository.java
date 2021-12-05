@@ -31,7 +31,7 @@ public class RAMShopRepository implements Repository<Shop> {
         for (Shop shop : shops){
             if (shop.getId().equals(id)){
                 shops.add(item);
-                shops.remove(item);
+                shops.remove(shop);
                 return true;
             }
         }
