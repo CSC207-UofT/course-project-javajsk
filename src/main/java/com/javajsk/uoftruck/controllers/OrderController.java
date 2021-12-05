@@ -1,8 +1,7 @@
-package controllers;
+package com.javajsk.uoftruck.controllers;
 
 import businessrules.order.inputboundaries.*;
 import businessrules.outputboundaries.ResponseObject;
-import entities.Order;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

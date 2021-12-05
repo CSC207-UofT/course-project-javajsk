@@ -13,6 +13,13 @@ public class EmptyCartInteractor implements EmptyCart {
     RepositoryBoundary repositoryBoundary;
     ObjectBoundary<Cart> cartObjectBoundary;
 
+    public EmptyCartInteractor(CustomerRepository customerRepository, RepositoryBoundary repositoryBoundary,
+                               ObjectBoundary<Cart> cartObjectBoundary) {
+        this.customerRepository = customerRepository;
+        this.repositoryBoundary = repositoryBoundary;
+        this.cartObjectBoundary = cartObjectBoundary;
+    }
+
     @Override
     public ResponseObject emptyCart(String userToken) {
         Customer customer = (Customer) customerRepository.getUserFromToken(userToken);

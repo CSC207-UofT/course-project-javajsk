@@ -11,6 +11,7 @@ import org.bson.types.ObjectId;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.aop.scope.ScopedObject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.print.Doc;
 import java.util.ArrayList;
@@ -58,10 +59,13 @@ public class MongoDB implements DBGateway {
         try {
             MongoCollection<Document> collection = database.getCollection(table);
             Document filter = new Document("_id", new ObjectId(id));
+            System.out.println("filter: "+filter);
             Document newDoc = Document.parse(newDat.toString());
-            collection.findOneAndUpdate(filter, newDoc);
+            System.out.println("filter: "+newDoc);
+            collection.replaceOne(filter, newDoc); //TODO: findOneAndUpdate doesn't seem to work...
             //TODO This exception clause needs to be modified.
         }catch (Exception e){
+            System.out.println(e.getMessage());
             return false;
         }
         return true;
@@ -71,6 +75,7 @@ public class MongoDB implements DBGateway {
     public String create(String table, JSONObject data) {
         try{
             MongoCollection<Document> collection = database.getCollection(table);
+            data.remove("id");
             Document insertion = Document.parse(data.toString());
             collection.insertOne(insertion);
             return insertion.getObjectId("_id").toString();

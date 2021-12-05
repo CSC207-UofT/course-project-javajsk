@@ -3,16 +3,15 @@ package adapters.dam.entityrepoitories;
 import adapters.dam.DBGateway;
 import adapters.dam.TokenSigner;
 import businessrules.dai.VendorRepository;
-import entities.Customer;
 import entities.Shop;
-import entities.User;
 import entities.Vendor;
+import framework.JWTSigner;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import java.util.ArrayList;
 import java.util.List;
-
 public class VendorDB implements VendorRepository {
     DBGateway databaseConnector;
 
@@ -21,7 +20,9 @@ public class VendorDB implements VendorRepository {
 
     public VendorDB(DBGateway databaseConnector) {
         this.databaseConnector = databaseConnector;
+        this.tokenSigner = new JWTSigner();
     }
+
 
     @Override
     public Vendor read(String id) {
@@ -51,12 +52,15 @@ public class VendorDB implements VendorRepository {
 
     @Override
     public Vendor findOneByFieldName(String fieldName, String needle) {
-        return loadVendorFromJSON(databaseConnector.readOne(tableName,fieldName, needle));
+        if(databaseConnector.readOne(tableName, fieldName, needle) != null) {
+            return loadVendorFromJSON(databaseConnector.readOne(tableName, fieldName, needle));
+        }
+        return  null;
     }
-
     @Override
     public Vendor getUserFromToken(String userToken) {
-        String userId = tokenSigner.getIdFromToken(userToken);
+        String info = tokenSigner.getIdFromToken(userToken);
+        String userId = info.split(",")[0];
         if(userId.contains("ERROR")){
             return null;
         }
@@ -72,7 +76,8 @@ public class VendorDB implements VendorRepository {
         if(!vendor.getHashedPassword().equals(password)){
             return null;
         }
-        return tokenSigner.generateToken(vendor.getId());
+        String token_parameter = vendor.getId() + "," +vendor.getUserName();
+        return tokenSigner.generateToken(token_parameter);
     }
 
     public Vendor loadVendorFromJSON(JSONObject jsonObject) {

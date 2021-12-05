@@ -19,18 +19,21 @@ public class ModifyVendorInteractor implements ModifyVendor {
     ObjectBoundary<Vendor> vendorObjectBoundary;
     Hasher hasher;
 
-    /**
-     * Method that modifies a Vendor
-     *
-     * @param vendorToken   token of the Vendor being modified
-     * @param username      new username of the Vendor
-     * @param password      new password of the Vendor
-     * @param passwordConf  new password of the Vendor confirmed
-     * @return              JSONObject representing the modified Vendor
-     */
+    public ModifyVendorInteractor(VendorRepository vendorRepository,
+                                  RepositoryBoundary repositoryBoundary, VendorBoundary vendorBoundary,
+                                  ObjectBoundary<Vendor> vendorObjectBoundary, Hasher hasher) {
+        this.vendorRepository = vendorRepository;
+        this.repositoryBoundary = repositoryBoundary;
+        this.vendorBoundary = vendorBoundary;
+        this.vendorObjectBoundary = vendorObjectBoundary;
+        this.hasher = hasher;
+    }
+
+
     @Override
     public ResponseObject modifyVendor(String vendorToken, String username, String password, String passwordConf) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
+        System.out.println("Here");
         if(vendor == null){
             return repositoryBoundary.queryNotFound("Unable to find such a vendor.");
         }

@@ -53,8 +53,14 @@ public class AddAddonToMenuInteractor implements AddAddonToMenu {
         }
         Shop shop = vendor.getShop();
         Menu menu = shop.getMenu();
+        System.out.println(vendor.getShop().getId());
+
+        System.out.println(addon);
         if(!vendor.getShop().getId().equals(addon.getShopId())){
+
             return vendorBoundary.error("This addon does not belong to this shop.");
+
+
         }
 
         menu.addAddon(addon);

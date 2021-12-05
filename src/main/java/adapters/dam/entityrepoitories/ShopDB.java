@@ -26,6 +26,8 @@ public class ShopDB implements Repository<Shop> {
 
     @Override
     public boolean update(String id, Shop item) {
+        System.out.println(id);
+        System.out.println(loadJSONFromShop(item));
         return dbGateway.update(tableName, id, loadJSONFromShop(item));
 
     }
