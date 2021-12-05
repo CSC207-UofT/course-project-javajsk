@@ -57,12 +57,12 @@ public class MongoDB implements DBGateway {
     @Override
     public boolean update(String table, String id, JSONObject newDat) {
         try {
+            newDat.remove("id");
             MongoCollection<Document> collection = database.getCollection(table);
             Document filter = new Document("_id", new ObjectId(id));
-            System.out.println("filter: "+filter);
             Document newDoc = Document.parse(newDat.toString());
-            System.out.println("filter: "+newDoc);
-            collection.replaceOne(filter, newDoc); //TODO: findOneAndUpdate doesn't seem to work...
+            System.out.println("filter: "+ newDoc);
+            collection.replaceOne(filter, newDoc);
             //TODO This exception clause needs to be modified.
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -131,8 +131,5 @@ public class MongoDB implements DBGateway {
             System.out.println(e.getMessage());
             return null;
         }
-
     }
-
-
 }

@@ -196,7 +196,7 @@ public class Order{
         jsonObject.put("customerId", this.customerId);
         jsonObject.put("status", this.status);
 
-        // TOOD: FIX THIS DATE SHIT.
+        // TODO: FIX THIS DATE SHIT.
         jsonObject.put("timePlaced", this.timePlaced);
         jsonObject.put("timeStatusModified", this.timeStatusModified);
         return jsonObject.toString();

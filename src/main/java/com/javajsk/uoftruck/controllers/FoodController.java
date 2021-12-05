@@ -33,7 +33,6 @@ public class FoodController {
     CreateFood createFood;
     GetShopFoods getShopFoods;
     ModifyFood modifyFood;
-
     MongoDB db = new MongoDB();
     VendorRepository vendorRepository = new VendorDB(db);
     Repository<Food> foodRepository = new FoodDB(db);
@@ -69,6 +68,4 @@ public class FoodController {
                               @RequestBody Food food){
         return modifyFood.modifyFood(vendorToken, foodId, food);
     }
-
-
 }

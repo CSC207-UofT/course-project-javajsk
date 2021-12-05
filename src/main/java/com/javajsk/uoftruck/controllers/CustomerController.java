@@ -34,8 +34,7 @@ public class CustomerController {
     Repository<Food> foodRepository = new FoodDB(db);
     CustomerRepository customerRepository = new CustomerDB(db);
     VendorBoundary vendorBoundary = new VendorPresenter();
-    CustomerBoundary customerBoundary = new CustomerPresenter() {
-    };
+    CustomerBoundary customerBoundary = new CustomerPresenter();
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
     Hasher hasher = new SHA512Hasher();
     ObjectBoundary<Customer> customerObjectBoundary = new ObjectPresenter<Customer>();

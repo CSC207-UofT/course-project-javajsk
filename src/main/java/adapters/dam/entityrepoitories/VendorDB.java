@@ -9,14 +9,13 @@ import framework.JWTSigner;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import java.util.ArrayList;
 import java.util.List;
 public class VendorDB implements VendorRepository {
     DBGateway databaseConnector;
-
     final String tableName = "Vendor";
-    TokenSigner tokenSigner;
+    TokenSigner tokenSigner = new JWTSigner();
+
 
     public VendorDB(DBGateway databaseConnector) {
         this.databaseConnector = databaseConnector;
@@ -32,7 +31,6 @@ public class VendorDB implements VendorRepository {
     @Override
     public boolean update(String id, Vendor item) {
         return databaseConnector.update(tableName, id, loadJSONFromVendor(item));
-
     }
 
     @Override
@@ -56,6 +54,7 @@ public class VendorDB implements VendorRepository {
             return loadVendorFromJSON(databaseConnector.readOne(tableName, fieldName, needle));
         }
         return  null;
+
     }
     @Override
     public Vendor getUserFromToken(String userToken) {
