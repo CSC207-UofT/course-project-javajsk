@@ -13,6 +13,12 @@ import java.util.List;
 public class ShopDB implements Repository<Shop> {
     DBGateway dbGateway;
     final String tableName = "Shop";
+
+    public ShopDB(DBGateway dbGateway) {
+        this.dbGateway = dbGateway;
+    }
+
+
     @Override
     public Shop read(String id) {
         return loadShopFromJSON(dbGateway.read(tableName, id));

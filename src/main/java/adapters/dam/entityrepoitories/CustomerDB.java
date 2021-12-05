@@ -1,44 +1,102 @@
 package adapters.dam.entityrepoitories;
 
+import adapters.dam.DBGateway;
+import adapters.dam.TokenSigner;
 import businessrules.dai.CustomerRepository;
-import entities.Customer;
-import entities.User;
+import entities.*;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDB implements CustomerRepository {
+    DBGateway databaseConnector;
+    TokenSigner tokenSigner;
+    final String tableName = "Customer";
+
+    public CustomerDB(DBGateway databaseConnector) {
+        this.databaseConnector = databaseConnector;
+    }
+
     @Override
     public Customer read(String id) {
-        return null;
+        return loadCustomerFromJSON(databaseConnector.read(tableName, id));
     }
 
     @Override
     public boolean update(String id, Customer item) {
-        return false;
+        return databaseConnector.update(tableName, id, loadJSONFromCustomer(item));
+
     }
+
 
     @Override
     public String create(Customer item) {
-        return null;
+        return databaseConnector.create(tableName, loadJSONFromCustomer(item));
     }
 
     @Override
     public List<Customer> readMultiple(String parameter, String needle) {
-        return null;
+        List<Customer> customerList = new ArrayList<>();
+        List<JSONObject> rawCustomers = databaseConnector.readMultiple(tableName, parameter, needle);
+        for(JSONObject rawCustomer: rawCustomers){
+            customerList.add(loadCustomerFromJSON(rawCustomer));
+        }
+        return customerList;
     }
 
     @Override
     public Customer findOneByFieldName(String fieldName, String needle) {
-        return null;
+        return loadCustomerFromJSON(databaseConnector.readOne(tableName,fieldName, needle));
     }
+
 
     @Override
     public User getUserFromToken(String userToken) {
-        return null;
+        String userId = tokenSigner.getIdFromToken(userToken);
+        if(userId.contains("ERROR")){
+            return null;
+        }
+        return read(userId);
     }
 
     @Override
     public String authenticateUser(String username, String password) {
-        return null;
+        Customer customer = findOneByFieldName("username", username);
+        if(customer == null){
+            return null;
+        }
+        if(!customer.getHashedPassword().equals(password)){
+            return null;
+        }
+        return tokenSigner.generateToken(customer.getId());
     }
+
+    public static JSONObject loadJSONFromCustomer(Customer customer){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", customer.getId());
+        jsonObject.put("cart", CartDB.loadJSONFromCart(customer.getCurrentCart()));
+        jsonObject.put("password", customer.getHashedPassword());
+        jsonObject.put("username",customer.getUserName());
+        return jsonObject;
+    }
+
+
+    public Customer loadCustomerFromJSON(JSONObject jsonObject){
+        CartDB cartLoader = new CartDB(databaseConnector);
+        OrderDB orderLoader = new OrderDB(databaseConnector);
+        try{
+            String id = jsonObject.getString("id");
+            String username = jsonObject.getString("username");
+            String hashedPassword = jsonObject.getString("password");
+            Cart cart = cartLoader.loadCartFromJSON(jsonObject.getJSONObject("cart"));
+            List<Order> orderHistory = orderLoader.readMultiple("customerId", id);
+            OrderBook custOrderbook = new OrderBook(orderHistory);
+            return new Customer(id, username, hashedPassword, custOrderbook, cart);
+        }catch (JSONException e){
+            return null;
+        }
+    }
+
 }

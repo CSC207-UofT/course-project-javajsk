@@ -1,5 +1,6 @@
 package businessrules.vendor.usecases;
 
+import businessrules.dai.Hasher;
 import businessrules.dai.VendorRepository;
 import businessrules.outputboundaries.VendorBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
@@ -13,6 +14,7 @@ public class VendorLoginInteractor implements VendorLogin {
     VendorRepository vendorRepository;
     VendorBoundary vendorBoundary;
     RepositoryBoundary repositoryBoundary;
+    Hasher hasher;
 
     /**
      * Method that logs in a Vendor
@@ -23,8 +25,8 @@ public class VendorLoginInteractor implements VendorLogin {
      */
     @Override
     public ResponseObject login(String username, String password) {
-        String token = vendorRepository.authenticateUser(username, password);
-
+        String hashedPassword = hasher.hash(password);
+        String token = vendorRepository.authenticateUser(username, hashedPassword);
         if(token == null){
             return repositoryBoundary.queryNotFound("Unable to locate such user.");
         }
