@@ -12,13 +12,23 @@ import entities.Vendor;
 
 import java.util.List;
 
-public class CreateSingietonInteractor implements CreateSingleton {
+/**
+ * Use case for creating a Singleton and updating the repository with the changes
+ */
+public class CreateSingletonInteractor implements CreateSingleton {
     VendorRepository vendorRepository;
     RepositoryBoundary repositoryBoundary;
     Repository<Singleton> singletonRepository;
     ObjectBoundary<Singleton> singletonObjectBoundary;
     VendorBoundary vendorBoundary;
 
+    /**
+     * Method that creates a Singleton entity and returns its JSONObject representation
+     *
+     * @param vendorToken   the token of the vendor creating the singleton
+     * @param singleton     the Singleton object being created
+     * @return              JSONObject representing the Singleton, error otherwise
+     */
     @Override
     public ResponseObject createSingleton(String vendorToken, Singleton singleton) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
@@ -26,7 +36,7 @@ public class CreateSingietonInteractor implements CreateSingleton {
             return repositoryBoundary.queryNotFound("No such vendor found.");
         }
 
-        String singletonId =singletonRepository.create(singleton);
+        String singletonId = singletonRepository.create(singleton);
         if(!vendor.getShop().getId().equals(singleton.getShopId())){
             return vendorBoundary.error("You do not own this singleton.");
         }

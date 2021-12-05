@@ -11,7 +11,9 @@ import businessrules.shop.inputboundaries.ModifyShop;
 
 import entities.Vendor;
 
-
+/**
+ * Use case for modifying a Shop
+ */
 public class ModifyShopInteractor implements ModifyShop {
     VendorRepository vendorRepository;
     RepositoryBoundary repositoryBoundary;
@@ -19,6 +21,14 @@ public class ModifyShopInteractor implements ModifyShop {
     VendorBoundary vendorBoundary;
     ObjectBoundary<Shop> shopObjectBoundary;
 
+    /**
+     * Method that modifies a shop by replacing it with a new
+     * shop. Should only be called by a Vendor.
+     *
+     * @param vendorToken the Vendor that owns the shop
+     * @param shop        the Shop that will replace the original shop
+     * @return
+     */
     public ResponseObject modifyShop(String vendorToken, Shop shop) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
         if(vendor == null){
