@@ -49,6 +49,7 @@ class RemoveFromCartInteractorTest {
         Selection[] selections = new Selection[0];
         Cart cart = new Cart();
         customer.setCurrentCart(cart);
+        assertSame(customerRepository.getUserFromToken(customer.getId()), customer);
         AddToCartInteractor addToCartInteractor = new AddToCartInteractor(foodRepository, cartObjectBoundary, customerRepository, repositoryBoundary);
         RemoveFromCartInteractor removeFromCartInteractor = new RemoveFromCartInteractor(customerRepository, repositoryBoundary, foodRepository, cartObjectBoundary);
         addToCartInteractor.addToCart(customer.getId(),food.getShopId(), food.getId(), null);
@@ -56,10 +57,9 @@ class RemoveFromCartInteractorTest {
         assertTrue(cart.getContents().containsKey(food));
         assertTrue(cart.getContents().containsKey(food1));
         ResponseObject responseObject = removeFromCartInteractor.removeFromCart(customer.getId(), food1, null);
-        //assertSame(customer.getCurrentCart().getContents().keySet(), responseObject.getContents());
-        //assertEquals(responseObject.getContents(), food);
         assertTrue(customer.getCurrentCart().getContents().containsKey(food));
-        assertFalse(customer.getCurrentCart().getContents().containsKey(food1));
+        assertFalse(customer.getCurrentCart().getContents().containsKey(food1)); //TODO find out why this does not work
+
 
 
 

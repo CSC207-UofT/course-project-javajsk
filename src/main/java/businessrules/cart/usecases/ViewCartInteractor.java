@@ -25,7 +25,7 @@ public class ViewCartInteractor implements ViewCart {
         Customer customer = (Customer) customerRepository.getUserFromToken(userToken);
 
         if(customer == null){
-            return repositoryBoundary.queryNotFound("Unable to find such cusomter.");
+            return repositoryBoundary.queryNotFound("Unable to find such customer.");
         }
 
         return cartObjectBoundary.showObject(customer.getCurrentCart());
