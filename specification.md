@@ -1,4 +1,4 @@
-## Food Truck Ordering App
+# Food Truck Ordering App
 
 Our app will have two user interfaces. One for users that want to order food from food trucks
 and another for vendors that are selling food from food trucks. Both the customers and vendors need accounts 
