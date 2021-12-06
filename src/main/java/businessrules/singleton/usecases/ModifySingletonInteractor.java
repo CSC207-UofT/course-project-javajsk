@@ -26,26 +26,26 @@ public class ModifySingletonInteractor implements ModifySingleton {
      * @param vendorToken  the token of the vendor modifying the Singleton
      * @param singletonId  the id of the Singleton to be modified
      * @param newSingleton the Singleton replacing the original
-     * @return             JSONObject that represents the updated Singleton, error otherwise
+     * @return JSONObject that represents the updated Singleton, error otherwise
      */
     @Override
     public ResponseObject modifySingleton(String vendorToken, String singletonId, Singleton newSingleton) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found.");
         }
 
         Singleton singleton = singletonRepository.read(singletonId);
 
-        if(singleton == null){
+        if (singleton == null) {
             return repositoryBoundary.queryNotFound("No such singleton found");
         }
 
-        if(!singleton.getId().equals(newSingleton.getId())){
+        if (!singleton.getId().equals(newSingleton.getId())) {
             return vendorBoundary.error("Singleton ids cannot be modified.");
         }
 
-        if(!singletonRepository.update(singletonId, newSingleton)){
+        if (!singletonRepository.update(singletonId, newSingleton)) {
             return repositoryBoundary.modificationFailed("Failed to modify singleton in repository.");
         }
 

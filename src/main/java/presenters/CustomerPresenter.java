@@ -6,7 +6,7 @@ import businessrules.outputboundaries.ResponseObject;
 /**
  * Presenter for Customer
  */
-public class CustomerPresenter implements CustomerBoundary{
+public class CustomerPresenter implements CustomerBoundary {
     /**
      * A method that returns a responseObject containing information to display the user token
      *

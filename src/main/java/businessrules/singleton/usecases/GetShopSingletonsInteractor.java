@@ -19,7 +19,7 @@ public class GetShopSingletonsInteractor implements GetShopSingletons {
      * Method that gets all the Singletons in the specified shop as a JSONObject
      *
      * @param shopId id of the shop
-     * @return       JSONObject representing a list of all Singletons in the shop
+     * @return JSONObject representing a list of all Singletons in the shop
      */
     @Override
     public ResponseObject getShopSingletons(String shopId) {

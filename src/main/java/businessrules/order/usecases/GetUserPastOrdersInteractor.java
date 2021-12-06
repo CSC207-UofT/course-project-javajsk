@@ -22,9 +22,10 @@ public class GetUserPastOrdersInteractor implements GetUserPastOrders {
 
     /**
      * Instantiates a use case for getting a customer's past orders from a repository
-     * @param cR the customer repository
-     * @param rB the repository boundary
-     * @param oR the order repository
+     *
+     * @param cR  the customer repository
+     * @param rB  the repository boundary
+     * @param oR  the order repository
      * @param oOB the order object boundart
      */
     public GetUserPastOrdersInteractor(CustomerRepository cR, RepositoryBoundary rB, Repository<Order> oR, ObjectBoundary<Order> oOB) {
@@ -36,13 +37,14 @@ public class GetUserPastOrdersInteractor implements GetUserPastOrders {
 
     /**
      * Method for getting a customer's past orders
+     *
      * @param userToken customer token
      * @return a response object
      */
     @Override
     public ResponseObject getUserPastOrders(String userToken) {
         Customer customer = (Customer) customerRepository.getUserFromToken(userToken);
-        if(customer == null){
+        if (customer == null) {
             return repositoryBoundary.queryNotFound("No such user found.");
         }
 

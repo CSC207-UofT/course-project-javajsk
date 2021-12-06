@@ -20,8 +20,9 @@ public class GetAvailableAddonsInteractor implements GetAvailableAddons {
 
     /**
      * Instantiates a use case for getting a shop's available addons
-     * @param sR the shop repository
-     * @param rB the repository boundary
+     *
+     * @param sR  the shop repository
+     * @param rB  the repository boundary
      * @param aOB the addon object boundary
      */
     public GetAvailableAddonsInteractor(Repository<Shop> sR, RepositoryBoundary rB, ObjectBoundary<Addon> aOB) {
@@ -32,6 +33,7 @@ public class GetAvailableAddonsInteractor implements GetAvailableAddons {
 
     /**
      * Method for getting available addons
+     *
      * @param shopId the shop id
      * @return a response object
      */
@@ -39,7 +41,7 @@ public class GetAvailableAddonsInteractor implements GetAvailableAddons {
     public ResponseObject getAvailableAddons(String shopId) {
         Shop shop = shopRepository.read(shopId);
 
-        if(shop == null){
+        if (shop == null) {
             return repositoryBoundary.queryNotFound("No such shop found.");
         }
 

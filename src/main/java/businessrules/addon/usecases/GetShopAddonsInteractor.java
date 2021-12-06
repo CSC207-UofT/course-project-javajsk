@@ -25,7 +25,7 @@ public class GetShopAddonsInteractor implements GetShopAddons {
     public ResponseObject getShopAddons(String shopId) {
 
         List<Addon> result = addonRepository.readMultiple("shopId", shopId);
-        if(result == null){
+        if (result == null) {
             return repositoryBoundary.queryNotFound("Unable to find shop.");
         }
         return addonObjectBoundary.showObjectList(result);

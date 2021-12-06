@@ -25,10 +25,11 @@ public class RemoveAddonFromMenuInteractor implements RemoveAddonFromMenu {
 
     /**
      * Instantiates a use case for removing an addon entity from a menu entry
-     * @param vR vendor repository
-     * @param rB repository boundary
-     * @param vB vendor boundary
-     * @param sR shop repository
+     *
+     * @param vR  vendor repository
+     * @param rB  repository boundary
+     * @param vB  vendor boundary
+     * @param sR  shop repository
      * @param mOB menu object boundary
      */
     public RemoveAddonFromMenuInteractor(VendorRepository vR, RepositoryBoundary rB, VendorBoundary vB,
@@ -42,21 +43,22 @@ public class RemoveAddonFromMenuInteractor implements RemoveAddonFromMenu {
 
     /**
      * Methof for removing an addon entity
+     *
      * @param vendorToken vendor token
-     * @param addon addon entity
+     * @param addon       addon entity
      * @return a response object
      */
     @Override
     public ResponseObject removeAddon(String vendorToken, Addon addon) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found");
         }
         Shop shop = vendor.getShop();
         Menu menu = shop.getMenu();
         menu.deleteAddon(addon);
 
-        if(!shopRepository.update(shop.getId(), shop)){
+        if (!shopRepository.update(shop.getId(), shop)) {
             return repositoryBoundary.modificationFailed("Failed to remove addon from menu.");
         }
 

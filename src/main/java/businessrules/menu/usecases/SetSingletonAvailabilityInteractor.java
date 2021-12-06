@@ -22,12 +22,13 @@ public class SetSingletonAvailabilityInteractor implements SetSingletonAvailabil
 
     /**
      * Instantiates a use case for setting the availability of a singleton in a menu
-     * @param mOB the menu object boundary
-     * @param vR the vendor repository
-     * @param rB the repository boundary
-     * @param vB the vendor boundary
+     *
+     * @param mOB   the menu object boundary
+     * @param vR    the vendor repository
+     * @param rB    the repository boundary
+     * @param vB    the vendor boundary
      * @param singR the singleton repository
-     * @param sR the shop repository
+     * @param sR    the shop repository
      */
     public SetSingletonAvailabilityInteractor(ObjectBoundary<Menu> mOB, VendorRepository vR, RepositoryBoundary rB,
                                               VendorBoundary vB, Repository<Singleton> singR, Repository<Shop> sR) {
@@ -41,22 +42,23 @@ public class SetSingletonAvailabilityInteractor implements SetSingletonAvailabil
 
     /**
      * Method for setting the availability of a singleton
-     * @param vendorToken the vendor token
-     * @param singleton the singleton entity
+     *
+     * @param vendorToken     the vendor token
+     * @param singleton       the singleton entity
      * @param newAvailability the new availability
      * @return a response object
      */
     @Override
     public ResponseObject setSingletonAvailability(String vendorToken, Singleton singleton, boolean newAvailability) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found.");
         }
 
         Shop shop = vendor.getShop();
         shop.getMenu().setSingletonAvailability(singleton, newAvailability);
 
-        if(!shopRepository.update(shop.getId(), shop)){
+        if (!shopRepository.update(shop.getId(), shop)) {
             return repositoryBoundary.modificationFailed("Failed to update singleton availability in shop.");
         }
 

@@ -25,10 +25,11 @@ public class SetOrderInprogressInteracator implements SetOrderInprogress {
 
     /**
      * Instantiates a use case for setting an order to in progress in a repository
-     * @param vR the vendor repository
-     * @param oR the order repository
-     * @param rB the repository boundary
-     * @param vB the vendor boundary
+     *
+     * @param vR  the vendor repository
+     * @param oR  the order repository
+     * @param rB  the repository boundary
+     * @param vB  the vendor boundary
      * @param oOB the order object boundary
      */
     public SetOrderInprogressInteracator(VendorRepository vR, Repository<Order> oR, RepositoryBoundary rB, VendorBoundary vB, ObjectBoundary<Order> oOB) {
@@ -41,32 +42,33 @@ public class SetOrderInprogressInteracator implements SetOrderInprogress {
 
     /**
      * Method for setting the order status as in progress
+     *
      * @param vendorToken the vendor token
-     * @param orderId the order id
+     * @param orderId     the order id
      * @return a response object
      */
     @Override
     public ResponseObject setOrderInprogress(String vendorToken, String orderId) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
 
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found.");
         }
 
         Order order = orderRepository.read(orderId);
 
-        if(order == null){
+        if (order == null) {
             return repositoryBoundary.queryNotFound("No such order found.");
         }
 
-        if(!order.getShopId().equals(vendor.getShop().getId())){
+        if (!order.getShopId().equals(vendor.getShop().getId())) {
             return vendorBoundary.unauthorizedAccess("You do not own this order.");
         }
 
         order.setStatus(Order.Status.IN_PROGRESS);
         order.setTimeStatusModified(new Date());
 
-        List<Order> userOrders = orderRepository.readMultiple("shopId", vendor.getShop().getId() );
+        List<Order> userOrders = orderRepository.readMultiple("shopId", vendor.getShop().getId());
         return orderObjectBoundary.showObjectList(userOrders);
     }
 }

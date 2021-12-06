@@ -18,8 +18,9 @@ public class GetNextOrderInteractor implements GetNextOrder {
 
     /**
      * Instantiates a use case for getting the next order entry of a repository
-     * @param vR the vendor repository
-     * @param rB the repository boundary
+     *
+     * @param vR  the vendor repository
+     * @param rB  the repository boundary
      * @param oOB the order object boundary
      */
     public GetNextOrderInteractor(VendorRepository vR, RepositoryBoundary rB, ObjectBoundary<Order> oOB) {
@@ -30,13 +31,14 @@ public class GetNextOrderInteractor implements GetNextOrder {
 
     /**
      * Method for getting the next incomplete order
+     *
      * @param vendorToken the vendor token
      * @return a response object
      */
     @Override
     public ResponseObject getNextOrder(String vendorToken) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found");
         }
 

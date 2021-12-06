@@ -22,11 +22,12 @@ public class ModifyFoodInteractor implements ModifyFood {
 
     /**
      * Instantiates a use case for modifying a food entry in a repository
-     * @param vR the vendor repository
-     * @param fR the food repository
-     * @param rB the repository boundary
+     *
+     * @param vR  the vendor repository
+     * @param fR  the food repository
+     * @param rB  the repository boundary
      * @param fOB the food object boundary
-     * @param vB the vendor boundary
+     * @param vB  the vendor boundary
      */
     public ModifyFoodInteractor(VendorRepository vR, Repository<Food> fR, RepositoryBoundary rB,
                                 ObjectBoundary<Food> fOB, VendorBoundary vB) {
@@ -39,36 +40,37 @@ public class ModifyFoodInteractor implements ModifyFood {
 
     /**
      * Method for modifying a food entry
+     *
      * @param vendorToken the vendor token
-     * @param foodId the food id
-     * @param food the food entity
+     * @param foodId      the food id
+     * @param food        the food entity
      * @return a response object
      */
     @Override
     public ResponseObject modifyFood(String vendorToken, String foodId, Food food) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found");
         }
 
         Food oldFood = foodRepository.read(foodId);
-        if(oldFood == null){
+        if (oldFood == null) {
             return repositoryBoundary.queryNotFound("No such food found");
         }
 
-        if(!oldFood.getShopId().equals(vendor.getShop().getId())){
+        if (!oldFood.getShopId().equals(vendor.getShop().getId())) {
             return vendorBoundary.unauthorizedAccess("You do not have access to modify this food.");
         }
 
-        if(!food.getId().equals(oldFood.getId())){
+        if (!food.getId().equals(oldFood.getId())) {
             return vendorBoundary.error("Food ids cannot be altered.");
         }
 
-        if(!food.getShopId().equals(oldFood.getShopId())){
+        if (!food.getShopId().equals(oldFood.getShopId())) {
             return vendorBoundary.error("ShopId cannot be altered.");
         }
 
-        if(!foodRepository.update(food.getId(), food)){
+        if (!foodRepository.update(food.getId(), food)) {
             return repositoryBoundary.modificationFailed("Failed to update food.");
         }
         return foodObjectBoundary.showObject(food);

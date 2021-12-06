@@ -146,20 +146,20 @@ public class Food {
         this.shopId = shopId;
     }
 
-    public boolean isValidSelections(Selection[] selections){
-        for(int i =0; i<this.components.length; i++){
-            if(!components[i].isValidSelection(selections[i])){
+    public boolean isValidSelections(Selection[] selections) {
+        for (int i = 0; i < this.components.length; i++) {
+            if (!components[i].isValidSelection(selections[i])) {
                 return false;
             }
         }
         return true;
     }
 
-    public void addSingleton(Singleton singleton){
-        Singleton[] newComponents = new Singleton[this.components.length+1];
-        int index =0;
-        for(int i =0; i< this.components.length;i++){
-            if(this.components[i].equals(singleton)){
+    public void addSingleton(Singleton singleton) {
+        Singleton[] newComponents = new Singleton[this.components.length + 1];
+        int index = 0;
+        for (int i = 0; i < this.components.length; i++) {
+            if (this.components[i].equals(singleton)) {
                 return;
             }
             newComponents[i] = this.components[i];
@@ -171,22 +171,23 @@ public class Food {
     }
 
     public boolean isAvailable() {
-        for(Singleton singleton: this.components){
-            if(!singleton.isAvailable()){
+        for (Singleton singleton : this.components) {
+            if (!singleton.isAvailable()) {
                 return false;
             }
         }
         return true;
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", this.id);
         jsonObject.put("name", this.name);
         jsonObject.put("description", this.description);
         jsonObject.put("price", this.price);
         JSONArray arr = new JSONArray();
-        for(Singleton sel: this.components){
+        for (Singleton sel : this.components) {
             arr.put(SingletonDB.loadJSONFromSingleton(sel));
         }
         jsonObject.put("components", arr);

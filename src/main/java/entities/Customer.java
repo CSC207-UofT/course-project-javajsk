@@ -13,12 +13,13 @@ public class Customer extends User {
     protected OrderBook orderHistory;
     protected Cart currentCart;
 
-    public Customer(String id,String username, String password, OrderBook orderHistory, Cart currentCart) {
+    public Customer(String id, String username, String password, OrderBook orderHistory, Cart currentCart) {
         super(id, username, password);
         this.orderHistory = orderHistory;
         this.currentCart = currentCart;
     }
-    public Customer(String id,String username, String password) {
+
+    public Customer(String id, String username, String password) {
         super(id, username, password);
         this.orderHistory = new OrderBook();
         this.currentCart = new Cart();
@@ -60,11 +61,12 @@ public class Customer extends User {
         this.currentCart = currentCart;
     }
 
-    public void emptyCart(){
+    public void emptyCart() {
         this.currentCart.empty();
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("orderHistory", this.orderHistory.toString());
         jsonObject.put("cart", this.currentCart.toString());

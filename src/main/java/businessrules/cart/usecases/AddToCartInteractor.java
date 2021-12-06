@@ -30,7 +30,7 @@ public class AddToCartInteractor implements AddToCart {
     @Override
     public ResponseObject addToCart(String userToken, String shopId, String foodId, Selection[] selection) {
         Customer customer = (Customer) customerRepository.getUserFromToken(userToken);
-        if(customer == null){
+        if (customer == null) {
             return repositoryBoundary.queryNotFound("No such customer found.");
         }
 
@@ -40,18 +40,18 @@ public class AddToCartInteractor implements AddToCart {
             return repositoryBoundary.queryNotFound("No such food found.");
         }
 
-        if(!food.isValidSelections(selection)){
+        if (!food.isValidSelections(selection)) {
             return cartObjectBoundary.invalidObject("Selections are invalid for the given food.");
         }
 
 
         Cart cart = customer.getCurrentCart();
         boolean success = cart.addItem(food, selection);
-        if(!success){
+        if (!success) {
             return repositoryBoundary.invalidInput("Unable to add food to cart, perhaps cart needs to be reset first.");
         }
 
-        if(!customerRepository.update(customer.getId(), customer)){
+        if (!customerRepository.update(customer.getId(), customer)) {
             return repositoryBoundary.modificationFailed("Failed to add item to customer's cart.");
         }
         return cartObjectBoundary.showObject(cart);

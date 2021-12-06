@@ -49,19 +49,19 @@ public class VendorSignUpInteractor implements VendorSignUp {
      * @param passwordConf password of the new Vendor confirmed
      * @param shopName     name of the shop of the new Vendor
      * @param shopLocation location of the shop of the new Vendor
-     * @return             JSONObject representing the new Vendor
+     * @return JSONObject representing the new Vendor
      */
     @Override
     public ResponseObject signUp(String username, String password, String passwordConf,
                                  String shopName, String shopLocation) {
 
-        if(!password.equals(passwordConf)){
+        if (!password.equals(passwordConf)) {
             return vendorBoundary.error("Passwords do not match.");
         }
 
         Vendor vendor = vendorRepository.findOneByFieldName("username", username);
 
-        if(vendor != null){
+        if (vendor != null) {
             return vendorBoundary.error("Username is already taken!");
         }
 
@@ -72,14 +72,14 @@ public class VendorSignUpInteractor implements VendorSignUp {
         Shop shop = vendorNew.getShop();
 
         String shopId = shopRepository.create(shop);
-        if(shopId == null){
+        if (shopId == null) {
             return repositoryBoundary.creationFailed("Failed to create a new shop in repository.");
         }
 
         shop.setId(shopId);
 
         String vendorId = vendorRepository.create(vendorNew);
-        if(vendorId == null){
+        if (vendorId == null) {
             return repositoryBoundary.creationFailed("Failed to create a new vendor in repository.");
         }
         vendorNew.setId(vendorId);

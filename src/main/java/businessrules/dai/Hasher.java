@@ -6,6 +6,7 @@ package businessrules.dai;
 public interface Hasher {
     /**
      * Method for hashing a string
+     *
      * @param plainText the string to hash
      * @return the hashed version of the string
      */

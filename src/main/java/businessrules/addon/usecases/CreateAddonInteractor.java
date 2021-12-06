@@ -30,12 +30,12 @@ public class CreateAddonInteractor implements CreateAddon {
     @Override
     public ResponseObject createAddon(String vendorToken, Addon addon) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return vendorBoundary.vendorNotFound();
         }
         String addonId = addonRepository.create(addon);
 
-        if(addonId == null){
+        if (addonId == null) {
             return repositoryBoundary.creationFailed("Unable to create addon in repository.");
         }
 

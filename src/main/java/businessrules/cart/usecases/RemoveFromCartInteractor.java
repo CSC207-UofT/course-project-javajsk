@@ -29,13 +29,13 @@ public class RemoveFromCartInteractor implements RemoveFromCart {
     public ResponseObject removeFromCart(String userToken, Food food, Selection[] selections) {
         Customer customer = (Customer) customerRepository.getUserFromToken(userToken);
 
-        if(customer == null){
+        if (customer == null) {
             return repositoryBoundary.queryNotFound("Unable to find such customer");
         }
 
         customer.getCurrentCart().removeItem(food, selections);
 
-        if(!customerRepository.update(customer.getId(), customer)){
+        if (!customerRepository.update(customer.getId(), customer)) {
             return repositoryBoundary.modificationFailed("Failed to update customer's cart.");
         }
         return cartObjectBoundary.showObject(customer.getCurrentCart());

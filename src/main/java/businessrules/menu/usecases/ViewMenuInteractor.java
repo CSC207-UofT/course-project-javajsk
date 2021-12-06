@@ -18,8 +18,9 @@ public class ViewMenuInteractor implements ViewMenu {
 
     /**
      * Instantiates a use case for viewing the menu of a menu
-     * @param sR the shop repository
-     * @param rB the repository boundary
+     *
+     * @param sR  the shop repository
+     * @param rB  the repository boundary
      * @param mOB the menu object boundary
      */
     public ViewMenuInteractor(Repository<Shop> sR, RepositoryBoundary rB, ObjectBoundary<Menu> mOB) {
@@ -30,13 +31,14 @@ public class ViewMenuInteractor implements ViewMenu {
 
     /**
      * Method for getting the menu of a shop
+     *
      * @param shopId the shop id
      * @return a response object
      */
     @Override
     public ResponseObject viewMenu(String shopId) {
         Shop shop = shopRepository.read(shopId);
-        if(shop == null){
+        if (shop == null) {
             return repositoryBoundary.queryNotFound("No such shop found.");
         }
         return menuObjectBoundary.showObject(shop.getMenu());

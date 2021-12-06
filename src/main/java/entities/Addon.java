@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * The type Addon.
  */
-public class Addon{
+public class Addon {
     /**
      * The Id.
      */
@@ -148,10 +148,10 @@ public class Addon{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         JSONObject finalObject = new JSONObject();
         assert !this.id.equals("N/A");
-        finalObject.put("id", this.id );
+        finalObject.put("id", this.id);
         finalObject.put("price", this.price);
         finalObject.put("name", this.name);
         finalObject.put("addonTypes", this.addonTypes);

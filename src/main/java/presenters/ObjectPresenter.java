@@ -11,6 +11,7 @@ import java.util.List;
 public class ObjectPresenter<T> implements ObjectBoundary<T> {
     /**
      * A method that returns a responseObject containing data to display a single object
+     *
      * @param obj object to display
      * @return response object with display information
      */
@@ -22,6 +23,7 @@ public class ObjectPresenter<T> implements ObjectBoundary<T> {
 
     /**
      * A method that returns a responseObject containing data to display a list of objects
+     *
      * @param listToDisp objects to display
      * @return response object with display information
      */
@@ -32,6 +34,7 @@ public class ObjectPresenter<T> implements ObjectBoundary<T> {
 
     /**
      * A method that returns a responseObject containing data to display error for invalid objects
+     *
      * @param message error message to display
      * @return response object with display information
      */

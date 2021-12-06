@@ -24,11 +24,12 @@ public class AddSingletonInteractor implements AddSingleton {
 
     /**
      * Instantiates a use case for adding singleton entities to a repository
-     * @param vR the vendor repository
-     * @param fR the food repository
-     * @param rB the repository boundary
+     *
+     * @param vR  the vendor repository
+     * @param fR  the food repository
+     * @param rB  the repository boundary
      * @param fOB the food object boundary
-     * @param vB the vendor boundary
+     * @param vB  the vendor boundary
      */
     public AddSingletonInteractor(VendorRepository vR, Repository<Food> fR, RepositoryBoundary rB,
                                   ObjectBoundary<Food> fOB, VendorBoundary vB) {
@@ -41,35 +42,36 @@ public class AddSingletonInteractor implements AddSingleton {
 
     /**
      * Method for adding a new singleton
+     *
      * @param vendorToken the token of the vendor
-     * @param foodId the food id
-     * @param singleton the singleton entity
+     * @param foodId      the food id
+     * @param singleton   the singleton entity
      * @return a response object
      */
     @Override
     public ResponseObject addSingleton(String vendorToken, String foodId, Singleton singleton) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found.");
         }
 
         Food food = foodRepository.read(foodId);
 
-        if(food == null){
+        if (food == null) {
             return repositoryBoundary.queryNotFound("No such food found.");
         }
 
-        if(!food.getShopId().equals(vendor.getShop().getId())){
+        if (!food.getShopId().equals(vendor.getShop().getId())) {
             return vendorBoundary.unauthorizedAccess("You do not have authority to modify this food.");
         }
 
-        if(!food.getShopId().equals(singleton.getShopId())){
+        if (!food.getShopId().equals(singleton.getShopId())) {
             return vendorBoundary.error("The singleton does not belong to your shop.");
         }
 
         food.addSingleton(singleton);
 
-        if(!foodRepository.update(food.getId(), food)){
+        if (!foodRepository.update(food.getId(), food)) {
             return repositoryBoundary.modificationFailed("Failed to update food.");
         }
 

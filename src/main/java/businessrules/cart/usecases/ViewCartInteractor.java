@@ -24,7 +24,7 @@ public class ViewCartInteractor implements ViewCart {
     public ResponseObject viewCart(String userToken) {
         Customer customer = (Customer) customerRepository.getUserFromToken(userToken);
 
-        if(customer == null){
+        if (customer == null) {
             return repositoryBoundary.queryNotFound("Unable to find such cusomter.");
         }
 

@@ -5,7 +5,7 @@ import org.json.JSONObject;
 /**
  * The type Vendor.
  */
-public class Vendor extends User{
+public class Vendor extends User {
     /**
      * The Shop.
      */
@@ -21,8 +21,8 @@ public class Vendor extends User{
         this.shop = shop;
     }
 
-    public Vendor(String id, String username, String password, String shopName, String shopLoc){
-        super(id,username,password);
+    public Vendor(String id, String username, String password, String shopName, String shopLoc) {
+        super(id, username, password);
         this.shop = new Shop(shopName, shopLoc);
     }
 
@@ -44,15 +44,16 @@ public class Vendor extends User{
         this.shop = shop;
     }
 
-    public boolean deleteShop(String shopId){
-        if(this.shop.getId().equals(shopId)){
+    public boolean deleteShop(String shopId) {
+        if (this.shop.getId().equals(shopId)) {
             this.shop = null;
             return true;
         }
         return false;
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", this.id);
         jsonObject.put("shops", this.shop.toString());

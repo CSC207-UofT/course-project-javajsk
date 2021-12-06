@@ -7,8 +7,9 @@ import java.util.Date;
 /**
  * The order entity
  */
-public class Order{
-    public enum Status{IN_PROGRESS, PLACED, COMPLETED, CANCELLED}
+public class Order {
+    public enum Status {IN_PROGRESS, PLACED, COMPLETED, CANCELLED}
+
     /**
      * The order id.
      */
@@ -188,7 +189,7 @@ public class Order{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", this.id);
         jsonObject.put("cartId", this.cart.id);

@@ -17,7 +17,8 @@ public class GetShopFoodsInteractor implements GetShopFoods {
 
     /**
      * Instantiates a use case for getting shop foods
-     * @param fR the food repository
+     *
+     * @param fR  the food repository
      * @param fOB the food object boundary
      */
     public GetShopFoodsInteractor(Repository<Food> fR, ObjectBoundary<Food> fOB) {
@@ -27,6 +28,7 @@ public class GetShopFoodsInteractor implements GetShopFoods {
 
     /**
      * Method for getting the foods of a shop
+     *
      * @param shopId the shop id
      * @return a response object
      */

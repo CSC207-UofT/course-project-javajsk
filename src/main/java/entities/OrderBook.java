@@ -50,11 +50,12 @@ public class OrderBook {
 
     /**
      * Method for getting order ids
+     *
      * @return a list of order ids
      */
-    public List<String> getOrderIds(){
+    public List<String> getOrderIds() {
         List<String> finalList = new ArrayList<>();
-        for(Order order: this.ordersList){
+        for (Order order : this.ordersList) {
             finalList.add(order.getId());
         }
         return finalList;
@@ -62,12 +63,13 @@ public class OrderBook {
 
     /**
      * Method for getting orders with in progress statuses
+     *
      * @return a list of in progress orders
      */
-    public List<Order> getIncompleteOrders(){
+    public List<Order> getIncompleteOrders() {
         List<Order> incomplete = new ArrayList<>();
-        for(Order order : this.ordersList){
-            if(order.status.equals(Order.Status.IN_PROGRESS) || order.status.equals(Order.Status.PLACED) ){
+        for (Order order : this.ordersList) {
+            if (order.status.equals(Order.Status.IN_PROGRESS) || order.status.equals(Order.Status.PLACED)) {
                 incomplete.add(order);
             }
         }
@@ -76,10 +78,11 @@ public class OrderBook {
 
     /**
      * Method for getting the next incomplete order
+     *
      * @return the next order
      */
-    public Order getNextOrder(){
-        if(this.ordersList.size() == 0){
+    public Order getNextOrder() {
+        if (this.ordersList.size() == 0) {
             return null;
         }
         List<Order> incompleteOrders = this.getIncompleteOrders();

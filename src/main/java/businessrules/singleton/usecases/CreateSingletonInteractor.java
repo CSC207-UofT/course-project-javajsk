@@ -25,22 +25,22 @@ public class CreateSingletonInteractor implements CreateSingleton {
     /**
      * Method that creates a Singleton entity and returns its JSONObject representation
      *
-     * @param vendorToken   the token of the vendor creating the singleton
-     * @param singleton     the Singleton object being created
-     * @return              JSONObject representing the Singleton, error otherwise
+     * @param vendorToken the token of the vendor creating the singleton
+     * @param singleton   the Singleton object being created
+     * @return JSONObject representing the Singleton, error otherwise
      */
     @Override
     public ResponseObject createSingleton(String vendorToken, Singleton singleton) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found.");
         }
 
         String singletonId = singletonRepository.create(singleton);
-        if(!vendor.getShop().getId().equals(singleton.getShopId())){
+        if (!vendor.getShop().getId().equals(singleton.getShopId())) {
             return vendorBoundary.error("You do not own this singleton.");
         }
-        if(singletonId == null){
+        if (singletonId == null) {
             return repositoryBoundary.creationFailed("Failed to create a singleton in the repository.");
         }
         singleton.setId(singletonId);

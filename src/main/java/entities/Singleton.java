@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * The type Singleton.
  */
-public class Singleton{
+public class Singleton {
     /**
      * The Id.
      */
@@ -191,7 +191,7 @@ public class Singleton{
     /**
      * Replace a singleton with another
      *
-     * @param newSingleton  the replacement singleton
+     * @param newSingleton the replacement singleton
      */
     public void replace(Singleton newSingleton) {
         this.id = newSingleton.getId();
@@ -211,11 +211,11 @@ public class Singleton{
         this.shopId = shopId;
     }
 
-    public boolean isValidSelection(Selection selection){
-        for(Addon addon: selection.getSelectedAddons()){
+    public boolean isValidSelection(Selection selection) {
+        for (Addon addon : selection.getSelectedAddons()) {
             List<Integer> addonTypes = addon.getAddonTypes();
-            for(int i =0;i<addonTypes.size();i++){
-                if(!this.allowedAddonTypes.contains(addonTypes.get(i))){
+            for (int i = 0; i < addonTypes.size(); i++) {
+                if (!this.allowedAddonTypes.contains(addonTypes.get(i))) {
                     return false;
                 }
             }
@@ -224,7 +224,7 @@ public class Singleton{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", this.id);
         jsonObject.put("price", this.price);
@@ -236,7 +236,6 @@ public class Singleton{
         jsonObject.put("shopId", this.shopId);
         return jsonObject.toString();
     }
-
 
 
 }

@@ -30,24 +30,24 @@ public class ModifyAddonInteractor implements ModifyAddon {
     @Override
     public ResponseObject modifyAddon(String vendorToken, String id, Addon addon) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return vendorBoundary.vendorNotFound();
         }
 
         Addon oldAddon = addonRepository.read(id);
-        if(oldAddon == null){
+        if (oldAddon == null) {
             return repositoryBoundary.queryNotFound("Unable to find such addon.");
         }
 
-        if(!oldAddon.getShopId().equals(vendor.getShop().getId())){
+        if (!oldAddon.getShopId().equals(vendor.getShop().getId())) {
             return vendorBoundary.unauthorizedAccess("You do not own the addon");
         }
 
-        if(!addon.getId().equals(oldAddon.getId()) || !addon.getShopId().equals(oldAddon.getShopId())){
+        if (!addon.getId().equals(oldAddon.getId()) || !addon.getShopId().equals(oldAddon.getShopId())) {
             return addonObjectBoundary.invalidObject("New addon id and shop id must match old addon id and shop id.");
         }
 
-        if(!addonRepository.update(addon.getId(), addon)){
+        if (!addonRepository.update(addon.getId(), addon)) {
             return repositoryBoundary.modificationFailed("Unable to modify addon.");
         }
 
