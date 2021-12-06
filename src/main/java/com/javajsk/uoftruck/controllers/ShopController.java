@@ -24,9 +24,9 @@ public class ShopController {
     MongoDB db = new MongoDB();
     ShopDB shopRepository = new ShopDB(db);
 
-    public ShopController(ChangeShopStatus changeShopStatus, ModifyShop modifyShop, ViewShop viewShop) {
-        this.changeShopStatus = new ChangeShopStatusInteractor();
-        this.modifyShop = new ModifyShopInteractor();
+    public ShopController() {
+//        this.changeShopStatus = new ChangeShopStatusInteractor();
+//        this.modifyShop = new ModifyShopInteractor();
         //this.viewShop = new ViewShopInteractor(shopRepository,);
 
     }

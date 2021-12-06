@@ -80,6 +80,7 @@ public class AddonDB implements Repository<Addon> {
     public Addon loadAddonFromJSON(JSONObject addonObj){
         if(!addonObj.has("id") || !addonObj.has("name") || !addonObj.has("price") ||
                 !addonObj.has("addonTypes") || !addonObj.has("isAvailable") || !addonObj.has("shopId")  ){
+
             throw new InvalidParameterException("Json object does not have the right types.");
         }
         try {

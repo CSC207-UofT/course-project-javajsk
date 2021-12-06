@@ -152,7 +152,7 @@ public class Addon{
         finalObject.put("price", this.price);
         finalObject.put("name", this.name);
         finalObject.put("addonTypes", this.addonTypes);
-        finalObject.put("availability", this.availability);
+        finalObject.put("isAvailable", this.availability);
         finalObject.put("shopId", this.shopId);
         return finalObject.toString();
     }

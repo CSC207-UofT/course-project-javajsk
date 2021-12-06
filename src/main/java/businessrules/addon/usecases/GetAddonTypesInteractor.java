@@ -25,8 +25,6 @@ public class GetAddonTypesInteractor implements GetAddonTypes {
     }
 
     public ResponseObject getAddonTypes() {
-        System.out.println(addonRepository.getAddonTypes() != null);
-        ResponseObject res = new ResponseObject(200, "",addonRepository.getAddonTypes().toString());
-        return res;
+        return new ResponseObject(200, "",addonRepository.getAddonTypes().toString());
     }
 }

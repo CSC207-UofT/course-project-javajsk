@@ -17,7 +17,7 @@ public class SingletonDB implements Repository<Singleton> {
 
     static final String[] keys = {"id","price","name","description",
             "allowedAddonTypes","defaultSelection",
-            "availability","shopId"};
+            "isAvailable","shopId"};
 
     public SingletonDB(DBGateway dbConnector) {
         this.dbConnector = dbConnector;
@@ -79,7 +79,7 @@ public class SingletonDB implements Repository<Singleton> {
             JSONObject rawSelection = rawSingleton.getJSONObject("defaultSelection");
             Selection defaultSel = selectionLoader.parseSelection(rawSelection);
 
-            boolean availability = rawSingleton.getBoolean("availability");
+            boolean availability = rawSingleton.getBoolean("isAvailable");
 
             String shopId = rawSingleton.getString("shopId");
 
