@@ -18,6 +18,7 @@ import businessrules.outputboundaries.*;
 import entities.Customer;
 import entities.Food;
 import framework.MongoDB;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -27,10 +28,8 @@ import presenters.ObjectPresenter;
 import presenters.RepositoryPresenter;
 import presenters.VendorPresenter;
 
-import javax.swing.text.View;
-import java.security.Permission;
-
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class CustomerController {
 
     CustomerLogin customerLogin;

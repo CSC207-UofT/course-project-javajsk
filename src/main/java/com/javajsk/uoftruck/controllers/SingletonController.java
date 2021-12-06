@@ -28,6 +28,7 @@ import presenters.RepositoryPresenter;
 import presenters.VendorPresenter;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class SingletonController {
 
     CreateSingleton createSingleton;
@@ -58,7 +59,10 @@ public class SingletonController {
 
     @PostMapping("/CreateSingleton/{vendorToken}")
     public ResponseObject runCreateSingleton(@PathVariable String vendorToken, @RequestBody String singletonStr){
+        System.out.println(singletonStr);
+
         JSONObject singletonJson = new JSONObject(singletonStr);
+
         Singleton singleton = singletonRepository.loadSingletonFromJSON(singletonJson);
         return createSingleton.createSingleton(vendorToken, singleton);
     }

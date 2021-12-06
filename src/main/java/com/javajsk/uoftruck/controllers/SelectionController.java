@@ -25,9 +25,11 @@ import presenters.RepositoryPresenter;
 import presenters.VendorPresenter;
 
 
+
 import java.util.HashMap;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class SelectionController {
     ModifyDefaultSelection modifyDefaultSelection;
     ModifySelectionInCart modifySelectionInCart;

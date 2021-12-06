@@ -21,6 +21,7 @@ import businessrules.vendor.usecases.ViewVendorInteractor;
 import entities.Shop;
 import entities.Vendor;
 import framework.MongoDB;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,6 +31,7 @@ import presenters.RepositoryPresenter;
 import presenters.VendorPresenter;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class VendorController {
     VendorLogin vendorLogin;
     VendorSignUp vendorSignUp;

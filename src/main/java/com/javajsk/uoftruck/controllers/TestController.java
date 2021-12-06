@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class TestController {
     @PostMapping("/test/{idk}")
     public ResponseObject test(@PathVariable String idk, @RequestBody String help){

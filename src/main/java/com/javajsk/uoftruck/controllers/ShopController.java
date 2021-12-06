@@ -13,7 +13,8 @@ import businessrules.outputboundaries.ResponseObject;
 import businessrules.shop.inputboundaries.ChangeShopStatus;
 import businessrules.shop.inputboundaries.ModifyShop;
 import entities.Shop;
-
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class ShopController {
 
 
@@ -22,6 +23,7 @@ public class ShopController {
     ViewShop viewShop;
     MongoDB db = new MongoDB();
     ShopDB shopRepository = new ShopDB(db);
+
     public ShopController(ChangeShopStatus changeShopStatus, ModifyShop modifyShop, ViewShop viewShop) {
         this.changeShopStatus = new ChangeShopStatusInteractor();
         this.modifyShop = new ModifyShopInteractor();
