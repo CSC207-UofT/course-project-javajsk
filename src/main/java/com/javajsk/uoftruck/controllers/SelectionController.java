@@ -24,6 +24,9 @@ import presenters.ObjectPresenter;
 import presenters.RepositoryPresenter;
 import presenters.VendorPresenter;
 
+
+import java.util.HashMap;
+
 @RestController
 public class SelectionController {
     ModifyDefaultSelection modifyDefaultSelection;
@@ -65,6 +68,14 @@ public class SelectionController {
     @PostMapping("/ModifySelectionInCart/{vendorToken}/{foodId}")
     public ResponseObject runModifySelectionInCart(@PathVariable String foodId, @PathVariable String vendorToken,
                                                @RequestBody Selection[] original, @RequestBody Selection[] new_singletons){
-        return modifySelectionInCart.modifySelection(vendorToken, foodId, original, new_singletons);
+        Selection[] original1 = new Selection[original.length];
+        for(int i = 0; i <= original.length; i++){
+            original1[i] =  cartrepository.parseSelection(new JSONObject(original[i]));
+        }
+        Selection[]  new_singletons1= new Selection[new_singletons.length];
+        for(int i = 0; i <= new_singletons.length; i++){
+            new_singletons1[i] =  cartrepository.parseSelection(new JSONObject(new_singletons[i]));
+        }
+        return modifySelectionInCart.modifySelection(vendorToken, foodId, original1, new_singletons1);
     }
 }

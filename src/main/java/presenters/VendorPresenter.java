@@ -35,6 +35,7 @@ public class VendorPresenter implements VendorBoundary {
      */
     @Override
     public ResponseObject error(String message) {
+        System.out.println(message);
         return new ResponseObject(406, message, null);
         // 406 is http status code for not acceptable
     }

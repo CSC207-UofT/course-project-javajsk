@@ -2,6 +2,7 @@ package com.javajsk.uoftruck.controllers;
 
 import adapters.dam.entityrepoitories.CustomerDB;
 import adapters.dam.entityrepoitories.FoodDB;
+import adapters.dam.entityrepoitories.SingletonDB;
 import adapters.dam.entityrepoitories.VendorDB;
 import businessrules.dai.CustomerRepository;
 import businessrules.dai.Repository;
@@ -21,6 +22,7 @@ import businessrules.outputboundaries.VendorBoundary;
 import entities.Food;
 import entities.Singleton;
 import framework.MongoDB;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import presenters.ObjectPresenter;
 import presenters.RepositoryPresenter;
@@ -34,8 +36,9 @@ public class FoodController {
     GetShopFoods getShopFoods;
     ModifyFood modifyFood;
     MongoDB db = new MongoDB();
-    VendorRepository vendorRepository = new VendorDB(db);
-    Repository<Food> foodRepository = new FoodDB(db);
+    VendorDB vendorRepository = new VendorDB(db);
+    FoodDB foodRepository = new FoodDB(db);
+    SingletonDB singletonRepository = new SingletonDB(db);
     CustomerRepository customerRepository = new CustomerDB(db);
     VendorBoundary vendorBoundary = new VendorPresenter();
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
@@ -49,15 +52,16 @@ public class FoodController {
     }
 
     @PutMapping("/AddSingleton/{vendorToken}/{foodId}")
-    public Food runAddSingleton(@PathVariable String vendorToken, @PathVariable String foodId,
-                                @RequestBody Singleton singleton){
-
-        ResponseObject response = addSingleton.addSingleton(vendorToken, foodId, singleton);
-        return (Food) response.getContents();
+    public ResponseObject runAddSingleton(@PathVariable String vendorToken, @PathVariable String foodId,
+                                @RequestBody String singleton){
+        Singleton singleton1 = singletonRepository.loadSingletonFromJSON(new JSONObject(singleton));
+        ResponseObject response = addSingleton.addSingleton(vendorToken, foodId, singleton1);
+        return response;
     }
     @PostMapping("/CreateFood/{vendorToken}")
-    public ResponseObject runCreateFood(@PathVariable String vendorToken, @RequestBody Food food){
-        return createFood.createFood(vendorToken,food);
+    public ResponseObject runCreateFood(@PathVariable String vendorToken, @RequestBody String food){
+        Food food1 = foodRepository.loadFoodFromJSON(new JSONObject(food));
+        return createFood.createFood(vendorToken,food1);
     }
     @GetMapping("/GetShopFoods/{shopId}")
     public ResponseObject runGetShopFoods(@PathVariable String shopId){
@@ -65,7 +69,8 @@ public class FoodController {
     }
     @PutMapping("/ModifyFood/{vendorToken}/{foodId}")
     public ResponseObject runModifyFood(@PathVariable String vendorToken, @PathVariable String foodId,
-                              @RequestBody Food food){
-        return modifyFood.modifyFood(vendorToken, foodId, food);
+                              @RequestBody String food){
+        Food food1 = foodRepository.loadFoodFromJSON(new JSONObject(food));
+        return modifyFood.modifyFood(vendorToken, foodId, food1);
     }
 }

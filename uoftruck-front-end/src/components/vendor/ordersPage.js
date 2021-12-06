@@ -9,32 +9,51 @@ function Orders() {
 
   return (
     <div>
-      <h1>Orders</h1>
+      <div className="display-5 my-2">
+        {/* Add shop name here */}
+        Orders for shop {}
+      </div>
       <div className="d-inline-block">
-        <h5 className="m-auto text-muted text-start p-1">pending</h5>
-        <div>
-          {/* a map to all the orders with pending statuses */}
-          <PendingOrder />
-          <PendingOrder />
+        <div className="card my-4 shadow">
+
+          <div className="card-header">
+            <p className="h5 text-danger">
+              Pending Orders
+            </p>
+          </div>
+          <div className="card-body">
+            <PendingOrder />
+            <PendingOrder />
+          </div>
         </div>
 
-        <h5 className="m-auto text-muted text-start p-1">in progress</h5>
-        <div>
-          {/* a map to all the orders with in progress statuses */}
-          <InprogressOrder />
-          <InprogressOrder />
-          <InprogressOrder />
+        <div className="card my-4 shadow">
+
+          <div className="card-header">
+            <p className="h5 text-warning">
+              In-Progress Orders
+            </p>
+          </div>
+          <div className="card-body">
+            <InprogressOrder />
+            <InprogressOrder />
+          </div>
         </div>
 
-        <h5 className="m-auto text-muted text-start p-1">completed</h5>
-        <div>
-          {/* a map to all the orders with completed statuses */}
-          <CompletedOrder />
-          <CompletedOrder />
-          <CompletedOrder />
-          <CompletedOrder />
+        <div className="card my-4 shadow">
+
+          <div className="card-header">
+            <p className="h5 text-success">
+              Pending Orders
+            </p>
+          </div>
+          <div className="card-body">
+            <CompletedOrder />
+            <CompletedOrder />
+          </div>
         </div>
       </div>
+
     </div>
   );
 }

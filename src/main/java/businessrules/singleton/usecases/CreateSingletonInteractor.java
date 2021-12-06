@@ -21,7 +21,6 @@ public class CreateSingletonInteractor implements CreateSingleton {
     Repository<Singleton> singletonRepository;
     ObjectBoundary<Singleton> singletonObjectBoundary;
     VendorBoundary vendorBoundary;
-
     public CreateSingletonInteractor(VendorRepository vendorRepository, RepositoryBoundary repositoryBoundary,
                                      Repository<Singleton> singletonRepository,
                                      ObjectBoundary<Singleton> singletonObjectBoundary,
@@ -32,6 +31,9 @@ public class CreateSingletonInteractor implements CreateSingleton {
         this.singletonObjectBoundary = singletonObjectBoundary;
         this.vendorBoundary = vendorBoundary;
     }
+
+
+
 
     /**
      * Method that creates a Singleton entity and returns its JSONObject representation

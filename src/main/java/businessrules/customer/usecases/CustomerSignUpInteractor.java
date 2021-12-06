@@ -67,5 +67,4 @@ public class CustomerSignUpInteractor implements CustomerSignUp {
 
         return customerObjectBoundary.showObject(customerNew);
     }
-
 }

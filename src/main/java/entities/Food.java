@@ -180,14 +180,16 @@ public class Food {
     }
     @Override
     public String toString(){
+
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", this.id);
         jsonObject.put("name", this.name);
         jsonObject.put("description", this.description);
         jsonObject.put("price", this.price);
+        jsonObject.put("shopId", this.shopId);
         JSONArray arr = new JSONArray();
         for(Singleton sel: this.components){
-            arr.put(SingletonDB.loadJSONFromSingleton(sel));
+            arr.put(sel.getId());
         }
         jsonObject.put("components", arr);
         return jsonObject.toString();

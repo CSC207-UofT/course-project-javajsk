@@ -30,6 +30,7 @@ public class AddonController {
     GetShopAddons getShopAddons;
     ModifyAddon modifyAddon;
     GetAddon getAddon;
+    GetAddonTypes getAddonTypes;
     MongoDB db;
     AddonDB addonRepository;
     VendorRepository vendorRepository;
@@ -40,6 +41,7 @@ public class AddonController {
 
     public AddonController() {
         this.db = new MongoDB();
+        this.getAddonTypes = new GetAddonTypesInteractor();
         this.addonRepository = new AddonDB(db);
         this.vendorRepository = new VendorDB(db);
         this.createAddon = new CreateAddonInteractor(addonRepository, vendorRepository, vendorBoundary,
@@ -64,6 +66,12 @@ public class AddonController {
     @GetMapping("GetAddon/{addonId}")
     public ResponseObject runGetAddon(@PathVariable String addonId){
         return getAddon.getAddon(addonId);
+
+
+    @GetMapping("/GetAddonTypes/")
+    public ResponseObject runGetAddonTypes(){
+
+        return getAddonTypes.getAddonTypes();
     }
 
     @PutMapping("/ModifyAddon/{vendorToken}/{addonId}")
