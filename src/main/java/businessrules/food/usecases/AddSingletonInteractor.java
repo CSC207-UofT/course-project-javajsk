@@ -54,7 +54,7 @@ public class AddSingletonInteractor implements AddSingleton {
         }
 
         Food food = foodRepository.read(foodId);
-
+        System.out.println("FOOD"+food);
         if(food == null){
             return repositoryBoundary.queryNotFound("No such food found.");
         }

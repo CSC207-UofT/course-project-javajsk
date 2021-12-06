@@ -14,4 +14,6 @@ public interface DBGateway {
     List<JSONObject> readMultiple(String table,String parameter, String needle);
 
     JSONObject readOne(String table, String parameter, String needle);
+
+    JSONObject getCollection(String collection);
 }
