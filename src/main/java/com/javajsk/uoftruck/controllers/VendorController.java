@@ -60,6 +60,6 @@ public class VendorController {
     @PutMapping("/ModifyVendor/{userToken}/{username}/{password}/{confirmed_password}")
     public ResponseObject runModifyVendor(@PathVariable String username, @PathVariable String password,
                                           @PathVariable String confirmed_password, @PathVariable String userToken){
-        return modifyVendor.modifyVendor(userToken, username, password, confirmed_password)
+        return modifyVendor.modifyVendor(userToken, username, password, confirmed_password);
     }
 }

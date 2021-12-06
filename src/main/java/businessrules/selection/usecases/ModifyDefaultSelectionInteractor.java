@@ -22,6 +22,23 @@ public class ModifyDefaultSelectionInteractor implements ModifyDefaultSelection 
     ObjectBoundary<Singleton> singletonObjectBoundary;
 
     /**
+     *  Instantiates a use case for modifying default selections
+     * @param vR the vendor repository
+     * @param rB the repository boundary
+     * @param sR the singleton repository
+     * @param vB the vendor boundary
+     * @param sOB the singleton object boundary
+     */
+    public ModifyDefaultSelectionInteractor(VendorRepository vR, RepositoryBoundary rB, Repository<Singleton> sR,
+                                            VendorBoundary vB, ObjectBoundary<Singleton> sOB) {
+        this.vendorRepository = vR;
+        this.repositoryBoundary = rB;
+        this.singletonRepository = sR;
+        this.vendorBoundary = vB;
+        this.singletonObjectBoundary = sOB;
+    }
+
+    /**
      * Methods that modifies the default selection of a Singleton
      * by replacing it with a new one.
      *
