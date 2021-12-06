@@ -22,6 +22,17 @@ public class CreateSingletonInteractor implements CreateSingleton {
     ObjectBoundary<Singleton> singletonObjectBoundary;
     VendorBoundary vendorBoundary;
 
+    public CreateSingletonInteractor(VendorRepository vendorRepository, RepositoryBoundary repositoryBoundary,
+                                     Repository<Singleton> singletonRepository,
+                                     ObjectBoundary<Singleton> singletonObjectBoundary,
+                                     VendorBoundary vendorBoundary) {
+        this.vendorRepository = vendorRepository;
+        this.repositoryBoundary = repositoryBoundary;
+        this.singletonRepository = singletonRepository;
+        this.singletonObjectBoundary = singletonObjectBoundary;
+        this.vendorBoundary = vendorBoundary;
+    }
+
     /**
      * Method that creates a Singleton entity and returns its JSONObject representation
      *
@@ -36,16 +47,15 @@ public class CreateSingletonInteractor implements CreateSingleton {
             return repositoryBoundary.queryNotFound("No such vendor found.");
         }
 
-        String singletonId = singletonRepository.create(singleton);
         if(!vendor.getShop().getId().equals(singleton.getShopId())){
             return vendorBoundary.error("You do not own this singleton.");
         }
+        String singletonId = singletonRepository.create(singleton);
         if(singletonId == null){
             return repositoryBoundary.creationFailed("Failed to create a singleton in the repository.");
         }
         singleton.setId(singletonId);
 
-        List<Singleton> singletons = singletonRepository.readMultiple("shopId", vendor.getShop().getId());
-        return singletonObjectBoundary.showObjectList(singletons);
+        return singletonObjectBoundary.showObject(singleton);
     }
 }

@@ -60,7 +60,7 @@ public class SetAddonAvailabilityInteractor implements SetAddonAvailability {
             return vendorBoundary.error("No such addon found in the menu.");
         }
 
-        shopAddon.setAvailable(newAvailability);
+        shopAddon.setAvailability(newAvailability);
 
         if(!shopRepository.update(shop.getId(), shop)){
             return repositoryBoundary.modificationFailed("Failed to update addon availability in shop.");

@@ -15,6 +15,12 @@ public class GetShopSingletonsInteractor implements GetShopSingletons {
     Repository<Singleton> singletonRepository;
     ObjectBoundary<Singleton> singletonObjectBoundary;
 
+    public GetShopSingletonsInteractor(Repository<Singleton> singletonRepository,
+                                       ObjectBoundary<Singleton> singletonObjectBoundary) {
+        this.singletonRepository = singletonRepository;
+        this.singletonObjectBoundary = singletonObjectBoundary;
+    }
+
     /**
      * Method that gets all the Singletons in the specified shop as a JSONObject
      *
