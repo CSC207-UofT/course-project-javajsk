@@ -35,6 +35,7 @@ public class FoodDB implements Repository<Food> {
      */
     @Override
     public Food read(String id) {
+        System.out.println("ID:"+id);
         return loadFoodFromJSON(databaseConnector.read(tableName, id));
     }
 

@@ -1,6 +1,10 @@
 package com.javajsk.uoftruck.controllers;
 
 import adapters.dam.entityrepoitories.ShopDB;
+import businessrules.shop.inputboundaries.ViewShop;
+import businessrules.shop.usecases.ChangeShopStatusInteractor;
+import businessrules.shop.usecases.ModifyShopInteractor;
+import businessrules.shop.usecases.ViewShopInteractor;
 import entities.Addon;
 import framework.MongoDB;
 import org.json.JSONObject;
@@ -15,11 +19,14 @@ public class ShopController {
 
     ChangeShopStatus changeShopStatus;
     ModifyShop modifyShop;
+    ViewShop viewShop;
     MongoDB db = new MongoDB();
-    ShopDB shoprepository = new ShopDB(db);
-    public ShopController(ChangeShopStatus changeShopStatus, ModifyShop modifyShop) {
-        this.changeShopStatus = changeShopStatus;
-        this.modifyShop = modifyShop;
+    ShopDB shopRepository = new ShopDB(db);
+    public ShopController(ChangeShopStatus changeShopStatus, ModifyShop modifyShop, ViewShop viewShop) {
+        this.changeShopStatus = new ChangeShopStatusInteractor();
+        this.modifyShop = new ModifyShopInteractor();
+        //this.viewShop = new ViewShopInteractor(shopRepository,);
+
     }
     @PutMapping("/changeshopstatus/{vendorToken}/{newStatus}")
     public ResponseObject runChangeShopStatus(@PathVariable String vendorToken,
@@ -28,8 +35,12 @@ public class ShopController {
     }
     @PutMapping("/modifyshop/{vendorToken}")
     public ResponseObject runModifyShop(@RequestBody String shop, @PathVariable String vendorToken ){
-        Shop shop1 = shoprepository.loadShopFromJSON(new JSONObject(shop));
+        Shop shop1 = shopRepository.loadShopFromJSON(new JSONObject(shop));
 
         return modifyShop.modifyShop(vendorToken, shop1);
+    }
+    @GetMapping("/GetShop/{shopId}")
+    public ResponseObject viewShop(@PathVariable String shopId){
+        return viewShop.viewShop(shopId);
     }
 }
