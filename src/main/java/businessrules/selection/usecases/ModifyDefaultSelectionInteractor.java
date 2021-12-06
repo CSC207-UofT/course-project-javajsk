@@ -16,10 +16,22 @@ import entities.Vendor;
  */
 public class ModifyDefaultSelectionInteractor implements ModifyDefaultSelection {
     VendorRepository vendorRepository;
-    RepositoryBoundary repositoryBoundary;
     Repository<Singleton> singletonRepository;
     VendorBoundary vendorBoundary;
+    RepositoryBoundary repositoryBoundary;
     ObjectBoundary<Singleton> singletonObjectBoundary;
+
+    public ModifyDefaultSelectionInteractor(VendorRepository vendorRepository,
+                                            Repository<Singleton> singletonRepository,
+                                            VendorBoundary vendorBoundary,
+                                            RepositoryBoundary repositoryBoundary,
+                                            ObjectBoundary<Singleton> singletonObjectBoundary) {
+        this.vendorRepository = vendorRepository;
+        this.singletonRepository = singletonRepository;
+        this.vendorBoundary = vendorBoundary;
+        this.repositoryBoundary = repositoryBoundary;
+        this.singletonObjectBoundary = singletonObjectBoundary;
+    }
 
     /**
      * Methods that modifies the default selection of a Singleton

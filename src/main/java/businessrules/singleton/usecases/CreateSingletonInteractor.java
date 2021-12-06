@@ -50,6 +50,7 @@ public class CreateSingletonInteractor implements CreateSingleton {
         if(!vendor.getShop().getId().equals(singleton.getShopId())){
             return vendorBoundary.error("You do not own this singleton.");
         }
+
         String singletonId = singletonRepository.create(singleton);
         if(singletonId == null){
             return repositoryBoundary.creationFailed("Failed to create a singleton in the repository.");

@@ -17,7 +17,7 @@ public class SingletonDB implements Repository<Singleton> {
 
     static final String[] keys = {"id","price","name","description",
             "allowedAddonTypes","defaultSelection",
-            "availability","shopId"};
+            "isAvailable","shopId"};
 
     public SingletonDB(DBGateway dbConnector) {
         this.dbConnector = dbConnector;
