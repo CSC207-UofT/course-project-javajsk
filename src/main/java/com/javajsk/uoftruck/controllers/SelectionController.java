@@ -29,7 +29,6 @@ import presenters.VendorPresenter;
 import java.util.HashMap;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 public class SelectionController {
     ModifyDefaultSelection modifyDefaultSelection;
     ModifySelectionInCart modifySelectionInCart;
@@ -72,11 +71,11 @@ public class SelectionController {
                                                @RequestBody Selection[] original, @RequestBody Selection[] new_singletons){
         Selection[] original1 = new Selection[original.length];
         for(int i = 0; i <= original.length; i++){
-            original1[i] =  cartrepository.parseSelection(new JSONObject(original[i]));
+            original1[i] = cartRepository.parseSelection(new JSONObject(original[i]));
         }
         Selection[]  new_singletons1= new Selection[new_singletons.length];
         for(int i = 0; i <= new_singletons.length; i++){
-            new_singletons1[i] =  cartrepository.parseSelection(new JSONObject(new_singletons[i]));
+            new_singletons1[i] = cartRepository.parseSelection(new JSONObject(new_singletons[i]));
         }
         return modifySelectionInCart.modifySelection(vendorToken, foodId, original1, new_singletons1);
     }

@@ -2,14 +2,8 @@ package com.javajsk.uoftruck.controllers;
 
 import adapters.dam.entityrepoitories.AddonDB;
 import adapters.dam.entityrepoitories.VendorDB;
-import businessrules.addon.inputboundaries.CreateAddon;
-import businessrules.addon.inputboundaries.GetAddon;
-import businessrules.addon.inputboundaries.GetShopAddons;
-import businessrules.addon.inputboundaries.ModifyAddon;
-import businessrules.addon.usecases.CreateAddonInteractor;
-import businessrules.addon.usecases.GetAddonInteractor;
-import businessrules.addon.usecases.GetShopAddonsInteractor;
-import businessrules.addon.usecases.ModifyAddonInteractor;
+import businessrules.addon.inputboundaries.*;
+import businessrules.addon.usecases.*;
 import businessrules.dai.Repository;
 import businessrules.dai.VendorRepository;
 import businessrules.outputboundaries.ObjectBoundary;
@@ -25,7 +19,6 @@ import presenters.RepositoryPresenter;
 import presenters.VendorPresenter;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 public class AddonController {
     CreateAddon createAddon;
     GetShopAddons getShopAddons;
@@ -65,9 +58,9 @@ public class AddonController {
     }
 
     @GetMapping("GetAddon/{addonId}")
-    public ResponseObject runGetAddon(@PathVariable String addonId){
+    public ResponseObject runGetAddon(@PathVariable String addonId) {
         return getAddon.getAddon(addonId);
-
+    }
 
     @GetMapping("/GetAddonTypes/")
     public ResponseObject runGetAddonTypes(){
@@ -76,8 +69,10 @@ public class AddonController {
     }
 
     @PutMapping("/ModifyAddon/{vendorToken}/{addonId}")
-    public ResponseObject runModifyAddon(@PathVariable String vendorToken, @PathVariable String addonId,
-                                         @RequestBody Addon addon){
+
+    public ResponseObject runModifyAddon(@PathVariable String vendorToken, @PathVariable String addonId, @RequestBody Addon addon)
+    {
         return modifyAddon.modifyAddon(vendorToken, addonId, addon);
+        }
+
     }
-}
