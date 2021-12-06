@@ -8,35 +8,14 @@ import java.util.List;
  * The type Singleton.
  */
 public class Singleton{
-    /**
-     * The Id.
-     */
-    public String id;
-    /**
-     * The Price.
-     */
-    protected float price;
-    /**
-     * The Name.
-     */
-    protected String name;
-    /**
-     * The Description.
-     */
-    protected String description;
-    /**
-     * The Allowed addon types.
-     */
-    protected List<Integer> allowedAddonTypes;
-    /**
-     * The Default selection.
-     */
-    protected Selection defaultSelection;
-    /**
-     * The Availability.
-     */
-    protected boolean availability;
 
+    public String id;
+    protected float price;
+    protected String name;
+    protected String description;
+    protected List<Integer> allowedAddonTypes;
+    protected Selection defaultSelection;
+    protected boolean availability;
     protected String shopId;
 
     /**
@@ -214,8 +193,8 @@ public class Singleton{
     public boolean isValidSelection(Selection selection){
         for(Addon addon: selection.getSelectedAddons()){
             List<Integer> addonTypes = addon.getAddonTypes();
-            for(int i =0;i<addonTypes.size();i++){
-                if(!this.allowedAddonTypes.contains(addonTypes.get(i))){
+            for (Integer addonType : addonTypes) {
+                if (!this.allowedAddonTypes.contains(addonType)) {
                     return false;
                 }
             }

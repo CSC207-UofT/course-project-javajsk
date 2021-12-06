@@ -33,10 +33,6 @@ public class ModifyVendorInteractor implements ModifyVendor {
     public ResponseObject modifyVendor(String vendorToken, String username, String password, String passwordConf) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
 
-    @Override
-    public ResponseObject modifyVendor(String vendorToken, String username, String password, String passwordConf) {
-        Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-
         if(vendor == null){
             return repositoryBoundary.queryNotFound("Unable to find such a vendor.");
         }

@@ -220,7 +220,7 @@ public class Menu{
     public List<Addon> getAvailableAddons(){
         List<Addon> availAddons = new ArrayList<>();
         for(Addon addon: this.addons){
-            if(addon.isAvailable()){
+            if(addon.getAvailability()){
                 availAddons.add(addon);
             }
         }
