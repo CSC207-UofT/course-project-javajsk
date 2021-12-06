@@ -1,5 +1,7 @@
 package businessrules.outputboundaries;
 
+import org.json.JSONObject;
+
 /**
  * Object containing information for presenters to display
  */
@@ -66,5 +68,13 @@ public class ResponseObject {
      */
     public void setStatus(int newStatus) {
         this.status = newStatus;
+    }
+
+    public String toString(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("status" , status);
+        jsonObject.put("message", message);
+        jsonObject.put("contents", contents.toString());
+        return jsonObject.toString();
     }
 }

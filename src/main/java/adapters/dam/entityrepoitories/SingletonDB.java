@@ -34,7 +34,6 @@ public class SingletonDB implements Repository<Singleton> {
 
     }
 
-
     @Override
     public String create(Singleton item) {
         return dbConnector.create(tableName, loadJSONFromSingleton(item));
@@ -50,11 +49,11 @@ public class SingletonDB implements Repository<Singleton> {
         return singletonList;
     }
 
-
     @Override
     public Singleton findOneByFieldName(String fieldName, String needle) {
         return loadSingletonFromJSON(dbConnector.readOne(tableName,fieldName,needle));
     }
+
     public static JSONObject loadJSONFromSingleton(Singleton singleton){
         return new JSONObject(singleton.toString());
     }
@@ -88,6 +87,7 @@ public class SingletonDB implements Repository<Singleton> {
                     shopId);
 
         }catch (JSONException e){
+            e.printStackTrace();
             return null;
         }
     }

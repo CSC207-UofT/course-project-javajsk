@@ -29,7 +29,6 @@ public class MenuController{
     SetAddonAvailability setAddonAvailability;
     SetSingletonAvailability setSingletonAvailability;
     ViewMenu viewMenu;
-
     MongoDB db = new MongoDB();
     Repository<Shop> shopRepository = new ShopDB(db);
     SingletonDB singletonRepository = new SingletonDB(db);
@@ -97,7 +96,7 @@ public class MenuController{
         return setAddonAvailability.setAddonAvailability(vendorToken, addon1, availability);
 
     }
-    @PutMapping("/SetAddonAvailability/{vendorToken}/{availability}")
+    @PutMapping("/SetSingletonAvailability/{vendorToken}/{availability}")
     public ResponseObject runSetSingletonAvailability(@PathVariable String vendorToken, @PathVariable Boolean availability,
                                         @RequestBody String singleton){
         Singleton singleton1 = singletonRepository.loadSingletonFromJSON(new JSONObject(singleton));
@@ -108,6 +107,4 @@ public class MenuController{
     public ResponseObject runViewMenu(@PathVariable String shopId){
         return viewMenu.viewMenu(shopId);
     }
-
-
 }

@@ -5,30 +5,15 @@ import org.json.JSONObject;
 import java.util.List;
 
 /**
- * The type Addon.
+ * The Addon Entity - represents toppings/ingredients that can be added to a food
  */
 public class Addon{
-    /**
-     * The Id.
-     */
-    public String id;
-    /**
-     * The Name.
-     */
-    protected String name;
-    /**
-     * The Price.
-     */
-    protected float price;
-    /**
-     * The Addon types.
-     */
-    protected List<Integer> addonTypes;
-    /**
-     * The Is available.
-     */
-    protected boolean isAvailable;
 
+    public String id;
+    protected String name;
+    protected float price;
+    protected List<Integer> addonTypes;
+    protected boolean availability;
     protected String shopId;
 
     /**
@@ -45,12 +30,12 @@ public class Addon{
         this.name = name;
         this.price = price;
         this.addonTypes = addonTypes;
-        this.isAvailable = isAvailable;
+        this.availability = isAvailable;
         this.shopId = shopId;
     }
 
     /**
-     * Gets name.
+     * A method that returns the name of the addon.
      *
      * @return the name
      */
@@ -59,7 +44,7 @@ public class Addon{
     }
 
     /**
-     * Sets name.
+     * A method that sets the name of the addon.
      *
      * @param name the name
      */
@@ -68,7 +53,7 @@ public class Addon{
     }
 
     /**
-     * Gets price.
+     * A method that returns the price of the addon.
      *
      * @return the price
      */
@@ -77,7 +62,7 @@ public class Addon{
     }
 
     /**
-     * Sets price.
+     * A method that sets the price of the addon.
      *
      * @param price the price
      */
@@ -86,43 +71,43 @@ public class Addon{
     }
 
     /**
-     * Gets addon types.
+     * A method that returns the addon types of the addon.
      *
-     * @return the addon types
+     * @return the addonTypes
      */
     public List<Integer> getAddonTypes() {
         return addonTypes;
     }
 
     /**
-     * Sets addon types.
+     * A method that sets the addon types of the addon.
      *
-     * @param addonTypes the addon types
+     * @param addonTypes the price
      */
     public void setAddonTypes(List<Integer> addonTypes) {
         this.addonTypes = addonTypes;
     }
 
     /**
-     * Is available boolean.
+     * A method that returns whether the addon is available
      *
-     * @return the boolean
+     * @return the availability of the addon
      */
-    public boolean isAvailable() {
-        return isAvailable;
+    public boolean getAvailability() {
+        return this.availability;
     }
 
     /**
-     * Sets available.
+     * A method that sets the availability of the addon.
      *
-     * @param available the available
+     * @param availability the price
      */
-    public void setAvailable(boolean available) {
-        isAvailable = available;
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
     }
 
     /**
-     * Gets id.
+     * A method that returns the id of the addon.
      *
      * @return the id
      */
@@ -131,7 +116,7 @@ public class Addon{
     }
 
     /**
-     * Sets id.
+     * A method that sets the id of the addon.
      *
      * @param id the id
      */
@@ -139,14 +124,26 @@ public class Addon{
         this.id = id;
     }
 
+    /**
+     * A method that returns the shop id of the addon
+     * @return shop id of the addon
+     */
     public String getShopId() {
         return shopId;
     }
 
+    /**
+     * A method that sets the shop id of the addon
+     * @param shopId new shop id
+     */
     public void setShopId(String shopId) {
         this.shopId = shopId;
     }
 
+    /**
+     * A method that returns the entity represented as a string
+     * @return string representation of the the addon
+     */
     @Override
     public String toString(){
         JSONObject finalObject = new JSONObject();
@@ -155,7 +152,7 @@ public class Addon{
         finalObject.put("price", this.price);
         finalObject.put("name", this.name);
         finalObject.put("addonTypes", this.addonTypes);
-        finalObject.put("isAvailable", this.isAvailable);
+        finalObject.put("availability", this.availability);
         finalObject.put("shopId", this.shopId);
         return finalObject.toString();
     }

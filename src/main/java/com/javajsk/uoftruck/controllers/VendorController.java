@@ -35,13 +35,13 @@ public class VendorController {
     VendorRepository vendorRepository = new VendorDB(db);
     Hasher hasher = new SHA512Hasher();
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
-    ObjectBoundary<Vendor> vendorObjectBoundary = new ObjectPresenter<Vendor>();
+    ObjectBoundary<Vendor> vendorObjectBoundary = new ObjectPresenter<>();
     Repository<Shop> shopRepository = new ShopDB(db);
     VendorBoundary vendorBoundary = new VendorPresenter();
 
 
     public VendorController() {
-        this.vendorLogin = new VendorLoginInteractor(vendorRepository, vendorBoundary, repositoryBoundary,hasher);
+        this.vendorLogin = new VendorLoginInteractor(vendorRepository, vendorBoundary, repositoryBoundary, hasher);
         this.vendorSignUp = new VendorSignUpInteractor(vendorRepository, hasher, repositoryBoundary,
                 vendorObjectBoundary, shopRepository, vendorBoundary);
         this.modifyVendor = new ModifyVendorInteractor(vendorRepository, repositoryBoundary, vendorBoundary,
@@ -62,6 +62,5 @@ public class VendorController {
     public ResponseObject runModifyVendor(@PathVariable String username, @PathVariable String password,
                                           @PathVariable String confirmed_password, @PathVariable String userToken){
         return modifyVendor.modifyVendor(userToken, username, password, confirmed_password);
-
     }
 }

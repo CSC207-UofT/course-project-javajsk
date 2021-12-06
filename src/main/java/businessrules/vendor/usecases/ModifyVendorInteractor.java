@@ -9,6 +9,9 @@ import businessrules.outputboundaries.VendorBoundary;
 import businessrules.vendor.inputboundaries.ModifyVendor;
 import entities.Vendor;
 
+/**
+ * Use case for modifying a Vendor
+ */
 public class ModifyVendorInteractor implements ModifyVendor {
     VendorRepository vendorRepository;
     RepositoryBoundary repositoryBoundary;
@@ -29,13 +32,18 @@ public class ModifyVendorInteractor implements ModifyVendor {
     @Override
     public ResponseObject modifyVendor(String vendorToken, String username, String password, String passwordConf) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        System.out.println("Here");
+
         if(vendor == null){
             return repositoryBoundary.queryNotFound("Unable to find such a vendor.");
         }
         if(!password.equals(passwordConf)){
             return vendorBoundary.error("Passwords must match.");
         }
+
+        if(vendorRepository.findOneByFieldName("username", username) != null){
+            return vendorBoundary.error("Username is already taken.");
+        }
+
         vendor.setUserName(username);
         String cypherText = hasher.hash(password);
         vendor.setHashedPassword(cypherText);

@@ -120,7 +120,7 @@ public class FoodDB implements Repository<Food> {
             String shopId = rawData.getString("shopId");
             return new Food(id,name, desc,price,selArr, shopId);
         }catch(JSONException e){
-
+            e.printStackTrace();
             return null;
         }
     }

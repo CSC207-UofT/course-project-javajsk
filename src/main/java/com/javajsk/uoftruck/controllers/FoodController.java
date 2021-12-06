@@ -35,7 +35,6 @@ public class FoodController {
     CreateFood createFood;
     GetShopFoods getShopFoods;
     ModifyFood modifyFood;
-
     MongoDB db = new MongoDB();
     VendorDB vendorRepository = new VendorDB(db);
     FoodDB foodRepository = new FoodDB(db);
@@ -74,6 +73,4 @@ public class FoodController {
         Food food1 = foodRepository.loadFoodFromJSON(new JSONObject(food));
         return modifyFood.modifyFood(vendorToken, foodId, food1);
     }
-
-
 }
