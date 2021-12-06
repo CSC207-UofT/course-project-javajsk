@@ -13,7 +13,7 @@ public class Addon{
     protected String name;
     protected float price;
     protected List<Integer> addonTypes;
-    protected boolean availability;
+    protected boolean isAvailable;
     protected String shopId;
 
     /**
@@ -30,7 +30,7 @@ public class Addon{
         this.name = name;
         this.price = price;
         this.addonTypes = addonTypes;
-        this.availability = isAvailable;
+        this.isAvailable = isAvailable;
         this.shopId = shopId;
     }
 
@@ -93,17 +93,17 @@ public class Addon{
      *
      * @return the availability of the addon
      */
-    public boolean getAvailability() {
-        return this.availability;
+    public boolean getAvailable() {
+        return this.isAvailable;
     }
 
     /**
      * A method that sets the availability of the addon.
      *
-     * @param availability the price
+     * @param available the price
      */
-    public void setAvailability(boolean availability) {
-        this.availability = availability;
+    public void setAvailable(boolean available) {
+        this.isAvailable = available;
     }
 
     /**
@@ -142,7 +142,7 @@ public class Addon{
 
     /**
      * A method that returns the entity represented as a string
-     * @return string representation of the the addon
+     * @return string representation of the addon
      */
     @Override
     public String toString(){
@@ -152,7 +152,7 @@ public class Addon{
         finalObject.put("price", this.price);
         finalObject.put("name", this.name);
         finalObject.put("addonTypes", this.addonTypes);
-        finalObject.put("isAvailable", this.availability);
+        finalObject.put("isAvailable", this.isAvailable);
         finalObject.put("shopId", this.shopId);
         return finalObject.toString();
     }

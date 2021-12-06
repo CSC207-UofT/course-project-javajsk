@@ -1,11 +1,18 @@
 package com.javajsk.uoftruck.controllers;
 
 import adapters.dam.entityrepoitories.ShopDB;
+import adapters.dam.entityrepoitories.VendorDB;
+import businessrules.dai.Repository;
+import businessrules.dai.VendorRepository;
+import businessrules.outputboundaries.ObjectBoundary;
+import businessrules.outputboundaries.RepositoryBoundary;
+import businessrules.outputboundaries.VendorBoundary;
 import businessrules.shop.inputboundaries.ViewShop;
 import businessrules.shop.usecases.ChangeShopStatusInteractor;
 import businessrules.shop.usecases.ModifyShopInteractor;
 import businessrules.shop.usecases.ViewShopInteractor;
 import entities.Addon;
+import entities.Vendor;
 import framework.MongoDB;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +20,10 @@ import businessrules.outputboundaries.ResponseObject;
 import businessrules.shop.inputboundaries.ChangeShopStatus;
 import businessrules.shop.inputboundaries.ModifyShop;
 import entities.Shop;
+import presenters.ObjectPresenter;
+import presenters.RepositoryPresenter;
+import presenters.VendorPresenter;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class ShopController {
@@ -21,13 +32,24 @@ public class ShopController {
     ChangeShopStatus changeShopStatus;
     ModifyShop modifyShop;
     ViewShop viewShop;
-    MongoDB db = new MongoDB();
-    ShopDB shopRepository = new ShopDB(db);
+    MongoDB db;
+    ShopDB shopRepository;
+    VendorRepository vendorRepository;
+    RepositoryBoundary repositoryBoundary;
+    ObjectBoundary<Shop> shopObjectBoundary;
+    VendorBoundary vendorBoundary;
+
 
     public ShopController() {
-//        this.changeShopStatus = new ChangeShopStatusInteractor();
-//        this.modifyShop = new ModifyShopInteractor();
-        //this.viewShop = new ViewShopInteractor(shopRepository,);
+        this.db = new MongoDB();
+        this.shopRepository = new ShopDB(db);
+        this.vendorRepository = new VendorDB(db);
+        this.repositoryBoundary = new RepositoryPresenter();
+        this.shopObjectBoundary = new ObjectPresenter<>();
+        this.vendorBoundary = new VendorPresenter();
+        this.changeShopStatus = new ChangeShopStatusInteractor(vendorRepository, shopRepository, repositoryBoundary, shopObjectBoundary);
+        this.modifyShop = new ModifyShopInteractor(vendorRepository, repositoryBoundary, shopRepository,vendorBoundary, shopObjectBoundary);
+        this.viewShop = new ViewShopInteractor(shopRepository,shopObjectBoundary);
 
     }
     @PutMapping("/changeshopstatus/{vendorToken}/{newStatus}")

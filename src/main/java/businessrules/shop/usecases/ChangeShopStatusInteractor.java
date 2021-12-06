@@ -20,6 +20,14 @@ public class ChangeShopStatusInteractor implements ChangeShopStatus {
     RepositoryBoundary repositoryBoundary;
     ObjectBoundary<Shop> shopObjectBoundary;
 
+    public ChangeShopStatusInteractor(VendorRepository vendorRepository, Repository<Shop> shopRepository,
+                                      RepositoryBoundary repositoryBoundary, ObjectBoundary<Shop> shopObjectBoundary) {
+        this.vendorRepository = vendorRepository;
+        this.shopRepository = shopRepository;
+        this.repositoryBoundary = repositoryBoundary;
+        this.shopObjectBoundary = shopObjectBoundary;
+    }
+
     /**
      * Method that modifies the status of the specified shop
      * by replacing it with newStatus. Should only be called by a

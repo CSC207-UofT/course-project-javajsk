@@ -15,7 +15,7 @@ public class Singleton{
     protected String description;
     protected List<Integer> allowedAddonTypes;
     protected Selection defaultSelection;
-    protected boolean availability;
+    protected boolean isAvailable;
     protected String shopId;
 
     /**
@@ -37,7 +37,7 @@ public class Singleton{
         this.description = description;
         this.allowedAddonTypes = allowedAddonTypes;
         this.defaultSelection = defaultSelection;
-        this.availability = availability;
+        this.isAvailable = availability;
         this.shopId = shopId;
     }
 
@@ -154,17 +154,17 @@ public class Singleton{
      *
      * @return the boolean
      */
-    public boolean isAvailable() {
-        return availability;
+    public boolean getAvailable() {
+        return isAvailable;
     }
 
     /**
      * Sets availability.
      *
-     * @param availability the availability
+     * @param available the availability
      */
-    public void setAvailability(boolean availability) {
-        this.availability = availability;
+    public void setAvailable(boolean available) {
+        this.isAvailable = available;
     }
 
     /**
@@ -179,7 +179,7 @@ public class Singleton{
         this.description = newSingleton.getDescription();
         this.allowedAddonTypes = newSingleton.getAllowedAddonTypes();
         this.defaultSelection = newSingleton.getDefaultSelection();
-        this.availability = newSingleton.isAvailable();
+        this.isAvailable = newSingleton.getAvailable();
     }
 
     public String getShopId() {
@@ -211,11 +211,8 @@ public class Singleton{
         jsonObject.put("description", this.description);
         jsonObject.put("allowedAddonTypes", this.allowedAddonTypes);
         jsonObject.put("defaultSelection", new JSONObject(this.defaultSelection.toString()));
-        jsonObject.put("isAvailable", this.availability);
+        jsonObject.put("isAvailable", this.isAvailable);
         jsonObject.put("shopId", this.shopId);
         return jsonObject.toString();
     }
-
-
-
 }

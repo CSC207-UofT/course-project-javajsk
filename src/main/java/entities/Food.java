@@ -172,7 +172,7 @@ public class Food {
 
     public boolean isAvailable() {
         for(Singleton singleton: this.components){
-            if(!singleton.isAvailable()){
+            if(!singleton.getAvailable()){
                 return false;
             }
         }

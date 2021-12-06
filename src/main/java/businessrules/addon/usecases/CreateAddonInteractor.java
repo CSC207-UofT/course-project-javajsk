@@ -33,6 +33,18 @@ public class CreateAddonInteractor implements CreateAddon {
         if(vendor == null){
             return vendorBoundary.vendorNotFound();
         }
+
+        Addon existingAddon = addonRepository.findOneByFieldName("name", addon.getName());
+        if(existingAddon != null){
+            if(existingAddon.getShopId().equals(vendor.getShop().getId())){
+                return addonObjectBoundary.invalidObject("Addon with this name already exists in your shop.");
+            }
+        }
+
+        if(!addon.getShopId().equals(vendor.getShop().getId())){
+            return addonObjectBoundary.invalidObject("You do not own this addon.");
+        }
+
         String addonId = addonRepository.create(addon);
 
         if(addonId == null){
