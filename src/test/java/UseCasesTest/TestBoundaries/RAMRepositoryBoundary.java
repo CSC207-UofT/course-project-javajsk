@@ -11,16 +11,16 @@ public class RAMRepositoryBoundary implements RepositoryBoundary {
 
     @Override
     public ResponseObject queryNotFound(String message) {
-        return null;
+        return new ResponseObject(0, message, "");
     }
 
     @Override
     public ResponseObject modificationFailed(String message) {
-        return null;
+        return new ResponseObject(0, message, "");
     }
 
     @Override
     public ResponseObject invalidInput(String message) {
-        return null;
+        return new ResponseObject(0, message, "");
     }
 }

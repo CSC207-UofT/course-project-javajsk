@@ -11,21 +11,21 @@ public class RAMVendorBoundary implements  VendorBoundary {
 
     @Override
     public ResponseObject vendorNotFound() {
-        return null;
+        return new ResponseObject(0, "Vendor not found", "");
     }
 
     @Override
     public ResponseObject unauthorizedAccess(String message) {
-        return null;
+        return new ResponseObject(0, message, "");
     }
 
     @Override
     public ResponseObject error(String message) {
-        return null;
+        return new ResponseObject(0, message, "");
     }
 
     @Override
     public ResponseObject displayToken(String token) {
-        return null;
+        return new ResponseObject(0, token, "");
     }
 }
