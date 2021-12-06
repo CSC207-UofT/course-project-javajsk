@@ -21,6 +21,15 @@ public class ModifyShopInteractor implements ModifyShop {
     VendorBoundary vendorBoundary;
     ObjectBoundary<Shop> shopObjectBoundary;
 
+    public ModifyShopInteractor(VendorRepository vr, Repository<Shop> sr, RepositoryBoundary rb,
+                                      ObjectBoundary<Shop>sOB, VendorBoundary vB) {
+        this.vendorRepository = vr;
+        this.shopRepository = sr;
+        this.repositoryBoundary = rb;
+        this.shopObjectBoundary = sOB;
+        this.vendorBoundary = vB;
+    }
+
     /**
      * Method that modifies a shop by replacing it with a new
      * shop. Should only be called by a Vendor.

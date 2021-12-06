@@ -12,6 +12,7 @@ import businessrules.order.usecases.PlaceOrderInteractor;
 import businessrules.outputboundaries.CustomerBoundary;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
+import businessrules.outputboundaries.ResponseObject;
 import entities.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,12 +34,11 @@ class PlaceOrderInteractorTest {
     ObjectBoundary<Order> orderObjectBoundary;
     PlaceOrderInteractor placeOrderInteractor;
     Cart cuurentCart;
+    Customer start_customer;
 
     @BeforeEach
     void setUp() {
-        Customer start_customer = new Customer("10000", "Username1", "Password1");
-        cuurentCart = createNewCart();
-        start_customer.setCurrentCart(cuurentCart);
+        start_customer = new Customer("10000", "Username1", "Password1");
         customerRepository = new RAMCustomerRepository(start_customer);
         repositoryBoundary = new RAMRepositoryBoundary();
         customerBoundary = new RAMCustomerBoundary();
@@ -51,7 +51,38 @@ class PlaceOrderInteractorTest {
 
     @Test
     void successfulPlaceOrder() {
+        Cart cart = createNewCart();
+        start_customer.setCurrentCart(cart);
+        Date currentTime = new Date();
+        Order order = new Order("N/A", cart, cart.getShopId(), start_customer.getId(),
+                Order.Status.PLACED, currentTime, currentTime);
+        ResponseObject responseObject = placeOrderInteractor.placeOrder("10000");
+        assertEquals(order, responseObject.getContents());
+    }
 
+    @Test
+    void noUserPlaceOrder() {
+       ResponseObject responseObject = placeOrderInteractor.placeOrder("20000");
+       assertEquals("No such user found.", responseObject.getMessage());
+    }
+
+    @Test
+    void emptyPlaceOrder() {
+        Cart empty_cart = new Cart();
+        start_customer.setCurrentCart(empty_cart);
+        ResponseObject responseObject = placeOrderInteractor.placeOrder("10000");
+        assertEquals("Cart is empty.", responseObject.getMessage());
+
+    }
+
+    @Test
+    void cartFailed() {
+        // TODO
+    }
+
+    @Test
+    void orderFailed() {
+        // TODO
     }
 
     public Cart createNewCart() {

@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FoodTest {
     Food burger;
+
     @BeforeEach
     void setFood(){
         ArrayList<Integer> type = new ArrayList<Integer>();
@@ -25,7 +26,7 @@ class FoodTest {
         selections.add(selection1);
         Singleton[] singletons = new Singleton[1];
         singletons[0] = singleton;
-        burger = new Food("123", "burger combo", "A burger combo", 20, singletons, "shop1");
+        burger = new Food("123", "burger combo", "A burger combo", 20f, singletons, "shop1");
     }
 
     @Test
@@ -36,11 +37,6 @@ class FoodTest {
     @Test
     void getName() {
         assertTrue(burger.getName().equalsIgnoreCase("burger combo"));
-    }
-
-    @Test
-    void getPrice() {
-        assertEquals(burger.price, 20);
     }
 
     @Test
@@ -61,12 +57,54 @@ class FoodTest {
 
     @Test
     void setComponents() {
-        
+        // TODO
+    }
+
+    @Test
+    void setName() {
+        burger.setName("cheeseburger");
+        assertEquals("cheeseburger", burger.getName());
+    }
+
+    @Test
+    void getDescription() {
+        String description = burger.getDescription();
+        assertEquals("A burger combo", description);
+    }
+
+    @Test
+    void setDescription(){
+        burger.setDescription("A new burger combo");
+        assertEquals("A new burger combo", burger.getDescription());
+    }
+
+    @Test
+    void getPrice() {
+        float price = burger.getPrice();
+        assertEquals(20f, price);
+    }
+
+    @Test
+    void setPrice() {
+        burger.setPrice(16f);
+        assertEquals(16f, burger.getPrice());
+    }
+
+    @Test
+    void setId(){
+        burger.setId("00001");
+        assertEquals("00001", burger.id);
     }
 
     @Test
     void getShopId() {
         assertEquals(burger.getShopId(), "shop1");
+    }
+
+    @Test
+    void setShopId() {
+        burger.setShopId("00004");
+        assertEquals("00004", burger.getId());
     }
 
 
@@ -86,7 +124,17 @@ class FoodTest {
     }
 
     @Test
+    void isValidSelections(){
+        //TODO
+    }
+
+    @Test
     void isAvailable() {
         assertTrue(burger.isAvailable());
+    }
+
+    @Test
+    void foodToString(){
+
     }
 }
