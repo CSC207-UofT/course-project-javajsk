@@ -1,11 +1,13 @@
 package com.javajsk.uoftruck.controllers;
 
+
 import adapters.dam.DBGateway;
 import adapters.dam.entityrepoitories.AddonDB;
 import adapters.dam.entityrepoitories.SingletonDB;
 import adapters.dam.entityrepoitories.VendorDB;
 import businessrules.dai.Repository;
 import businessrules.dai.VendorRepository;
+
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
@@ -20,6 +22,7 @@ import entities.Singleton;
 import framework.MongoDB;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
+
 import presenters.ObjectPresenter;
 import presenters.RepositoryPresenter;
 import presenters.VendorPresenter;
@@ -29,9 +32,11 @@ public class SingletonController {
 
     CreateSingleton createSingleton;
     GetShopSingletons getShopSingletons;
-    ModifySingleton modifySingleton;
-    MongoDB db;
+
     VendorRepository vendorRepository;
+    ModifySingleton modifySingleton;
+
+    MongoDB db;
     SingletonDB singletonRepository;
     AddonDB addonRepository;
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();

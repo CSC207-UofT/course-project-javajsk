@@ -55,7 +55,7 @@ public class Vendor extends User{
     public String toString(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", this.id);
-        jsonObject.put("shops", this.shop.toString());
+        jsonObject.put("shops", new JSONObject(this.shop.toString()));
 
         return jsonObject.toString();
     }
