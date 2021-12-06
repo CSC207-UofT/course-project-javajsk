@@ -3,9 +3,11 @@ package com.javajsk.uoftruck.controllers;
 import adapters.dam.entityrepoitories.AddonDB;
 import adapters.dam.entityrepoitories.VendorDB;
 import businessrules.addon.inputboundaries.CreateAddon;
+import businessrules.addon.inputboundaries.GetAddonTypes;
 import businessrules.addon.inputboundaries.GetShopAddons;
 import businessrules.addon.inputboundaries.ModifyAddon;
 import businessrules.addon.usecases.CreateAddonInteractor;
+import businessrules.addon.usecases.GetAddonTypesInteractor;
 import businessrules.addon.usecases.GetShopAddonsInteractor;
 import businessrules.addon.usecases.ModifyAddonInteractor;
 import businessrules.dai.Repository;
@@ -27,6 +29,7 @@ public class AddonController {
     CreateAddon createAddon;
     GetShopAddons getShopAddons;
     ModifyAddon modifyAddon;
+    GetAddonTypes getAddonTypes;
     MongoDB db;
     AddonDB addonRepository;
     VendorRepository vendorRepository;
@@ -37,6 +40,7 @@ public class AddonController {
 
     public AddonController() {
         this.db = new MongoDB();
+        this.getAddonTypes = new GetAddonTypesInteractor();
         this.addonRepository = new AddonDB(db);
         this.vendorRepository = new VendorDB(db);
         this.createAddon = new CreateAddonInteractor(addonRepository, vendorRepository, vendorBoundary,
@@ -55,6 +59,13 @@ public class AddonController {
     @GetMapping("/GetShopAddons/{shopId}")
     public ResponseObject runGetShopAddons(@PathVariable String shopId){
         return getShopAddons.getShopAddons(shopId);
+    }
+
+
+    @GetMapping("/GetAddonTypes/")
+    public ResponseObject runGetAddonTypes(){
+
+        return getAddonTypes.getAddonTypes();
     }
 
     @PutMapping("/ModifyAddon/{vendorToken}/{addonId}")

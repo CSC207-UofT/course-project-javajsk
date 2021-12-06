@@ -6,9 +6,11 @@ import adapters.dam.entityrepoitories.FoodDB;
 import businessrules.customer.inputboundaries.CustomerLogin;
 import businessrules.customer.inputboundaries.CustomerSignUp;
 import businessrules.customer.inputboundaries.ModifyCustomer;
+import businessrules.customer.inputboundaries.ViewCustomer;
 import businessrules.customer.usecases.CustomerLoginInteractor;
 import businessrules.customer.usecases.CustomerSignUpInteractor;
 import businessrules.customer.usecases.ModifyCustomerInteractor;
+import businessrules.customer.usecases.ViewCustomerInteractor;
 import businessrules.dai.CustomerRepository;
 import businessrules.dai.Hasher;
 import businessrules.dai.Repository;
@@ -16,6 +18,7 @@ import businessrules.outputboundaries.*;
 import entities.Customer;
 import entities.Food;
 import framework.MongoDB;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +27,7 @@ import presenters.ObjectPresenter;
 import presenters.RepositoryPresenter;
 import presenters.VendorPresenter;
 
+import javax.swing.text.View;
 import java.security.Permission;
 
 @RestController
@@ -32,6 +36,7 @@ public class CustomerController {
     CustomerLogin customerLogin;
     CustomerSignUp customerSignUp;
     ModifyCustomer modifyCustomer;
+    ViewCustomer viewCustomer;
     MongoDB db;
     Repository<Food> foodRepository;
     CustomerRepository customerRepository;
@@ -54,6 +59,7 @@ public class CustomerController {
         this.customerLogin = new CustomerLoginInteractor(customerRepository, customerBoundary, repositoryBoundary,hasher);
         this.customerSignUp = new CustomerSignUpInteractor(customerRepository, repositoryBoundary, customerBoundary, customerObjectBoundary, hasher);
         this.modifyCustomer = new ModifyCustomerInteractor(customerRepository, customerObjectBoundary, repositoryBoundary, customerBoundary, hasher);
+        this.viewCustomer = new ViewCustomerInteractor(customerRepository,customerObjectBoundary);
 
     }
 
@@ -71,5 +77,9 @@ public class CustomerController {
                                       @PathVariable String confirmed_password, @PathVariable String userToken){
         return modifyCustomer.modify(userToken, username, password, confirmed_password);
 
+    }
+    @GetMapping("/viewCustomer/{customerId}")
+    public ResponseObject viewCustomer(@PathVariable String customerId){
+        return viewCustomer.viewCustomer(customerId);
     }
 }
