@@ -16,6 +16,7 @@ import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
 import entities.Addon;
 import framework.MongoDB;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import presenters.ObjectPresenter;
 import presenters.RepositoryPresenter;
@@ -27,7 +28,7 @@ public class AddonController {
     GetShopAddons getShopAddons;
     ModifyAddon modifyAddon;
     MongoDB db;
-    Repository<Addon> addonRepository;
+    AddonDB addonRepository;
     VendorRepository vendorRepository;
     VendorBoundary vendorBoundary = new VendorPresenter();
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
@@ -46,8 +47,9 @@ public class AddonController {
     }
 
     @PostMapping("/CreateAddon/{vendorToken}")
-    public ResponseObject runCreateAddon(@PathVariable String vendorToken, @RequestBody Addon addon){
-        return createAddon.createAddon(vendorToken, addon);
+    public ResponseObject runCreateAddon(@PathVariable String vendorToken, @RequestBody String addon){
+        Addon addon1 = addonRepository.loadAddonFromJSON(new JSONObject(addon));
+        return createAddon.createAddon(vendorToken, addon1);
     }
 
     @GetMapping("/GetShopAddons/{shopId}")
@@ -55,7 +57,7 @@ public class AddonController {
         return getShopAddons.getShopAddons(shopId);
     }
 
-    @PutMapping("/ModifyAddonInteractor/{vendorToken}/{addonId}")
+    @PutMapping("/ModifyAddon/{vendorToken}/{addonId}")
     public ResponseObject runModifyAddon(@PathVariable String vendorToken, @PathVariable String addonId,
                                 @RequestBody Addon addon){
         return modifyAddon.modifyAddon(vendorToken, addonId, addon);

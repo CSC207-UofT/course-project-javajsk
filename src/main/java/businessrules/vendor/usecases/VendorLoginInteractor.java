@@ -16,6 +16,7 @@ public class VendorLoginInteractor implements VendorLogin {
     RepositoryBoundary repositoryBoundary;
     Hasher hasher;
 
+
     public VendorLoginInteractor(VendorRepository vendorRepository,
                                  VendorBoundary vendorBoundary, RepositoryBoundary
                                          repositoryBoundary, Hasher hasher) {
@@ -32,16 +33,14 @@ public class VendorLoginInteractor implements VendorLogin {
      * @param password password of the Vendor
      * @return         the token of the Vendor
      */
-
     @Override
     public ResponseObject login(String username, String password) {
-        System.out.println("Here");
+
         String hashedPassword = hasher.hash(password);
         String token = vendorRepository.authenticateUser(username, hashedPassword);
-        System.out.println("two");
-        System.out.println(token);
+
         if(token == null){
-            return repositoryBoundary.queryNotFound("Unable to locate such user.");
+            return repositoryBoundary.queryNotFound("Incorrect username or password. Please try again.");
         }
 
         return vendorBoundary.displayToken(token);
