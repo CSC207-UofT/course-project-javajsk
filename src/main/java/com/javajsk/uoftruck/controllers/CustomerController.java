@@ -16,6 +16,7 @@ import businessrules.outputboundaries.*;
 import entities.Customer;
 import entities.Food;
 import framework.MongoDB;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,7 @@ import presenters.VendorPresenter;
 import java.security.Permission;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class CustomerController {
 
     CustomerLogin customerLogin;

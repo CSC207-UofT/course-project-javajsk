@@ -9,7 +9,8 @@ import businessrules.outputboundaries.ResponseObject;
 import businessrules.shop.inputboundaries.ChangeShopStatus;
 import businessrules.shop.inputboundaries.ModifyShop;
 import entities.Shop;
-
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class ShopController {
 
 
@@ -17,9 +18,9 @@ public class ShopController {
     ModifyShop modifyShop;
     MongoDB db = new MongoDB();
     ShopDB shoprepository = new ShopDB(db);
-    public ShopController(ChangeShopStatus changeShopStatus, ModifyShop modifyShop) {
-        this.changeShopStatus = changeShopStatus;
-        this.modifyShop = modifyShop;
+    public ShopController() {
+//        this.changeShopStatus = changeShopStatus;
+//        this.modifyShop = modifyShop;
     }
     @PutMapping("/changeshopstatus/{vendorToken}/{newStatus}")
     public ResponseObject runChangeShopStatus(@PathVariable String vendorToken,
