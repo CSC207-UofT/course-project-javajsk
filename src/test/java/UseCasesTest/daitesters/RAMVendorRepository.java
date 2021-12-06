@@ -74,7 +74,7 @@ public class RAMVendorRepository implements VendorRepository {
         if(!vendor.getHashedPassword().equals(password)){
             return null;
         }
-        //hard code token to be just thr username
+        //hard code token to be just the username
         return username;
     }
 
