@@ -19,6 +19,16 @@ public class CreateSingietonInteractor implements CreateSingleton {
     ObjectBoundary<Singleton> singletonObjectBoundary;
     VendorBoundary vendorBoundary;
 
+    public CreateSingietonInteractor(VendorRepository vendorRepository, RepositoryBoundary repositoryBoundary,
+                                     Repository<Singleton> singletonRepository, ObjectBoundary<Singleton> singletonObjectBoundary,
+                                     VendorBoundary vendorBoundary) {
+        this.vendorRepository = vendorRepository;
+        this.repositoryBoundary = repositoryBoundary;
+        this.singletonRepository = singletonRepository;
+        this.singletonObjectBoundary = singletonObjectBoundary;
+        this.vendorBoundary = vendorBoundary;
+    }
+
     @Override
     public ResponseObject createSingleton(String vendorToken, Singleton singleton) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);

@@ -80,9 +80,9 @@ public class SingletonDB implements Repository<Singleton> {
             JSONObject rawSelection = rawSingleton.getJSONObject("defaultSelection");
             Selection defaultSel = selectionLoader.parseSelection(rawSelection);
 
-            boolean availability = rawSelection.getBoolean("availability");
+            boolean availability = rawSingleton.getBoolean("availability");
 
-            String shopId = rawSelection.getString("shopId");
+            String shopId = rawSingleton.getString("shopId");
 
             return new Singleton(id, price, name, description, allowedAddonTypes, defaultSel, availability,
                     shopId);

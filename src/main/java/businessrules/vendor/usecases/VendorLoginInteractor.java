@@ -26,11 +26,8 @@ public class VendorLoginInteractor implements VendorLogin {
 
     @Override
     public ResponseObject login(String username, String password) {
-        System.out.println("Here");
         String hashedPassword = hasher.hash(password);
         String token = vendorRepository.authenticateUser(username, hashedPassword);
-        System.out.println("two");
-        System.out.println(token);
         if(token == null){
             return repositoryBoundary.queryNotFound("Unable to locate such user.");
         }
