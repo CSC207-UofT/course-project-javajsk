@@ -1,15 +1,29 @@
 package com.javajsk.uoftruck.controllers;
 
-import adapters.dam.entityrepoitories.CartDB;
+import adapters.dam.entityrepoitories.*;
+import businessrules.dai.CustomerRepository;
 import businessrules.dai.Repository;
-import businessrules.outputboundaries.ResponseObject;
+import businessrules.dai.VendorRepository;
+import businessrules.outputboundaries.*;
 import businessrules.selection.inputboundaries.ModifyDefaultSelection;
 import businessrules.selection.inputboundaries.ModifySelectionInCart;
+import businessrules.selection.usecases.ModifyDefaultSelectionInteractor;
+import businessrules.selection.usecases.ModifySelectionInCartInteractor;
 import entities.Cart;
+import entities.Food;
 import entities.Selection;
+import entities.Singleton;
 import framework.MongoDB;
 import org.json.JSONObject;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import presenters.CustomerPresenter;
+import presenters.ObjectPresenter;
+import presenters.RepositoryPresenter;
+import presenters.VendorPresenter;
+
 
 
 import java.util.HashMap;
@@ -19,21 +33,38 @@ import java.util.HashMap;
 public class SelectionController {
     ModifyDefaultSelection modifyDefaultSelection;
     ModifySelectionInCart modifySelectionInCart;
-    MongoDB db = new MongoDB();
-    CartDB cartrepository = new CartDB(db);
+    VendorRepository vendorRepository;
+    CustomerRepository customerRepository;
+    Repository<Singleton> singletonRepository;
+    Repository<Food> foodRepository;
+    MongoDB db;
+    CartDB cartRepository;
+    VendorBoundary vendorBoundary = new VendorPresenter();
+    CustomerBoundary customerBoundary = new CustomerPresenter();
+    RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
+    ObjectBoundary<Singleton> singletonObjectBoundary = new ObjectPresenter<>();
+    ObjectBoundary<Cart> cartObjectBoundary = new ObjectPresenter<>();
+
+
     public SelectionController() {
-        this.modifyDefaultSelection = modifyDefaultSelection;
-        this.modifySelectionInCart = modifySelectionInCart;
+        this.db = new MongoDB();
+        this.vendorRepository = new VendorDB(db);
+        this.customerRepository = new CustomerDB(db);
+        this.singletonRepository = new SingletonDB(db);
+        this.foodRepository = new FoodDB(db);
+        this.cartRepository = new CartDB(db);
+        this.modifyDefaultSelection = new ModifyDefaultSelectionInteractor(vendorRepository, singletonRepository,
+                vendorBoundary, repositoryBoundary, singletonObjectBoundary);
+        this.modifySelectionInCart = new ModifySelectionInCartInteractor(customerRepository,
+                foodRepository, repositoryBoundary, customerBoundary, cartObjectBoundary);
     }
 
     @PostMapping("/ModifyDefaultSelection/{vendorToken}/{singletonId}")
     public ResponseObject runModifyDefaultSelection(@PathVariable String singletonId, @PathVariable String vendorToken,
-                                               @RequestBody String selection){
-
-        Selection selection1 = cartrepository.parseSelection(new JSONObject(selection));
-
-        return modifyDefaultSelection.modifyDefaultSelection(vendorToken, singletonId, selection1);
-
+                                               @RequestBody String selectionStr){
+        JSONObject selectionJson = new JSONObject(selectionStr);
+        Selection selection = cartRepository.parseSelection(selectionJson);
+        return modifyDefaultSelection.modifyDefaultSelection(vendorToken, singletonId, selection);
     }
 
     @PostMapping("/ModifySelectionInCart/{vendorToken}/{foodId}")

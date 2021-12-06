@@ -3,9 +3,11 @@ package com.javajsk.uoftruck.controllers;
 import adapters.dam.entityrepoitories.AddonDB;
 import adapters.dam.entityrepoitories.VendorDB;
 import businessrules.addon.inputboundaries.CreateAddon;
+import businessrules.addon.inputboundaries.GetAddon;
 import businessrules.addon.inputboundaries.GetShopAddons;
 import businessrules.addon.inputboundaries.ModifyAddon;
 import businessrules.addon.usecases.CreateAddonInteractor;
+import businessrules.addon.usecases.GetAddonInteractor;
 import businessrules.addon.usecases.GetShopAddonsInteractor;
 import businessrules.addon.usecases.ModifyAddonInteractor;
 import businessrules.dai.Repository;
@@ -28,13 +30,14 @@ public class AddonController {
     CreateAddon createAddon;
     GetShopAddons getShopAddons;
     ModifyAddon modifyAddon;
+    GetAddon getAddon;
     GetAddonTypes getAddonTypes;
     MongoDB db;
     AddonDB addonRepository;
     VendorRepository vendorRepository;
     VendorBoundary vendorBoundary = new VendorPresenter();
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
-    ObjectBoundary<Addon> addonObjectBoundary = new ObjectPresenter<Addon>();
+    ObjectBoundary<Addon> addonObjectBoundary = new ObjectPresenter<>();
 
 
     public AddonController() {
@@ -47,6 +50,7 @@ public class AddonController {
         this.getShopAddons = new GetShopAddonsInteractor(addonRepository, repositoryBoundary, addonObjectBoundary);
         this.modifyAddon = new ModifyAddonInteractor(addonRepository, addonObjectBoundary,
                 repositoryBoundary, vendorRepository, vendorBoundary);
+        this.getAddon = new GetAddonInteractor(addonRepository, repositoryBoundary, addonObjectBoundary);
     }
 
     @PostMapping("/CreateAddon/{vendorToken}")
@@ -60,6 +64,10 @@ public class AddonController {
         return getShopAddons.getShopAddons(shopId);
     }
 
+    @GetMapping("GetAddon/{addonId}")
+    public ResponseObject runGetAddon(@PathVariable String addonId){
+        return getAddon.getAddon(addonId);
+
 
     @GetMapping("/GetAddonTypes/")
     public ResponseObject runGetAddonTypes(){
@@ -69,7 +77,7 @@ public class AddonController {
 
     @PutMapping("/ModifyAddon/{vendorToken}/{addonId}")
     public ResponseObject runModifyAddon(@PathVariable String vendorToken, @PathVariable String addonId,
-                                @RequestBody Addon addon){
+                                         @RequestBody Addon addon){
         return modifyAddon.modifyAddon(vendorToken, addonId, addon);
     }
 }

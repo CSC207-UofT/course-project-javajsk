@@ -4,6 +4,7 @@ import adapters.dam.DBGateway;
 import adapters.dam.TokenSigner;
 import businessrules.dai.CustomerRepository;
 import entities.*;
+import framework.JWTSigner;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,6 +17,7 @@ public class CustomerDB implements CustomerRepository {
     final String tableName = "Customer";
 
     public CustomerDB(DBGateway databaseConnector) {
+        this.tokenSigner = new JWTSigner();
         this.databaseConnector = databaseConnector;
     }
 
@@ -29,7 +31,6 @@ public class CustomerDB implements CustomerRepository {
         return databaseConnector.update(tableName, id, loadJSONFromCustomer(item));
 
     }
-
 
     @Override
     public String create(Customer item) {
@@ -48,7 +49,11 @@ public class CustomerDB implements CustomerRepository {
 
     @Override
     public Customer findOneByFieldName(String fieldName, String needle) {
-        return loadCustomerFromJSON(databaseConnector.readOne(tableName,fieldName, needle));
+        JSONObject customerData = databaseConnector.readOne(tableName,fieldName, needle);
+        if (customerData == null){
+            return null;
+        }
+        return loadCustomerFromJSON(customerData);
     }
 
 

@@ -22,6 +22,17 @@ public class ModifySelectionInCartInteractor implements ModifySelectionInCart {
     CustomerBoundary customerBoundary;
     ObjectBoundary<Cart> cartObjectBoundary;
 
+    public ModifySelectionInCartInteractor(CustomerRepository customerRepository,
+                                           Repository<Food> foodRepository, RepositoryBoundary repositoryBoundary,
+                                           CustomerBoundary customerBoundary,
+                                           ObjectBoundary<Cart> cartObjectBoundary) {
+        this.customerRepository = customerRepository;
+        this.foodRepository = foodRepository;
+        this.repositoryBoundary = repositoryBoundary;
+        this.customerBoundary = customerBoundary;
+        this.cartObjectBoundary = cartObjectBoundary;
+    }
+
     /**
      * Method that modifies the selections in a cart and
      * returns a JSONObject representing the modified cart

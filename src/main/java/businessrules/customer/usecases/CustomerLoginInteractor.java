@@ -36,7 +36,7 @@ public class CustomerLoginInteractor implements CustomerLogin {
         String token = customerRepository.authenticateUser(username, hashedPassword);
 
         if(token == null){
-            return repositoryBoundary.queryNotFound("Unable to locate such user.");
+            return repositoryBoundary.queryNotFound("Incorrect username or password.");
         }
 
         return customerBoundary.displayToken(token);
