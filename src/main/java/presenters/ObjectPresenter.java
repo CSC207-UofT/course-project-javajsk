@@ -2,6 +2,8 @@ package presenters;
 
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.ResponseObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class ObjectPresenter<T> implements ObjectBoundary<T> {
      */
     @Override
     public ResponseObject showObject(T obj) {
-        return new ResponseObject(200, "", obj);
+        return new ResponseObject(200, "", obj.toString());
         // 200 http status code for OK
     }
 
@@ -27,7 +29,13 @@ public class ObjectPresenter<T> implements ObjectBoundary<T> {
      */
     @Override
     public ResponseObject showObjectList(List<T> listToDisp) {
-        return new ResponseObject(200, "", listToDisp);
+        String[] newArr = new String[listToDisp.size()];
+        int i =0;
+        for (T obj : listToDisp){
+            newArr[i] = obj.toString();
+            i++;
+        }
+        return new ResponseObject(200, "", newArr);
     }
 
     /**

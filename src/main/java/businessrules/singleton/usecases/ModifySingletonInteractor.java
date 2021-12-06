@@ -20,6 +20,16 @@ public class ModifySingletonInteractor implements ModifySingleton {
     VendorBoundary vendorBoundary;
     ObjectBoundary<Singleton> singletonObjectBoundary;
 
+    public ModifySingletonInteractor(VendorRepository vendorRepository, Repository<Singleton> singletonRepository,
+                                     RepositoryBoundary repositoryBoundary, VendorBoundary vendorBoundary,
+                                     ObjectBoundary<Singleton> singletonObjectBoundary) {
+        this.vendorRepository = vendorRepository;
+        this.singletonRepository = singletonRepository;
+        this.repositoryBoundary = repositoryBoundary;
+        this.vendorBoundary = vendorBoundary;
+        this.singletonObjectBoundary = singletonObjectBoundary;
+    }
+
     /**
      * Method that modifies a Singleton by replacing it with another
      *

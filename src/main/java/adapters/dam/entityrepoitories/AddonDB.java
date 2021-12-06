@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,6 @@ public class AddonDB implements Repository<Addon> {
         return loadAddonFromJSON(databaseConnector.readOne(tableName, fieldName, needle));
     }
 
-
     public static JSONObject loadJSONfromAddon(Addon addon){
         return new JSONObject(addon.toString());
     }
@@ -57,7 +57,7 @@ public class AddonDB implements Repository<Addon> {
     public Addon loadAddonFromJSON(JSONObject addonObj){
         if(!addonObj.has("id") || !addonObj.has("name") || !addonObj.has("price") ||
                 !addonObj.has("addonTypes") || !addonObj.has("isAvailable") || !addonObj.has("shopId")  ){
-            return null;
+            throw new InvalidParameterException("Json object does not have the right types.");
         }
         try {
             String id = addonObj.getString("id");

@@ -35,7 +35,7 @@ public class VendorController {
     VendorRepository vendorRepository = new VendorDB(db);
     Hasher hasher = new SHA512Hasher();
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
-    ObjectBoundary<Vendor> vendorObjectBoundary = new ObjectPresenter<Vendor>();
+    ObjectBoundary<Vendor> vendorObjectBoundary = new ObjectPresenter<>();
     Repository<Shop> shopRepository = new ShopDB(db);
     VendorBoundary vendorBoundary = new VendorPresenter();
 
@@ -52,6 +52,7 @@ public class VendorController {
         return vendorLogin.login(username, password);
     }
     @PutMapping("/VendorSignUp/{username}/{password}/{confirmed_password}/{shop_name}/{location}")
+    //TODO: We pass passwords through URLs which is obviously bad practice.
     public ResponseObject runVendorSignup(@PathVariable String username, @PathVariable String password,
                                           @PathVariable String confirmed_password, @PathVariable String location,
                                           @PathVariable String shop_name){

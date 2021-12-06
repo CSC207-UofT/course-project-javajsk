@@ -57,7 +57,7 @@ public class CustomerSignUpInteractor implements CustomerSignUp {
 
         String cypherText = hasher.hash(password);
 
-        Customer customerNew = new Customer("N/A", username,password);
+        Customer customerNew = new Customer("N/A", username,cypherText);
 
         String custId = customerRepository.create(customerNew);
         if(custId == null){

@@ -1,5 +1,6 @@
 package com.javajsk.uoftruck.controllers;
 
+import adapters.dam.entityrepoitories.CartDB;
 import adapters.dam.entityrepoitories.CustomerDB;
 import adapters.dam.entityrepoitories.FoodDB;
 import businessrules.cart.inputboundaries.AddToCart;
@@ -20,6 +21,7 @@ import entities.Cart;
 import entities.Food;
 import entities.Selection;
 import framework.MongoDB;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import presenters.ObjectPresenter;
 import presenters.RepositoryPresenter;
@@ -38,6 +40,7 @@ public class CartController {
     VendorBoundary vendorBoundary = new VendorPresenter();
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
     ObjectBoundary<Cart> cartObjectBoundary = new ObjectPresenter<Cart>();
+    CartDB cartrepository = new CartDB(db);
 
     CartController(){
         addToCart = new AddToCartInteractor(foodRepository, cartObjectBoundary, customerRepository, repositoryBoundary);
@@ -48,8 +51,12 @@ public class CartController {
     
     @PutMapping("/AddtoCart/{userToken}/{foodId}/{shopId}")
     public Cart runAddToCart(@PathVariable String userToken, @PathVariable String shopId,
-                             @PathVariable String foodId, @RequestBody Selection[] selection){
-        ResponseObject response = addToCart.addToCart(userToken, shopId, foodId, selection);
+                             @PathVariable String foodId, @RequestBody String[] selections){
+        Selection[] contents = new Selection[selections.length];
+        for(int i = 0; i <= selections.length; i++){
+            contents[i] =  cartrepository.parseSelection(new JSONObject(selections[i]));
+        }
+        ResponseObject response = addToCart.addToCart(userToken, shopId, foodId, contents);
         return (Cart) response.getContents();
     }
     @PutMapping("/EmptyCart/{userToken}")
@@ -59,8 +66,13 @@ public class CartController {
 
     @PutMapping("/RemovefromCart/{userToken}")
     public ResponseObject runRemoveFromCart(@PathVariable String userToken, @RequestBody Food food,
-                                  @RequestBody Selection[] selection){
-        return removeFromCart.removeFromCart(userToken, food, selection);
+                                  @RequestBody Selection[] selections){
+        Selection[] contents = new Selection[selections.length];
+        for(int i = 0; i <= selections.length; i++){
+            contents[i] =  cartrepository.parseSelection(new JSONObject(selections[i]));
+        }
+
+        return removeFromCart.removeFromCart(userToken, food, contents);
     }
     @GetMapping("/ViewCart/{userToken}")
     public ResponseObject runViewCart(@PathVariable String userToken){

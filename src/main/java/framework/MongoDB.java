@@ -78,6 +78,7 @@ public class MongoDB implements DBGateway {
             data.remove("id");
             Document insertion = Document.parse(data.toString());
             collection.insertOne(insertion);
+            System.out.println("ID from db:"+insertion.getObjectId("_id").toString());
             return insertion.getObjectId("_id").toString();
         }catch (Exception e){
             return null;
