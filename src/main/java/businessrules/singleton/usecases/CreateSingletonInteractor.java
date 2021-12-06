@@ -47,11 +47,6 @@ public class CreateSingletonInteractor implements CreateSingleton {
             return repositoryBoundary.queryNotFound("No such vendor found.");
         }
 
-
-
-        // TODO: remove after testing
-        System.out.println("Create Singleton: " + singletonRepository.create(singleton));
-
         if(!vendor.getShop().getId().equals(singleton.getShopId())){
             return vendorBoundary.error("You do not own this singleton.");
         }

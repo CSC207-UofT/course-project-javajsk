@@ -210,7 +210,7 @@ public class Singleton{
         jsonObject.put("name", this.name);
         jsonObject.put("description", this.description);
         jsonObject.put("allowedAddonTypes", this.allowedAddonTypes);
-        jsonObject.put("defaultSelection", this.defaultSelection.toString());
+        jsonObject.put("defaultSelection", new JSONObject(this.defaultSelection.toString()));
         jsonObject.put("availability", this.availability);
         jsonObject.put("shopId", this.shopId);
         return jsonObject.toString();
