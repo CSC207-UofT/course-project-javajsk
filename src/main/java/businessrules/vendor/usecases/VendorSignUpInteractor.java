@@ -1,5 +1,9 @@
 package businessrules.vendor.usecases;
 
+import adapters.dam.DBGateway;
+import adapters.dam.SHA512Hasher;
+import adapters.dam.entityrepoitories.ShopDB;
+import adapters.dam.entityrepoitories.VendorDB;
 import businessrules.dai.Hasher;
 import businessrules.dai.Repository;
 import businessrules.dai.VendorRepository;
@@ -10,6 +14,10 @@ import businessrules.outputboundaries.VendorBoundary;
 import businessrules.vendor.inputboundaries.VendorSignUp;
 import entities.Shop;
 import entities.Vendor;
+import framework.MongoDB;
+import presenters.ObjectPresenter;
+import presenters.RepositoryPresenter;
+import presenters.VendorPresenter;
 
 /**
  * Use case that signs up a Vendor
@@ -46,6 +54,7 @@ public class VendorSignUpInteractor implements VendorSignUp {
     @Override
     public ResponseObject signUp(String username, String password, String passwordConf,
                                  String shopName, String shopLocation) {
+
         if(!password.equals(passwordConf)){
             return vendorBoundary.error("Passwords do not match.");
         }
@@ -58,7 +67,7 @@ public class VendorSignUpInteractor implements VendorSignUp {
 
         String cypherText = hasher.hash(password);
 
-        Vendor vendorNew = new Vendor("N/A", username,cypherText, shopName, shopLocation);
+        Vendor vendorNew = new Vendor("N/A", username, cypherText, shopName, shopLocation);
 
         Shop shop = vendorNew.getShop();
 

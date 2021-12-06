@@ -11,6 +11,7 @@ import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
 import entities.*;
 import framework.MongoDB;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import presenters.ObjectPresenter;
 import presenters.RepositoryPresenter;
@@ -28,11 +29,13 @@ public class MenuController{
     SetAddonAvailability setAddonAvailability;
     SetSingletonAvailability setSingletonAvailability;
     ViewMenu viewMenu;
-
     MongoDB db = new MongoDB();
     Repository<Shop> shopRepository = new ShopDB(db);
-    Repository<Singleton> singletonRepository = new SingletonDB(db);
+    SingletonDB singletonRepository = new SingletonDB(db);
     VendorRepository vendorRepository = new VendorDB(db);
+    AddonDB addonRepository = new AddonDB(db);
+    FoodDB foodRepository = new FoodDB(db);
+
     VendorBoundary vendorBoundary = new VendorPresenter();
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
     ObjectBoundary<Menu> menuObjectBoundary = new ObjectPresenter<Menu>();
@@ -52,13 +55,15 @@ public class MenuController{
     }
 
     @PutMapping("/AddAddontoMenu/{vendorToken}")
-    public ResponseObject runAddAddontoMenu(@PathVariable String vendorToken, @RequestBody Addon addon){
-        ResponseObject response = addAddonToMenu.addAddon(vendorToken, addon);
+    public ResponseObject runAddAddontoMenu(@PathVariable String vendorToken, @RequestBody String addon){
+        Addon addon1 = addonRepository.loadAddonFromJSON(new JSONObject(addon));
+        ResponseObject response = addAddonToMenu.addAddon(vendorToken, addon1);
         return response;
     }
     @PutMapping("/AddFoodtoMenu/{vendorToken}")
-    public ResponseObject runAddFoodtoMenu(@PathVariable String vendorToken, @RequestBody Food food){
-        ResponseObject response = addFoodToMenu.addFood(vendorToken, food);
+    public ResponseObject runAddFoodtoMenu(@PathVariable String vendorToken, @RequestBody String food){
+        Food food1 = foodRepository.loadFoodFromJSON(new JSONObject(food));
+        ResponseObject response = addFoodToMenu.addFood(vendorToken, food1);
         return response;
     }
     @GetMapping("/GetAvailableAddons/{shopId}")
@@ -73,31 +78,33 @@ public class MenuController{
         return response;
     }
     @PutMapping("/RemoveAddonfromMenu/{vendorToken}")
-    public ResponseObject runRemoveAddonFromMenu(@PathVariable String vendorToken, @RequestBody Addon addon){
-        ResponseObject response = removeAddonFromMenu.removeAddon(vendorToken, addon);
+    public ResponseObject runRemoveAddonFromMenu(@PathVariable String vendorToken, @RequestBody String addon){
+        Addon addon1 = addonRepository.loadAddonFromJSON(new JSONObject(addon));
+        ResponseObject response = removeAddonFromMenu.removeAddon(vendorToken, addon1);
         return response;
     }
     @PutMapping("/RemoveFoodfromMenu/{vendorToken}")
-    public ResponseObject runRemoveFoodFromMenu(@PathVariable String vendorToken, @RequestBody Food food){
-        ResponseObject response = removeFoodFromMenu.removeFood(vendorToken, food);
+    public ResponseObject runRemoveFoodFromMenu(@PathVariable String vendorToken, @RequestBody String food){
+        Food food1 = foodRepository.loadFoodFromJSON(new JSONObject(food));
+        ResponseObject response = removeFoodFromMenu.removeFood(vendorToken, food1);
         return response;
     }
     @PutMapping("/SetAddonAvailability1/{vendorToken}/{availability}")
     public ResponseObject runSetAddonAvailability(@PathVariable String vendorToken, @PathVariable Boolean availability,
-                                        @RequestBody Addon addon){
-        return setAddonAvailability.setAddonAvailability(vendorToken, addon, availability);
+                                        @RequestBody String addon){
+        Addon addon1 = addonRepository.loadAddonFromJSON(new JSONObject(addon));
+        return setAddonAvailability.setAddonAvailability(vendorToken, addon1, availability);
 
     }
-    @PutMapping("/SetAddonAvailability/{vendorToken}/{availability}")
+    @PutMapping("/SetSingletonAvailability/{vendorToken}/{availability}")
     public ResponseObject runSetSingletonAvailability(@PathVariable String vendorToken, @PathVariable Boolean availability,
-                                        @RequestBody Singleton singleton){
-        return setSingletonAvailability.setSingletonAvailability(vendorToken, singleton, availability);
+                                        @RequestBody String singleton){
+        Singleton singleton1 = singletonRepository.loadSingletonFromJSON(new JSONObject(singleton));
+        return setSingletonAvailability.setSingletonAvailability(vendorToken, singleton1, availability);
 
     }
     @GetMapping("/ViewMenu/{shopId}")
     public ResponseObject runViewMenu(@PathVariable String shopId){
         return viewMenu.viewMenu(shopId);
     }
-
-
 }

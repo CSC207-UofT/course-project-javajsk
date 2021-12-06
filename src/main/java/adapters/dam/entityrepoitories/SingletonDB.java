@@ -34,7 +34,6 @@ public class SingletonDB implements Repository<Singleton> {
 
     }
 
-
     @Override
     public String create(Singleton item) {
         return dbConnector.create(tableName, loadJSONFromSingleton(item));
@@ -50,11 +49,11 @@ public class SingletonDB implements Repository<Singleton> {
         return singletonList;
     }
 
-
     @Override
     public Singleton findOneByFieldName(String fieldName, String needle) {
         return loadSingletonFromJSON(dbConnector.readOne(tableName,fieldName,needle));
     }
+
     public static JSONObject loadJSONFromSingleton(Singleton singleton){
         return new JSONObject(singleton.toString());
     }
@@ -80,14 +79,15 @@ public class SingletonDB implements Repository<Singleton> {
             JSONObject rawSelection = rawSingleton.getJSONObject("defaultSelection");
             Selection defaultSel = selectionLoader.parseSelection(rawSelection);
 
-            boolean availability = rawSelection.getBoolean("availability");
+            boolean availability = rawSingleton.getBoolean("availability");
 
-            String shopId = rawSelection.getString("shopId");
+            String shopId = rawSingleton.getString("shopId");
 
             return new Singleton(id, price, name, description, allowedAddonTypes, defaultSel, availability,
                     shopId);
 
         }catch (JSONException e){
+            e.printStackTrace();
             return null;
         }
     }
