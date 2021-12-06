@@ -48,7 +48,7 @@ function Selector(){
                     <Link to="/vendor/menu/" className="btn btn-secondary">See menu</Link>
                 </div>
                 <div className="col">
-                    <Link to="/vendor/modifyshop/" className="btn btn-info">Set Shop Info</Link>
+                    <Link to="/vendor/modifyshop/" className="btn btn-primary">Set Shop Info</Link>
                 </div>
             </div>
         </div>

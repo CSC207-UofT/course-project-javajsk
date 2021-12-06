@@ -45,7 +45,6 @@ function login(event, setter){
         "password": event.target[1].value
     }   
     axios.put(`${domain}:${port}/VendorLogin/${formData.username}/${formData.password}/`).then((output)=>{
-        console.log(output.data);
         setter(output.data);
    });
 
@@ -55,7 +54,6 @@ function VendorLogin(){
     const [request, setRequest] = useState(null);
     if(request != null){
         if(request.contents != ""){
-            console.log("Setting token");
             SetUser(request.contents);
         }
     }
@@ -80,7 +78,7 @@ function VendorLogin(){
                 <button type="submit" className="btn btn-primary w-50">Submit </button>
             </form>
             <div className="container my-3">
-                <Link to="/vendor/signup">Signup instead</Link>
+                <Link to="/vendor/signup">New? Sign up here!</Link>
             </div>
         </div>
     );

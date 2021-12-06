@@ -16,6 +16,18 @@
   min-height: 5em;
 }
 
+.textofwr{
+  overflow: hidden;
+  width: 100px;
+  display: inline-block;
+  white-space:nowrap;
+  text-overflow: ellipsis;
+}
+.listItem{
+  height: 5vh;
+  text-overflow: ellipsis;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

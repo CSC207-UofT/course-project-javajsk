@@ -44,7 +44,7 @@ function Orders() {
 
           <div className="card-header">
             <p className="h5 text-success">
-              Pending Orders
+              Completed Orders
             </p>
           </div>
           <div className="card-body">

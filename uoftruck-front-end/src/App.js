@@ -36,7 +36,7 @@ function Logout(){
   const [user, setUser] = useContext(UserContext);
   return(
       <div>
-          <button className="btn btn-secondary" onClick={()=> {setUser(null)}}>Logout</button>
+          <button className="btn btn-secondary" onClick={() => {setUser(null)}}>Logout</button>
       </div>
   )
 }
