@@ -143,22 +143,44 @@ export function CreateSingleton(){
 }
 
 
+
+function runCreateAddon(event, data, setResponse){
+    event.preventDefault();
+    let finalDat = {};
+    finalDat['name'] = data.name;
+    finalDat['price'] = data.price;
+    let allowedTypes = [];
+    for (let dat of data['types']) {
+        allowedTypes.push(dat.value);
+    }
+    finalDat["addonTypes"] = allowedTypes;
+    finalDat["isAvailable"] = true;
+    finalDat["id"] = "N/A";
+
+    axios.post(`${domain}:${port}/CreateSingleton/${token}`,finalDat).then((resp)=>{
+        console.log(resp);
+    });
+
+}
+
 export function CreateAddon(){
+    const [data, setData] = useState({});
+    const [response, setResponse] = useState(null);
     return(
             <div className="container my-3">
                 <div className="display-5">Create Addon</div>
                 <form >
                     <div className="form-group">
                         <label for="name">Name:</label>
-                        <input key="name" type="text" className="form-control my-2" id="name"/>
+                        <input key="name" onInput={e=>setData({...data,name:e.target.value})} type="text" className="form-control my-2" id="name"/>
                     </div>
                     <div className="my-2"></div>
                     <div className="form-group">
                         <label for="price">Price:</label>
-                        <input key="priceInput" type="number" className="form-control my-2" min="1" id="price"/>
+                        <input key="priceInput" onInput={e=>setData({...data,price:e.target.value})} type="number" className="form-control my-2" min="1" id="price"/>
                     </div>
                     <div className="form-group">
-                        <label for="price">Type of Addon:</label>
+                        <label for="price" onInput={e=>setData({...data,types:e.target.selectedOptions})}>Type of Addon:</label>
                         <select multiple class="form-control my-2" id="sel1">
                             <option>Condiments</option>
                             <option>alsdkj</option>
