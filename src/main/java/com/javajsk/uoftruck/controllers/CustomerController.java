@@ -30,26 +30,31 @@ public class CustomerController {
     CustomerLogin customerLogin;
     CustomerSignUp customerSignUp;
     ModifyCustomer modifyCustomer;
-    MongoDB db = new MongoDB();
-    Repository<Food> foodRepository = new FoodDB(db);
-    CustomerRepository customerRepository = new CustomerDB(db);
-    VendorBoundary vendorBoundary = new VendorPresenter();
+    MongoDB db;
+    Repository<Food> foodRepository;
+    CustomerRepository customerRepository;
     CustomerBoundary customerBoundary = new CustomerPresenter();
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
     Hasher hasher = new SHA512Hasher();
-    ObjectBoundary<Customer> customerObjectBoundary = new ObjectPresenter<Customer>();
+    ObjectBoundary<Customer> customerObjectBoundary = new ObjectPresenter<>();
 
     public CustomerController() {
-        this.customerLogin = new CustomerLoginInteractor(customerRepository, customerBoundary, repositoryBoundary,hasher);
-        this.customerSignUp = new CustomerSignUpInteractor(customerRepository, repositoryBoundary, customerBoundary, customerObjectBoundary, hasher);
-        this.modifyCustomer = new ModifyCustomerInteractor(customerRepository, customerObjectBoundary, repositoryBoundary, customerBoundary, hasher);
+        this.db = new MongoDB();
+        this.foodRepository = new FoodDB(db);
+        this.customerRepository = new CustomerDB(db);
+        this.customerLogin = new CustomerLoginInteractor(customerRepository,
+                customerBoundary, repositoryBoundary,hasher);
+        this.customerSignUp = new CustomerSignUpInteractor(customerRepository,
+                repositoryBoundary, customerBoundary, customerObjectBoundary, hasher);
+        this.modifyCustomer = new ModifyCustomerInteractor(customerRepository,
+                customerObjectBoundary, repositoryBoundary, customerBoundary, hasher);
     }
 
     @PutMapping("/CustomerLogin/{username}/{password}")
     public ResponseObject runCustomerLogin(@PathVariable String username, @PathVariable String password){
         return customerLogin.login(username, password);
     }
-    @PutMapping("/CustomerLogin/{username}/{password}/{confirmed_password}")
+    @PutMapping("/CustomerSignUp/{username}/{password}/{confirmed_password}")
     public ResponseObject runCustomerSignup(@PathVariable String username, @PathVariable String password,
                                       @PathVariable String confirmed_password){
         return customerSignUp.signUp(username, password, confirmed_password);
