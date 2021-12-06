@@ -1,13 +1,20 @@
 package UseCasesTest.Customer;
 
+import UseCasesTest.TestBoundaries.RAMCustomerBoundary;
+import UseCasesTest.TestBoundaries.RAMRepositoryBoundary;
 import UseCasesTest.daitesters.RAMCustomerRepository;
 import UseCasesTest.daitesters.RAMShopRepository;
+import adapters.dam.SHA512Hasher;
 import businessrules.customer.inputboundaries.CustomerLogin;
+import businessrules.customer.usecases.CustomerLoginInteractor;
+import businessrules.customer.usecases.CustomerSignUpInteractor;
 import businessrules.dai.CustomerRepository;
+import businessrules.dai.Hasher;
 import businessrules.outputboundaries.CustomerBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import entities.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -19,33 +26,31 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerLoginInteractorTest {
     RAMCustomerRepository customerRepository;
-    RAMShopRepository shopRepository;
+    CustomerBoundary customerBoundary;
+    RepositoryBoundary repositoryBoundary;
+    Hasher hasher;
+    CustomerLoginInteractor customerLoginInteractor;
 
-    public Customer setNewCustomer() {
-        Cart currentCart =  new Cart();
-        Cart cart1 = new Cart();
-        Cart cart2 = new Cart();
-        Date time_placed1 = new Date(2020, 8, 15, 12, 2, 3);
-        Date time_modified1 = new Date(2020, 8, 15, 12, 2, 3);
-        Date time_placed2 = new Date(2021, 6, 12, 8, 4, 0);
-        Date time_modified2 = new Date(2021, 6, 12, 8, 20, 10);
-        Order order1 = new Order("00001", cart1, "00002", "00000", Order.Status.COMPLETED,
-                time_placed1, time_modified1);
-        Order order2 = new Order("00003", cart2, "00004", "00000", Order.Status.COMPLETED,
-                time_placed2, time_modified2);
-        List<Order> orderlist = new ArrayList<Order>();
-        orderlist.add(order1);
-        orderlist.add(order2);
-        OrderBook orderHistory = new OrderBook(orderlist);
-        Customer customer = new Customer("00000", "Username", "Password",
-                orderHistory, currentCart);
-
-        return customer;
+    @BeforeEach
+    void setUp() {
+        customerBoundary = new RAMCustomerBoundary();
+        repositoryBoundary = new RAMRepositoryBoundary();
+        hasher = new SHA512Hasher();
+        Customer start_customer = new Customer("10000", "Username1", "Password1");
+        customerRepository = new RAMCustomerRepository(start_customer);
+        customerLoginInteractor = new CustomerLoginInteractor(customerRepository, customerBoundary,
+                repositoryBoundary, hasher);
     }
 
     @Test
     void login() {
-        Customer test_customer = setNewCustomer();
+        ResponseObject responseObject = customerLoginInteractor.login("Username1", "Password1");
+        assertEquals("User authenticated", responseObject.getContents());
+    }
 
+    @Test
+    void unableLogin(){
+        ResponseObject responseObject = customerLoginInteractor.login("Username12", "Password12");
+        assertEquals("Unable to locate such user.", responseObject.getMessage());
     }
 }

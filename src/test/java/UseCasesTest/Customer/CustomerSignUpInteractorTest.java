@@ -1,7 +1,11 @@
 package UseCasesTest.Customer;
 
+import UseCasesTest.TestBoundaries.RAMCustomerBoundary;
+import UseCasesTest.TestBoundaries.RAMCustomerObjectBoundary;
+import UseCasesTest.TestBoundaries.RAMRepositoryBoundary;
 import UseCasesTest.daitesters.RAMCustomerRepository;
 import UseCasesTest.daitesters.RAMShopRepository;
+import adapters.dam.SHA512Hasher;
 import businessrules.customer.inputboundaries.CustomerSignUp;
 import businessrules.customer.usecases.CustomerSignUpInteractor;
 import businessrules.dai.CustomerRepository;
@@ -13,6 +17,9 @@ import businessrules.outputboundaries.ResponseObject;
 import entities.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerSignUpInteractorTest {
@@ -22,10 +29,13 @@ class CustomerSignUpInteractorTest {
     CustomerBoundary customerBoundary;
     ObjectBoundary<Customer> objectBoundary;
     Hasher hasher;
-    CustomerSignUp customerSignUp;
 
     @BeforeEach
     void setUp() {
+        hasher = new SHA512Hasher();
+        customerBoundary = new RAMCustomerBoundary();
+        repositoryBoundary = new RAMRepositoryBoundary();
+        objectBoundary = new RAMCustomerObjectBoundary();
         Customer start_customer = new Customer("10000", "Username1", "Password1");
         customerRepository = new RAMCustomerRepository(start_customer);
         customerSignUpInteractor = new CustomerSignUpInteractor(customerRepository, repositoryBoundary,
@@ -34,15 +44,23 @@ class CustomerSignUpInteractorTest {
 
     @Test
     void mismatchPassword() {
-        assertEquals("Passwords do not match.", customerSignUp.signUp("Username",
+        assertEquals("Passwords do not match.", customerSignUpInteractor.signUp("Username",
                 "Password", "Password1").getMessage());
     }
 
     @Test
+    void usedUsername() {
+       ResponseObject responseObject = customerSignUpInteractor.signUp("Username1",
+               "Password1", "Password1");
+       assertEquals("Username is already taken!", responseObject.getMessage());
+    }
+
+    @Test
     void successfulSignUp() {
-        customerSignUpInteractor.signUp("Username", "Password", "Password");
+        ResponseObject responseObject = customerSignUpInteractor.signUp("Username",
+                "Password", "Password");
         Customer new_customer = customerRepository.read("N/A");
-        assertEquals("Username", new_customer.getUserName());
+        assertNotNull(new_customer);
         assertEquals(hasher.hash("Password"), new_customer.getHashedPassword());
     }
 }
