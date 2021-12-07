@@ -2,7 +2,7 @@ import './App.css';
 import { HashRouter, Switch, Route,Link } from 'react-router-dom'
 import { UserContext } from './mechanisms/contexts';
 import { useContext, useState } from 'react';
-import Customer from './components/customer/customer';
+import { CustomerHome } from './components/customer/customerHome';
 import VendorHome from './components/vendor/vendorHome';
 import AuthenticateUser from './mechanisms/authenticateTokens';
 import { GetUserName } from './mechanisms/authenticateTokens';
@@ -23,7 +23,7 @@ function App() {
       <HashRouter>
       <Switch>
         <Route path="/vendor" component={VendorHome} />
-        <Route path="/customer" component={Customer} />
+        <Route path="/customer" component={CustomerHome} />
         <Route path="/" exact component={chooser}/>
       </Switch>
       </HashRouter>

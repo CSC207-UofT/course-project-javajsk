@@ -1,5 +1,5 @@
 import { Redirect } from "react-router";
-import AuthenticateUser, { GetShopId } from "../../mechanisms/authenticateTokens";
+import AuthenticateUser, { GetShopId, GetToken } from "../../mechanisms/authenticateTokens";
 import { Link } from "react-router-dom";
 import { Router, Route, Switch, useRouteMatch } from "react-router-dom";
 import { CreateAddon, CreateFood, CreateSingleton } from "./creation";
@@ -51,13 +51,95 @@ function MainMenu(){
     );
 }
 
+function SetAvailability(oldObj, type, token, items, setItems ){
+    let avail = true;
+    let object = JSON.parse(JSON.stringify(oldObj));
+    if(object.isAvailable){
+        avail = false;
+    }
+    object.isAvailable = avail;
+    axios.put(`${domain}:${port}/Modify${type}/${token}/${object.id}`, object).then((resp)=>{
+        if(resp.data.status == 200){
+            setItem(items, setItems, oldObj, JSON.parse(resp.data.contents));
+        }
+    });
+
+}
+
+function AvailabilityButton(data, type, token, foodDat, setFoodDat){
+    if(data.isAvailable== true  ){
+        return (<button class="btn btn-success" onClick={()=>{SetAvailability(data, type, token, foodDat, setFoodDat)}}>Yes</button>
+        );
+    }
+    return (<button class="btn btn-danger" onClick={()=>{SetAvailability(data, type, token, foodDat, setFoodDat)}}>No</button>
+    );
+}
+
+function parseArr(arr){
+    let newArr = [];
+    arr.map((elem)=>{
+        newArr.push(JSON.parse(elem));
+    })
+    return newArr;
+}
+
+function setItem(data, setDat, oldElem, newElem){
+    let newArr = data.contents;
+
+    let index = newArr.indexOf(oldElem);
+    if(index !== -1){
+        newArr[index] = newElem;
+    }
+    console.log(oldElem);
+    console.log(newElem);
+    console.log(newArr);
+    setDat({...data, contents:newArr});
+}   
+
+function IsFoodAvailable(data,singletons){
+    if(singletons == null){
+        return(<div class="spinner-border" role="status">
+            <span class="sr-only"></span>
+        </div>);
+    }
+    let available = true;
+    data.components.map((elem)=>{
+        singletons.map((raw) =>{
+            let single = JSON.parse(raw)
+            if(single.id == elem){
+                if(!single.isAvailable){
+                    available = false;
+                }
+            }
+        });
+    })
+    
+    if(available){
+    return(
+        <div class="text-success">Yes</div>
+    );
+    }
+    return(
+        <div class="text-danger">No</div>
+    )
+}
+
 function Foods(){
     const [data, setData] = useState(null);
+    const [singletons, setSingletons] = useState(null);
     const shopId = GetShopId();
     useEffect(()=>{
         axios.get(`${domain}:${port}/GetShopFoods/${shopId}`).then((resp)=>{
-            setData(resp.data)
+            resp.data.contents = parseArr(resp.data.contents);
+            setData(resp.data);
         });
+
+        axios.get(`${domain}:${port}/GetShopSingletons/${shopId}`).then((resp)=>{
+            if(resp.data.status == 200){
+                setSingletons(resp.data.contents);
+            }
+        });
+        
     },[]);
     if(data === null){
         return (
@@ -70,7 +152,7 @@ function Foods(){
                 </div>
                 <div className="card-body">
                     <div class="spinner-border" role="status">
-                        <span class="sr-only">Loading...</span>
+                        <span class="sr-only"></span>
                     </div>
                 </div>
             </div>
@@ -99,8 +181,7 @@ function Foods(){
                     </div>
             </div>
             <div className="card-body py-0 px-0">
-                {data.contents.map((i)=>{
-                        let dat = JSON.parse(i);
+                {data.contents.map((dat)=>{
                         return(
                             <div className="border border-light w-100 listItem container-fluid">
                                 <div class="container">
@@ -117,7 +198,8 @@ function Foods(){
                                         {dat.price}$
                                         </div>
                                         <div class="col">
-                                        {dat.isAvaiable ? <div class="text-success">Yes</div> : <div class="text-danger">No</div> }
+                                        {IsFoodAvailable(dat,singletons)
+                                    }
                                         </div>
                                     </div>
                                 </div>
@@ -133,9 +215,13 @@ function Foods(){
 function Singletons(){
     const [data, setData] = useState(null);
     const shopId = GetShopId();
+    const token = GetToken();
     useEffect(()=>{
         axios.get(`${domain}:${port}/GetShopSingletons/${shopId}`).then((resp)=>{
-            setData(resp.data)
+            if(resp.data.status === 200){
+                resp.data.contents = parseArr(resp.data.contents);
+                setData(resp.data)
+            }
         });
     },[]);
     if(data === null){
@@ -149,7 +235,7 @@ function Singletons(){
                 </div>
                 <div className="card-body">
                     <div class="spinner-border" role="status">
-                        <span class="sr-only">Loading...</span>
+                        <span class="sr-only"></span>
                     </div>
                 </div>
             </div>
@@ -178,8 +264,7 @@ function Singletons(){
                     </div>
             </div>
             <div className="card-body py-0 px-0">
-                {data.contents.map((i)=>{
-                        let dat = JSON.parse(i);
+                {data.contents.map((dat)=>{
                         return(
                             <div className="border border-light w-100 listItem container-fluid">
                                 <div class="container">
@@ -196,7 +281,7 @@ function Singletons(){
                                         {dat.price}$
                                         </div>
                                         <div class="col">
-                                        {dat.isAvaiable ? <div class="text-success">Yes</div> : <div class="text-danger">No</div> }
+                                        {AvailabilityButton(dat, "Singleton", token, data, setData) }
                                         </div>
                                     </div>
                                 </div>
@@ -305,17 +390,18 @@ function Addons(){
 
 
 function SelectorCreation(){
+    let {path, url} = useRouteMatch();
     return(
         <div className="container my-3">
             <div className="row">
                 <div className="col">
-                    <Link to="createfood/" className="btn btn-primary">Create Food</Link>
+                    <Link to={`${path}createfood/`} className="btn btn-primary">Create Food</Link>
                 </div>  
                 <div className="col">
-                    <Link to="createsingleton/" className="btn btn-success">Create Singleton</Link>
+                    <Link to={`${path}createsingleton/`} className="btn btn-success">Create Singleton</Link>
                 </div>
                 <div className="col">
-                    <Link to="createaddon/" className="btn btn-danger">Create Addon</Link>
+                    <Link to={`${path}createaddon/`} className="btn btn-danger">Create Addon</Link>
                 </div>
             </div>
         </div>

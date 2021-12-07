@@ -37,6 +37,7 @@ function SingletonCreation(data,arr, event, setResp,token, shopId){
     finalDat["id"] = "N/A";
     console.log(finalDat);
     axios.post(`${domain}:${port}/CreateSingleton/${token}`,finalDat).then((resp)=>{
+        console.log(resp);
         setResp(resp);
     });
 }
@@ -64,7 +65,7 @@ function generateOptions(data,form, setForm){
         return(
         <div class="input-group" key={index}>
             <select name="" onInput={e=>setForm(
-                {...form,selection:{...form.selection,[`addon${index}`]:e.target.value}}
+                {...form,selection:{...form.selection,[`addon${index}`]:e.target.selectedOptions[0].value}}
                 )} id={`addon.${index}`} className="form-control rounded-0">
                 <AddonsSelector/>
             </select>
@@ -124,6 +125,8 @@ export function CreateSingleton(){
     const [options, setOptions]  = useState({data:[1],counter:2});
     const [formData, setFormData] = useState({});
     const token = GetToken();
+
+    console.log(formData);
     const shopId = GetShopId();
     return(
         <div className="container my-3">
@@ -274,15 +277,14 @@ function runCreateFood(event, data, setResponse, token, shopId){
     finalDat['description'] = data.description;
     let components = [];
     for (let dat of data['components']) {
-        components.push(dat.id);
+        components.push(dat.value);
     }
     finalDat["components"] = components;
     finalDat["isAvailable"] = true;
     finalDat['shopId'] = shopId;
     finalDat["id"] = "N/A";
-    console.log(finalDat);
     axios.post(`${domain}:${port}/CreateFood/${token}`,finalDat).then((resp)=>{
-        setResponse(resp);
+       setResponse(resp);
     });
 }
 
@@ -347,7 +349,7 @@ function SingletonOptions(){
         if(data.status == 200){
             return(data.contents.map((i)=>{
                 const dat = JSON.parse(i);
-                return(<option id={dat.id}>{dat.name}</option>);
+                return(<option value={dat.id}>{dat.name}</option>);
             }));
         }
     }

@@ -66,6 +66,7 @@ function VendorLogin(){
         <div className="container my-3">
             <form onSubmit={(event) => login(event, setRequest)}>
                 {generateError(request,"/vendor/")}
+                <div class="h4">Vendor Login</div>
                 <div className="form-group">
                     <label for="username">Username:</label>
                     <input type="text" className="form-control my-2" id="username"/>

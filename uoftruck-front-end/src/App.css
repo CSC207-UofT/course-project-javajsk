@@ -1,3 +1,6 @@
+*{
+  transition: all ease 0.5s;
+}
 .App {
   text-align: center;
 }
@@ -15,7 +18,11 @@
 #descriptionInput{
   min-height: 5em;
 }
-
+.cartButton{
+  position: fixed;
+  right:0px;
+  bottom:0px;
+}
 .textofwr{
   overflow: hidden;
   width: 100px;
@@ -24,7 +31,7 @@
   text-overflow: ellipsis;
 }
 .listItem{
-  height: 5vh;
+  height: 6vh;
   text-overflow: ellipsis;
 }
 

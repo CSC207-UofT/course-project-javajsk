@@ -41,12 +41,17 @@ public class MongoDB implements DBGateway {
     @Override
     public JSONObject read(String table, String id) {
         MongoCollection<Document> collection = database.getCollection(table);
-        Document first = collection.find(new Document("_id",new ObjectId(id))).first();
+
         try{
+            Document first = collection.find(new Document("_id",new ObjectId(id))).first();
             assert first != null;
             JSONObject jsonObject = new JSONObject(first.toJson());
             return jsonObjectCleaner(jsonObject);
-        }catch (NullPointerException e){
+        }catch(IllegalArgumentException obj){
+            System.out.println("Not a valid id.");
+            return null;
+        }
+        catch (NullPointerException e){
             System.out.println(e.getMessage());
             return null;
         }

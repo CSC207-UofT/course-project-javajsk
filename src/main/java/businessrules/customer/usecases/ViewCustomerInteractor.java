@@ -11,9 +11,10 @@ public class ViewCustomerInteractor implements ViewCustomer {
     Repository<Customer> customerRepository;
     ObjectBoundary<Customer> customerObjectBoundary;
 
-    public ViewCustomerInteractor(Repository<Customer> customerRepository, ObjectBoundary<Customer> shopObjectBoundary) {
+    public ViewCustomerInteractor(Repository<Customer> customerRepository,
+                                  ObjectBoundary<Customer> customerObjectBoundary) {
         this.customerRepository = customerRepository;
-        this.customerObjectBoundary = shopObjectBoundary;
+        this.customerObjectBoundary = customerObjectBoundary;
     }
 
     @Override

@@ -17,7 +17,11 @@ function VendorHome(props){
               <Route path={`/vendor/login`} exact component={VendorLogin}/>
               <Route path={`${path}/signup`} exact component={VendorSignUp} />
               <Route path={`${path}/menu`} component={Menu}/>
-              <Route path={`${path}/modifyshop`} component={ModifyShop}/>
+              <Route path={`${path}/modifyshop`}>
+                  <div class="my-2">
+                    <ModifyShop/> 
+                  </div>
+              </Route>
               <Route path={path} exact component={DashBoard}/>
             </Switch>
         </div>

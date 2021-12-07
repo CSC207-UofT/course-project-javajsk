@@ -70,7 +70,11 @@ public class ShopDB implements Repository<Shop> {
             OrderBook orderBook = new OrderBook(orderList);
             Menu menu = loadMenuFromJSON(rawMenu);
             return new Shop(id, name, location, isOpen, menu, orderBook);
-        }catch(JSONException e){
+        }catch(NullPointerException err){
+            System.out.println("Null input");
+            return null;
+        }
+        catch(JSONException e){
             return null;
         }
     }
