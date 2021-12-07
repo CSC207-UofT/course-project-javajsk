@@ -90,9 +90,6 @@ function setItem(data, setDat, oldElem, newElem){
     if(index !== -1){
         newArr[index] = newElem;
     }
-    console.log(oldElem);
-    console.log(newElem);
-    console.log(newArr);
     setDat({...data, contents:newArr});
 }   
 
@@ -128,17 +125,23 @@ function Foods(){
     const [data, setData] = useState(null);
     const [singletons, setSingletons] = useState(null);
     const shopId = GetShopId();
+    
     useEffect(()=>{
-        axios.get(`${domain}:${port}/GetShopFoods/${shopId}`).then((resp)=>{
-            resp.data.contents = parseArr(resp.data.contents);
-            setData(resp.data);
-        });
+        setInterval(()=>{
+            axios.get(`${domain}:${port}/GetShopFoods/${shopId}`).then((resp)=>{
+                resp.data.contents = parseArr(resp.data.contents);
+                setData(resp.data);
+            });
+    
+            axios.get(`${domain}:${port}/GetShopSingletons/${shopId}`).then((resp)=>{
+                if(resp.data.status == 200){
+                    setSingletons(resp.data.contents);
+                }
+            });
 
-        axios.get(`${domain}:${port}/GetShopSingletons/${shopId}`).then((resp)=>{
-            if(resp.data.status == 200){
-                setSingletons(resp.data.contents);
-            }
-        });
+        },
+        1000);
+        
         
     },[]);
     if(data === null){
@@ -298,9 +301,14 @@ function Singletons(){
 function Addons(){
     const [data, setData] = useState(null);
     const shopId = GetShopId();
+    const token = GetToken();
     useEffect(()=>{
         axios.get(`${domain}:${port}/GetShopAddons/${shopId}`).then((resp)=>{
-            setData(resp.data);
+            
+            if(resp.data.status === 200){
+                resp.data.contents = parseArr(resp.data.contents);
+                setData(resp.data)
+            }
         });
     },[]);
     if(data === null){
@@ -347,8 +355,7 @@ function Addons(){
                     </div>
                 </div>
                 <div className="card-body py-0 px-0">
-                    {data.contents.map((i)=>{
-                        let dat = JSON.parse(i);
+                    {data.contents.map((dat)=>{
                         return(
                             <div className="border border-light w-100 listItem container-fluid">
                                 <div class="container">
@@ -360,7 +367,7 @@ function Addons(){
                                         {dat.price}$
                                         </div>
                                         <div class="col">
-                                        {dat.isAvaiable ? <div class="text-success">Yes</div> : <div class="text-danger">No</div> }
+                                        {AvailabilityButton(dat, "Addon", token, data, setData) }
                                         </div>
                                     </div>
                                 </div>

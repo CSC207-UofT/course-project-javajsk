@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -173,6 +174,7 @@ public class Cart{
         selections.add(index, newSel);
     }
 
+
     @Override
     public String toString() {
         JSONObject finalValue = new JSONObject();
@@ -196,7 +198,7 @@ public class Cart{
     public static JSONArray loadJSONfromSelectionLst(Selection[] input){
         JSONArray jsonSelectionList = new JSONArray();
         for(Selection sel: input){
-            jsonSelectionList.put(sel.toString());
+            jsonSelectionList.put(new JSONObject(sel.toString()));
         }
         return jsonSelectionList;
     }
