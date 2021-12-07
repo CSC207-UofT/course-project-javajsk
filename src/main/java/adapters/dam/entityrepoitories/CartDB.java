@@ -123,7 +123,10 @@ public class CartDB implements Repository<Cart> {
             String id = object.getString("id");
             String shopId = object.getString("shopId");
             JSONObject contentsRaw = object.getJSONObject("contents");
-            return new Cart(id, shopId, loadContents(contentsRaw));
+            HashMap<Food, List<Selection[]>> test1 = loadContents(contentsRaw);
+            Cart test = new Cart(id, shopId, loadContents(contentsRaw));
+            return new Cart(id, shopId, loadContents(contentsRaw));//Cart constructor doens't work.
+            //I get can't use cart.toString()?
         }catch (JSONException e){
             return null;
         }
@@ -157,12 +160,21 @@ public class CartDB implements Repository<Cart> {
         List<Selection[]> selectionData = new ArrayList<>();
         for(int i =0; i< data.length();i++){
             JSONArray current = data.getJSONArray(i);
-            Selection[] temporary = new Selection[current.length()];
+
+
             for(int x =0;x<current.length();x++){
-                temporary[i] = parseSelection(current.getJSONObject(x));
+                String test = current.getString(x);
+                JSONObject raw_selection = new JSONObject(test);
+                Selection[] temporary = new Selection[raw_selection.length()];
+                for(int j = 0;j<raw_selection.length();j++){
+                    temporary[x] = parseSelection(raw_selection);
+                }
+
+                selectionData.add(temporary);
             }
-            selectionData.add(temporary);
+
         }
+
         return selectionData;
     }
 

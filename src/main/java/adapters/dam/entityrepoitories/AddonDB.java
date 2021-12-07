@@ -44,28 +44,11 @@ public class AddonDB implements Repository<Addon> {
         }
         return addonList;
     }
-//    public List<Addon> parseAddonTypes(JSONObject rawAddonTypes){
-//        List<Addon> addonTypes= new ArrayList<>();
-//        JSONArray types = rawAddonTypes.getJSONArray("AddonTypes");
-//        for(int i = 0; i < types.length(); i++)
-//        {
-//            JSONObject addon = types.getJSONObject(i);
-//            addonTypes.add(new Addon(addon.getString("name"), addon.getInt("label")));
-//        }
-//    }
+
     public JSONObject getAddonTypes(){
         return databaseConnector.getCollection("AddonTypes");
-//        JSONArray raw_addonTypes = rawAddons.getJSONArray("AddonTypes");
 
-//        List<Addon> addonTypes = new ArrayList<>();
-//        for(int i = 0; i < raw_addonTypes.length(); i++)
-//        {
-//            JSONObject objects = raw_addonTypes.getJSONObject(i);
-//
-//            //Iterate through the elements of the array i.
-//            //Get thier value.
-//            //Get the value for the first element and the value for the last element.
-//        }
+
     }
 
     @Override

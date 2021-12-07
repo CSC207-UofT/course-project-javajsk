@@ -21,11 +21,15 @@ import entities.Cart;
 import entities.Food;
 import entities.Selection;
 import framework.MongoDB;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import presenters.ObjectPresenter;
 import presenters.RepositoryPresenter;
 import presenters.VendorPresenter;
+
+import java.util.Iterator;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -52,12 +56,33 @@ public class CartController {
     
     @PutMapping("/AddtoCart/{userToken}/{foodId}/{shopId}")
     public Cart runAddToCart(@PathVariable String userToken, @PathVariable String shopId,
-                             @PathVariable String foodId, @RequestBody String[] selections){
-        Selection[] contents = new Selection[selections.length];
-        for(int i = 0; i <= selections.length; i++){
-            contents[i] =  cartrepository.parseSelection(new JSONObject(selections[i]));
+                             @PathVariable String foodId, @RequestBody String selections){
+        System.out.println(selections);
+        JSONObject contents = new JSONObject(selections);
+        //Iterator<String> keys = contents.keys();
+        System.out.println(contents.get("selections"));
+        JSONArray raw_selections = contents.getJSONArray("selections");
+        Selection[] selection_list = new Selection[raw_selections.length()];
+        //int i = 0;
+
+//        while(keys.hasNext()) {
+//            String key = keys.next();
+//            if (contents.get(key) instanceof JSONObject) {
+//                Selection selection = cartrepository.parseSelection(contents.getJSONObject(key));
+//                selection_list[i] = selection;
+//                i++;
+//            }
+//        }
+        for(int i = 0; i < raw_selections.length(); i++)
+        {
+            JSONObject raw_object = raw_selections.getJSONObject(i);
+            Selection curr_selection = cartrepository.parseSelection(raw_object);
+            System.out.println(curr_selection);
+            selection_list[i] = curr_selection;
         }
-        ResponseObject response = addToCart.addToCart(userToken, shopId, foodId, contents);
+        System.out.println("LISTLISTLISTLSIT");
+        System.out.println(selection_list[1].getClass());
+        ResponseObject response = addToCart.addToCart(userToken, shopId, foodId, selection_list);
         return (Cart) response.getContents();
     }
     @PutMapping("/EmptyCart/{userToken}")

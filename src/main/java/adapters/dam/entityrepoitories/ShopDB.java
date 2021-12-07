@@ -32,6 +32,12 @@ public class ShopDB implements Repository<Shop> {
 
     }
 
+    public JSONObject viewAllShops(){
+        return dbGateway.getCollection("Shop");
+
+
+    }
+
     @Override
     public String create(Shop item) {
         return dbGateway.create(tableName, loadJSONFromShop(item));
