@@ -3,7 +3,7 @@ package businessrules.outputboundaries;
 import org.json.JSONObject;
 
 /**
- * Object containing information for presenters to display
+ * Object containing information for adapters.presenters to display
  */
 public class ResponseObject {
     int status;

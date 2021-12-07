@@ -55,6 +55,7 @@ public class RemoveAddonFromMenuInteractor implements RemoveAddonFromMenu {
         Shop shop = vendor.getShop();
         Menu menu = shop.getMenu();
         menu.deleteAddon(addon);
+        shop.setMenu(menu);
 
         if(!shopRepository.update(shop.getId(), shop)){
             return repositoryBoundary.modificationFailed("Failed to remove addon from menu.");

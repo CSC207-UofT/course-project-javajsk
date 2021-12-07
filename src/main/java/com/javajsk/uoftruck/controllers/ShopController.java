@@ -1,8 +1,7 @@
 package com.javajsk.uoftruck.controllers;
 
-import adapters.dam.entityrepoitories.ShopDB;
-import adapters.dam.entityrepoitories.VendorDB;
-import businessrules.dai.Repository;
+import adapters.dam.ShopDB;
+import adapters.dam.VendorDB;
 import businessrules.dai.VendorRepository;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
@@ -11,8 +10,6 @@ import businessrules.shop.inputboundaries.ViewShop;
 import businessrules.shop.usecases.ChangeShopStatusInteractor;
 import businessrules.shop.usecases.ModifyShopInteractor;
 import businessrules.shop.usecases.ViewShopInteractor;
-import entities.Addon;
-import entities.Vendor;
 import framework.MongoDB;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +17,9 @@ import businessrules.outputboundaries.ResponseObject;
 import businessrules.shop.inputboundaries.ChangeShopStatus;
 import businessrules.shop.inputboundaries.ModifyShop;
 import entities.Shop;
-import presenters.ObjectPresenter;
-import presenters.RepositoryPresenter;
-import presenters.VendorPresenter;
+import adapters.presenters.ObjectPresenter;
+import adapters.presenters.RepositoryPresenter;
+import adapters.presenters.VendorPresenter;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")

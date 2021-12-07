@@ -9,7 +9,6 @@ import businessrules.shop.inputboundaries.ChangeShopStatus;
 
 import entities.Shop;
 import entities.Vendor;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Use case for changing the status of a shop

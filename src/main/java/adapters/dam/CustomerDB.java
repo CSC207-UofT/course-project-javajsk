@@ -1,7 +1,7 @@
-package adapters.dam.entityrepoitories;
+package adapters.dam;
 
-import adapters.dam.DBGateway;
-import adapters.dam.TokenSigner;
+import adapters.TokenSigner;
+import adapters.DBGateway;
 import businessrules.dai.CustomerRepository;
 import entities.*;
 import framework.JWTSigner;

@@ -1,7 +1,7 @@
-package adapters.dam.entityrepoitories;
+package adapters.dam;
 
-import adapters.dam.DBGateway;
-import adapters.dam.TokenSigner;
+import adapters.DBGateway;
+import adapters.TokenSigner;
 import businessrules.dai.VendorRepository;
 import entities.Shop;
 import entities.Vendor;

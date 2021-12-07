@@ -1,6 +1,5 @@
 package entities;
 
-import adapters.dam.entityrepoitories.SingletonDB;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -12,21 +11,9 @@ public class Food {
      * The Id.
      */
     public String id;
-    /**
-     * The Name.
-     */
     protected String name;
-    /**
-     * The Description.
-     */
     protected String description;
-    /**
-     * The Price.
-     */
     protected float price;
-    /**
-     * The Components.
-     */
     protected Singleton[] components;
     protected String shopId;
 
@@ -178,6 +165,15 @@ public class Food {
         }
         return true;
     }
+
+    @Override
+    public boolean equals(Object object){
+        if(!(object instanceof Food)){
+            return false;
+        }
+        return ((Food) object).getId().equals(this.id);
+    }
+
     @Override
     public String toString(){
 

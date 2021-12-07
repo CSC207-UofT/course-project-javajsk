@@ -1,8 +1,8 @@
 package com.javajsk.uoftruck.controllers;
 
-import adapters.dam.entityrepoitories.CartDB;
-import adapters.dam.entityrepoitories.CustomerDB;
-import adapters.dam.entityrepoitories.FoodDB;
+import adapters.dam.CartDB;
+import adapters.dam.CustomerDB;
+import adapters.dam.FoodDB;
 import businessrules.cart.inputboundaries.AddToCart;
 import businessrules.cart.inputboundaries.EmptyCart;
 import businessrules.cart.inputboundaries.RemoveFromCart;
@@ -23,9 +23,9 @@ import entities.Selection;
 import framework.MongoDB;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
-import presenters.ObjectPresenter;
-import presenters.RepositoryPresenter;
-import presenters.VendorPresenter;
+import adapters.presenters.ObjectPresenter;
+import adapters.presenters.RepositoryPresenter;
+import adapters.presenters.VendorPresenter;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -40,7 +40,7 @@ public class CartController {
     CustomerRepository customerRepository = new CustomerDB(db);
     VendorBoundary vendorBoundary = new VendorPresenter();
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
-    ObjectBoundary<Cart> cartObjectBoundary = new ObjectPresenter<Cart>();
+    ObjectBoundary<Cart> cartObjectBoundary = new ObjectPresenter<>();
     CartDB cartrepository = new CartDB(db);
 
     CartController(){

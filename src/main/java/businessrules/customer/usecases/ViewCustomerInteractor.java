@@ -5,7 +5,6 @@ import businessrules.dai.Repository;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import entities.Customer;
-import entities.Shop;
 
 public class ViewCustomerInteractor implements ViewCustomer {
     Repository<Customer> customerRepository;

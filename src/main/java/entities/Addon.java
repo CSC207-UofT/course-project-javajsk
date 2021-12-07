@@ -140,6 +140,14 @@ public class Addon{
         this.shopId = shopId;
     }
 
+    @Override
+    public boolean equals(Object object){
+        if(!(object instanceof Addon)){
+            return false;
+        }
+        return ((Addon) object).getId().equals(this.id);
+    }
+
     /**
      * A method that returns the entity represented as a string
      * @return string representation of the addon

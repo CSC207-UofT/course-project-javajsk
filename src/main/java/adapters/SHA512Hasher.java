@@ -1,4 +1,4 @@
-package adapters.dam;
+package adapters;
 
 import businessrules.dai.Hasher;
 

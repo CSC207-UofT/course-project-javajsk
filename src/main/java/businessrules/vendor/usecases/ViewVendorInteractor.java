@@ -5,7 +5,6 @@ import businessrules.dai.Repository;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import entities.Vendor;
-import entities.Shop;
 
 public class ViewVendorInteractor implements ViewVendor {
     Repository<Vendor> vendorRepository;

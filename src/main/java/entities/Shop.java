@@ -59,7 +59,7 @@ public class Shop{
      * @return the menu
      */
     public Menu getMenu() {
-        return menu;
+        return this.menu;
     }
 
     /**
@@ -77,7 +77,7 @@ public class Shop{
      * @return the order book
      */
     public OrderBook getOrderBook() {
-        return orderBook;
+        return this.orderBook;
     }
 
     /**
@@ -95,7 +95,7 @@ public class Shop{
      * @return the location
      */
     public String getLocation() {
-        return location;
+        return this.location;
     }
 
     /**
@@ -113,7 +113,7 @@ public class Shop{
      * @return the name
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**

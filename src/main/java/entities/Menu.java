@@ -110,7 +110,7 @@ public class Menu{
      * @param addon the addon to remove
      */
     public void deleteAddon(Addon addon) {
-        this.addons.remove(addon);
+        this.addons.removeIf(addon::equals);
     }
 
     /**
@@ -145,7 +145,7 @@ public class Menu{
      * @param food the food entity to renove
      */
     public void deleteFood(Food food){
-        this.foods.remove(food);
+        this.foods.removeIf(food::equals);
     }
 
     /**

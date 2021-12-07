@@ -1,13 +1,12 @@
-package adapters.dam.entityrepoitories;
+package adapters.dam;
 
-import adapters.dam.DBGateway;
+import adapters.DBGateway;
 import businessrules.dai.Repository;
 import entities.Food;
 import entities.Singleton;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 
 import java.util.ArrayList;
 import java.util.List;

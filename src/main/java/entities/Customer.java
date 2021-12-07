@@ -2,8 +2,6 @@ package entities;
 
 import org.json.JSONObject;
 
-import javax.print.attribute.standard.JobStateReasons;
-
 /**
  * The type Customer.
  */

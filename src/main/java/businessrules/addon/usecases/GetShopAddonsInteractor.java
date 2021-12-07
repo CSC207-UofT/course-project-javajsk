@@ -8,7 +8,6 @@ import businessrules.outputboundaries.ResponseObject;
 import entities.Addon;
 
 import java.util.List;
-import java.util.function.ToDoubleBiFunction;
 
 public class GetShopAddonsInteractor implements GetShopAddons {
     Repository<Addon> addonRepository;

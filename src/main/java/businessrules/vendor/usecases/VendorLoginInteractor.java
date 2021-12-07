@@ -7,8 +7,6 @@ import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.vendor.inputboundaries.VendorLogin;
 
-import javax.sound.midi.Soundbank;
-
 
 public class VendorLoginInteractor implements VendorLogin {
     VendorRepository vendorRepository;

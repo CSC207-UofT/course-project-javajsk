@@ -1,6 +1,5 @@
 package businessrules.shop.usecases;
 
-import adapters.dam.entityrepoitories.ShopDB;
 import businessrules.dai.Repository;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.ResponseObject;

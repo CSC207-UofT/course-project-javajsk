@@ -10,8 +10,6 @@ import businessrules.singleton.inputboundaries.CreateSingleton;
 import entities.Singleton;
 import entities.Vendor;
 
-import java.util.List;
-
 /**
  * Use case for creating a Singleton and updating the repository with the changes
  */

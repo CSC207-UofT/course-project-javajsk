@@ -1,10 +1,9 @@
 package com.javajsk.uoftruck.controllers;
 
-import adapters.dam.entityrepoitories.AddonDB;
-import adapters.dam.entityrepoitories.VendorDB;
+import adapters.dam.AddonDB;
+import adapters.dam.VendorDB;
 import businessrules.addon.inputboundaries.*;
 import businessrules.addon.usecases.*;
-import businessrules.dai.Repository;
 import businessrules.dai.VendorRepository;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
@@ -14,9 +13,9 @@ import entities.Addon;
 import framework.MongoDB;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
-import presenters.ObjectPresenter;
-import presenters.RepositoryPresenter;
-import presenters.VendorPresenter;
+import adapters.presenters.ObjectPresenter;
+import adapters.presenters.RepositoryPresenter;
+import adapters.presenters.VendorPresenter;
 
 @RestController
 public class AddonController {
@@ -64,15 +63,13 @@ public class AddonController {
 
     @GetMapping("/GetAddonTypes/")
     public ResponseObject runGetAddonTypes(){
-
         return getAddonTypes.getAddonTypes();
     }
 
     @PutMapping("/ModifyAddon/{vendorToken}/{addonId}")
-
-    public ResponseObject runModifyAddon(@PathVariable String vendorToken, @PathVariable String addonId, @RequestBody Addon addon)
-    {
+    public ResponseObject runModifyAddon(@PathVariable String vendorToken, @PathVariable String addonId,
+                                         @RequestBody Addon addon){
         return modifyAddon.modifyAddon(vendorToken, addonId, addon);
-        }
-
     }
+
+}

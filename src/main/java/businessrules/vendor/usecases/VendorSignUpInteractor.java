@@ -1,9 +1,5 @@
 package businessrules.vendor.usecases;
 
-import adapters.dam.DBGateway;
-import adapters.dam.SHA512Hasher;
-import adapters.dam.entityrepoitories.ShopDB;
-import adapters.dam.entityrepoitories.VendorDB;
 import businessrules.dai.Hasher;
 import businessrules.dai.Repository;
 import businessrules.dai.VendorRepository;
@@ -14,10 +10,6 @@ import businessrules.outputboundaries.VendorBoundary;
 import businessrules.vendor.inputboundaries.VendorSignUp;
 import entities.Shop;
 import entities.Vendor;
-import framework.MongoDB;
-import presenters.ObjectPresenter;
-import presenters.RepositoryPresenter;
-import presenters.VendorPresenter;
 
 /**
  * Use case that signs up a Vendor
