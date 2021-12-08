@@ -1,12 +1,10 @@
 package com.javajsk.uoftruck.controllers;
 
-import adapters.dam.entityrepoitories.CustomerDB;
-import adapters.dam.entityrepoitories.FoodDB;
-import adapters.dam.entityrepoitories.SingletonDB;
-import adapters.dam.entityrepoitories.VendorDB;
+import adapters.dam.CustomerDB;
+import adapters.dam.FoodDB;
+import adapters.dam.SingletonDB;
+import adapters.dam.VendorDB;
 import businessrules.dai.CustomerRepository;
-import businessrules.dai.Repository;
-import businessrules.dai.VendorRepository;
 import businessrules.food.inputboundaries.AddSingleton;
 import businessrules.food.inputboundaries.CreateFood;
 import businessrules.food.inputboundaries.GetShopFoods;
@@ -24,9 +22,9 @@ import entities.Singleton;
 import framework.MongoDB;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
-import presenters.ObjectPresenter;
-import presenters.RepositoryPresenter;
-import presenters.VendorPresenter;
+import adapters.presenters.ObjectPresenter;
+import adapters.presenters.RepositoryPresenter;
+import adapters.presenters.VendorPresenter;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -43,7 +41,7 @@ public class FoodController {
     CustomerRepository customerRepository = new CustomerDB(db);
     VendorBoundary vendorBoundary = new VendorPresenter();
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
-    ObjectBoundary<Food> foodObjectBoundary = new ObjectPresenter<Food>();
+    ObjectBoundary<Food> foodObjectBoundary = new ObjectPresenter<>();
 
     public FoodController() {
         this.addSingleton = new AddSingletonInteractor(vendorRepository, foodRepository, repositoryBoundary, foodObjectBoundary,  vendorBoundary);
@@ -56,8 +54,7 @@ public class FoodController {
     public ResponseObject runAddSingleton(@PathVariable String vendorToken, @PathVariable String foodId,
                                 @RequestBody String singleton){
         Singleton singleton1 = singletonRepository.loadSingletonFromJSON(new JSONObject(singleton));
-        ResponseObject response = addSingleton.addSingleton(vendorToken, foodId, singleton1);
-        return response;
+        return addSingleton.addSingleton(vendorToken, foodId, singleton1);
     }
     @PostMapping("/CreateFood/{vendorToken}")
     public ResponseObject runCreateFood(@PathVariable String vendorToken, @RequestBody String food){

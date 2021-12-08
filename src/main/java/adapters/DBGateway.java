@@ -1,4 +1,4 @@
-package adapters.dam;
+package adapters;
 
 import org.json.JSONObject;
 

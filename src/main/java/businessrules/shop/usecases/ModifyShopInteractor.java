@@ -15,12 +15,36 @@ import entities.Vendor;
  * Use case for modifying a Shop
  */
 public class ModifyShopInteractor implements ModifyShop {
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Shop repository.
+     */
     Repository<Shop> shopRepository;
+    /**
+     * The Vendor boundary.
+     */
     VendorBoundary vendorBoundary;
+    /**
+     * The Shop object boundary.
+     */
     ObjectBoundary<Shop> shopObjectBoundary;
 
+    /**
+     * Instantiates a new Modify shop interactor.
+     *
+     * @param vendorRepository   the vendor repository
+     * @param repositoryBoundary the repository boundary
+     * @param shopRepository     the shop repository
+     * @param vendorBoundary     the vendor boundary
+     * @param shopObjectBoundary the shop object boundary
+     */
     public ModifyShopInteractor(VendorRepository vendorRepository, RepositoryBoundary repositoryBoundary,
                                 Repository<Shop> shopRepository, VendorBoundary vendorBoundary,
                                 ObjectBoundary<Shop> shopObjectBoundary) {

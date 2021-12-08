@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * The type Cart.
+ * The Cart entity class
  */
 public class Cart{
 
@@ -48,7 +48,6 @@ public class Cart{
         this.shopId = "N/A";
         this.contents = new HashMap<>();
     }
-
 
     /**
      * Gets id.
@@ -103,7 +102,6 @@ public class Cart{
     public void setContents(HashMap<Food, List<Selection[]>> contents) {
         this.contents = contents;
     }
-
 
     /**
      * Method for adding a new item to cart
@@ -174,6 +172,11 @@ public class Cart{
         selections.add(index, newSel);
     }
 
+    /**
+     * Method returns cart as a string representation
+     *
+     * @return string representation of cart
+     */
     @Override
     public String toString() {
         JSONObject finalValue = new JSONObject();
@@ -194,12 +197,17 @@ public class Cart{
         return finalValue.toString();
     }
 
+    /**
+     * Method that returns list of selections objects represented as a JSONArray
+     * @param input list of selections to convert
+     * @return JSONArray representation of list
+     */
     public static JSONArray loadJSONfromSelectionLst(Selection[] input){
         JSONArray jsonSelectionList = new JSONArray();
         for(Selection sel: input){
-            jsonSelectionList.put(sel.toString());
+            jsonSelectionList.put(new JSONObject(sel.toString()));
+
         }
         return jsonSelectionList;
     }
-
 }

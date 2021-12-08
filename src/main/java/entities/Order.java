@@ -5,7 +5,7 @@ import org.json.JSONObject;
 import java.util.Date;
 
 /**
- * The order entity
+ * The order entity class
  */
 public class Order{
     public enum Status{IN_PROGRESS, PLACED, COMPLETED, CANCELLED}

@@ -9,13 +9,37 @@ import java.util.List;
  */
 public class Singleton{
 
+    /**
+     * The Id.
+     */
     public String id;
+    /**
+     * The Price.
+     */
     protected float price;
+    /**
+     * The Name.
+     */
     protected String name;
+    /**
+     * The Description.
+     */
     protected String description;
+    /**
+     * The Allowed addon types.
+     */
     protected List<Integer> allowedAddonTypes;
+    /**
+     * The Default selection.
+     */
     protected Selection defaultSelection;
+    /**
+     * The Is available.
+     */
     protected boolean isAvailable;
+    /**
+     * The Shop id.
+     */
     protected String shopId;
 
     /**
@@ -28,6 +52,7 @@ public class Singleton{
      * @param allowedAddonTypes the allowed addon types
      * @param defaultSelection  the default selection
      * @param availability      the availability
+     * @param shopId            the shop id
      */
     public Singleton(String id, float price, String name, String description, List<Integer> allowedAddonTypes,
                      Selection defaultSelection, boolean availability, String shopId) {
@@ -170,7 +195,7 @@ public class Singleton{
     /**
      * Replace a singleton with another
      *
-     * @param newSingleton  the replacement singleton
+     * @param newSingleton the replacement singleton
      */
     public void replace(Singleton newSingleton) {
         this.id = newSingleton.getId();
@@ -182,14 +207,30 @@ public class Singleton{
         this.isAvailable = newSingleton.getAvailable();
     }
 
+    /**
+     * Gets shop id.
+     *
+     * @return the shop id
+     */
     public String getShopId() {
         return shopId;
     }
 
+    /**
+     * Sets shop id.
+     *
+     * @param shopId the shop id
+     */
     public void setShopId(String shopId) {
         this.shopId = shopId;
     }
 
+    /**
+     * Method returns whether the selection contains addons that are all of allowed addon type.
+     *
+     * @param selection the selection
+     * @return whether selection is valid
+     */
     public boolean isValidSelection(Selection selection){
         for(Addon addon: selection.getSelectedAddons()){
             List<Integer> addonTypes = addon.getAddonTypes();
@@ -202,6 +243,11 @@ public class Singleton{
         return true;
     }
 
+    /**
+     * Method returns Singleton as a string representation
+     *
+     * @return string representation of singleton
+     */
     @Override
     public String toString(){
         JSONObject jsonObject = new JSONObject();

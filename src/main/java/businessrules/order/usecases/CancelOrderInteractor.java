@@ -17,18 +17,34 @@ import java.util.List;
  * Use case for cancelling an order entry of a repository
  */
 public class CancelOrderInteractor implements CancelOrder {
+    /**
+     * The Customer repository.
+     */
     CustomerRepository customerRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Order repository.
+     */
     Repository<Order> orderRepository;
+    /**
+     * The Customer boundary.
+     */
     CustomerBoundary customerBoundary;
+    /**
+     * The Order object boundary.
+     */
     ObjectBoundary<Order> orderObjectBoundary;
 
     /**
      * Instantiates a use case for cancelling an order entry
-     * @param cR the customer repository
-     * @param rB the repository boundary
-     * @param oR the order repository
-     * @param cB the customer boundary
+     *
+     * @param cR  the customer repository
+     * @param rB  the repository boundary
+     * @param oR  the order repository
+     * @param cB  the customer boundary
      * @param oOB the order object boundary
      */
     public CancelOrderInteractor(CustomerRepository cR, RepositoryBoundary rB, Repository<Order> oR,

@@ -1,18 +1,16 @@
 package framework;
 
-import adapters.dam.DBGateway;
+import adapters.DBGateway;
 import com.mongodb.*;
 import com.mongodb.client.*;
 import com.mongodb.client.MongoClient;
 import org.bson.Document;
-import org.bson.io.BsonOutput;
 import org.bson.types.ObjectId;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class MongoDB implements DBGateway {
@@ -108,11 +106,6 @@ public class MongoDB implements DBGateway {
         System.out.println("Here");
         JSONArray addon_types = new JSONArray();
         MongoCollection<Document> collection_doc = database.getCollection(collection);
-//        FindIterable<Document> iterDoc = collection_doc.find();
-//        MongoCursor<Document> dbc =  iterDoc.cursor();
-//        for(Document document: iterDoc){
-//            addon_types.put(jsonObjectCleaner(new JSONObject(document.toJson())));
-//        }
         FindIterable<Document> iterDoc = collection_doc.find();
 
         for(Document document: iterDoc){
@@ -123,7 +116,7 @@ public class MongoDB implements DBGateway {
 
 
         JSONObject res = new JSONObject();
-        res.put("Addon_Types",addon_types);
+        res.put(collection,addon_types);
         return res;
     }
 

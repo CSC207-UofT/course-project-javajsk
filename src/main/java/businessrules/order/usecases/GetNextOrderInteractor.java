@@ -12,14 +12,24 @@ import entities.Vendor;
  * Use case for getting the next order entry of a repository
  */
 public class GetNextOrderInteractor implements GetNextOrder {
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Order object boundary.
+     */
     ObjectBoundary<Order> orderObjectBoundary;
 
     /**
      * Instantiates a use case for getting the next order entry of a repository
-     * @param vR the vendor repository
-     * @param rB the repository boundary
+     *
+     * @param vR  the vendor repository
+     * @param rB  the repository boundary
      * @param oOB the order object boundary
      */
     public GetNextOrderInteractor(VendorRepository vR, RepositoryBoundary rB, ObjectBoundary<Order> oOB) {

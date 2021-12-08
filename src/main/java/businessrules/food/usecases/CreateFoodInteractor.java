@@ -9,22 +9,33 @@ import businessrules.outputboundaries.ResponseObject;
 import entities.Food;
 import entities.Vendor;
 
-import java.util.List;
-
 /**
  * Use case for creating a food entry in a repository
  */
 public class CreateFoodInteractor implements CreateFood {
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Food repository.
+     */
     Repository<Food> foodRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Food object boundary.
+     */
     ObjectBoundary<Food> foodObjectBoundary;
 
     /**
      * Instantiates a use case for creating food entries in a repository
-     * @param vR the vendor repository
-     * @param fR the food repository
-     * @param rB the repository boundary
+     *
+     * @param vR  the vendor repository
+     * @param fR  the food repository
+     * @param rB  the repository boundary
      * @param fOB the food object boundary
      */
     public CreateFoodInteractor(VendorRepository vR, Repository<Food> fR,
@@ -58,7 +69,5 @@ public class CreateFoodInteractor implements CreateFood {
         String shopId = vendor.getShop().getId();
         List<Food> foods = foodRepository.readMultiple("shopId", shopId);
         return foodObjectBoundary.showObjectList(foods);
-
-
     }
 }
