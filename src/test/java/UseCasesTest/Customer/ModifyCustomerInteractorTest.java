@@ -5,7 +5,7 @@ import UseCasesTest.TestBoundaries.RAMCustomerObjectBoundary;
 import UseCasesTest.TestBoundaries.RAMRepositoryBoundary;
 import UseCasesTest.daitesters.RAMCustomerRepository;
 import UseCasesTest.daitesters.RAMShopRepository;
-import adapters.dam.SHA512Hasher;
+import adapters.SHA512Hasher;
 import businessrules.customer.usecases.CustomerLoginInteractor;
 import businessrules.customer.usecases.ModifyCustomerInteractor;
 import businessrules.dai.CustomerRepository;

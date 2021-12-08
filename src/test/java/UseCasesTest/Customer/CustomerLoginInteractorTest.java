@@ -4,7 +4,7 @@ import UseCasesTest.TestBoundaries.RAMCustomerBoundary;
 import UseCasesTest.TestBoundaries.RAMRepositoryBoundary;
 import UseCasesTest.daitesters.RAMCustomerRepository;
 import UseCasesTest.daitesters.RAMShopRepository;
-import adapters.dam.SHA512Hasher;
+import adapters.SHA512Hasher;
 import businessrules.customer.inputboundaries.CustomerLogin;
 import businessrules.customer.usecases.CustomerLoginInteractor;
 import businessrules.customer.usecases.CustomerSignUpInteractor;
@@ -50,7 +50,7 @@ class CustomerLoginInteractorTest {
 
     @Test
     void unableLogin(){
-        ResponseObject responseObject = customerLoginInteractor.login("Username12", "Password12");
+        ResponseObject responseObject = customerLoginInteractor.login("me12", "Password1");
         assertEquals("User not found", responseObject.getMessage());
     }
 }

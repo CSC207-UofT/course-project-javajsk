@@ -5,7 +5,7 @@ import UseCasesTest.TestBoundaries.RAMVendorBoundary;
 import UseCasesTest.TestBoundaries.RAMVendorObjectBoundary;
 import UseCasesTest.daitesters.RAMShopRepository;
 import UseCasesTest.daitesters.RAMVendorRepository;
-import adapters.dam.SHA512Hasher;
+import adapters.SHA512Hasher;
 import businessrules.dai.Hasher;
 import businessrules.dai.Repository;
 import businessrules.dai.VendorRepository;
@@ -20,6 +20,7 @@ import entities.Shop;
 import entities.Vendor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 class VendorSignUpInteractorTest {
     VendorRepository vendorRepository;

@@ -78,8 +78,8 @@ class AddonTest {
 
     @Test
     void setAvailable(){
-        addon.setAvailability(false);
-        assertFalse(addon.getAvailability());
+        addon.setAvailable(false);
+        assertFalse(addon.getAvailable());
     }
 
     @Test

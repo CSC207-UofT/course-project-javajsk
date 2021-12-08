@@ -31,14 +31,6 @@ public class ChangeShopStatusInteractor implements ChangeShopStatus {
      */
     ObjectBoundary<Shop> shopObjectBoundary;
 
-    public ChangeShopStatusInteractor(VendorRepository vr, Repository<Shop> sr, RepositoryBoundary rb,
-                                      ObjectBoundary<Shop>sOB) {
-        this.vendorRepository = vr;
-        this.shopRepository = sr;
-        this.repositoryBoundary = rb;
-        this.shopObjectBoundary = sOB;
-    }
-
     /**
      * Instantiates a new Change shop status interactor.
      *

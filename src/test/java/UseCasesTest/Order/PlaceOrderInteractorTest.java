@@ -23,6 +23,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 class PlaceOrderInteractorTest {
     CustomerRepository customerRepository;
     RepositoryBoundary repositoryBoundary;
@@ -60,8 +62,8 @@ class PlaceOrderInteractorTest {
 
     @Test
     void noUserPlaceOrder() {
-       ResponseObject responseObject = placeOrderInteractor.placeOrder("20000");
-       assertEquals("No such user found.", responseObject.getMessage());
+        ResponseObject responseObject = placeOrderInteractor.placeOrder("20000");
+        assertEquals("No such user found.", responseObject.getMessage());
     }
 
     @Test

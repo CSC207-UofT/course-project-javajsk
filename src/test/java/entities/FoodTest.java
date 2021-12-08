@@ -104,7 +104,7 @@ class FoodTest {
     @Test
     void setShopId() {
         burger.setShopId("00004");
-        assertEquals("00004", burger.getId());
+        assertEquals("00004", burger.getShopId());
     }
 
 
