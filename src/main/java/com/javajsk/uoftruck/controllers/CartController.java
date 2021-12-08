@@ -42,7 +42,6 @@ public class CartController {
     MongoDB db = new MongoDB();
     Repository<Food> foodRepository = new FoodDB(db);
     CustomerRepository customerRepository = new CustomerDB(db);
-    VendorBoundary vendorBoundary = new VendorPresenter();
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
     ObjectBoundary<Cart> cartObjectBoundary = new ObjectPresenter<Cart>();
     CartDB cartrepository = new CartDB(db);
