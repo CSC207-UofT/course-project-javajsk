@@ -49,12 +49,12 @@ public class ShopController {
         this.viewShop = new ViewShopInteractor(shopRepository,shopObjectBoundary);
 
     }
-    @PutMapping("/changeshopstatus/{vendorToken}/{newStatus}")
+    @PutMapping("/ChangeShopStatus/{vendorToken}/{newStatus}")
     public ResponseObject runChangeShopStatus(@PathVariable String vendorToken,
                                     @PathVariable Boolean newStatus){
         return changeShopStatus.changeShopStatus(vendorToken, newStatus);
     }
-    @PutMapping("/modifyshop/{vendorToken}")
+    @PutMapping("/ModifyShop/{vendorToken}")
     public ResponseObject runModifyShop(@RequestBody String shop, @PathVariable String vendorToken ){
         Shop shop1 = shopRepository.loadShopFromJSON(new JSONObject(shop));
 

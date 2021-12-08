@@ -23,11 +23,12 @@ public class ViewCustomerInteractor implements ViewCustomer {
      * Instantiates a new View customer interactor.
      *
      * @param customerRepository the customer repository
-     * @param shopObjectBoundary the shop object boundary
+     * @param customerObjectBoundary the shop object boundary
      */
-    public ViewCustomerInteractor(Repository<Customer> customerRepository, ObjectBoundary<Customer> shopObjectBoundary) {
+    public ViewCustomerInteractor(Repository<Customer> customerRepository, ObjectBoundary<Customer> customerObjectBoundary) {
+
         this.customerRepository = customerRepository;
-        this.customerObjectBoundary = shopObjectBoundary;
+        this.customerObjectBoundary = customerObjectBoundary;
     }
 
     /**
