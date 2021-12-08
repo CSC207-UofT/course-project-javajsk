@@ -1,5 +1,6 @@
 package UseCasesTest.Shop;
 
+import UseCasesTest.TestBoundaries.RAMRepositoryBoundary;
 import UseCasesTest.TestBoundaries.RAMShopObjectBoundary;
 import UseCasesTest.daitesters.RAMShopRepository;
 import UseCasesTest.daitesters.RAMVendorRepository;
