@@ -23,6 +23,23 @@ public class ModifySelectionInCartInteractor implements ModifySelectionInCart {
     ObjectBoundary<Cart> cartObjectBoundary;
 
     /**
+     * Instantiates a use case for modifying a cart selection
+     * @param cR the customer repository
+     * @param fR the food repository
+     * @param rB the repository boundary
+     * @param cB the customer boundary
+     * @param cOB the cart object boundary
+     */
+    public ModifySelectionInCartInteractor(CustomerRepository cR, Repository<Food> fR, RepositoryBoundary rB, CustomerBoundary cB,
+                                           ObjectBoundary<Cart> cOB) {
+        this.customerRepository = cR;
+        this.foodRepository = fR;
+        this.repositoryBoundary = rB;
+        this.customerBoundary = cB;
+        this.cartObjectBoundary = cOB;
+    }
+
+    /**
      * Method that modifies the selections in a cart and
      * returns a JSONObject representing the modified cart
      *
@@ -43,7 +60,7 @@ public class ModifySelectionInCartInteractor implements ModifySelectionInCart {
         if(food == null){
             return repositoryBoundary.queryNotFound("No such food found.");
         }
-
+//checks the selections are of allowed types
         if(!food.isValidSelections(selections)){
             return customerBoundary.error("Invalid selection provided. Please try again.");
         }
