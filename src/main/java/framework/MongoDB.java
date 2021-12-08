@@ -4,16 +4,22 @@ import adapters.DBGateway;
 import com.mongodb.*;
 import com.mongodb.client.*;
 import com.mongodb.client.MongoClient;
+import io.jsonwebtoken.io.IOException;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class MongoDB implements DBGateway {
+
+
+
     String username = "Application";
     String password = "F9PYZ6nevnvxGP6U";
     MongoClient mongoClient;
@@ -24,8 +30,40 @@ public class MongoDB implements DBGateway {
         Connect();
     }
 
+    public String getMongoPassword(){
+
+        try (InputStream input = new FileInputStream("src/props.properties")) {
+
+            Properties prop = new Properties();
+
+            prop.load(input);
+
+            return(prop.getProperty("dbpassword"));
+
+
+        } catch (IOException | java.io.IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    public String getMongoUsername(){
+
+        try (InputStream input = new FileInputStream("src/props.properties")) {
+
+            Properties prop = new Properties();
+
+            prop.load(input);
+
+            return(prop.getProperty("dbusernmae"));
+
+
+        } catch (IOException | java.io.IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
     private void Connect(){
-        ConnectionString connectionString = new ConnectionString("mongodb+srv://Application:"+ password +
+        ConnectionString connectionString = new ConnectionString("mongodb+srv://Application:"+ this.getMongoPassword() +
                 "@cluster0." +
                 "whkvw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
         MongoClientSettings settings = MongoClientSettings.builder()
