@@ -3,21 +3,41 @@ package entities;
 import org.json.JSONObject;
 
 /**
- * The type Customer.
+ * The Customer entity class
  */
-
 public class Customer extends User {
     /**
      * The Order history.
      */
     protected OrderBook orderHistory;
+    /**
+     * The current cart.
+     */
     protected Cart currentCart;
 
+
+    /**
+     * Instantiates a new Customer.
+     *
+     * @param id           the id
+     * @param username     the username
+     * @param password     the password
+     * @param orderHistory the order history
+     * @param currentCart  the current cart
+     */
     public Customer(String id,String username, String password, OrderBook orderHistory, Cart currentCart) {
         super(id, username, password);
         this.orderHistory = orderHistory;
         this.currentCart = currentCart;
     }
+
+    /**
+     * Instantiates a new Customer.
+     *
+     * @param id       the id
+     * @param username the username
+     * @param password the password
+     */
     public Customer(String id,String username, String password) {
         super(id, username, password);
         this.orderHistory = new OrderBook();
@@ -60,9 +80,18 @@ public class Customer extends User {
         this.currentCart = currentCart;
     }
 
+    /**
+     * Empty cart.
+     */
     public void emptyCart(){
         this.currentCart.empty();
     }
+
+    /**
+     * Method returns customer as a string representation
+     *
+     * @return string representation of customer
+     */
     @Override
     public String toString(){
         JSONObject jsonObject = new JSONObject();

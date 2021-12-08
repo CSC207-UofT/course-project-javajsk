@@ -4,17 +4,32 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * The type Food.
+ * The Food entity class
  */
 public class Food {
     /**
      * The Id.
      */
     public String id;
+    /**
+     * The Name.
+     */
     protected String name;
+    /**
+     * The Description.
+     */
     protected String description;
+    /**
+     * The Price.
+     */
     protected float price;
+    /**
+     * The Components.
+     */
     protected Singleton[] components;
+    /**
+     * The Shop id.
+     */
     protected String shopId;
 
     /**
@@ -25,6 +40,7 @@ public class Food {
      * @param description the description
      * @param price       the price
      * @param components  the components
+     * @param shopId      the shop id
      */
     public Food(String id, String name, String description, float price, Singleton[] components, String shopId) {
         this.id = id;
@@ -125,14 +141,30 @@ public class Food {
         this.components = components;
     }
 
+    /**
+     * Gets shop id.
+     *
+     * @return the shop id
+     */
     public String getShopId() {
         return shopId;
     }
 
+    /**
+     * Sets shop id.
+     *
+     * @param shopId the shop id
+     */
     public void setShopId(String shopId) {
         this.shopId = shopId;
     }
 
+    /**
+     * Is valid selections boolean.
+     *
+     * @param selections the selections
+     * @return the boolean
+     */
     public boolean isValidSelections(Selection[] selections){
         for(int i =0; i<this.components.length; i++){
             if(!components[i].isValidSelection(selections[i])){
@@ -142,6 +174,11 @@ public class Food {
         return true;
     }
 
+    /**
+     * Add singleton.
+     *
+     * @param singleton the singleton
+     */
     public void addSingleton(Singleton singleton){
         Singleton[] newComponents = new Singleton[this.components.length+1];
         int index =0;
@@ -157,6 +194,11 @@ public class Food {
         this.setComponents(newComponents);
     }
 
+    /**
+     * Is available boolean.
+     *
+     * @return the boolean
+     */
     public boolean isAvailable() {
         for(Singleton singleton: this.components){
             if(!singleton.getAvailable()){
@@ -166,6 +208,12 @@ public class Food {
         return true;
     }
 
+    /**
+     * Method overrides the equals method, returns whether a given object is considered
+     * to be equal to this food object
+     * @param object object to check if it is equal
+     * @return wther object is equal to this instance of food
+     */
     @Override
     public boolean equals(Object object){
         if(!(object instanceof Food)){
@@ -174,6 +222,11 @@ public class Food {
         return ((Food) object).getId().equals(this.id);
     }
 
+    /**
+     * Method returns food as a string representation
+     *
+     * @return string representation of food
+     */
     @Override
     public String toString(){
 

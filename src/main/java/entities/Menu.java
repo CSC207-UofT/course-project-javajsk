@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Menu entity class.
+ * The Menu entity class
  */
 public class Menu{
     /**
@@ -241,6 +241,11 @@ public class Menu{
         return availFoods;
     }
 
+    /**
+     * Method returns menu as a string representation
+     *
+     * @return string representation of menu
+     */
     @Override
     public String toString(){
         JSONObject jsonObject = new JSONObject();

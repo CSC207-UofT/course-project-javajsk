@@ -4,26 +4,45 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * The type Shop.
+ * The Shop entity class
  */
 public class Shop{
 
+    /**
+     * The Id.
+     */
     public String id;
+    /**
+     * The Name.
+     */
     protected String name;
+    /**
+     * The Location.
+     */
     protected String location;
+    /**
+     * The Is open.
+     */
     protected boolean isOpen;
+    /**
+     * The Menu.
+     */
     protected Menu menu;
+    /**
+     * The Order book.
+     */
     protected OrderBook orderBook;
 
 
     /**
      * Instantiates a new Shop.
      *
+     * @param id        the id
+     * @param name      the name
+     * @param location  the location
+     * @param isOpen    the is open
      * @param menu      the menu
      * @param orderBook the order book
-     * @param location  the location
-     * @param name      the name
-     * @param isOpen    the is open
      */
     public Shop(String id, String name, String location, boolean isOpen, Menu menu, OrderBook orderBook) {
         this.id = id;
@@ -34,6 +53,12 @@ public class Shop{
         this.isOpen = isOpen;
     }
 
+    /**
+     * Instantiates a new Shop.
+     *
+     * @param name     the name
+     * @param location the location
+     */
     public Shop(String name, String location){
         this.id = "N/A";
         this.name = name;
@@ -43,12 +68,20 @@ public class Shop{
         this.isOpen = false;
     }
 
-
-
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(String id) {
         this.id = id;
     }
@@ -154,6 +187,12 @@ public class Shop{
         return jsonObject.toString();
     }
 
+    /**
+     * Load jso nfrom menu json object.
+     *
+     * @param menu the menu
+     * @return the json object
+     */
     public static JSONObject loadJSONfromMenu(Menu menu){
         JSONObject jsonObject = new JSONObject();
         JSONArray foods = new JSONArray();
