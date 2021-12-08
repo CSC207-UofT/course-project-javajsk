@@ -1,6 +1,8 @@
 package UseCasesTest.Shop;
 
+import UseCasesTest.TestBoundaries.RAMRepositoryBoundary;
 import UseCasesTest.TestBoundaries.RAMShopObjectBoundary;
+import UseCasesTest.TestBoundaries.RAMVendorBoundary;
 import UseCasesTest.daitesters.RAMShopRepository;
 import UseCasesTest.daitesters.RAMVendorRepository;
 import businessrules.dai.Repository;
@@ -47,10 +49,11 @@ class ModifyShopInteractorTest {
 
     @Test
     void modifyShop() {
-        Shop updatedShop = shop;
-        updatedShop.setLocation("Bahen");
+        Shop updatedShop = new Shop("00001", "truck2", "Bahen", true,
+                new Menu(), new OrderBook());
         useCase.modifyShop(vendor.getUserName(),updatedShop);
         assertEquals("Bahen", vendor.getShop().getLocation());
+        assertEquals("truck2", vendor.getShop().getName());
     }
 
     @Test

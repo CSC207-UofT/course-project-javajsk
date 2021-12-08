@@ -60,6 +60,8 @@ public class ModifyShopInteractor implements ModifyShop {
         if(!shopRepository.update(oldShop.getId(), shop)){
             return repositoryBoundary.modificationFailed("Failed to update shop in repository.");
         }
+        vendor.setShop(shop);
+        vendorRepository.update(vendor.getId(), vendor);
 
         return shopObjectBoundary.showObject(shop);
     }
