@@ -107,7 +107,6 @@ public class FoodDB implements Repository<Food> {
     public Food loadFoodFromJSON(JSONObject rawData){
         SingletonDB singletonLoader = new SingletonDB(databaseConnector);
         try{
-            System.out.println("here");
             String id = rawData.getString("id");
             String name = rawData.getString("name");
             String desc = rawData.getString("description");

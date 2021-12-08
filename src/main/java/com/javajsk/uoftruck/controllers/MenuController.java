@@ -101,20 +101,22 @@ public class MenuController{
         return removeFoodFromMenu.removeFood(vendorToken, food1);
     }
 
-    @PutMapping("/SetAddonAvailability/{vendorToken}/{availability}")
-    public ResponseObject runSetAddonAvailability(@PathVariable String vendorToken, @PathVariable Boolean availability,
-                                        @RequestBody String addon){
-        Addon addon1 = addonRepository.loadAddonFromJSON(new JSONObject(addon));
-        return setAddonAvailability.setAddonAvailability(vendorToken, addon1, availability);
+    // We are using the ModifyAddon (see AddonController) and ModifySingleton (see SingletonController) use cases instead
+//    @PutMapping("/SetAddonAvailability/{vendorToken}/{availability}")
+//    public ResponseObject runSetAddonAvailability(@PathVariable String vendorToken, @PathVariable Boolean availability,
+//                                        @RequestBody String addon){
+//        Addon addon1 = addonRepository.loadAddonFromJSON(new JSONObject(addon));
+//        return setAddonAvailability.setAddonAvailability(vendorToken, addon1, availability);
+//
+//    }
+//    @PutMapping("/SetSingletonAvailability/{vendorToken}/{availability}")
+//    public ResponseObject runSetSingletonAvailability(@PathVariable String vendorToken, @PathVariable Boolean availability,
+//                                        @RequestBody String singleton){
+//        Singleton singleton1 = singletonRepository.loadSingletonFromJSON(new JSONObject(singleton));
+//        return setSingletonAvailability.setSingletonAvailability(vendorToken, singleton1, availability);
+//
+//    }
 
-    }
-    @PutMapping("/SetSingletonAvailability/{vendorToken}/{availability}")
-    public ResponseObject runSetSingletonAvailability(@PathVariable String vendorToken, @PathVariable Boolean availability,
-                                        @RequestBody String singleton){
-        Singleton singleton1 = singletonRepository.loadSingletonFromJSON(new JSONObject(singleton));
-        return setSingletonAvailability.setSingletonAvailability(vendorToken, singleton1, availability);
-
-    }
     @GetMapping("/ViewMenu/{shopId}")
     public ResponseObject runViewMenu(@PathVariable String shopId){
         return viewMenu.viewMenu(shopId);
