@@ -1,26 +1,13 @@
-# Food Truck Ordering App
+# UofTruck
 
-Our app will have two user interfaces. One for users that want to order food from food trucks
-and another for vendors that are selling food from food trucks. Both the customers and vendors need accounts 
-to access our application that is secured with password-based authentication.
+At the University of Toronto, students like to order from food trucks, such as the ones that are commonly found on St. George st. The goal of this app is to allow students to place online orders for food from these food trucks on campus. A system like this would make life easier for both students and food truck vendors, since it allows students to save time while allowing food truck vendors to better expedite their orders.
 
+Each food truck has a unique menu that contains different types of items, including normal items such as burgers or fries, but also combo items such as burger combo with fries and drink. A customer might also choose to customize their order - for example, one customer might want extra lettuce inside their wrap, and another might not want any pickles in their burger. Furthermore, individual food trucks might do things like deals or discounts.
 
-Customers buying food will be able to see which food trucks are open on campus via a map that shows the food trucks as pins.
-Customers are capable of seeing the menus of all the food trucks and in the menu of a given food truck, they can search for items or sort by price.
-Customers can only add food items from one food truck at a time since they can't order from multiple food trucks in the same order.
-Food items will have photos, the pricing, and a short description. Multiple food items can also be combined to form a combo deal.
-After selecting all the desired food items, the customer can check out which sends the order to the food truck vendors.
-User can track their order status to see if their order is cancelled, processing, confirmed, or completed. 
-Before an order is confirmed by the vendor, the customer is still allowed to cancel their order.
-Customers can also view their order history as well as keep track of their favourite menu items and orders that allow for quick repurchases.
-Lastly after making a purchase at a specific food truck, the user is permitted to leave a review about their experience.
+As for the food trucks themselves, there are many food trucks around campus, each with their own locations and opening hours. Some food trucks may be unavailable on certain days.
 
-Vendors that own a food truck are able to create a food truck in our system. They will build their food truck menu by adding food items with the pricing, photos, and description of their product. 
-They can update the menu by adding and removing items as well as changing the attributes of existing menu items.
-Vendors are able to specify the sold out items so that they no longer appear on their menu.
-If the vendors are feeling generous, they can also easily set up discounts for their food truck.
-Vendors can set their current location and indicate when they are opened or closed. 
-When a customer places an order, the vendor is able to see the order as well as the customer's profile then decide whether to confirm or reject it.
-When it gets busy, the vendor will see a queue of all the orders including the incoming ones and the ones that are already confirmed.
-Once an order is ready, they can update the order status and mark it as complete.
+Customers using this app would want to be able to log into some sort of account, especially since they are disclosing their personal information within the app. They would want their payments and transactions to be secure and smooth. From within the app, they should be able to browse all food trucks, view menus, order food, and view their order history.
 
+Vendors, on the other hand, would also want to be able to log into some sort of account to be able to manage their food truck, which is essentially an online shop. They should be able to modify their shop by adding or removing items, updating item information such as prices, discounts, or components of the item (such as removing combo pieces). They should be able to update their opening and closing times at will. They should also be able to view their current orders, and choose to accept and confirm orders or decline them.
+
+Finally, this product will be used in real time, with customers interacting with vendors in real time in a number of ways. Since ordering food should be a fast process, the interactions should be quick and easy for both sides.
