@@ -58,7 +58,6 @@ public class CartDB implements Repository<Cart> {
         return databaseConnector.update(tableName, id, loadJSONFromCart(item));
     }
 
-
     /**
      * Method for creating a new cart entry in the database
      * @param item the new cart information

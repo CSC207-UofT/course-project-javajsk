@@ -6,10 +6,21 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Concrete hasher used for user account passwords
+ */
 public class SHA512Hasher implements Hasher {
+    /**
+     * Instantiates a new Sha 512 hasher.
+     */
     public SHA512Hasher() {
     }
 
+    /**
+     * Method hashes given string
+     * @param plainText the string to hash
+     * @return hashed string
+     */
     @Override
     public String hash(String plainText) {
         // CODE taken from GEEKSFORGEEKS:
@@ -42,9 +53,5 @@ public class SHA512Hasher implements Hasher {
         catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-    }
-    
-    public static void main(String[] args){
-        System.out.println(new SHA512Hasher().hash("test"));
     }
 }

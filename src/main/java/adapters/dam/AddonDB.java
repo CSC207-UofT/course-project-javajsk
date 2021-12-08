@@ -62,6 +62,12 @@ public class AddonDB implements Repository<Addon> {
         return databaseConnector.create(tableName, loadJSONfromAddon(item));
     }
 
+    /**
+     * Method for reading multiple addon entries from the database
+     * @param parameter the parameter to look up in the database
+     * @param needle the value of the parameter to find in the database
+     * @return a list of addon entities that match the requirements
+     */
     @Override
     public List<Addon> readMultiple(String parameter, String needle) {
         List<Addon> addonList = new ArrayList<>();
