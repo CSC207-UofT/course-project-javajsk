@@ -52,7 +52,14 @@ public class CartController {
         removeFromCart = new RemoveFromCartInteractor(customerRepository, repositoryBoundary, foodRepository, cartObjectBoundary);
         viewCart = new ViewCartInteractor(cartObjectBoundary, customerRepository, repositoryBoundary);
     }
-    
+
+    /**
+     * @param userToken The user token associated with the user trying to place the order
+     * @param shopId The shopId of the shop that the user is tring to place the order to
+     * @param foodId The foodId of the food the user is trying to order
+     * @param selections The selections associated with the food the user has chosen. This will be a stirng JSON that will be parsed to an object
+     * @return The updated Cart after the item has been added to the cart
+     */
     @PutMapping("/AddtoCart/{userToken}/{foodId}/{shopId}")
     public Cart runAddToCart(@PathVariable String userToken, @PathVariable String shopId,
                              @PathVariable String foodId, @RequestBody String selections){
@@ -68,11 +75,22 @@ public class CartController {
         ResponseObject response = addToCart.addToCart(userToken, shopId, foodId, selection_list);
         return (Cart) response.getContents();
     }
+
+    /**
+     * @param userToken The usertoken associated with cart that is trying to be emptied
+     * @return A ResponseObject containing an empty cart and status codes
+     */
     @PutMapping("/EmptyCart/{userToken}")
     public ResponseObject runEmptyCart(@PathVariable String userToken){
         return emptyCart.emptyCart(userToken);
     }
 
+    /**
+     * @param userToken The user token associated with the user trying to modify their cart
+     * @param food The food that is trying to be removed
+     * @param selections The selections of said food
+     * @return A ResponseObject containing the updated cart and status codes
+     */
     @PutMapping("/RemovefromCart/{userToken}")
     public ResponseObject runRemoveFromCart(@PathVariable String userToken, @RequestBody Food food,
                                   @RequestBody Selection[] selections){
@@ -83,6 +101,11 @@ public class CartController {
 
         return removeFromCart.removeFromCart(userToken, food, contents);
     }
+
+    /**
+     * @param userToken The user token associated with the user trying to view their cart
+     * @return A ResponseObject containing their cart object and status codes
+     */
     @GetMapping("/ViewCart/{userToken}")
     public ResponseObject runViewCart(@PathVariable String userToken){
         return viewCart.viewCart(userToken);
