@@ -1,20 +1,18 @@
 package framework;
 
 import adapters.dam.DBGateway;
-import com.mongodb.BasicDBObject;
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientSettings;
+import com.mongodb.*;
 import com.mongodb.client.*;
-import com.mongodb.util.JSON;
+import com.mongodb.client.MongoClient;
 import org.bson.Document;
+import org.bson.io.BsonOutput;
 import org.bson.types.ObjectId;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.aop.scope.ScopedObject;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.print.Doc;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class MongoDB implements DBGateway {
@@ -43,12 +41,17 @@ public class MongoDB implements DBGateway {
     @Override
     public JSONObject read(String table, String id) {
         MongoCollection<Document> collection = database.getCollection(table);
-        Document first = collection.find(new Document("_id",new ObjectId(id))).first();
+
         try{
+            Document first = collection.find(new Document("_id",new ObjectId(id))).first();
             assert first != null;
             JSONObject jsonObject = new JSONObject(first.toJson());
             return jsonObjectCleaner(jsonObject);
-        }catch (NullPointerException e){
+        }catch(IllegalArgumentException obj){
+            System.out.println("Not a valid id.");
+            return null;
+        }
+        catch (NullPointerException e){
             System.out.println(e.getMessage());
             return null;
         }
@@ -101,6 +104,28 @@ public class MongoDB implements DBGateway {
         }
 
     }
+    public JSONObject getCollection(String collection){
+        System.out.println("Here");
+        JSONArray addon_types = new JSONArray();
+        MongoCollection<Document> collection_doc = database.getCollection(collection);
+//        FindIterable<Document> iterDoc = collection_doc.find();
+//        MongoCursor<Document> dbc =  iterDoc.cursor();
+//        for(Document document: iterDoc){
+//            addon_types.put(jsonObjectCleaner(new JSONObject(document.toJson())));
+//        }
+        FindIterable<Document> iterDoc = collection_doc.find();
+
+        for(Document document: iterDoc){
+            addon_types.put(jsonObjectCleaner(new JSONObject(document.toJson())));
+        }
+
+
+
+
+        JSONObject res = new JSONObject();
+        res.put("Addon_Types",addon_types);
+        return res;
+    }
 
     @Override
     public JSONObject readOne(String table, String parameter, String needle) {
@@ -133,4 +158,6 @@ public class MongoDB implements DBGateway {
             return null;
         }
     }
+
+
 }

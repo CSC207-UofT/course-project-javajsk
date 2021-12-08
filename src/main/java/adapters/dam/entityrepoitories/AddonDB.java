@@ -44,6 +44,29 @@ public class AddonDB implements Repository<Addon> {
         }
         return addonList;
     }
+//    public List<Addon> parseAddonTypes(JSONObject rawAddonTypes){
+//        List<Addon> addonTypes= new ArrayList<>();
+//        JSONArray types = rawAddonTypes.getJSONArray("AddonTypes");
+//        for(int i = 0; i < types.length(); i++)
+//        {
+//            JSONObject addon = types.getJSONObject(i);
+//            addonTypes.add(new Addon(addon.getString("name"), addon.getInt("label")));
+//        }
+//    }
+    public JSONObject getAddonTypes(){
+        return databaseConnector.getCollection("AddonTypes");
+//        JSONArray raw_addonTypes = rawAddons.getJSONArray("AddonTypes");
+
+//        List<Addon> addonTypes = new ArrayList<>();
+//        for(int i = 0; i < raw_addonTypes.length(); i++)
+//        {
+//            JSONObject objects = raw_addonTypes.getJSONObject(i);
+//
+//            //Iterate through the elements of the array i.
+//            //Get thier value.
+//            //Get the value for the first element and the value for the last element.
+//        }
+    }
 
     @Override
     public Addon findOneByFieldName(String fieldName, String needle) {
@@ -55,8 +78,12 @@ public class AddonDB implements Repository<Addon> {
     }
 
     public Addon loadAddonFromJSON(JSONObject addonObj){
+        if(addonObj == null){
+            return null;
+        }
         if(!addonObj.has("id") || !addonObj.has("name") || !addonObj.has("price") ||
                 !addonObj.has("addonTypes") || !addonObj.has("isAvailable") || !addonObj.has("shopId")  ){
+
             throw new InvalidParameterException("Json object does not have the right types.");
         }
         try {

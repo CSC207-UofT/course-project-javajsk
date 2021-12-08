@@ -14,7 +14,7 @@ import java.util.List;
 public class VendorDB implements VendorRepository {
     DBGateway databaseConnector;
     final String tableName = "Vendor";
-    TokenSigner tokenSigner = new JWTSigner();
+    TokenSigner tokenSigner;
 
 
     public VendorDB(DBGateway databaseConnector) {
@@ -75,7 +75,7 @@ public class VendorDB implements VendorRepository {
         if(!vendor.getHashedPassword().equals(password)){
             return null;
         }
-        String token_parameter = vendor.getId() + "," +vendor.getUserName() +","+vendor.getShop().getName();
+        String token_parameter = vendor.getId() + "," +vendor.getUserName() +","+vendor.getShop().getId();
         return tokenSigner.generateToken(token_parameter);
     }
 

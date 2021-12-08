@@ -35,6 +35,7 @@ public class FoodDB implements Repository<Food> {
      */
     @Override
     public Food read(String id) {
+        System.out.println("ID:"+id);
         return loadFoodFromJSON(databaseConnector.read(tableName, id));
     }
 
@@ -107,7 +108,6 @@ public class FoodDB implements Repository<Food> {
     public Food loadFoodFromJSON(JSONObject rawData){
         SingletonDB singletonLoader = new SingletonDB(databaseConnector);
         try{
-            System.out.println("here");
             String id = rawData.getString("id");
             String name = rawData.getString("name");
             String desc = rawData.getString("description");

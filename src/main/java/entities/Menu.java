@@ -207,7 +207,7 @@ public class Menu{
         for(Food food: this.foods){
             for(Singleton singletonIter: food.getComponents()){
                 if(singletonIter.equals(singleton)){
-                    singletonIter.setAvailability(availability);
+                    singletonIter.setAvailable(availability);
                 }
             }
         }
@@ -220,7 +220,7 @@ public class Menu{
     public List<Addon> getAvailableAddons(){
         List<Addon> availAddons = new ArrayList<>();
         for(Addon addon: this.addons){
-            if(addon.getAvailability()){
+            if(addon.getAvailable()){
                 availAddons.add(addon);
             }
         }

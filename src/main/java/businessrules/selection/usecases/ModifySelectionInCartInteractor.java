@@ -22,6 +22,17 @@ public class ModifySelectionInCartInteractor implements ModifySelectionInCart {
     CustomerBoundary customerBoundary;
     ObjectBoundary<Cart> cartObjectBoundary;
 
+    public ModifySelectionInCartInteractor(CustomerRepository customerRepository,
+                                           Repository<Food> foodRepository, RepositoryBoundary repositoryBoundary,
+                                           CustomerBoundary customerBoundary,
+                                           ObjectBoundary<Cart> cartObjectBoundary) {
+        this.customerRepository = customerRepository;
+        this.foodRepository = foodRepository;
+        this.repositoryBoundary = repositoryBoundary;
+        this.customerBoundary = customerBoundary;
+        this.cartObjectBoundary = cartObjectBoundary;
+    }
+
     /**
      * Instantiates a use case for modifying a cart selection
      * @param cR the customer repository

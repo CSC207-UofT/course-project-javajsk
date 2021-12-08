@@ -18,6 +18,7 @@ import presenters.RepositoryPresenter;
 import presenters.VendorPresenter;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class MenuController{
 
     AddAddonToMenu addAddonToMenu;

@@ -29,6 +29,7 @@ import presenters.RepositoryPresenter;
 import presenters.VendorPresenter;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class FoodController {
 
     AddSingleton addSingleton;
@@ -52,11 +53,11 @@ public class FoodController {
     }
 
     @PutMapping("/AddSingleton/{vendorToken}/{foodId}")
-    public Food runAddSingleton(@PathVariable String vendorToken, @PathVariable String foodId,
+    public ResponseObject runAddSingleton(@PathVariable String vendorToken, @PathVariable String foodId,
                                 @RequestBody String singleton){
         Singleton singleton1 = singletonRepository.loadSingletonFromJSON(new JSONObject(singleton));
         ResponseObject response = addSingleton.addSingleton(vendorToken, foodId, singleton1);
-        return (Food) response.getContents();
+        return response;
     }
     @PostMapping("/CreateFood/{vendorToken}")
     public ResponseObject runCreateFood(@PathVariable String vendorToken, @RequestBody String food){
@@ -67,6 +68,7 @@ public class FoodController {
     public ResponseObject runGetShopFoods(@PathVariable String shopId){
         return getShopFoods.getShopFoods(shopId);
     }
+
     @PutMapping("/ModifyFood/{vendorToken}/{foodId}")
     public ResponseObject runModifyFood(@PathVariable String vendorToken, @PathVariable String foodId,
                               @RequestBody String food){

@@ -2,11 +2,10 @@ package com.javajsk.uoftruck.controllers;
 
 import businessrules.order.inputboundaries.*;
 import businessrules.outputboundaries.ResponseObject;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class OrderController {
     CancelOrder cancelOrder;
     CompleteOrder completeOrder;
@@ -16,17 +15,14 @@ public class OrderController {
     PlaceOrder placeOrder;
     SetOrderInprogress setOrderInprogress;
 
-    public OrderController(CancelOrder cancelOrder, CompleteOrder completeOrder,
-                           GetNextOrder getNextOrder, GetShopOrders getShopOrders,
-                           GetUserPastOrders getUserPastOrders, PlaceOrder placeOrder,
-                           SetOrderInprogress setOrderInprogress) {
-        this.cancelOrder = cancelOrder;
-        this.completeOrder = completeOrder;
-        this.getNextOrder = getNextOrder;
-        this.getShopOrders = getShopOrders;
-        this.getUserPastOrders = getUserPastOrders;
-        this.placeOrder = placeOrder;
-        this.setOrderInprogress = setOrderInprogress;
+    public OrderController() {
+//        this.cancelOrder = cancelOrder;
+//        this.completeOrder = completeOrder;
+//        this.getNextOrder = getNextOrder;
+//        this.getShopOrders = getShopOrders;
+//        this.getUserPastOrders = getUserPastOrders;
+//        this.placeOrder = placeOrder;
+//        this.setOrderInprogress = setOrderInprogress;
     }
     @PutMapping("/CancelOrder/{userToken}/{orderId}")
     public ResponseObject runCancelOrder(@PathVariable String orderId, @PathVariable String userToken){

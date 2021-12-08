@@ -172,7 +172,7 @@ public class Food {
 
     public boolean isAvailable() {
         for(Singleton singleton: this.components){
-            if(!singleton.isAvailable()){
+            if(!singleton.getAvailable()){
                 return false;
             }
         }
@@ -186,6 +186,7 @@ public class Food {
         jsonObject.put("name", this.name);
         jsonObject.put("description", this.description);
         jsonObject.put("price", this.price);
+        jsonObject.put("shopId", this.shopId);
         JSONArray arr = new JSONArray();
         for(Singleton sel: this.components){
             arr.put(sel.getId());
