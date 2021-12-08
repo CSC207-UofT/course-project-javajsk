@@ -11,11 +11,31 @@ import businessrules.outputboundaries.ResponseObject;
  * Use case for logging in a customer with repository data
  */
 public class CustomerLoginInteractor implements CustomerLogin {
+    /**
+     * The Customer repository.
+     */
     CustomerRepository customerRepository;
+    /**
+     * The Customer boundary.
+     */
     CustomerBoundary customerBoundary;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Hasher.
+     */
     Hasher hasher;
 
+    /**
+     * Instantiates a new Customer login interactor.
+     *
+     * @param customerRepository the customer repository
+     * @param customerBoundary   the customer boundary
+     * @param repositoryBoundary the repository boundary
+     * @param hasher             the hasher
+     */
     public CustomerLoginInteractor(CustomerRepository customerRepository, CustomerBoundary customerBoundary,
                                    RepositoryBoundary repositoryBoundary, Hasher hasher) {
         this.customerRepository = customerRepository;
@@ -35,8 +55,8 @@ public class CustomerLoginInteractor implements CustomerLogin {
         String hashedPassword = hasher.hash(password);
         String token = customerRepository.authenticateUser(username, hashedPassword);
 
-        if(token.equals("User not found")){
-            return repositoryBoundary.queryNotFound("User not found");
+        if(token == null){
+            return repositoryBoundary.queryNotFound("Incorrect username or password.");
         }
 
         return customerBoundary.displayToken(token);

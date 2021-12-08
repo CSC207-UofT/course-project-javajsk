@@ -17,18 +17,34 @@ import java.util.List;
  * Use case for setting an order to in progress in a repository
  */
 public class SetOrderInprogressInteracator implements SetOrderInprogress {
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Order repository.
+     */
     Repository<Order> orderRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Vendor boundary.
+     */
     VendorBoundary vendorBoundary;
+    /**
+     * The Order object boundary.
+     */
     ObjectBoundary<Order> orderObjectBoundary;
 
     /**
      * Instantiates a use case for setting an order to in progress in a repository
-     * @param vR the vendor repository
-     * @param oR the order repository
-     * @param rB the repository boundary
-     * @param vB the vendor boundary
+     *
+     * @param vR  the vendor repository
+     * @param oR  the order repository
+     * @param rB  the repository boundary
+     * @param vB  the vendor boundary
      * @param oOB the order object boundary
      */
     public SetOrderInprogressInteracator(VendorRepository vR, Repository<Order> oR, RepositoryBoundary rB, VendorBoundary vB, ObjectBoundary<Order> oOB) {

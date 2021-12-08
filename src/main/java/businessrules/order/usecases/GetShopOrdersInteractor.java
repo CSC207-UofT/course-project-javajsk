@@ -12,14 +12,24 @@ import entities.Vendor;
  * Use case for getting a shop's orders from a repository
  */
 public class GetShopOrdersInteractor implements GetShopOrders {
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Order object boundary.
+     */
     ObjectBoundary<Order> orderObjectBoundary;
 
     /**
      * Instantiates a use case for getting a shop's orders
-     * @param vR the vendor repository
-     * @param rB the repository boundary
+     *
+     * @param vR  the vendor repository
+     * @param rB  the repository boundary
      * @param oOB the order object boundary
      */
     public GetShopOrdersInteractor(VendorRepository vR, RepositoryBoundary rB, ObjectBoundary<Order> oOB) {

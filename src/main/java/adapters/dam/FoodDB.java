@@ -1,13 +1,12 @@
-package adapters.dam.entityrepoitories;
+package adapters.dam;
 
-import adapters.dam.DBGateway;
+import adapters.DBGateway;
 import businessrules.dai.Repository;
 import entities.Food;
 import entities.Singleton;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +106,6 @@ public class FoodDB implements Repository<Food> {
     public Food loadFoodFromJSON(JSONObject rawData){
         SingletonDB singletonLoader = new SingletonDB(databaseConnector);
         try{
-            System.out.println("here");
             String id = rawData.getString("id");
             String name = rawData.getString("name");
             String desc = rawData.getString("description");
@@ -120,7 +118,6 @@ public class FoodDB implements Repository<Food> {
             String shopId = rawData.getString("shopId");
             return new Food(id,name, desc,price,selArr, shopId);
         }catch(JSONException e){
-            e.printStackTrace();
             return null;
         }
     }

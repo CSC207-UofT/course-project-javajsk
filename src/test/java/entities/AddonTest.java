@@ -73,7 +73,7 @@ class AddonTest {
 
     @Test
     void isAvailable() {
-        assertTrue(addon.getAvailability());
+        assertTrue(addon.getAvailable());
     }
 
     @Test

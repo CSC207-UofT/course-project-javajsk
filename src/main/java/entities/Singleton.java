@@ -9,13 +9,37 @@ import java.util.List;
  */
 public class Singleton{
 
+    /**
+     * The Id.
+     */
     public String id;
+    /**
+     * The Price.
+     */
     protected float price;
+    /**
+     * The Name.
+     */
     protected String name;
+    /**
+     * The Description.
+     */
     protected String description;
+    /**
+     * The Allowed addon types.
+     */
     protected List<Integer> allowedAddonTypes;
+    /**
+     * The Default selection.
+     */
     protected Selection defaultSelection;
-    protected boolean availability;
+    /**
+     * The Is available.
+     */
+    protected boolean isAvailable;
+    /**
+     * The Shop id.
+     */
     protected String shopId;
 
     /**
@@ -28,6 +52,7 @@ public class Singleton{
      * @param allowedAddonTypes the allowed addon types
      * @param defaultSelection  the default selection
      * @param availability      the availability
+     * @param shopId            the shop id
      */
     public Singleton(String id, float price, String name, String description, List<Integer> allowedAddonTypes,
                      Selection defaultSelection, boolean availability, String shopId) {
@@ -37,7 +62,7 @@ public class Singleton{
         this.description = description;
         this.allowedAddonTypes = allowedAddonTypes;
         this.defaultSelection = defaultSelection;
-        this.availability = availability;
+        this.isAvailable = availability;
         this.shopId = shopId;
     }
 
@@ -154,23 +179,23 @@ public class Singleton{
      *
      * @return the boolean
      */
-    public boolean isAvailable() {
-        return availability;
+    public boolean getAvailable() {
+        return isAvailable;
     }
 
     /**
      * Sets availability.
      *
-     * @param availability the availability
+     * @param available the availability
      */
-    public void setAvailability(boolean availability) {
-        this.availability = availability;
+    public void setAvailable(boolean available) {
+        this.isAvailable = available;
     }
 
     /**
      * Replace a singleton with another
      *
-     * @param newSingleton  the replacement singleton
+     * @param newSingleton the replacement singleton
      */
     public void replace(Singleton newSingleton) {
         this.id = newSingleton.getId();
@@ -179,17 +204,33 @@ public class Singleton{
         this.description = newSingleton.getDescription();
         this.allowedAddonTypes = newSingleton.getAllowedAddonTypes();
         this.defaultSelection = newSingleton.getDefaultSelection();
-        this.availability = newSingleton.isAvailable();
+        this.isAvailable = newSingleton.getAvailable();
     }
 
+    /**
+     * Gets shop id.
+     *
+     * @return the shop id
+     */
     public String getShopId() {
         return shopId;
     }
 
+    /**
+     * Sets shop id.
+     *
+     * @param shopId the shop id
+     */
     public void setShopId(String shopId) {
         this.shopId = shopId;
     }
 
+    /**
+     * Method returns whether the selection contains addons that are all of allowed addon type.
+     *
+     * @param selection the selection
+     * @return whether selection is valid
+     */
     public boolean isValidSelection(Selection selection){
         for(Addon addon: selection.getSelectedAddons()){
             List<Integer> addonTypes = addon.getAddonTypes();
@@ -202,6 +243,11 @@ public class Singleton{
         return true;
     }
 
+    /**
+     * Method returns Singleton as a string representation
+     *
+     * @return string representation of singleton
+     */
     @Override
     public String toString(){
         JSONObject jsonObject = new JSONObject();
@@ -211,11 +257,8 @@ public class Singleton{
         jsonObject.put("description", this.description);
         jsonObject.put("allowedAddonTypes", this.allowedAddonTypes);
         jsonObject.put("defaultSelection", new JSONObject(this.defaultSelection.toString()));
-        jsonObject.put("availability", this.availability);
+        jsonObject.put("isAvailable", this.isAvailable);
         jsonObject.put("shopId", this.shopId);
         return jsonObject.toString();
     }
-
-
-
 }

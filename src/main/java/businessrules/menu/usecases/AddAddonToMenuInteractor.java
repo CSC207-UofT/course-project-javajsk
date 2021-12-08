@@ -16,18 +16,34 @@ import entities.Vendor;
  * Use case for adding an addon to a menu of a repository
  */
 public class AddAddonToMenuInteractor implements AddAddonToMenu {
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Vendor boundary.
+     */
     VendorBoundary vendorBoundary;
+    /**
+     * The Shop repository.
+     */
     Repository<Shop> shopRepository;
+    /**
+     * The Menu object boundary.
+     */
     ObjectBoundary<Menu> menuObjectBoundary;
 
     /**
      * Instantiates a use case for adding an addon to a menu
-     * @param vR the vendor repository
-     * @param rB the repository boundary
-     * @param vB the vendor boundary
-     * @param sR the shop repository
+     *
+     * @param vR  the vendor repository
+     * @param rB  the repository boundary
+     * @param vB  the vendor boundary
+     * @param sR  the shop repository
      * @param mOB the menu object boundary
      */
     public AddAddonToMenuInteractor(VendorRepository vR, RepositoryBoundary rB, VendorBoundary vB,
@@ -53,17 +69,13 @@ public class AddAddonToMenuInteractor implements AddAddonToMenu {
         }
         Shop shop = vendor.getShop();
         Menu menu = shop.getMenu();
-        System.out.println(vendor.getShop().getId());
 
-        System.out.println(addon);
         if(!vendor.getShop().getId().equals(addon.getShopId())){
-
             return vendorBoundary.error("This addon does not belong to this shop.");
-
-
         }
 
         menu.addAddon(addon);
+        shop.setMenu(menu);
 
         if(!shopRepository.update(shop.getId(), shop)){
             return repositoryBoundary.modificationFailed("Failed to update shop with new addon in the menu.");

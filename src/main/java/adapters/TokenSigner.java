@@ -1,4 +1,4 @@
-package adapters.dam;
+package adapters;
 
 public interface TokenSigner {
     String generateToken(String userId);

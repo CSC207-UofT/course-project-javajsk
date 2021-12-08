@@ -2,8 +2,6 @@ package UseCasesTest.daitesters;
 
 import businessrules.dai.Repository;
 import entities.Food;
-import entities.Singleton;
-import entities.Vendor;
 
 import java.util.ArrayList;
 import java.util.List;
