@@ -108,7 +108,6 @@ public class OrderDB implements Repository<Order> {
             String customerId = rawOrder.getString("customerId");
             Order.Status status = rawOrder.getEnum(Order.Status.class, "status");
 
-            //TODO: FIX DATES.
             Date timePlaced = new Date();
             Date timeStatusModified = new Date();
             return new Order(id, cart, shopId, customerId, status, timePlaced, timeStatusModified);

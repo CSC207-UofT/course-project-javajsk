@@ -57,7 +57,6 @@ public class SingletonController {
 
     @PostMapping("/CreateSingleton/{vendorToken}")
     public ResponseObject runCreateSingleton(@PathVariable String vendorToken, @RequestBody String singletonStr){
-        System.out.println(singletonStr);
 
         JSONObject singletonJson = new JSONObject(singletonStr);
 

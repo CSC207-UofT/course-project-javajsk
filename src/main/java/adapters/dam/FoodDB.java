@@ -34,7 +34,6 @@ public class FoodDB implements Repository<Food> {
      */
     @Override
     public Food read(String id) {
-        System.out.println("ID:"+id);
         return loadFoodFromJSON(databaseConnector.read(tableName, id));
     }
 
@@ -119,7 +118,6 @@ public class FoodDB implements Repository<Food> {
             String shopId = rawData.getString("shopId");
             return new Food(id,name, desc,price,selArr, shopId);
         }catch(JSONException e){
-            e.printStackTrace();
             return null;
         }
     }

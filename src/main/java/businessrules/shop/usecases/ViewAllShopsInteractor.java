@@ -1,6 +1,6 @@
 package businessrules.shop.usecases;
 
-import adapters.dam.entityrepoitories.ShopDB;
+import adapters.dam.ShopDB;
 import businessrules.dai.Repository;
 import businessrules.dai.VendorRepository;
 import businessrules.outputboundaries.ObjectBoundary;
@@ -14,19 +14,17 @@ import org.json.JSONObject;
 
 public class ViewAllShopsInteractor implements ViewAllShops {
     ShopDB shopRepository;
-    VendorRepository vendorRepository;
-    VendorBoundary vendorBoundary;
-    RepositoryBoundary repositoryBoundary;
-    ObjectBoundary<Shop> shopObjectBoundary;
+
     MongoDB db;
     public ViewAllShopsInteractor() {
         this.db = new MongoDB();
         this.shopRepository = new ShopDB(db);
     }
 
+    /**
+     * @return Returns a ResponseObject whose contents are a list of JSONs of all current shops in the database.
+     */
     public ResponseObject viewAllShops() {
-        //System.out.println(shopRepository.viewAllShops() != null);
-        ResponseObject res = new ResponseObject(200, "",shopRepository.viewAllShops().toString());
-        return res;
+        return new ResponseObject(200, "",shopRepository.viewAllShops().toString());
     }
 }

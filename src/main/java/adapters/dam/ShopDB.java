@@ -18,30 +18,52 @@ public class ShopDB implements Repository<Shop> {
         this.dbGateway = db;
     }
 
+    /**
+     * @param id the id of the entry to get from the database
+     * @return the constructed object of the given id from the database
+     */
     @Override
     public Shop read(String id) {
         return loadShopFromJSON(dbGateway.read(tableName, id));
     }
 
+    /**
+     * Method for updating a shop entry in the database
+     * @param id the id of the shop entry
+     * @param item the updated shop information
+     * @return whether the update was successful or not
+     */
     @Override
     public boolean update(String id, Shop item) {
-        System.out.println(id);
-        System.out.println(loadJSONFromShop(item));
         return dbGateway.update(tableName, id, loadJSONFromShop(item));
 
     }
 
+    /**
+     * @return Gets all items from the collection "Shop" in the database in a JSONObject
+     */
     public JSONObject viewAllShops(){
         return dbGateway.getCollection("Shop");
 
 
     }
 
+    /**
+     * Method for creating a new shop entry in the database
+     * @param item the new shop information
+     * @return the id of the new shop entry
+     */
     @Override
     public String create(Shop item) {
         return dbGateway.create(tableName, loadJSONFromShop(item));
     }
 
+    /**
+     * Method for retrieving multiple shops from the database
+     * @param parameter the parameter to search by
+     * @param needle the value of the parameter to find
+     * @return a list of shop entities that match the requirements
+     */
     @Override
     public List<Shop> readMultiple(String parameter, String needle) {
         List<Shop> shopList = new ArrayList<>();
@@ -53,16 +75,32 @@ public class ShopDB implements Repository<Shop> {
     }
 
 
+    /**
+     * Method for retrieving a shop from the database
+     * @param fieldName the field to search by
+     * @param needle the value of the field to find
+     * @return a shop entity that matches the requirements
+     */
     @Override
     public Shop findOneByFieldName(String fieldName, String needle) {
         return loadShopFromJSON(dbGateway.readOne(tableName,fieldName,needle));
     }
 
-
+    /**
+     * Method for converting a shop entity to a JSON object
+     * @param shop the shop entity
+     * @return the corresponding JSON object
+     */
     public JSONObject loadJSONFromShop(Shop shop){
         return new JSONObject(shop.toString());
     }
 
+
+    /**
+     * Method for converting a JSON object to a shop entity
+     * @param rawShop the JSON data
+     * @return the corresponding shop entity
+     */
     public Shop loadShopFromJSON(JSONObject rawShop){
         if(rawShop == null){
             return null;
@@ -78,15 +116,16 @@ public class ShopDB implements Repository<Shop> {
             OrderBook orderBook = new OrderBook(orderList);
             Menu menu = loadMenuFromJSON(rawMenu);
             return new Shop(id, name, location, isOpen, menu, orderBook);
-        }catch(NullPointerException err){
-            System.out.println("Null input");
-            return null;
-        }
-        catch(JSONException e){
+        }catch(NullPointerException | JSONException err){
             return null;
         }
     }
 
+    /**
+     * Method for converting a JSON object to a menu entity
+     * @param rawMenu the JSON data
+     * @return the corresponding menu entity
+     */
     public Menu loadMenuFromJSON(JSONObject rawMenu){
         FoodDB foodLoader = new FoodDB(dbGateway);
         AddonDB addonLoader = new AddonDB(dbGateway);
