@@ -57,31 +57,15 @@ public class CartController {
     @PutMapping("/AddtoCart/{userToken}/{foodId}/{shopId}")
     public Cart runAddToCart(@PathVariable String userToken, @PathVariable String shopId,
                              @PathVariable String foodId, @RequestBody String selections){
-        System.out.println(selections);
         JSONObject contents = new JSONObject(selections);
-        //Iterator<String> keys = contents.keys();
-        System.out.println(contents.get("selections"));
         JSONArray raw_selections = contents.getJSONArray("selections");
         Selection[] selection_list = new Selection[raw_selections.length()];
-        //int i = 0;
-
-//        while(keys.hasNext()) {
-//            String key = keys.next();
-//            if (contents.get(key) instanceof JSONObject) {
-//                Selection selection = cartrepository.parseSelection(contents.getJSONObject(key));
-//                selection_list[i] = selection;
-//                i++;
-//            }
-//        }
         for(int i = 0; i < raw_selections.length(); i++)
         {
             JSONObject raw_object = raw_selections.getJSONObject(i);
             Selection curr_selection = cartrepository.parseSelection(raw_object);
-            System.out.println(curr_selection);
             selection_list[i] = curr_selection;
         }
-        System.out.println("LISTLISTLISTLSIT");
-        System.out.println(selection_list[1].getClass());
         ResponseObject response = addToCart.addToCart(userToken, shopId, foodId, selection_list);
         return (Cart) response.getContents();
     }
