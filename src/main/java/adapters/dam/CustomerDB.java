@@ -98,8 +98,7 @@ public class CustomerDB implements CustomerRepository {
             String username = jsonObject.getString("username");
             String hashedPassword = jsonObject.getString("password");
             Cart cart = cartLoader.loadCartFromJSON(jsonObject.getJSONObject("cart"));
-            List<Order> orderHistory = orderLoader.readMultiple("customerId", id);
-            OrderBook custOrderbook = new OrderBook(orderHistory);
+            OrderBook custOrderbook = new OrderBook();
             return new Customer(id, username, hashedPassword, custOrderbook, cart);
         }catch (JSONException e){
             return null;

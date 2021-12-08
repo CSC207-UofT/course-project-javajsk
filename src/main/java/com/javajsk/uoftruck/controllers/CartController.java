@@ -21,11 +21,15 @@ import entities.Cart;
 import entities.Food;
 import entities.Selection;
 import framework.MongoDB;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import adapters.presenters.ObjectPresenter;
 import adapters.presenters.RepositoryPresenter;
 import adapters.presenters.VendorPresenter;
+
+import java.util.Iterator;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -38,7 +42,6 @@ public class CartController {
     MongoDB db = new MongoDB();
     Repository<Food> foodRepository = new FoodDB(db);
     CustomerRepository customerRepository = new CustomerDB(db);
-    VendorBoundary vendorBoundary = new VendorPresenter();
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
     ObjectBoundary<Cart> cartObjectBoundary = new ObjectPresenter<>();
     CartDB cartrepository = new CartDB(db);
@@ -52,12 +55,17 @@ public class CartController {
     
     @PutMapping("/AddtoCart/{userToken}/{foodId}/{shopId}")
     public Cart runAddToCart(@PathVariable String userToken, @PathVariable String shopId,
-                             @PathVariable String foodId, @RequestBody String[] selections){
-        Selection[] contents = new Selection[selections.length];
-        for(int i = 0; i <= selections.length; i++){
-            contents[i] =  cartrepository.parseSelection(new JSONObject(selections[i]));
+                             @PathVariable String foodId, @RequestBody String selections){
+        JSONObject contents = new JSONObject(selections);
+        JSONArray raw_selections = contents.getJSONArray("selections");
+        Selection[] selection_list = new Selection[raw_selections.length()];
+        for(int i = 0; i < raw_selections.length(); i++)
+        {
+            JSONObject raw_object = raw_selections.getJSONObject(i);
+            Selection curr_selection = cartrepository.parseSelection(raw_object);
+            selection_list[i] = curr_selection;
         }
-        ResponseObject response = addToCart.addToCart(userToken, shopId, foodId, contents);
+        ResponseObject response = addToCart.addToCart(userToken, shopId, foodId, selection_list);
         return (Cart) response.getContents();
     }
     @PutMapping("/EmptyCart/{userToken}")

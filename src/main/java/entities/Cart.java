@@ -204,7 +204,8 @@ public class Cart{
     public static JSONArray loadJSONfromSelectionLst(Selection[] input){
         JSONArray jsonSelectionList = new JSONArray();
         for(Selection sel: input){
-            jsonSelectionList.put(sel.toString());
+            jsonSelectionList.put(new JSONObject(sel.toString()));
+
         }
         return jsonSelectionList;
     }

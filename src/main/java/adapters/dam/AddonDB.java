@@ -15,21 +15,37 @@ public class AddonDB implements Repository<Addon> {
     DBGateway databaseConnector;
     final String tableName = "Addon";
 
+    /**
+     * @param databaseConnector The concrete implementation of the specific database we want to use
+     */
     public AddonDB(DBGateway databaseConnector) {
         this.databaseConnector = databaseConnector;
     }
 
+    /**
+     * @param id the id of the entry
+     * @return An Addon object parsed from the database
+     */
     @Override
     public Addon read(String id) {
         JSONObject rawData = databaseConnector.read(tableName, id);
         return loadAddonFromJSON(rawData);
     }
 
+    /**
+     * @param id   the id of the entry to update
+     * @param item The new Addon item to replace the existing item iwth
+     * @return The status of the update. True if it went through, false otherwise.
+     */
     @Override
     public boolean update(String id, Addon item) {
         return databaseConnector.update(tableName,id, loadJSONfromAddon(item));
     }
 
+    /**
+     * @param item the entity to add to the database
+     * @return A string representation of the object that was created
+     */
     @Override
     public String create(Addon item) {
         return databaseConnector.create(tableName, loadJSONfromAddon(item));
@@ -44,28 +60,14 @@ public class AddonDB implements Repository<Addon> {
         }
         return addonList;
     }
-//    public List<Addon> parseAddonTypes(JSONObject rawAddonTypes){
-//        List<Addon> addonTypes= new ArrayList<>();
-//        JSONArray types = rawAddonTypes.getJSONArray("AddonTypes");
-//        for(int i = 0; i < types.length(); i++)
-//        {
-//            JSONObject addon = types.getJSONObject(i);
-//            addonTypes.add(new Addon(addon.getString("name"), addon.getInt("label")));
-//        }
-//    }
+
+    /**
+     * @return A JSONObject of all Addon types in the databse.
+     */
     public JSONObject getAddonTypes(){
         return databaseConnector.getCollection("AddonTypes");
-//        JSONArray raw_addonTypes = rawAddons.getJSONArray("AddonTypes");
 
-//        List<Addon> addonTypes = new ArrayList<>();
-//        for(int i = 0; i < raw_addonTypes.length(); i++)
-//        {
-//            JSONObject objects = raw_addonTypes.getJSONObject(i);
-//
-//            //Iterate through the elements of the array i.
-//            //Get thier value.
-//            //Get the value for the first element and the value for the last element.
-//        }
+
     }
 
     @Override

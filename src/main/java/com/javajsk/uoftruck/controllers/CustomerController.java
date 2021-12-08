@@ -34,14 +34,15 @@ public class CustomerController {
     CustomerLogin customerLogin;
     CustomerSignUp customerSignUp;
     ModifyCustomer modifyCustomer;
-    ViewCustomer customerView;
+
+    ViewCustomer viewCustomer;
+
     MongoDB db;
     Repository<Food> foodRepository;
     CustomerRepository customerRepository;
     CustomerBoundary customerBoundary = new CustomerPresenter();
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
     Hasher hasher = new SHA512Hasher();
-    ViewCustomer viewCustomer;
     ObjectBoundary<Customer> customerObjectBoundary = new ObjectPresenter<>();
 
     public CustomerController() {
@@ -54,8 +55,10 @@ public class CustomerController {
                 repositoryBoundary, customerBoundary, customerObjectBoundary, hasher);
         this.modifyCustomer = new ModifyCustomerInteractor(customerRepository,
                 customerObjectBoundary, repositoryBoundary, customerBoundary, hasher);
-        this.customerView = new ViewCustomerInteractor(customerRepository, customerObjectBoundary);
 
+
+
+        this.viewCustomer = new ViewCustomerInteractor(customerRepository,customerObjectBoundary);
     }
 
     @PutMapping("/CustomerLogin/{username}/{password}")
@@ -76,8 +79,8 @@ public class CustomerController {
 
     }
   
-    @GetMapping("/viewCustomer/{customerId}")
+    @GetMapping("/ViewCustomer/{customerId}")
     public ResponseObject viewCustomer(@PathVariable String customerId){
-        return customerView.viewCustomer(customerId);
+        return viewCustomer.viewCustomer(customerId);
     }
 }
