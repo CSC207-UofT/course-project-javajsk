@@ -27,47 +27,49 @@ class ModifyDefaultSelectionInteractorTest {
     ObjectBoundary<Singleton> sOB;
     VendorBoundary vB;
     RepositoryBoundary rB;
-    List<Integer> allowedAddonTypes;
+    Vendor vendor;
     Selection defaultSelection;
-    Singleton updatedSingleton;
-    String vendorToken;
+    Selection newDefaultSelection;
 
 
     @BeforeEach
     void setUp() {
+        //create an addon and a list of integers for allowed addon types
+        ArrayList<Integer> allowedTypes = new ArrayList<>();
+        allowedTypes.add(1);
+        Addon addon1 = new Addon("1", "Ketchup", 12, allowedTypes, true, "shop1");
 
-        allowedAddonTypes = new ArrayList<>();
-        allowedAddonTypes.add(1);
-        allowedAddonTypes.add(2);
-        Addon addon1 = new Addon("00000", "Lettuce", 0.5f,
-                allowedAddonTypes, true, "00001");
-        Addon addon2 = new Addon("00003", "Tomato", 0.5f,
-                allowedAddonTypes, true, "00001");
-        HashMap<Addon, Integer> singletonSelection = new HashMap<>();
-        singletonSelection.put(addon1, 1);
-        singletonSelection.put(addon2, 2);
-        defaultSelection = new Selection(singletonSelection);
-        Singleton singleton = new Singleton("12345", 15f, "Cheeseburger", "Burger with cheese",
-                allowedAddonTypes, defaultSelection, true, "00001");
-        sR = new RAMSingletonRepository(singleton);
+        // build selection hash map of addon to integers (default selection)
+        HashMap<Addon, Integer> selectionHash = new HashMap<>();
+        selectionHash.put(addon1, 2);
+        defaultSelection = new Selection(selectionHash);
+
+        //build a singleton with the allowed addon types and the default selection
+        Singleton singleton = new Singleton("3", 10, "burger ", "A burger", allowedTypes, defaultSelection, true, "shop1");
+
+        //build a new default selection
+        ArrayList<Integer> newAllowedTypes = new ArrayList<>();
+        newAllowedTypes.add(3);
+        Addon addon2 = new Addon("1", "sprinkles", 12, allowedTypes, true, "shop1");
+        HashMap<Addon, Integer> newSelectionHash = new HashMap<>();
+        newSelectionHash.put(addon2, 2);
+        newDefaultSelection = new Selection(selectionHash);
+
         Shop shop = new Shop("00001", "JavaJShop", "Bay Street", true, new Menu(), new OrderBook());
-        vR = new RAMVendorRepository(new Vendor("12345", "vendorName", "vendorPass", shop));
-        rB = new RAMRepositoryBoundary();
-        vB = new RAMVendorBoundary();
+        vendor = new Vendor("12345", "Username", "Password", shop);
+        vR = new RAMVendorRepository(vendor);
+        sR = new RAMSingletonRepository(singleton);
         sOB = new RAMSingletonObjectBoundary();
-        Addon addon3 = new Addon("00004", "Bacon", 0.5f,
-                allowedAddonTypes, true, "00001");
-        singletonSelection.put(addon3, 1);
-        selection = new Selection(singletonSelection);
-        updatedSingleton.setDefaultSelection(selection);
+        vB = new RAMVendorBoundary();
+        rB = new RAMRepositoryBoundary();
         useCase = new ModifyDefaultSelectionInteractor(vR, rB, sR, vB, sOB);
-        vendorToken = vR.authenticateUser("vendorName", "vendorPass");
 
     }
 
     @Test
     void modifyDefaultSelection() {
-        assertEquals(updatedSingleton, useCase.modifyDefaultSelection("vendorName", "12345", selection).getContents());
+        Singleton updatedSingleton = (Singleton) useCase.modifyDefaultSelection("Username", "3", newDefaultSelection).getContents();
+        assertEquals(newDefaultSelection, updatedSingleton.getDefaultSelection());
     }
 
     @Test
@@ -77,6 +79,22 @@ class ModifyDefaultSelectionInteractorTest {
 
     @Test
     void modifyDefaultSelectionInvalidSingleton() {
-        assertEquals("No such singleton found", useCase.modifyDefaultSelection("vendorName", "invalidSingletonId", selection).getMessage());
+        assertEquals("No such singleton found", useCase.modifyDefaultSelection("Username", "invalidSingletonId", selection).getMessage());
     }
+
+    @Test
+    void modifyDefaultSelectionInvalidAddonType() {
+        //build another selection with invalid addon types
+        ArrayList<Integer> newAllowedTypes = new ArrayList<>();
+        newAllowedTypes.add(3);
+        Addon addon1 = new Addon("6", "sprinkles", 12, newAllowedTypes, true, "shop1");
+
+        // build selection hash map of addon to integers (default selection)
+        HashMap<Addon, Integer> newSelectionHash = new HashMap<>();
+        newSelectionHash.put(addon1, 2);
+        newDefaultSelection = new Selection(newSelectionHash);
+
+        assertEquals("Incorrect values inputted for selection.", useCase.modifyDefaultSelection("Username", "3", newDefaultSelection).getMessage());
+    }
+
 }
