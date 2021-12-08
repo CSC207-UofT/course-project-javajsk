@@ -14,7 +14,7 @@ public class RAMFoodObjectBoundary implements ObjectBoundary<Food> {
 
     @Override
     public ResponseObject showObjectList(List<Food> listToDisp) {
-        return null;
+        return new ResponseObject(0, "", listToDisp);
     }
 
     @Override

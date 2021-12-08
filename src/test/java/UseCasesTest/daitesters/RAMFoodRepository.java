@@ -7,14 +7,20 @@ import entities.Vendor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class RAMFoodRepository implements Repository<Food> {
     List<Food> foodList;
+
     public RAMFoodRepository(Food food){
         List<Food> foodList = new ArrayList<>();
         foodList.add(food);
         this.foodList = foodList;
     }
+    public RAMFoodRepository(){
+        this.foodList = new ArrayList<>();
+    }
+
     @Override
     public Food read(String id) {
         for (Food food: foodList){
@@ -49,7 +55,14 @@ public class RAMFoodRepository implements Repository<Food> {
 
     @Override
     public List<Food> readMultiple(String parameter, String needle) {
-        return null;
+        List<Food> foods = new ArrayList<>();
+        for (Food food: foodList){
+            //hard code to look for shop id
+            if (Objects.equals(food.getShopId(), needle)){
+                foods.add(food);
+            }
+        }
+        return foods;
     }
 
     @Override
