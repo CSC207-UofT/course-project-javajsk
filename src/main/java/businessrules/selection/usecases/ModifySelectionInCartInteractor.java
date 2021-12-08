@@ -16,12 +16,36 @@ import entities.Selection;
  * Use case for modifying the selection within a cart
  */
 public class ModifySelectionInCartInteractor implements ModifySelectionInCart {
+    /**
+     * The Customer repository.
+     */
     CustomerRepository customerRepository;
+    /**
+     * The Food repository.
+     */
     Repository<Food> foodRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Customer boundary.
+     */
     CustomerBoundary customerBoundary;
+    /**
+     * The Cart object boundary.
+     */
     ObjectBoundary<Cart> cartObjectBoundary;
 
+    /**
+     * Instantiates a new Modify selection in cart interactor.
+     *
+     * @param customerRepository the customer repository
+     * @param foodRepository     the food repository
+     * @param repositoryBoundary the repository boundary
+     * @param customerBoundary   the customer boundary
+     * @param cartObjectBoundary the cart object boundary
+     */
     public ModifySelectionInCartInteractor(CustomerRepository customerRepository,
                                            Repository<Food> foodRepository, RepositoryBoundary repositoryBoundary,
                                            CustomerBoundary customerBoundary,
@@ -34,14 +58,13 @@ public class ModifySelectionInCartInteractor implements ModifySelectionInCart {
     }
 
     /**
-     * Method that modifies the selections in a cart and
-     * returns a JSONObject representing the modified cart
+     * Modifies the selections in a cart
      *
      * @param userToken         token representing the user that owns the cart
      * @param foodId            the food that has the selections
      * @param originalSelection The original selection
      * @param selections        The selection that will replace the original selection
-     * @return                  JSONObject representing the current cart (after updating)
+     * @return a response object
      */
     @Override
     public ResponseObject modifySelection(String userToken, String foodId, Selection[] originalSelection,

@@ -1,9 +1,8 @@
-package adapters.dam.entityrepoitories;
+package adapters.dam;
 
-import adapters.dam.DBGateway;
+import adapters.DBGateway;
 import businessrules.dai.Repository;
 import entities.*;
-import framework.MongoDB;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,6 +58,9 @@ public class ShopDB implements Repository<Shop> {
     }
 
     public Shop loadShopFromJSON(JSONObject rawShop){
+        if(rawShop == null){
+            return null;
+        }
         OrderDB orderLoader = new OrderDB(dbGateway);
         try{
             String id = rawShop.getString("id");
@@ -90,8 +92,8 @@ public class ShopDB implements Repository<Shop> {
                 foods.add(foodLoader.read(rawFoods.getString(i)));
             }
             List<Addon> addons = new ArrayList<>();
-            for (int i = 0; i < rawFoods.length(); i++) {
-                addons.add(addonLoader.read(rawFoods.getString(i)));
+            for (int i = 0; i < rawAddons.length(); i++) {
+                addons.add(addonLoader.read(rawAddons.getString(i)));
             }
             return new Menu(foods, addons);
         }catch (JSONException e){

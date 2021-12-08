@@ -15,16 +15,29 @@ import java.util.List;
  * Use case for getting a customer's past orders from a repository
  */
 public class GetUserPastOrdersInteractor implements GetUserPastOrders {
+    /**
+     * The Customer repository.
+     */
     CustomerRepository customerRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Order repository.
+     */
     Repository<Order> orderRepository;
+    /**
+     * The Order object boundary.
+     */
     ObjectBoundary<Order> orderObjectBoundary;
 
     /**
      * Instantiates a use case for getting a customer's past orders from a repository
-     * @param cR the customer repository
-     * @param rB the repository boundary
-     * @param oR the order repository
+     *
+     * @param cR  the customer repository
+     * @param rB  the repository boundary
+     * @param oR  the order repository
      * @param oOB the order object boundart
      */
     public GetUserPastOrdersInteractor(CustomerRepository cR, RepositoryBoundary rB, Repository<Order> oR, ObjectBoundary<Order> oOB) {

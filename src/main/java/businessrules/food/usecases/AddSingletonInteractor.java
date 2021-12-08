@@ -15,12 +15,26 @@ import entities.Vendor;
  * Use case for adding a singleton to a repository
  */
 public class AddSingletonInteractor implements AddSingleton {
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Food repository.
+     */
     Repository<Food> foodRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Food object boundary.
+     */
     ObjectBoundary<Food> foodObjectBoundary;
+    /**
+     * The Vendor boundary.
+     */
     VendorBoundary vendorBoundary;
-
 
     /**
      * Instantiates a use case for adding singleton entities to a repository
@@ -74,6 +88,5 @@ public class AddSingletonInteractor implements AddSingleton {
         }
 
         return foodObjectBoundary.showObject(food);
-
     }
 }

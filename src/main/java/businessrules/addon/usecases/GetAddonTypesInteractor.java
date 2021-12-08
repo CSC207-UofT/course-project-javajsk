@@ -1,30 +1,31 @@
 package businessrules.addon.usecases;
 
-import adapters.dam.entityrepoitories.AddonDB;
+import adapters.dam.AddonDB;
 import businessrules.addon.inputboundaries.GetAddonTypes;
-import businessrules.dai.Repository;
-import businessrules.dai.VendorRepository;
-import businessrules.outputboundaries.ObjectBoundary;
-import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import businessrules.outputboundaries.VendorBoundary;
-import entities.Addon;
-import framework.MongoDB;
-import org.json.JSONObject;
 
+/**
+ * Get addon types use cases
+ */
 public class GetAddonTypesInteractor implements GetAddonTypes {
+    /**
+     * The Addon repository.
+     */
     AddonDB addonRepository;
-    VendorRepository vendorRepository;
-    VendorBoundary vendorBoundary;
-    RepositoryBoundary repositoryBoundary;
-    ObjectBoundary<Addon> addonObjectBoundary;
-    MongoDB db;
-    public GetAddonTypesInteractor() {
-        this.db = new MongoDB();
-        this.addonRepository = new AddonDB(db);
+
+    /**
+     * Instantiates a new Get addon types interactor.
+     */
+    public GetAddonTypesInteractor(AddonDB addonRepository) {
+        this.addonRepository = addonRepository;
     }
 
+    /**
+     * Method that returns a response object containing addon types
+     * @return response object containing addon types
+     */
     public ResponseObject getAddonTypes() {
+
         return new ResponseObject(200, "",addonRepository.getAddonTypes().toString());
     }
 }

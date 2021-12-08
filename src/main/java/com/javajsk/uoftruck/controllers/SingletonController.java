@@ -1,11 +1,9 @@
 package com.javajsk.uoftruck.controllers;
 
 
-import adapters.dam.DBGateway;
-import adapters.dam.entityrepoitories.AddonDB;
-import adapters.dam.entityrepoitories.SingletonDB;
-import adapters.dam.entityrepoitories.VendorDB;
-import businessrules.dai.Repository;
+import adapters.dam.AddonDB;
+import adapters.dam.SingletonDB;
+import adapters.dam.VendorDB;
 import businessrules.dai.VendorRepository;
 
 import businessrules.outputboundaries.ObjectBoundary;
@@ -23,9 +21,9 @@ import framework.MongoDB;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
-import presenters.ObjectPresenter;
-import presenters.RepositoryPresenter;
-import presenters.VendorPresenter;
+import adapters.presenters.ObjectPresenter;
+import adapters.presenters.RepositoryPresenter;
+import adapters.presenters.VendorPresenter;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")

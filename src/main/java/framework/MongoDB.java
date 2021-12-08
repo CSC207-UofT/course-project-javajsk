@@ -1,18 +1,16 @@
 package framework;
 
-import adapters.dam.DBGateway;
+import adapters.DBGateway;
 import com.mongodb.*;
 import com.mongodb.client.*;
 import com.mongodb.client.MongoClient;
 import org.bson.Document;
-import org.bson.io.BsonOutput;
 import org.bson.types.ObjectId;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class MongoDB implements DBGateway {

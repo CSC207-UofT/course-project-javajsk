@@ -1,8 +1,8 @@
 package com.javajsk.uoftruck.controllers;
 
-import adapters.dam.SHA512Hasher;
-import adapters.dam.entityrepoitories.CustomerDB;
-import adapters.dam.entityrepoitories.FoodDB;
+import adapters.SHA512Hasher;
+import adapters.dam.CustomerDB;
+import adapters.dam.FoodDB;
 import businessrules.customer.inputboundaries.CustomerLogin;
 import businessrules.customer.inputboundaries.CustomerSignUp;
 import businessrules.customer.inputboundaries.ModifyCustomer;
@@ -23,10 +23,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
-import presenters.CustomerPresenter;
-import presenters.ObjectPresenter;
-import presenters.RepositoryPresenter;
-import presenters.VendorPresenter;
+import adapters.presenters.CustomerPresenter;
+import adapters.presenters.ObjectPresenter;
+import adapters.presenters.RepositoryPresenter;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -35,6 +34,7 @@ public class CustomerController {
     CustomerLogin customerLogin;
     CustomerSignUp customerSignUp;
     ModifyCustomer modifyCustomer;
+    ViewCustomer customerView;
     MongoDB db;
     Repository<Food> foodRepository;
     CustomerRepository customerRepository;
@@ -54,7 +54,8 @@ public class CustomerController {
                 repositoryBoundary, customerBoundary, customerObjectBoundary, hasher);
         this.modifyCustomer = new ModifyCustomerInteractor(customerRepository,
                 customerObjectBoundary, repositoryBoundary, customerBoundary, hasher);
-        this.viewCustomer = new ViewCustomerInteractor(customerRepository,customerObjectBoundary);
+        this.customerView = new ViewCustomerInteractor(customerRepository, customerObjectBoundary);
+
     }
 
     @PutMapping("/CustomerLogin/{username}/{password}")
@@ -77,6 +78,6 @@ public class CustomerController {
   
     @GetMapping("/viewCustomer/{customerId}")
     public ResponseObject viewCustomer(@PathVariable String customerId){
-        return viewCustomer.viewCustomer(customerId);
+        return customerView.viewCustomer(customerId);
     }
 }

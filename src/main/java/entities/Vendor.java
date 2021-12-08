@@ -3,7 +3,7 @@ package entities;
 import org.json.JSONObject;
 
 /**
- * The type Vendor.
+ * The Vendor entity class.
  */
 public class Vendor extends User{
     /**
@@ -14,13 +14,25 @@ public class Vendor extends User{
     /**
      * Instantiates a new Vendor.
      *
-     * @param shop the shop
+     * @param id       the id
+     * @param username the username
+     * @param password the password
+     * @param shop     the shop
      */
     public Vendor(String id, String username, String password, Shop shop) {
         super(id, username, password);
         this.shop = shop;
     }
 
+    /**
+     * Instantiates a new Vendor.
+     *
+     * @param id       the id
+     * @param username the username
+     * @param password the password
+     * @param shopName the shop name
+     * @param shopLoc  the shop loc
+     */
     public Vendor(String id, String username, String password, String shopName, String shopLoc){
         super(id,username,password);
         this.shop = new Shop(shopName, shopLoc);
@@ -44,6 +56,12 @@ public class Vendor extends User{
         this.shop = shop;
     }
 
+    /**
+     * Delete shop boolean.
+     *
+     * @param shopId the shop id
+     * @return the boolean
+     */
     public boolean deleteShop(String shopId){
         if(this.shop.getId().equals(shopId)){
             this.shop = null;
@@ -51,6 +69,12 @@ public class Vendor extends User{
         }
         return false;
     }
+
+    /**
+     * Method returns vendor as a string representation
+     *
+     * @return string representation of vendor
+     */
     @Override
     public String toString(){
         JSONObject jsonObject = new JSONObject();

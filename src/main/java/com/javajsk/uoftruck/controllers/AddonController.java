@@ -1,7 +1,7 @@
 package com.javajsk.uoftruck.controllers;
 
-import adapters.dam.entityrepoitories.AddonDB;
-import adapters.dam.entityrepoitories.VendorDB;
+import adapters.dam.AddonDB;
+import adapters.dam.VendorDB;
 import businessrules.addon.inputboundaries.*;
 import businessrules.addon.usecases.*;
 import businessrules.addon.inputboundaries.CreateAddon;
@@ -22,9 +22,9 @@ import entities.Addon;
 import framework.MongoDB;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
-import presenters.ObjectPresenter;
-import presenters.RepositoryPresenter;
-import presenters.VendorPresenter;
+import adapters.presenters.ObjectPresenter;
+import adapters.presenters.RepositoryPresenter;
+import adapters.presenters.VendorPresenter;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -44,7 +44,6 @@ public class AddonController {
 
     public AddonController() {
         this.db = new MongoDB();
-        this.getAddonTypes = new GetAddonTypesInteractor();
         this.addonRepository = new AddonDB(db);
         this.vendorRepository = new VendorDB(db);
         this.createAddon = new CreateAddonInteractor(addonRepository, vendorRepository, vendorBoundary,
@@ -52,6 +51,7 @@ public class AddonController {
         this.getShopAddons = new GetShopAddonsInteractor(addonRepository, repositoryBoundary, addonObjectBoundary);
         this.modifyAddon = new ModifyAddonInteractor(addonRepository, addonObjectBoundary,
                 repositoryBoundary, vendorRepository, vendorBoundary);
+        this.getAddonTypes = new GetAddonTypesInteractor(addonRepository);
         this.getAddon = new GetAddonInteractor(addonRepository, repositoryBoundary, addonObjectBoundary);
     }
 
@@ -73,15 +73,13 @@ public class AddonController {
 
     @GetMapping("/GetAddonTypes/")
     public ResponseObject runGetAddonTypes(){
-
         return getAddonTypes.getAddonTypes();
     }
 
     @PutMapping("/ModifyAddon/{vendorToken}/{addonId}")
-
-    public ResponseObject runModifyAddon(@PathVariable String vendorToken, @PathVariable String addonId, @RequestBody Addon addon)
-    {
+    public ResponseObject runModifyAddon(@PathVariable String vendorToken, @PathVariable String addonId,
+                                         @RequestBody Addon addon){
         return modifyAddon.modifyAddon(vendorToken, addonId, addon);
-        }
-
     }
+
+}

@@ -1,6 +1,6 @@
 package com.javajsk.uoftruck.controllers;
 
-import adapters.dam.entityrepoitories.*;
+import adapters.dam.*;
 import businessrules.dai.CustomerRepository;
 import businessrules.dai.Repository;
 import businessrules.dai.VendorRepository;
@@ -19,14 +19,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import presenters.CustomerPresenter;
-import presenters.ObjectPresenter;
-import presenters.RepositoryPresenter;
-import presenters.VendorPresenter;
-
-
-
-import java.util.HashMap;
+import adapters.presenters.CustomerPresenter;
+import adapters.presenters.ObjectPresenter;
+import adapters.presenters.RepositoryPresenter;
+import adapters.presenters.VendorPresenter;
 
 @RestController
 public class SelectionController {

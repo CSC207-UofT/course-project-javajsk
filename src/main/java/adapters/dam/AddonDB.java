@@ -1,6 +1,6 @@
-package adapters.dam.entityrepoitories;
+package adapters.dam;
 
-import adapters.dam.DBGateway;
+import adapters.DBGateway;
 import businessrules.dai.Repository;
 import entities.Addon;
 import org.json.JSONArray;

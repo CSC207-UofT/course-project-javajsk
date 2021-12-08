@@ -14,18 +14,34 @@ import java.util.List;
  * Use case for completing an order entry of a repository
  */
 public class CompleteOrderInteractor implements CompleteOrder {
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Order repository.
+     */
     Repository<Order> orderRepository;
+    /**
+     * The Vendor boundary.
+     */
     VendorBoundary vendorBoundary;
+    /**
+     * The Order object boundary.
+     */
     ObjectBoundary<Order> orderObjectBoundary;
 
     /**
      * Instantiates a use case for completing an order
-     * @param vR the vendor repository
-     * @param rB the repository boundary
-     * @param oR the order repository
-     * @param vB the vendor boundary
+     *
+     * @param vR  the vendor repository
+     * @param rB  the repository boundary
+     * @param oR  the order repository
+     * @param vB  the vendor boundary
      * @param oOB the order object boundary
      */
     public CompleteOrderInteractor(VendorRepository vR, RepositoryBoundary rB, Repository<Order> oR,

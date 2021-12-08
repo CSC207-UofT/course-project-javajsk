@@ -1,4 +1,4 @@
-package presenters;
+package adapters.presenters;
 
 import businessrules.outputboundaries.CustomerBoundary;
 import businessrules.outputboundaries.ResponseObject;

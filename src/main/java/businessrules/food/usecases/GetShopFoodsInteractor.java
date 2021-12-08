@@ -12,12 +12,19 @@ import java.util.List;
  * Use case for getting a shops foods from a repository
  */
 public class GetShopFoodsInteractor implements GetShopFoods {
+    /**
+     * The Food repository.
+     */
     Repository<Food> foodRepository;
+    /**
+     * The Food object boundary.
+     */
     ObjectBoundary<Food> foodObjectBoundary;
 
     /**
      * Instantiates a use case for getting shop foods
-     * @param fR the food repository
+     *
+     * @param fR  the food repository
      * @param fOB the food object boundary
      */
     public GetShopFoodsInteractor(Repository<Food> fR, ObjectBoundary<Food> fOB) {

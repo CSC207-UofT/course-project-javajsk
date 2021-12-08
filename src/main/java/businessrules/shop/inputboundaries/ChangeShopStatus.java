@@ -2,6 +2,9 @@ package businessrules.shop.inputboundaries;
 
 import businessrules.outputboundaries.ResponseObject;
 
+/**
+ * Input Boundary for ChangeShopStatusInteractor
+ */
 public interface ChangeShopStatus {
     /**
      * Change the status of the shop belonging to the
@@ -9,7 +12,7 @@ public interface ChangeShopStatus {
      *
      * @param vendorToken the vendor that owns the shop
      * @param newStatus   the new status of the shop
-     * @return            JSONobject representing the shop
+     * @return  response object
      */
     ResponseObject changeShopStatus(String vendorToken, boolean newStatus);
 }

@@ -1,9 +1,7 @@
 package UseCasesTest.daitesters;
 
 import businessrules.dai.Repository;
-import entities.Addon;
 import entities.Shop;
-import entities.Singleton;
 
 import java.util.ArrayList;
 import java.util.List;

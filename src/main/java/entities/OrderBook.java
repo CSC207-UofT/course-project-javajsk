@@ -1,12 +1,10 @@
 package entities;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The Order book entity
+ * The Order book entity class
  */
 public class OrderBook {
     /**
@@ -85,5 +83,4 @@ public class OrderBook {
         List<Order> incompleteOrders = this.getIncompleteOrders();
         return incompleteOrders.get(0);
     }
-
 }
