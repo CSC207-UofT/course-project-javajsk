@@ -61,24 +61,46 @@ public class CustomerController {
         this.viewCustomer = new ViewCustomerInteractor(customerRepository,customerObjectBoundary);
     }
 
+    /**
+     * @param username Username of customer trying to login
+     * @param password Password of customer trying to login
+     * @return A ResponseObject with the customer token associated with that log in session, with status codes
+     */
     @PutMapping("/CustomerLogin/{username}/{password}")
     public ResponseObject runCustomerLogin(@PathVariable String username, @PathVariable String password){
         return customerLogin.login(username, password);
     }
 
+    /**
+     * @param username Username of customer trying to make a new account
+     * @param password Password of customer trying to make a new account
+     * @param confirmed_password Password confirmation of customer trying to make a new account
+     * @return A ResponseObject with the customer object just created, with status codes
+     */
     @PutMapping("/CustomerSignUp/{username}/{password}/{confirmed_password}")
     public ResponseObject runCustomerSignup(@PathVariable String username, @PathVariable String password,
                                       @PathVariable String confirmed_password){
         return customerSignUp.signUp(username, password, confirmed_password);
     }
-  
+
+    /**
+     * @param username New Username of customer trying to change account details
+     * @param password New password of customer trying to change account details
+     * @param confirmed_password New confirmed_password of customer trying to change account details
+     * @param userToken usertoken of user trying to change details, to make sure they're logged in first
+     * @return A ResponseObject with the new customer object just modified, with status codes
+     */
     @PutMapping("/ModifyCustomer/{userToken}/{username}/{password}/{confirmed_password}")
     public ResponseObject runModifyCustomer(@PathVariable String username, @PathVariable String password,
                                       @PathVariable String confirmed_password, @PathVariable String userToken){
         return modifyCustomer.modify(userToken, username, password, confirmed_password);
 
     }
-  
+
+    /**
+     * @param customerId id of the customer wanting to be viewed
+     * @return A ResponseObject with the customer object with the given id, with status codes
+     */
     @GetMapping("/ViewCustomer/{customerId}")
     public ResponseObject viewCustomer(@PathVariable String customerId){
         return viewCustomer.viewCustomer(customerId);
