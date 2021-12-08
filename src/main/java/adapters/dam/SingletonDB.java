@@ -87,7 +87,6 @@ public class SingletonDB implements Repository<Singleton> {
                     shopId);
 
         }catch (JSONException e){
-            e.printStackTrace();
             return null;
         }
     }

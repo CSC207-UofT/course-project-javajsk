@@ -25,8 +25,6 @@ public class ShopDB implements Repository<Shop> {
 
     @Override
     public boolean update(String id, Shop item) {
-        System.out.println(id);
-        System.out.println(loadJSONFromShop(item));
         return dbGateway.update(tableName, id, loadJSONFromShop(item));
 
     }
@@ -79,7 +77,6 @@ public class ShopDB implements Repository<Shop> {
             Menu menu = loadMenuFromJSON(rawMenu);
             return new Shop(id, name, location, isOpen, menu, orderBook);
         }catch(NullPointerException err){
-            System.out.println("Null input");
             return null;
         }
         catch(JSONException e){
