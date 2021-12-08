@@ -14,11 +14,36 @@ import entities.Vendor;
  * Use case for creating a Singleton and updating the repository with the changes
  */
 public class CreateSingletonInteractor implements CreateSingleton {
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Singleton repository.
+     */
     Repository<Singleton> singletonRepository;
+    /**
+     * The Singleton object boundary.
+     */
     ObjectBoundary<Singleton> singletonObjectBoundary;
+    /**
+     * The Vendor boundary.
+     */
     VendorBoundary vendorBoundary;
+
+    /**
+     * Instantiates a new Create singleton interactor.
+     *
+     * @param vendorRepository        the vendor repository
+     * @param repositoryBoundary      the repository boundary
+     * @param singletonRepository     the singleton repository
+     * @param singletonObjectBoundary the singleton object boundary
+     * @param vendorBoundary          the vendor boundary
+     */
     public CreateSingletonInteractor(VendorRepository vendorRepository, RepositoryBoundary repositoryBoundary,
                                      Repository<Singleton> singletonRepository,
                                      ObjectBoundary<Singleton> singletonObjectBoundary,
@@ -30,15 +55,12 @@ public class CreateSingletonInteractor implements CreateSingleton {
         this.vendorBoundary = vendorBoundary;
     }
 
-
-
-
     /**
      * Method that creates a Singleton entity and returns its JSONObject representation
      *
      * @param vendorToken   the token of the vendor creating the singleton
      * @param singleton     the Singleton object being created
-     * @return              JSONObject representing the Singleton, error otherwise
+     * @return response object
      */
     @Override
     public ResponseObject createSingleton(String vendorToken, Singleton singleton) {

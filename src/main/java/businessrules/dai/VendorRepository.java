@@ -3,7 +3,7 @@ package businessrules.dai;
 import entities.Vendor;
 
 /**
- *Interface for vendor repositories to implement
+ * Interface for vendor repositories to implement
  *
  * Extends both the user repository and a repository of type Vendor
  */

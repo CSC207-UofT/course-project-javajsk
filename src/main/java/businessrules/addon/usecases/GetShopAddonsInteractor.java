@@ -9,11 +9,30 @@ import entities.Addon;
 
 import java.util.List;
 
+/**
+ * Get shop addons use case
+ */
 public class GetShopAddonsInteractor implements GetShopAddons {
+    /**
+     * The Addon repository.
+     */
     Repository<Addon> addonRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Addon object boundary.
+     */
     ObjectBoundary<Addon> addonObjectBoundary;
 
+    /**
+     * Instantiates a new Get shop addons interactor.
+     *
+     * @param addonRepository     the addon repository
+     * @param repositoryBoundary  the repository boundary
+     * @param addonObjectBoundary the addon object boundary
+     */
     public GetShopAddonsInteractor(Repository<Addon> addonRepository, RepositoryBoundary repositoryBoundary,
                                    ObjectBoundary<Addon> addonObjectBoundary) {
         this.addonRepository = addonRepository;
@@ -21,8 +40,13 @@ public class GetShopAddonsInteractor implements GetShopAddons {
         this.addonObjectBoundary = addonObjectBoundary;
     }
 
+    /**
+     * Method that returns a response object that contains the addons of the shop
+     * with the given id
+     * @param shopId id of shop
+     * @return response object containing shop addons or error message
+     */
     @Override
-    //TODO implement this using readMultiple method; currently null in all local repositories
     public ResponseObject getShopAddons(String shopId) {
 
         List<Addon> result = addonRepository.readMultiple("shopId", shopId);

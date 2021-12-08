@@ -16,18 +16,34 @@ import entities.Vendor;
  * Use case for adding an addon to a menu of a repository
  */
 public class AddAddonToMenuInteractor implements AddAddonToMenu {
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Vendor boundary.
+     */
     VendorBoundary vendorBoundary;
+    /**
+     * The Shop repository.
+     */
     Repository<Shop> shopRepository;
+    /**
+     * The Menu object boundary.
+     */
     ObjectBoundary<Menu> menuObjectBoundary;
 
     /**
      * Instantiates a use case for adding an addon to a menu
-     * @param vR the vendor repository
-     * @param rB the repository boundary
-     * @param vB the vendor boundary
-     * @param sR the shop repository
+     *
+     * @param vR  the vendor repository
+     * @param rB  the repository boundary
+     * @param vB  the vendor boundary
+     * @param sR  the shop repository
      * @param mOB the menu object boundary
      */
     public AddAddonToMenuInteractor(VendorRepository vR, RepositoryBoundary rB, VendorBoundary vB,

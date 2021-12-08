@@ -3,7 +3,7 @@ package businessrules.customer.inputboundaries;
 import businessrules.outputboundaries.ResponseObject;
 
 /**
- * Input Boundary for CustomerLoginInterface
+ * Input Boundary for CustomerLoginInteractor
  */
 public interface CustomerLogin {
     /**

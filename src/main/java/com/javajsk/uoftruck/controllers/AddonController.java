@@ -34,7 +34,6 @@ public class AddonController {
 
     public AddonController() {
         this.db = new MongoDB();
-        this.getAddonTypes = new GetAddonTypesInteractor();
         this.addonRepository = new AddonDB(db);
         this.vendorRepository = new VendorDB(db);
         this.createAddon = new CreateAddonInteractor(addonRepository, vendorRepository, vendorBoundary,
@@ -42,6 +41,7 @@ public class AddonController {
         this.getShopAddons = new GetShopAddonsInteractor(addonRepository, repositoryBoundary, addonObjectBoundary);
         this.modifyAddon = new ModifyAddonInteractor(addonRepository, addonObjectBoundary,
                 repositoryBoundary, vendorRepository, vendorBoundary);
+        this.getAddonTypes = new GetAddonTypesInteractor(addonRepository);
         this.getAddon = new GetAddonInteractor(addonRepository, repositoryBoundary, addonObjectBoundary);
     }
 

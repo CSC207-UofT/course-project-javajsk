@@ -11,11 +11,31 @@ import businessrules.outputboundaries.ResponseObject;
  * Use case for logging in a customer with repository data
  */
 public class CustomerLoginInteractor implements CustomerLogin {
+    /**
+     * The Customer repository.
+     */
     CustomerRepository customerRepository;
+    /**
+     * The Customer boundary.
+     */
     CustomerBoundary customerBoundary;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Hasher.
+     */
     Hasher hasher;
 
+    /**
+     * Instantiates a new Customer login interactor.
+     *
+     * @param customerRepository the customer repository
+     * @param customerBoundary   the customer boundary
+     * @param repositoryBoundary the repository boundary
+     * @param hasher             the hasher
+     */
     public CustomerLoginInteractor(CustomerRepository customerRepository, CustomerBoundary customerBoundary,
                                    RepositoryBoundary repositoryBoundary, Hasher hasher) {
         this.customerRepository = customerRepository;

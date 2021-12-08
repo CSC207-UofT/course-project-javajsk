@@ -15,20 +15,35 @@ import entities.Vendor;
 /**
  * Use case for removing an addon entity from a menu entry in a repository
  */
-@SuppressWarnings("DuplicatedCode")
 public class RemoveAddonFromMenuInteractor implements RemoveAddonFromMenu {
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Vendor boundary.
+     */
     VendorBoundary vendorBoundary;
+    /**
+     * The Shop repository.
+     */
     Repository<Shop> shopRepository;
+    /**
+     * The Menu object boundary.
+     */
     ObjectBoundary<Menu> menuObjectBoundary;
 
     /**
      * Instantiates a use case for removing an addon entity from a menu entry
-     * @param vR vendor repository
-     * @param rB repository boundary
-     * @param vB vendor boundary
-     * @param sR shop repository
+     *
+     * @param vR  vendor repository
+     * @param rB  repository boundary
+     * @param vB  vendor boundary
+     * @param sR  shop repository
      * @param mOB menu object boundary
      */
     public RemoveAddonFromMenuInteractor(VendorRepository vR, RepositoryBoundary rB, VendorBoundary vB,
@@ -62,6 +77,5 @@ public class RemoveAddonFromMenuInteractor implements RemoveAddonFromMenu {
         }
 
         return menuObjectBoundary.showObject(menu);
-
     }
 }

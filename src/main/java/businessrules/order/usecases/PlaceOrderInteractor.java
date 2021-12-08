@@ -17,21 +17,40 @@ import java.util.Date;
  * Use case for placing an order in the repository
  */
 public class PlaceOrderInteractor implements PlaceOrder {
+    /**
+     * The Customer repository.
+     */
     CustomerRepository customerRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Order repository.
+     */
     Repository<Order> orderRepository;
+    /**
+     * The Cart repository.
+     */
     Repository<Cart> cartRepository;
+    /**
+     * The Customer boundary.
+     */
     CustomerBoundary customerBoundary;
+    /**
+     * The Order object boundary.
+     */
     ObjectBoundary<Order> orderObjectBoundary;
 
     /**
      * Instantiates a use case for placing an order in the repository
+     *
      * @param cusR the customer repository
-     * @param rB the repository boundary
-     * @param oR the order repository
-     * @param cR the cart repository
-     * @param cB the customer boundary
-     * @param oOB the order object boundary
+     * @param rB   the repository boundary
+     * @param oR   the order repository
+     * @param cR   the cart repository
+     * @param cB   the customer boundary
+     * @param oOB  the order object boundary
      */
     public PlaceOrderInteractor(CustomerRepository cusR, RepositoryBoundary rB, Repository<Order> oR, Repository<Cart> cR, CustomerBoundary cB, ObjectBoundary<Order> oOB) {
         this.customerRepository = cusR;
