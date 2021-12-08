@@ -44,14 +44,15 @@ class CustomerSignUpInteractorTest {
 
     @Test
     void mismatchPassword() {
-        assertEquals("Passwords do not match.", customerSignUpInteractor.signUp("Username",
-                "Password", "Password1").getMessage());
+        ResponseObject responseObject = customerSignUpInteractor.signUp("Username",
+                "Password", "Password1");
+        assertEquals("Passwords do not match.", responseObject.getMessage());
     }
 
     @Test
     void usedUsername() {
        ResponseObject responseObject = customerSignUpInteractor.signUp("Username1",
-               "Password1", "Password1");
+               "Password2", "Password2");
        assertEquals("Username is already taken!", responseObject.getMessage());
     }
 

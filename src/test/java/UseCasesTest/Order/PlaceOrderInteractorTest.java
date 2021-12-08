@@ -53,11 +53,11 @@ class PlaceOrderInteractorTest {
     void successfulPlaceOrder() {
         Cart cart = createNewCart();
         start_customer.setCurrentCart(cart);
-        Date currentTime = new Date();
-        Order order = new Order("N/A", cart, cart.getShopId(), start_customer.getId(),
-                Order.Status.PLACED, currentTime, currentTime);
         ResponseObject responseObject = placeOrderInteractor.placeOrder("10000");
-        assertEquals(order, responseObject.getContents());
+        Order shown_order = (Order) responseObject.getContents();
+        assertEquals(cart, shown_order.getCart());
+        assertEquals(shown_order, orderRepository.read("N/A"));
+        assertEquals(cart, cartRepository.read("cart1"));
     }
 
     @Test
@@ -73,16 +73,6 @@ class PlaceOrderInteractorTest {
         ResponseObject responseObject = placeOrderInteractor.placeOrder("10000");
         assertEquals("Cart is empty.", responseObject.getMessage());
 
-    }
-
-    @Test
-    void cartFailed() {
-        // TODO
-    }
-
-    @Test
-    void orderFailed() {
-        // TODO
     }
 
     public Cart createNewCart() {

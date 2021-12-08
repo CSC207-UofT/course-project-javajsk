@@ -7,7 +7,7 @@ public class RAMCustomerBoundary implements CustomerBoundary {
     @Override
     public ResponseObject displayToken(String token) {
         ResponseObject responseObject = new ResponseObject(0, "", token);
-        return null;
+        return responseObject;
     }
 
     @Override

@@ -15,7 +15,8 @@ public class RAMOrderObjectBoundary implements ObjectBoundary<Order> {
 
     @Override
     public ResponseObject showObjectList(List<Order> listToDisp) {
-        return null;
+        ResponseObject responseObject = new ResponseObject(0, "", listToDisp);
+        return responseObject;
     }
 
     @Override

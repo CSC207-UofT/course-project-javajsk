@@ -1,16 +1,20 @@
 package entities;
 
+import adapters.dam.SHA512Hasher;
+import businessrules.dai.Hasher;
 import org.json.JSONObject;
 
 public abstract class User{
     public String id;
     protected String userName;
     protected String hashedPassword;
+    protected Hasher hasher;
 
     public User(String id, String userName, String hashedPassword) {
+        this.hasher = new SHA512Hasher();
         this.id = id;
         this.userName = userName;
-        this.hashedPassword = hashedPassword;
+        this.hashedPassword = hasher.hash(hashedPassword);
     }
 
     public String getId() {

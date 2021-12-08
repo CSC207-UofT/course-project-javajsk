@@ -8,6 +8,7 @@ import org.mockito.internal.matchers.Or;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class RAMOrderRepository implements Repository<Order> {
     List<Order> storage;
@@ -51,7 +52,13 @@ public class RAMOrderRepository implements Repository<Order> {
 
     @Override
     public List<Order> readMultiple(String parameter, String needle) {
-        return null;
+        List<Order> orderList = new ArrayList<Order>();
+        for (Order i : storage){
+            if (Objects.equals(i.getCustomerId(), needle)){
+                orderList.add(i);
+            }
+        }
+        return orderList;
     }
 
     @Override

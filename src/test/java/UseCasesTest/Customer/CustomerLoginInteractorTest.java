@@ -51,6 +51,6 @@ class CustomerLoginInteractorTest {
     @Test
     void unableLogin(){
         ResponseObject responseObject = customerLoginInteractor.login("Username12", "Password12");
-        assertEquals("Unable to locate such user.", responseObject.getMessage());
+        assertEquals("User not found", responseObject.getMessage());
     }
 }
