@@ -54,7 +54,8 @@ public class CustomerController {
                 repositoryBoundary, customerBoundary, customerObjectBoundary, hasher);
         this.modifyCustomer = new ModifyCustomerInteractor(customerRepository,
                 customerObjectBoundary, repositoryBoundary, customerBoundary, hasher);
-        this.viewCustomer = new ViewCustomerInteractor(customerRepository, customerObjectBoundary);
+
+        this.viewCustomer = new ViewCustomerInteractor(customerRepository,customerObjectBoundary);
     }
 
     @PutMapping("/CustomerLogin/{username}/{password}")

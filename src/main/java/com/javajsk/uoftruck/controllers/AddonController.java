@@ -4,6 +4,14 @@ import adapters.dam.entityrepoitories.AddonDB;
 import adapters.dam.entityrepoitories.VendorDB;
 import businessrules.addon.inputboundaries.*;
 import businessrules.addon.usecases.*;
+import businessrules.addon.inputboundaries.CreateAddon;
+import businessrules.addon.inputboundaries.GetAddonTypes;
+import businessrules.addon.inputboundaries.GetShopAddons;
+import businessrules.addon.inputboundaries.ModifyAddon;
+import businessrules.addon.usecases.CreateAddonInteractor;
+import businessrules.addon.usecases.GetAddonTypesInteractor;
+import businessrules.addon.usecases.GetShopAddonsInteractor;
+import businessrules.addon.usecases.ModifyAddonInteractor;
 import businessrules.dai.Repository;
 import businessrules.dai.VendorRepository;
 import businessrules.outputboundaries.ObjectBoundary;
@@ -19,6 +27,7 @@ import presenters.RepositoryPresenter;
 import presenters.VendorPresenter;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class AddonController {
     CreateAddon createAddon;
     GetShopAddons getShopAddons;

@@ -75,7 +75,7 @@ public class VendorDB implements VendorRepository {
         if(!vendor.getHashedPassword().equals(password)){
             return null;
         }
-        String token_parameter = vendor.getId() + "," +vendor.getUserName() +","+vendor.getShop().getName();
+        String token_parameter = vendor.getId() + "," +vendor.getUserName() +","+vendor.getShop().getId();
         return tokenSigner.generateToken(token_parameter);
     }
 

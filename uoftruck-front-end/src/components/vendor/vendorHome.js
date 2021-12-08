@@ -17,7 +17,11 @@ function VendorHome(props){
               <Route path={`/vendor/login`} exact component={VendorLogin}/>
               <Route path={`${path}/signup`} exact component={VendorSignUp} />
               <Route path={`${path}/menu`} component={Menu}/>
-              <Route path={`${path}/modifyshop`} component={ModifyShop}/>
+              <Route path={`${path}/modifyshop`}>
+                  <div class="my-2">
+                    <ModifyShop/> 
+                  </div>
+              </Route>
               <Route path={path} exact component={DashBoard}/>
             </Switch>
         </div>
@@ -48,7 +52,7 @@ function Selector(){
                     <Link to="/vendor/menu/" className="btn btn-secondary">See menu</Link>
                 </div>
                 <div className="col">
-                    <Link to="/vendor/modifyshop/" className="btn btn-info">Set Shop Info</Link>
+                    <Link to="/vendor/modifyshop/" className="btn btn-primary">Set Shop Info</Link>
                 </div>
             </div>
         </div>

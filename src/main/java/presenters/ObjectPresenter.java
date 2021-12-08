@@ -18,6 +18,9 @@ public class ObjectPresenter<T> implements ObjectBoundary<T> {
      */
     @Override
     public ResponseObject showObject(T obj) {
+        if(obj == null){
+            return new ResponseObject(403, "", "");
+        }
         return new ResponseObject(200, "", obj.toString());
         // 200 http status code for OK
     }
