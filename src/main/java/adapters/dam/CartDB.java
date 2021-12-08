@@ -16,14 +16,21 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * An implementation of a repository with type cart
+ * The data access manager for Cart database.
  */
 public class CartDB implements Repository<Cart> {
+    /**
+     * The Database connector.
+     */
     DBGateway databaseConnector;
+    /**
+     * The Table name.
+     */
     final String tableName = "Cart";
 
     /**
      * Instantiates a cart database
+     *
      * @param databaseConnector the connector to the database
      */
     public CartDB(DBGateway databaseConnector) {
@@ -92,17 +99,18 @@ public class CartDB implements Repository<Cart> {
 
     /**
      * Method for converting a cart entity to a JSON object
+     *
      * @param cart the cart to convert
      * @return the JSON object
      */
     public static JSONObject loadJSONFromCart(Cart cart){
         return new JSONObject(cart.toString());
     }
-  
 
 
-  /**
+    /**
      * Method for converting a selection entity to a JSON object
+     *
      * @param selection the selection entity
      * @return the JSON object
      */
@@ -112,6 +120,7 @@ public class CartDB implements Repository<Cart> {
 
     /**
      * Method for creating a cart entity from a JSON object
+     *
      * @param object the JSON object
      * @return the corresponding cart entity
      */
@@ -170,6 +179,7 @@ public class CartDB implements Repository<Cart> {
 
     /**
      * Method for creating selection entities from a JSON object
+     *
      * @param rawSelection selection data in JSON object
      * @return the corresponding selection entity
      * @throws JSONException if there's an error getting data from the JSON object

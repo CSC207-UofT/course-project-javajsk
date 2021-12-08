@@ -11,14 +11,31 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The data access manager for Singleton database.
+ */
 public class SingletonDB implements Repository<Singleton> {
+    /**
+     * The Database connector.
+     */
     DBGateway dbConnector;
+    /**
+     * The Table name.
+     */
     final String tableName = "Singleton";
 
+    /**
+     * The Keys.
+     */
     static final String[] keys = {"id","price","name","description",
             "allowedAddonTypes","defaultSelection",
             "isAvailable","shopId"};
 
+    /**
+     * Instantiates a new Singleton db.
+     *
+     * @param dbConnector the db connector
+     */
     public SingletonDB(DBGateway dbConnector) {
         this.dbConnector = dbConnector;
     }
@@ -80,8 +97,10 @@ public class SingletonDB implements Repository<Singleton> {
     public Singleton findOneByFieldName(String fieldName, String needle) {
         return loadSingletonFromJSON(dbConnector.readOne(tableName,fieldName,needle));
     }
+
     /**
      * Method for converting a singleton entity to a JSON object
+     *
      * @param singleton the singleton entity
      * @return the corresponding JSON object
      */
@@ -91,6 +110,7 @@ public class SingletonDB implements Repository<Singleton> {
 
     /**
      * Method for converting a JSON object to a singleton entity
+     *
      * @param rawSingleton the JSON data
      * @return the corresponding singleton entity
      */

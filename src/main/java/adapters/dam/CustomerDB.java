@@ -11,12 +11,29 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The data access manager for customer repository.
+ */
 public class
 CustomerDB implements CustomerRepository {
+    /**
+     * The Database connector.
+     */
     DBGateway databaseConnector;
+    /**
+     * The Token signer.
+     */
     TokenSigner tokenSigner;
+    /**
+     * The Table name.
+     */
     final String tableName = "Customer";
 
+    /**
+     * Instantiates a new Customer db.
+     *
+     * @param databaseConnector the database connector
+     */
     public CustomerDB(DBGateway databaseConnector) {
         this.tokenSigner = new JWTSigner();
         this.databaseConnector = databaseConnector;
@@ -114,6 +131,8 @@ CustomerDB implements CustomerRepository {
     }
 
     /**
+     * Load json from customer json object.
+     *
      * @param customer Customer entity that we want to create a JSON of
      * @return The JSONObject representation of that object
      */
@@ -128,6 +147,8 @@ CustomerDB implements CustomerRepository {
 
 
     /**
+     * Load customer from json customer.
+     *
      * @param jsonObject JSON Object representation of Customer
      * @return A constructed customer object
      */
