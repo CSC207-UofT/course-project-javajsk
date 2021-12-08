@@ -61,7 +61,6 @@ public class CustomerDB implements CustomerRepository {
     public User getUserFromToken(String userToken) {
         String info = tokenSigner.getIdFromToken(userToken);
         String userId = info.split(",")[0];
-        System.out.println(userId);
         if(userId.contains("ERROR")){
             return null;
         }
