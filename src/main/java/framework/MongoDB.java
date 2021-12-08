@@ -30,6 +30,9 @@ public class MongoDB implements DBGateway {
         Connect();
     }
 
+    /**
+     * @return Loads mongo password from properties file
+     */
     public String getMongoPassword(){
 
         try (InputStream input = new FileInputStream("src/props.properties")) {
@@ -46,6 +49,9 @@ public class MongoDB implements DBGateway {
         }
         return null;
     }
+    /**
+     * @return Loads mongo username from properties file
+     */
     public String getMongoUsername(){
 
         try (InputStream input = new FileInputStream("src/props.properties")) {
