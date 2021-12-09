@@ -13,14 +13,21 @@ import java.util.List;
 
 
 /**
- * An implementation of a repository with type food
+ * The data access manager for Food database.
  */
 public class FoodDB implements Repository<Food> {
+    /**
+     * The Database connector.
+     */
     DBGateway databaseConnector;
+    /**
+     * The Table name.
+     */
     final String tableName = "Food";
 
     /**
      * Instantiates a food database
+     *
      * @param databaseConnector the connector to the database
      */
     public FoodDB(DBGateway databaseConnector) {
@@ -90,6 +97,7 @@ public class FoodDB implements Repository<Food> {
 
     /**
      * Method for converting a food entity to a JSON object
+     *
      * @param food the food entity
      * @return the corresponding JSON object
      */
@@ -100,6 +108,7 @@ public class FoodDB implements Repository<Food> {
 
     /**
      * Method for creating a food entity from a JSON object
+     *
      * @param rawData the food data
      * @return the corresponding food entity
      */

@@ -31,21 +31,57 @@ import adapters.presenters.VendorPresenter;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Controller for cart use cases
+ */
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class CartController {
 
+    /**
+     * The Add to cart input boundary.
+     */
     AddToCart addToCart;
+    /**
+     * The Empty cart input boundary.
+     */
     EmptyCart emptyCart;
+    /**
+     * The Remove from cart input boundary.
+     */
     RemoveFromCart removeFromCart;
+    /**
+     * The View cart input boundary.
+     */
     ViewCart viewCart;
+    /**
+     * The database.
+     */
     MongoDB db = new MongoDB();
+    /**
+     * The Food repository.
+     */
     Repository<Food> foodRepository = new FoodDB(db);
+    /**
+     * The Customer repository.
+     */
     CustomerRepository customerRepository = new CustomerDB(db);
+    /**
+     * The Repository output boundary.
+     */
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
+    /**
+     * The Cart object output boundary.
+     */
     ObjectBoundary<Cart> cartObjectBoundary = new ObjectPresenter<>();
+    /**
+     * The Cart repository.
+     */
     CartDB cartrepository = new CartDB(db);
 
+    /**
+     * Instantiates a new Cart controller.
+     */
     CartController(){
         addToCart = new AddToCartInteractor(foodRepository, cartObjectBoundary, customerRepository, repositoryBoundary);
         emptyCart = new EmptyCartInteractor(customerRepository, repositoryBoundary, cartObjectBoundary);
@@ -54,9 +90,11 @@ public class CartController {
     }
 
     /**
-     * @param userToken The user token associated with the user trying to place the order
-     * @param shopId The shopId of the shop that the user is tring to place the order to
-     * @param foodId The foodId of the food the user is trying to order
+     * Runs add to cart use case.
+     *
+     * @param userToken  The user token associated with the user trying to place the order
+     * @param shopId     The shopId of the shop that the user is tring to place the order to
+     * @param foodId     The foodId of the food the user is trying to order
      * @param selections The selections associated with the food the user has chosen. This will be a stirng JSON that will be parsed to an object
      * @return The updated Cart after the item has been added to the cart
      */
@@ -77,6 +115,8 @@ public class CartController {
     }
 
     /**
+     * Runs empty cart use case.
+     *
      * @param userToken The usertoken associated with cart that is trying to be emptied
      * @return A ResponseObject containing an empty cart and status codes
      */
@@ -86,8 +126,10 @@ public class CartController {
     }
 
     /**
-     * @param userToken The user token associated with the user trying to modify their cart
-     * @param food The food that is trying to be removed
+     * Runs remove from cart use case.
+     *
+     * @param userToken  The user token associated with the user trying to modify their cart
+     * @param food       The food that is trying to be removed
      * @param selections The selections of said food
      * @return A ResponseObject containing the updated cart and status codes
      */
@@ -103,6 +145,8 @@ public class CartController {
     }
 
     /**
+     * Runs view cart use case.
+     *
      * @param userToken The user token associated with the user trying to view their cart
      * @return A ResponseObject containing their cart object and status codes
      */

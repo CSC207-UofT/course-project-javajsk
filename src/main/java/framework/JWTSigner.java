@@ -7,18 +7,36 @@ import io.jsonwebtoken.security.Keys;
 
 import java.security.Key;
 
+/**
+ * Concrete Token Signer
+ */
 public class JWTSigner implements TokenSigner {
+    /**
+     * The Key.
+     */
     static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    public JWTSigner() {
-    }
+    /**
+     * Instantiates a new Jwt signer.
+     */
+    public JWTSigner() {}
 
+    /**
+     * Method generates token from given user id
+     * @param userId id of user
+     * @return string containing user token
+     */
     @Override
     public String generateToken(String userId) {
 
         return Jwts.builder().setSubject(userId).signWith(key).compact();
     }
 
+    /**
+     * Method returns id associated with given user token
+     * @param token token of user
+     * @return string id of user
+     */
     @Override
     public String getIdFromToken(String token) {
         try {
@@ -27,5 +45,4 @@ public class JWTSigner implements TokenSigner {
             return "ERROR: " + e.getMessage();
         }
     }
-
 }

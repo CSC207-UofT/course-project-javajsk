@@ -27,24 +27,61 @@ import adapters.presenters.CustomerPresenter;
 import adapters.presenters.ObjectPresenter;
 import adapters.presenters.RepositoryPresenter;
 
+/**
+ * Controller for customer use cases
+ */
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class CustomerController {
 
+    /**
+     * The Customer login input boundary.
+     */
     CustomerLogin customerLogin;
+    /**
+     * The Customer sign up input boundary.
+     */
     CustomerSignUp customerSignUp;
+    /**
+     * The Modify customer input boundary.
+     */
     ModifyCustomer modifyCustomer;
-
+    /**
+     * The View customer input boundary.
+     */
     ViewCustomer viewCustomer;
-
+    /**
+     * The database.
+     */
     MongoDB db;
+    /**
+     * The Food repository.
+     */
     Repository<Food> foodRepository;
+    /**
+     * The Customer repository.
+     */
     CustomerRepository customerRepository;
+    /**
+     * The Customer output boundary.
+     */
     CustomerBoundary customerBoundary = new CustomerPresenter();
+    /**
+     * The Repository output boundary.
+     */
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
+    /**
+     * The Hasher.
+     */
     Hasher hasher = new SHA512Hasher();
+    /**
+     * The Customer object output boundary.
+     */
     ObjectBoundary<Customer> customerObjectBoundary = new ObjectPresenter<>();
 
+    /**
+     * Instantiates a new Customer controller.
+     */
     public CustomerController() {
         this.db = new MongoDB();
         this.foodRepository = new FoodDB(db);
@@ -62,6 +99,8 @@ public class CustomerController {
     }
 
     /**
+     * Runs customer login use case.
+     *
      * @param username Username of customer trying to login
      * @param password Password of customer trying to login
      * @return A ResponseObject with the customer token associated with that log in session, with status codes
@@ -72,8 +111,10 @@ public class CustomerController {
     }
 
     /**
-     * @param username Username of customer trying to make a new account
-     * @param password Password of customer trying to make a new account
+     * Runs customer signup use case.
+     *
+     * @param username           Username of customer trying to make a new account
+     * @param password           Password of customer trying to make a new account
      * @param confirmed_password Password confirmation of customer trying to make a new account
      * @return A ResponseObject with the customer object just created, with status codes
      */
@@ -84,10 +125,12 @@ public class CustomerController {
     }
 
     /**
-     * @param username New Username of customer trying to change account details
-     * @param password New password of customer trying to change account details
+     * Runs modify customer use case.
+     *
+     * @param username           New Username of customer trying to change account details
+     * @param password           New password of customer trying to change account details
      * @param confirmed_password New confirmed_password of customer trying to change account details
-     * @param userToken usertoken of user trying to change details, to make sure they're logged in first
+     * @param userToken          usertoken of user trying to change details, to make sure they're logged in first
      * @return A ResponseObject with the new customer object just modified, with status codes
      */
     @PutMapping("/ModifyCustomer/{userToken}/{username}/{password}/{confirmed_password}")
@@ -98,6 +141,8 @@ public class CustomerController {
     }
 
     /**
+     * Runs view customer use case.
+     *
      * @param customerId id of the customer wanting to be viewed
      * @return A ResponseObject with the customer object with the given id, with status codes
      */

@@ -10,10 +10,24 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The data access manager for Shop database.
+ */
 public class ShopDB implements Repository<Shop> {
+    /**
+     * The database gateway.
+     */
     DBGateway dbGateway;
+    /**
+     * The Table name.
+     */
     final String tableName = "Shop";
 
+    /**
+     * Instantiates a new Shop db.
+     *
+     * @param db the db
+     */
     public ShopDB(DBGateway db) {
         this.dbGateway = db;
     }
@@ -40,6 +54,8 @@ public class ShopDB implements Repository<Shop> {
     }
 
     /**
+     * View all shops json object.
+     *
      * @return Gets all items from the collection "Shop" in the database in a JSONObject
      */
     public JSONObject viewAllShops(){
@@ -88,6 +104,7 @@ public class ShopDB implements Repository<Shop> {
 
     /**
      * Method for converting a shop entity to a JSON object
+     *
      * @param shop the shop entity
      * @return the corresponding JSON object
      */
@@ -98,6 +115,7 @@ public class ShopDB implements Repository<Shop> {
 
     /**
      * Method for converting a JSON object to a shop entity
+     *
      * @param rawShop the JSON data
      * @return the corresponding shop entity
      */
@@ -123,6 +141,7 @@ public class ShopDB implements Repository<Shop> {
 
     /**
      * Method for converting a JSON object to a menu entity
+     *
      * @param rawMenu the JSON data
      * @return the corresponding menu entity
      */
