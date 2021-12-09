@@ -57,28 +57,29 @@ public class SetAddonAvailabilityInteractor implements SetAddonAvailability {
 
     /**
      * Method for setting add on availability
-     * @param vendorToken the vendor token
-     * @param addon the addon entity
+     *
+     * @param vendorToken     the vendor token
+     * @param addon           the addon entity
      * @param newAvailability the new availability
      * @return a response object
      */
     @Override
     public ResponseObject setAddonAvailability(String vendorToken, Addon addon, boolean newAvailability) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found.");
         }
 
         Shop shop = vendor.getShop();
 
         Addon shopAddon = shop.getMenu().getAddon(addon);
-        if(shopAddon == null){
+        if (shopAddon == null) {
             return vendorBoundary.error("No such addon found in the menu.");
         }
 
         shopAddon.setAvailable(newAvailability);
 
-        if(!shopRepository.update(shop.getId(), shop)){
+        if (!shopRepository.update(shop.getId(), shop)) {
             return repositoryBoundary.modificationFailed("Failed to update addon availability in shop.");
         }
 

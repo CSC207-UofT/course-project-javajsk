@@ -120,7 +120,7 @@ public class OrderController {
      * @return response object containing data to display to user
      */
     @PutMapping("/CancelOrder/{userToken}/{orderId}")
-    public ResponseObject runCancelOrder(@PathVariable String orderId, @PathVariable String userToken){
+    public ResponseObject runCancelOrder(@PathVariable String orderId, @PathVariable String userToken) {
         return cancelOrder.cancelOrder(userToken, orderId);
     }
 
@@ -132,7 +132,7 @@ public class OrderController {
      * @return response object containing data to display to user
      */
     @PutMapping("/CompleteOrder/{vendorToken}/{orderId}")
-    public ResponseObject runCompleteOrder(@PathVariable String orderId, @PathVariable String vendorToken){
+    public ResponseObject runCompleteOrder(@PathVariable String orderId, @PathVariable String vendorToken) {
         return completeOrder.completeOrder(vendorToken, orderId);
     }
 
@@ -143,7 +143,7 @@ public class OrderController {
      * @return response object containing data to display to user
      */
     @GetMapping("/GetNextOrder/{vendorToken}")
-    public ResponseObject runGetNextOrder(@PathVariable String vendorToken){
+    public ResponseObject runGetNextOrder(@PathVariable String vendorToken) {
         return getNextOrder.getNextOrder(vendorToken);
     }
 
@@ -154,7 +154,7 @@ public class OrderController {
      * @return response object containing data to display to user
      */
     @GetMapping("/GetShopOrders/{vendorToken}")
-    public ResponseObject runGetShopOrders(@PathVariable String vendorToken){
+    public ResponseObject runGetShopOrders(@PathVariable String vendorToken) {
         return getShopOrders.getShopOrders(vendorToken);
     }
 
@@ -165,7 +165,7 @@ public class OrderController {
      * @return response object containing data to display to user
      */
     @GetMapping("/GetUsersPastOrders/{userToken}")
-    public ResponseObject runGetUsersPastOrders(@PathVariable String userToken){
+    public ResponseObject runGetUsersPastOrders(@PathVariable String userToken) {
         return getUserPastOrders.getUserPastOrders(userToken);
     }
 
@@ -176,7 +176,7 @@ public class OrderController {
      * @return response object containing data to display to user
      */
     @PostMapping("/PlaceOrder/{userToken}")
-    public ResponseObject runPlaceOrder(@PathVariable String userToken){
+    public ResponseObject runPlaceOrder(@PathVariable String userToken) {
         return placeOrder.placeOrder(userToken);
     }
 
@@ -188,7 +188,7 @@ public class OrderController {
      * @return response object containing data to display to user
      */
     @PostMapping("/SetOrderInProgress/{vendorToken}/{orderId}")
-    public ResponseObject runSetOrderInProgress(@PathVariable String vendorToken, @PathVariable String orderId){
+    public ResponseObject runSetOrderInProgress(@PathVariable String vendorToken, @PathVariable String orderId) {
         return setOrderInprogress.setOrderInprogress(vendorToken, orderId);
     }
 }

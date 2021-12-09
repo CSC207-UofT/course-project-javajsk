@@ -6,6 +6,7 @@ package businessrules.outputboundaries;
 public interface RepositoryBoundary {
     /**
      * A method that returns a responseObject containing error message when object creation failed
+     *
      * @param message error message
      * @return responseObject with information to display
      */
@@ -13,6 +14,7 @@ public interface RepositoryBoundary {
 
     /**
      * A method that returns a responseObject containing error message when query is not found
+     *
      * @param message error message
      * @return responseObject with information to display
      */
@@ -20,6 +22,7 @@ public interface RepositoryBoundary {
 
     /**
      * A method that returns a responseObject containing error message when modification fails
+     *
      * @param message error message
      * @return responseObject with information to display
      */
@@ -27,6 +30,7 @@ public interface RepositoryBoundary {
 
     /**
      * A method that returns a responseObject containing error message when input is invalid
+     *
      * @param message error message
      * @return responseObject with information to display
      */

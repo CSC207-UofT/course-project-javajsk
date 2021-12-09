@@ -86,7 +86,7 @@ public class FoodController {
      * Instantiates a new Food controller.
      */
     public FoodController() {
-        this.addSingleton = new AddSingletonInteractor(vendorRepository, foodRepository, repositoryBoundary, foodObjectBoundary,  vendorBoundary);
+        this.addSingleton = new AddSingletonInteractor(vendorRepository, foodRepository, repositoryBoundary, foodObjectBoundary, vendorBoundary);
         this.createFood = new CreateFoodInteractor(vendorRepository, foodRepository, repositoryBoundary, foodObjectBoundary);
         this.getShopFoods = new GetShopFoodsInteractor(foodRepository, foodObjectBoundary);
         this.modifyFood = new ModifyFoodInteractor(vendorRepository, foodRepository, repositoryBoundary, foodObjectBoundary, vendorBoundary);
@@ -102,7 +102,7 @@ public class FoodController {
      */
     @PutMapping("/AddSingleton/{vendorToken}/{foodId}")
     public ResponseObject runAddSingleton(@PathVariable String vendorToken, @PathVariable String foodId,
-                                @RequestBody String singleton){
+                                          @RequestBody String singleton) {
         Singleton singleton1 = singletonRepository.loadSingletonFromJSON(new JSONObject(singleton));
         return addSingleton.addSingleton(vendorToken, foodId, singleton1);
     }
@@ -115,9 +115,9 @@ public class FoodController {
      * @return A ResponseObject with the food object just created, with status codes
      */
     @PostMapping("/CreateFood/{vendorToken}")
-    public ResponseObject runCreateFood(@PathVariable String vendorToken, @RequestBody String food){
+    public ResponseObject runCreateFood(@PathVariable String vendorToken, @RequestBody String food) {
         Food food1 = foodRepository.loadFoodFromJSON(new JSONObject(food));
-        return createFood.createFood(vendorToken,food1);
+        return createFood.createFood(vendorToken, food1);
     }
 
     /**
@@ -127,7 +127,7 @@ public class FoodController {
      * @return A ResponseObject with the food objects from the given shops, with status codes
      */
     @GetMapping("/GetShopFoods/{shopId}")
-    public ResponseObject runGetShopFoods(@PathVariable String shopId){
+    public ResponseObject runGetShopFoods(@PathVariable String shopId) {
         return getShopFoods.getShopFoods(shopId);
     }
 
@@ -141,7 +141,7 @@ public class FoodController {
      */
     @PutMapping("/ModifyFood/{vendorToken}/{foodId}")
     public ResponseObject runModifyFood(@PathVariable String vendorToken, @PathVariable String foodId,
-                              @RequestBody String food){
+                                        @RequestBody String food) {
         Food food1 = foodRepository.loadFoodFromJSON(new JSONObject(food));
         return modifyFood.modifyFood(vendorToken, foodId, food1);
     }

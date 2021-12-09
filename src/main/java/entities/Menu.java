@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * The Menu entity class
  */
-public class Menu{
+public class Menu {
     /**
      * The list of foods
      */
@@ -34,7 +34,7 @@ public class Menu{
     /**
      * Instantiates a new empty menu
      */
-    public Menu(){
+    public Menu() {
         this.foods = new ArrayList<>();
         this.addons = new ArrayList<>();
     }
@@ -77,6 +77,7 @@ public class Menu{
 
     /**
      * Method for adding an addon to the menu
+     *
      * @param addon the new addon entity
      */
     public void addAddon(Addon addon) {
@@ -85,8 +86,9 @@ public class Menu{
 
     /**
      * Method for updating an addon in the menu
+     *
      * @param addonId the id of the addon being modified
-     * @param addon the new addon entity
+     * @param addon   the new addon entity
      * @return whether the update was successful
      */
     public boolean updateAddon(String addonId, Addon addon) {
@@ -107,6 +109,7 @@ public class Menu{
 
     /**
      * Method for removing an addon from the menu
+     *
      * @param addon the addon to remove
      */
     public void deleteAddon(Addon addon) {
@@ -115,8 +118,9 @@ public class Menu{
 
     /**
      * Method for updating a singleton of a food item in the menu
+     *
      * @param singletonId the singleton id
-     * @param singleton the new singleton entity
+     * @param singleton   the new singleton entity
      * @return whether the update was successful
      */
     public boolean updateSingleton(String singletonId, Singleton singleton) {
@@ -134,27 +138,30 @@ public class Menu{
 
     /**
      * Method for adding a new food to the menu
+     *
      * @param food the new food entity
      */
-    public void addFood(Food food){
+    public void addFood(Food food) {
         this.foods.add(food);
     }
 
     /**
      * Method for removing a food item from the menu
+     *
      * @param food the food entity to renove
      */
-    public void deleteFood(Food food){
+    public void deleteFood(Food food) {
         this.foods.removeIf(food::equals);
     }
 
     /**
      * Method for updating a food item in the menu
+     *
      * @param foodId the food id
-     * @param food the updated food entity
+     * @param food   the updated food entity
      * @return whether the update was successful
      */
-    public boolean updateFood(String foodId, Food food){
+    public boolean updateFood(String foodId, Food food) {
         int index = -1;
         for (int i = 0; i < this.foods.size(); i++) {
             if (this.foods.get(i).getId().equals(foodId)) {
@@ -172,12 +179,13 @@ public class Menu{
 
     /**
      * Method for getting a pointer to the exact addon instance
+     *
      * @param addon an addon entity
      * @return the addon from the menu's list of addons
      */
-    public Addon getAddon(Addon addon){
-        for(Addon iterAddon: this.addons){
-            if(iterAddon.equals(addon)){
+    public Addon getAddon(Addon addon) {
+        for (Addon iterAddon : this.addons) {
+            if (iterAddon.equals(addon)) {
                 return iterAddon;
             }
         }
@@ -186,12 +194,13 @@ public class Menu{
 
     /**
      * Method for getting a pointer to the exact food instance
+     *
      * @param food a food entity
      * @return the food entity from menu's list of foods
      */
-    public Food getFood(Food food){
-        for(Food iterFood: this.foods){
-            if(iterFood.equals(food)){
+    public Food getFood(Food food) {
+        for (Food iterFood : this.foods) {
+            if (iterFood.equals(food)) {
                 return iterFood;
             }
         }
@@ -200,13 +209,14 @@ public class Menu{
 
     /**
      * Method for setting the availability of a singleton of a food item
-     * @param singleton the singleton
+     *
+     * @param singleton    the singleton
      * @param availability the availability
      */
-    public void setSingletonAvailability(Singleton singleton, boolean availability){
-        for(Food food: this.foods){
-            for(Singleton singletonIter: food.getComponents()){
-                if(singletonIter.equals(singleton)){
+    public void setSingletonAvailability(Singleton singleton, boolean availability) {
+        for (Food food : this.foods) {
+            for (Singleton singletonIter : food.getComponents()) {
+                if (singletonIter.equals(singleton)) {
                     singletonIter.setAvailable(availability);
                 }
             }
@@ -215,12 +225,13 @@ public class Menu{
 
     /**
      * Method for getting the available addons
+     *
      * @return the list of available addon entities
      */
-    public List<Addon> getAvailableAddons(){
+    public List<Addon> getAvailableAddons() {
         List<Addon> availAddons = new ArrayList<>();
-        for(Addon addon: this.addons){
-            if(addon.getAvailable()){
+        for (Addon addon : this.addons) {
+            if (addon.getAvailable()) {
                 availAddons.add(addon);
             }
         }
@@ -229,12 +240,13 @@ public class Menu{
 
     /**
      * Method for getting the available foods
+     *
      * @return the list of available food entities
      */
-    public List<Food> getAvailableFoods(){
+    public List<Food> getAvailableFoods() {
         List<Food> availFoods = new ArrayList<>();
-        for(Food food: this.foods){
-            if(food.isAvailable()){
+        for (Food food : this.foods) {
+            if (food.isAvailable()) {
                 availFoods.add(food);
             }
         }
@@ -247,14 +259,14 @@ public class Menu{
      * @return string representation of menu
      */
     @Override
-    public String toString(){
+    public String toString() {
         JSONObject jsonObject = new JSONObject();
         JSONArray foods = new JSONArray();
         JSONArray addons = new JSONArray();
-        for(Food food: this.foods){
+        for (Food food : this.foods) {
             foods.put(food.getId());
         }
-        for(Addon addon: this.addons){
+        for (Addon addon : this.addons) {
             addons.put(addon.getId());
         }
         jsonObject.put("foods", foods);

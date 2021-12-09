@@ -12,19 +12,34 @@ import entities.Shop;
 import framework.MongoDB;
 import org.json.JSONObject;
 
+/**
+ * View all shops use case.
+ */
 public class ViewAllShopsInteractor implements ViewAllShops {
+    /**
+     * The Shop repository.
+     */
     ShopDB shopRepository;
 
+    /**
+     * The database.
+     */
     MongoDB db;
+
+    /**
+     * Instantiates a new View all shops interactor.
+     */
     public ViewAllShopsInteractor() {
         this.db = new MongoDB();
         this.shopRepository = new ShopDB(db);
     }
 
     /**
-     * @return Returns a ResponseObject whose contents are a list of JSONs of all current shops in the database.
+     * Method returns response object containing all the shops in the database
+     *
+     * @return response object
      */
     public ResponseObject viewAllShops() {
-        return new ResponseObject(200, "",shopRepository.viewAllShops().toString());
+        return new ResponseObject(200, "", shopRepository.viewAllShops().toString());
     }
 }

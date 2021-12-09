@@ -42,6 +42,7 @@ public class ViewCartInteractor implements ViewCart {
     /**
      * Method that returns information to display the cart of the customer
      * with the given token
+     *
      * @param userToken token of customer that is currently logged in
      * @return response object containing customer's cart or error message to display
      */
@@ -49,7 +50,7 @@ public class ViewCartInteractor implements ViewCart {
     public ResponseObject viewCart(String userToken) {
         Customer customer = (Customer) customerRepository.getUserFromToken(userToken);
 
-        if(customer == null){
+        if (customer == null) {
             return repositoryBoundary.queryNotFound("Unable to find such customer.");
         }
 

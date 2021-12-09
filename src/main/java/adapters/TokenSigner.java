@@ -6,6 +6,7 @@ package adapters;
 public interface TokenSigner {
     /**
      * Method generates token from given user id
+     *
      * @param userId id of user
      * @return string containing user token
      */
@@ -13,6 +14,7 @@ public interface TokenSigner {
 
     /**
      * Method returns id associated with given user token
+     *
      * @param token token of user
      * @return string id of user
      */

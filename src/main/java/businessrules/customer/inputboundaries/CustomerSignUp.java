@@ -8,8 +8,9 @@ import businessrules.outputboundaries.ResponseObject;
 public interface CustomerSignUp {
     /**
      * Method for signing up as a customer
-     * @param username the new username
-     * @param password the new password
+     *
+     * @param username     the new username
+     * @param password     the new password
      * @param passwordConf the password confirmation
      * @return a response object
      */

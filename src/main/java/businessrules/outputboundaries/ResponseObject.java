@@ -91,9 +91,9 @@ public class ResponseObject {
      *
      * @return string representation of cart
      */
-    public String toString(){
+    public String toString() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("status" , status);
+        jsonObject.put("status", status);
         jsonObject.put("message", message);
         jsonObject.put("contents", contents.toString());
         return jsonObject.toString();

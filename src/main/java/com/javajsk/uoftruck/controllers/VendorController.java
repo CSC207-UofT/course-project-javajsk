@@ -102,7 +102,7 @@ public class VendorController {
      * @return response object containing data to display to user
      */
     @PutMapping("/VendorLogin/{username}/{password}")
-    public ResponseObject runVendorLogin(@PathVariable String username, @PathVariable String password){
+    public ResponseObject runVendorLogin(@PathVariable String username, @PathVariable String password) {
         return vendorLogin.login(username, password);
     }
 
@@ -120,7 +120,7 @@ public class VendorController {
     //TODO: We pass passwords through URLs which is obviously bad practice.
     public ResponseObject runVendorSignup(@PathVariable String username, @PathVariable String password,
                                           @PathVariable String confirmed_password, @PathVariable String location,
-                                          @PathVariable String shop_name){
+                                          @PathVariable String shop_name) {
         return vendorSignUp.signUp(username, password, confirmed_password, shop_name, location);
     }
 
@@ -135,7 +135,7 @@ public class VendorController {
      */
     @PutMapping("/ModifyVendor/{userToken}/{username}/{password}/{confirmed_password}")
     public ResponseObject runModifyVendor(@PathVariable String username, @PathVariable String password,
-                                          @PathVariable String confirmed_password, @PathVariable String userToken){
+                                          @PathVariable String confirmed_password, @PathVariable String userToken) {
         return modifyVendor.modifyVendor(userToken, username, password, confirmed_password);
     }
 
@@ -146,7 +146,7 @@ public class VendorController {
      * @return response object containing data to display to user
      */
     @GetMapping("/ViewVendor/{vendorId}")
-    public ResponseObject viewVendor(@PathVariable String vendorId){
+    public ResponseObject viewVendor(@PathVariable String vendorId) {
         return viewVendor.viewVendor(vendorId);
     }
 }

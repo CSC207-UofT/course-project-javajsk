@@ -5,7 +5,7 @@ import org.json.JSONObject;
 /**
  * The Vendor entity class.
  */
-public class Vendor extends User{
+public class Vendor extends User {
     /**
      * The Shop.
      */
@@ -33,8 +33,8 @@ public class Vendor extends User{
      * @param shopName the shop name
      * @param shopLoc  the shop loc
      */
-    public Vendor(String id, String username, String password, String shopName, String shopLoc){
-        super(id,username,password);
+    public Vendor(String id, String username, String password, String shopName, String shopLoc) {
+        super(id, username, password);
         this.shop = new Shop(shopName, shopLoc);
     }
 
@@ -62,8 +62,8 @@ public class Vendor extends User{
      * @param shopId the shop id
      * @return the boolean
      */
-    public boolean deleteShop(String shopId){
-        if(this.shop.getId().equals(shopId)){
+    public boolean deleteShop(String shopId) {
+        if (this.shop.getId().equals(shopId)) {
             this.shop = null;
             return true;
         }
@@ -76,7 +76,7 @@ public class Vendor extends User{
      * @return string representation of vendor
      */
     @Override
-    public String toString(){
+    public String toString() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", this.id);
         jsonObject.put("shops", new JSONObject(this.shop.toString()));

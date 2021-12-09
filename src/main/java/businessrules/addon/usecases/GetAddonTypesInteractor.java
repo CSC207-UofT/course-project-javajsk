@@ -22,10 +22,11 @@ public class GetAddonTypesInteractor implements GetAddonTypes {
 
     /**
      * Method that returns a response object containing addon types
+     *
      * @return response object containing addon types
      */
     public ResponseObject getAddonTypes() {
 
-        return new ResponseObject(200, "",addonRepository.getAddonTypes().toString());
+        return new ResponseObject(200, "", addonRepository.getAddonTypes().toString());
     }
 }

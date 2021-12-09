@@ -27,9 +27,9 @@ public class SingletonDB implements Repository<Singleton> {
     /**
      * The Keys.
      */
-    static final String[] keys = {"id","price","name","description",
-            "allowedAddonTypes","defaultSelection",
-            "isAvailable","shopId"};
+    static final String[] keys = {"id", "price", "name", "description",
+            "allowedAddonTypes", "defaultSelection",
+            "isAvailable", "shopId"};
 
     /**
      * Instantiates a new Singleton db.
@@ -51,7 +51,8 @@ public class SingletonDB implements Repository<Singleton> {
 
     /**
      * Method for updating a singleton entry in the database
-     * @param id the id of the singleton entry
+     *
+     * @param id   the id of the singleton entry
      * @param item the updated singleton information
      * @return whether the update was successful or not
      */
@@ -60,8 +61,10 @@ public class SingletonDB implements Repository<Singleton> {
         return dbConnector.update(tableName, id, loadJSONFromSingleton(item));
 
     }
+
     /**
      * Method for creating a new shop singleton in the database
+     *
      * @param item the new singleton information
      * @return the id of the new singleton entry
      */
@@ -73,15 +76,16 @@ public class SingletonDB implements Repository<Singleton> {
 
     /**
      * Method for retrieving multiple singletons from the database
+     *
      * @param parameter the parameter to search by
-     * @param needle the value of the parameter to find
+     * @param needle    the value of the parameter to find
      * @return a list of singleton entities that match the requirements
      */
     @Override
     public List<Singleton> readMultiple(String parameter, String needle) {
         List<Singleton> singletonList = new ArrayList<>();
         List<JSONObject> rawSingletons = dbConnector.readMultiple(tableName, parameter, needle);
-        for(JSONObject rawSingleton: rawSingletons){
+        for (JSONObject rawSingleton : rawSingletons) {
             singletonList.add(loadSingletonFromJSON(rawSingleton));
         }
         return singletonList;
@@ -89,13 +93,14 @@ public class SingletonDB implements Repository<Singleton> {
 
     /**
      * Method for retrieving a singleton from the database
+     *
      * @param fieldName the field to search by
-     * @param needle the value of the field to find
+     * @param needle    the value of the field to find
      * @return a singleton entity that matches the requirements
      */
     @Override
     public Singleton findOneByFieldName(String fieldName, String needle) {
-        return loadSingletonFromJSON(dbConnector.readOne(tableName,fieldName,needle));
+        return loadSingletonFromJSON(dbConnector.readOne(tableName, fieldName, needle));
     }
 
     /**
@@ -104,7 +109,7 @@ public class SingletonDB implements Repository<Singleton> {
      * @param singleton the singleton entity
      * @return the corresponding JSON object
      */
-    public static JSONObject loadJSONFromSingleton(Singleton singleton){
+    public static JSONObject loadJSONFromSingleton(Singleton singleton) {
         return new JSONObject(singleton.toString());
     }
 
@@ -114,22 +119,22 @@ public class SingletonDB implements Repository<Singleton> {
      * @param rawSingleton the JSON data
      * @return the corresponding singleton entity
      */
-    public Singleton loadSingletonFromJSON(JSONObject rawSingleton){
+    public Singleton loadSingletonFromJSON(JSONObject rawSingleton) {
         CartDB selectionLoader = new CartDB(dbConnector);
-        for(String key: keys){
-            if(!rawSingleton.has(key)){
+        for (String key : keys) {
+            if (!rawSingleton.has(key)) {
                 return null;
             }
         }
 
-        try{
+        try {
             String id = rawSingleton.getString("id");
             float price = rawSingleton.getFloat("price");
             String name = rawSingleton.getString("name");
             String description = rawSingleton.getString("description");
             JSONArray allowedAddonTypesRaw = rawSingleton.getJSONArray("allowedAddonTypes");
             List<Integer> allowedAddonTypes = new ArrayList<>();
-            for(int i =0;i< allowedAddonTypesRaw.length(); i++){
+            for (int i = 0; i < allowedAddonTypesRaw.length(); i++) {
                 allowedAddonTypes.add(allowedAddonTypesRaw.getInt(i));
             }
             JSONObject rawSelection = rawSingleton.getJSONObject("defaultSelection");
@@ -142,7 +147,7 @@ public class SingletonDB implements Repository<Singleton> {
             return new Singleton(id, price, name, description, allowedAddonTypes, defaultSel, availability,
                     shopId);
 
-        }catch (JSONException e){
+        } catch (JSONException e) {
             return null;
         }
     }

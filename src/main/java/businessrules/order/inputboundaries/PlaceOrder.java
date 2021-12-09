@@ -8,6 +8,7 @@ import businessrules.outputboundaries.ResponseObject;
 public interface PlaceOrder {
     /**
      * Method for placing an order
+     *
      * @param userToken the customer token
      * @return a response object
      */

@@ -41,13 +41,14 @@ public class GetAddonInteractor implements GetAddon {
 
     /**
      * Method that returns addon with given id, if it exists in the form of a response object
+     *
      * @param id id of addon
      * @return response object containing addon object or error message
      */
     @Override
     public ResponseObject getAddon(String id) {
         Addon addon = addonRepository.read(id);
-        if (addon == null){
+        if (addon == null) {
             repositoryBoundary.queryNotFound("No addon with this id.");
         }
 

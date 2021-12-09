@@ -8,6 +8,7 @@ import businessrules.outputboundaries.ResponseObject;
 public interface GetAvailableFoods {
     /**
      * Method for getting available foods from a shop
+     *
      * @param shopId the shop id
      * @return a response object
      */

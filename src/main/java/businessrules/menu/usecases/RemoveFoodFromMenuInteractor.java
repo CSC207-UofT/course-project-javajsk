@@ -58,21 +58,22 @@ public class RemoveFoodFromMenuInteractor implements RemoveFoodFromMenu {
 
     /**
      * Method for removing food entities from a menu
+     *
      * @param vendorToken vendor token
-     * @param food the food entity
+     * @param food        the food entity
      * @return a response object
      */
     @Override
     public ResponseObject removeFood(String vendorToken, Food food) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found");
         }
         Shop shop = vendor.getShop();
         Menu menu = shop.getMenu();
         menu.deleteFood(food);
 
-        if(!shopRepository.update(shop.getId(), shop)){
+        if (!shopRepository.update(shop.getId(), shop)) {
             return repositoryBoundary.modificationFailed("Failed to remove food from menu.");
         }
 

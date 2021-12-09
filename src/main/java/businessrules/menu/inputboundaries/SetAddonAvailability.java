@@ -9,8 +9,9 @@ import entities.Addon;
 public interface SetAddonAvailability {
     /**
      * Method for setting add on availability
-     * @param vendorToken the vendor token
-     * @param addon the addon entity
+     *
+     * @param vendorToken     the vendor token
+     * @param addon           the addon entity
      * @param newAvailability the new availability
      * @return a response object
      */

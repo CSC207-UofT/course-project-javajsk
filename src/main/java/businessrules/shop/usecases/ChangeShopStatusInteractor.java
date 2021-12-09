@@ -53,18 +53,18 @@ public class ChangeShopStatusInteractor implements ChangeShopStatus {
      *
      * @param vendorToken the vendor that owns the shop
      * @param newStatus   the new status of the shop
-     * @return  response object
+     * @return response object
      */
     public ResponseObject changeShopStatus(String vendorToken, boolean newStatus) {
 
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found.");
         }
 
         Shop shop = vendor.getShop();
         shop.setOpen(newStatus);
-        if(!shopRepository.update(shop.getId(), shop)){
+        if (!shopRepository.update(shop.getId(), shop)) {
             return repositoryBoundary.modificationFailed("Failed to update shop status in repository.");
         }
 

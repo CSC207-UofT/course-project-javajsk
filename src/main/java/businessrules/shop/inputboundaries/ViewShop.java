@@ -8,6 +8,7 @@ import businessrules.outputboundaries.ResponseObject;
 public interface ViewShop {
     /**
      * Method returns a response object containing shop with shopId or error message
+     *
      * @param shopId id of shop
      * @return response object
      */

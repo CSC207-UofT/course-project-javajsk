@@ -36,11 +36,12 @@ public class CustomerSignUpInteractor implements CustomerSignUp {
 
     /**
      * Instantiates a customer sign up use case
-     * @param cR the customer repository
-     * @param rB the repository boundary
-     * @param cB the customer boundary
+     *
+     * @param cR  the customer repository
+     * @param rB  the repository boundary
+     * @param cB  the customer boundary
      * @param cOB the customer object boundary
-     * @param h the hasher
+     * @param h   the hasher
      */
     public CustomerSignUpInteractor(CustomerRepository cR, RepositoryBoundary rB,
                                     CustomerBoundary cB, ObjectBoundary<Customer> cOB, Hasher h) {
@@ -54,28 +55,29 @@ public class CustomerSignUpInteractor implements CustomerSignUp {
 
     /**
      * Method for signing up as a customer
-     * @param username the new username
-     * @param password the new password
+     *
+     * @param username     the new username
+     * @param password     the new password
      * @param passwordConf the password confirmation
      * @return a response object
      */
     @Override
     public ResponseObject signUp(String username, String password, String passwordConf) {
-        if(!password.equals(passwordConf)){
+        if (!password.equals(passwordConf)) {
             return customerBoundary.error("Passwords do not match.");
         }
 
         Customer customer = customerRepository.findOneByFieldName("username", username);
-        if(customer != null){
+        if (customer != null) {
             return customerBoundary.error("Username is already taken!");
         }
 
         String cypherText = hasher.hash(password);
 
-        Customer customerNew = new Customer("N/A",username,cypherText);
+        Customer customerNew = new Customer("N/A", username, cypherText);
 
         String custId = customerRepository.create(customerNew);
-        if(custId == null){
+        if (custId == null) {
             return repositoryBoundary.creationFailed("Unable to create user.");
         }
         customerNew.setId(custId);

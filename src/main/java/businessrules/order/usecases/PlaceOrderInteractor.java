@@ -63,22 +63,23 @@ public class PlaceOrderInteractor implements PlaceOrder {
 
     /**
      * Method for placing an order
+     *
      * @param userToken the customer token
      * @return a response object
      */
     @Override
     public ResponseObject placeOrder(String userToken) {
         Customer customer = (Customer) customerRepository.getUserFromToken(userToken);
-        if(customer == null){
+        if (customer == null) {
             return repositoryBoundary.queryNotFound("No such user found.");
         }
 
-        if(customer.getCurrentCart().isEmpty()){
+        if (customer.getCurrentCart().isEmpty()) {
             return customerBoundary.error("Cart is empty.");
         }
 
         String cartId = cartRepository.create(customer.getCurrentCart());
-        if(cartId == null){
+        if (cartId == null) {
             return repositoryBoundary.creationFailed("Failed to create cart in database");
         }
         customer.getCurrentCart().setId(cartId);
@@ -88,7 +89,7 @@ public class PlaceOrderInteractor implements PlaceOrder {
                 currentTime);
 
         String orderId = orderRepository.create(order);
-        if(orderId == null){
+        if (orderId == null) {
             repositoryBoundary.creationFailed("Failed to create order in database.");
         }
 

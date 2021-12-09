@@ -165,9 +165,9 @@ public class Food {
      * @param selections the selections
      * @return the boolean
      */
-    public boolean isValidSelections(Selection[] selections){
-        for(int i =0; i<this.components.length; i++){
-            if(!components[i].isValidSelection(selections[i])){
+    public boolean isValidSelections(Selection[] selections) {
+        for (int i = 0; i < this.components.length; i++) {
+            if (!components[i].isValidSelection(selections[i])) {
                 return false;
             }
         }
@@ -179,11 +179,11 @@ public class Food {
      *
      * @param singleton the singleton
      */
-    public void addSingleton(Singleton singleton){
-        Singleton[] newComponents = new Singleton[this.components.length+1];
-        int index =0;
-        for(int i =0; i< this.components.length;i++){
-            if(this.components[i].equals(singleton)){
+    public void addSingleton(Singleton singleton) {
+        Singleton[] newComponents = new Singleton[this.components.length + 1];
+        int index = 0;
+        for (int i = 0; i < this.components.length; i++) {
+            if (this.components[i].equals(singleton)) {
                 return;
             }
             newComponents[i] = this.components[i];
@@ -200,8 +200,8 @@ public class Food {
      * @return the boolean
      */
     public boolean isAvailable() {
-        for(Singleton singleton: this.components){
-            if(!singleton.getAvailable()){
+        for (Singleton singleton : this.components) {
+            if (!singleton.getAvailable()) {
                 return false;
             }
         }
@@ -211,12 +211,13 @@ public class Food {
     /**
      * Method overrides the equals method, returns whether a given object is considered
      * to be equal to this food object
+     *
      * @param object object to check if it is equal
      * @return wther object is equal to this instance of food
      */
     @Override
-    public boolean equals(Object object){
-        if(!(object instanceof Food)){
+    public boolean equals(Object object) {
+        if (!(object instanceof Food)) {
             return false;
         }
         return ((Food) object).getId().equals(this.id);
@@ -228,7 +229,7 @@ public class Food {
      * @return string representation of food
      */
     @Override
-    public String toString(){
+    public String toString() {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", this.id);
@@ -237,7 +238,7 @@ public class Food {
         jsonObject.put("price", this.price);
         jsonObject.put("shopId", this.shopId);
         JSONArray arr = new JSONArray();
-        for(Singleton sel: this.components){
+        for (Singleton sel : this.components) {
             arr.put(sel.getId());
         }
         jsonObject.put("components", arr);

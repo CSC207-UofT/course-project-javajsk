@@ -64,17 +64,17 @@ public class ModifyShopInteractor implements ModifyShop {
      */
     public ResponseObject modifyShop(String vendorToken, Shop shop) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found.");
         }
 
         Shop oldShop = vendor.getShop();
-        if(!oldShop.getId().equals(shop.getId())){
+        if (!oldShop.getId().equals(shop.getId())) {
             return vendorBoundary.error("Cannot modify ids of shops.");
         }
 
 
-        if(!shopRepository.update(oldShop.getId(), shop)){
+        if (!shopRepository.update(oldShop.getId(), shop)) {
             return repositoryBoundary.modificationFailed("Failed to update shop in repository.");
         }
 

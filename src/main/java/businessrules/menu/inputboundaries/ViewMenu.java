@@ -8,6 +8,7 @@ import businessrules.outputboundaries.ResponseObject;
 public interface ViewMenu {
     /**
      * Method for getting the menu of a shop
+     *
      * @param shopId the shop id
      * @return a response object
      */

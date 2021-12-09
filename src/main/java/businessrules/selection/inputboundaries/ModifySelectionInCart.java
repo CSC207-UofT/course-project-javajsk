@@ -16,6 +16,6 @@ public interface ModifySelectionInCart {
      * @param selections        The selection that will replace the original selection
      * @return a response object
      */
-    ResponseObject modifySelection(String userToken, String foodId,Selection[] originalSelection,
+    ResponseObject modifySelection(String userToken, String foodId, Selection[] originalSelection,
                                    Selection[] selections);
 }

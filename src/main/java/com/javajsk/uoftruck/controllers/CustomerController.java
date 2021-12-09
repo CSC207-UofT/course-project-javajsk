@@ -87,15 +87,14 @@ public class CustomerController {
         this.foodRepository = new FoodDB(db);
         this.customerRepository = new CustomerDB(db);
         this.customerLogin = new CustomerLoginInteractor(customerRepository,
-                customerBoundary, repositoryBoundary,hasher);
+                customerBoundary, repositoryBoundary, hasher);
         this.customerSignUp = new CustomerSignUpInteractor(customerRepository,
                 repositoryBoundary, customerBoundary, customerObjectBoundary, hasher);
         this.modifyCustomer = new ModifyCustomerInteractor(customerRepository,
                 customerObjectBoundary, repositoryBoundary, customerBoundary, hasher);
 
 
-
-        this.viewCustomer = new ViewCustomerInteractor(customerRepository,customerObjectBoundary);
+        this.viewCustomer = new ViewCustomerInteractor(customerRepository, customerObjectBoundary);
     }
 
     /**
@@ -106,7 +105,7 @@ public class CustomerController {
      * @return A ResponseObject with the customer token associated with that log in session, with status codes
      */
     @PutMapping("/CustomerLogin/{username}/{password}")
-    public ResponseObject runCustomerLogin(@PathVariable String username, @PathVariable String password){
+    public ResponseObject runCustomerLogin(@PathVariable String username, @PathVariable String password) {
         return customerLogin.login(username, password);
     }
 
@@ -120,7 +119,7 @@ public class CustomerController {
      */
     @PutMapping("/CustomerSignUp/{username}/{password}/{confirmed_password}")
     public ResponseObject runCustomerSignup(@PathVariable String username, @PathVariable String password,
-                                      @PathVariable String confirmed_password){
+                                            @PathVariable String confirmed_password) {
         return customerSignUp.signUp(username, password, confirmed_password);
     }
 
@@ -135,7 +134,7 @@ public class CustomerController {
      */
     @PutMapping("/ModifyCustomer/{userToken}/{username}/{password}/{confirmed_password}")
     public ResponseObject runModifyCustomer(@PathVariable String username, @PathVariable String password,
-                                      @PathVariable String confirmed_password, @PathVariable String userToken){
+                                            @PathVariable String confirmed_password, @PathVariable String userToken) {
         return modifyCustomer.modify(userToken, username, password, confirmed_password);
 
     }
@@ -147,7 +146,7 @@ public class CustomerController {
      * @return A ResponseObject with the customer object with the given id, with status codes
      */
     @GetMapping("/ViewCustomer/{customerId}")
-    public ResponseObject viewCustomer(@PathVariable String customerId){
+    public ResponseObject viewCustomer(@PathVariable String customerId) {
         return viewCustomer.viewCustomer(customerId);
     }
 }

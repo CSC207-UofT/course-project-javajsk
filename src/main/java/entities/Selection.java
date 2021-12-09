@@ -43,17 +43,18 @@ public class Selection {
 
     /**
      * Method returns set of addons in the selection
+     *
      * @return set of addons
      */
-    public Set<Addon> getSelectedAddons(){
+    public Set<Addon> getSelectedAddons() {
         return this.singletonSelection.keySet();
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         JSONObject jsonObject = new JSONObject();
         HashMap<Addon, Integer> singletonSelection = this.singletonSelection;
-        for(Addon addon: this.singletonSelection.keySet()){
+        for (Addon addon : this.singletonSelection.keySet()) {
             jsonObject.put(addon.getId(), singletonSelection.get(addon));
         }
         return jsonObject.toString();

@@ -40,13 +40,14 @@ public class GetShopOrdersInteractor implements GetShopOrders {
 
     /**
      * Method for getting a shops orders
+     *
      * @param vendorToken the vendor token
      * @return a response object
      */
     @Override
     public ResponseObject getShopOrders(String vendorToken) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found");
         }
 

@@ -59,7 +59,7 @@ public class VendorLoginInteractor implements VendorLogin {
         String hashedPassword = hasher.hash(password);
         String token = vendorRepository.authenticateUser(username, hashedPassword);
 
-        if(token == null){
+        if (token == null) {
             return repositoryBoundary.queryNotFound("Incorrect username or password. Please try again.");
         }
 

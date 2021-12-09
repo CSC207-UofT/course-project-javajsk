@@ -57,25 +57,26 @@ public class AddFoodToMenuInteractor implements AddFoodToMenu {
 
     /**
      * Method for adding a food entity to the menu
+     *
      * @param vendorToken the vendor token
-     * @param food the food entity
+     * @param food        the food entity
      * @return a response object
      */
     @Override
     public ResponseObject addFood(String vendorToken, Food food) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found");
         }
         Shop shop = vendor.getShop();
         Menu menu = shop.getMenu();
-        if(!vendor.getShop().getId().equals(food.getShopId())){
+        if (!vendor.getShop().getId().equals(food.getShopId())) {
             return vendorBoundary.error("This food does not belong to this shop.");
         }
 
         menu.addFood(food);
 
-        if(!shopRepository.update(shop.getId(), shop)){
+        if (!shopRepository.update(shop.getId(), shop)) {
             return repositoryBoundary.modificationFailed("Failed to update shop with new food in the menu.");
         }
 

@@ -40,13 +40,14 @@ public class ViewMenuInteractor implements ViewMenu {
 
     /**
      * Method for getting the menu of a shop
+     *
      * @param shopId the shop id
      * @return a response object
      */
     @Override
     public ResponseObject viewMenu(String shopId) {
         Shop shop = shopRepository.read(shopId);
-        if(shop == null){
+        if (shop == null) {
             return repositoryBoundary.queryNotFound("No such shop found.");
         }
         return menuObjectBoundary.showObject(shop.getMenu());

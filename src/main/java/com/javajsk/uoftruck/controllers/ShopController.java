@@ -87,8 +87,8 @@ public class ShopController {
         this.viewAllShops = new ViewAllShopsInteractor();
         this.changeShopStatus = new ChangeShopStatusInteractor(vendorRepository, shopRepository,
                 repositoryBoundary, shopObjectBoundary);
-        this.modifyShop = new ModifyShopInteractor(vendorRepository, repositoryBoundary, shopRepository,vendorBoundary, shopObjectBoundary);
-        this.viewShop = new ViewShopInteractor(shopRepository,shopObjectBoundary);
+        this.modifyShop = new ModifyShopInteractor(vendorRepository, repositoryBoundary, shopRepository, vendorBoundary, shopObjectBoundary);
+        this.viewShop = new ViewShopInteractor(shopRepository, shopObjectBoundary);
 
     }
 
@@ -101,7 +101,7 @@ public class ShopController {
      */
     @PutMapping("/ChangeShopStatus/{vendorToken}/{newStatus}")
     public ResponseObject runChangeShopStatus(@PathVariable String vendorToken,
-                                    @PathVariable Boolean newStatus){
+                                              @PathVariable Boolean newStatus) {
         return changeShopStatus.changeShopStatus(vendorToken, newStatus);
     }
 
@@ -113,7 +113,7 @@ public class ShopController {
      * @return response object containing data to display to user
      */
     @PutMapping("/ModifyShop/{vendorToken}")
-    public ResponseObject runModifyShop(@RequestBody String shop, @PathVariable String vendorToken ){
+    public ResponseObject runModifyShop(@RequestBody String shop, @PathVariable String vendorToken) {
         Shop shop1 = shopRepository.loadShopFromJSON(new JSONObject(shop));
 
         return modifyShop.modifyShop(vendorToken, shop1);
@@ -126,7 +126,7 @@ public class ShopController {
      * @return response object containing data to display to user
      */
     @GetMapping("/GetShop/{shopId}")
-    public ResponseObject viewShop(@PathVariable String shopId){
+    public ResponseObject viewShop(@PathVariable String shopId) {
         return viewShop.viewShop(shopId);
     }
 
@@ -136,7 +136,7 @@ public class ShopController {
      * @return response object containing data to display to user
      */
     @GetMapping("/ViewAllShops/")
-    public ResponseObject viewAllShop(){
+    public ResponseObject viewAllShop() {
         return viewAllShops.viewAllShops();
     }
 }

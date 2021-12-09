@@ -83,8 +83,8 @@ public class SingletonController {
         this.singletonRepository = new SingletonDB(db);
         this.addonRepository = new AddonDB(db);
         this.createSingleton = new CreateSingletonInteractor(vendorRepository, repositoryBoundary,
-                                                            singletonRepository, singletonObjectBoundary,
-                                                            vendorBoundary);
+                singletonRepository, singletonObjectBoundary,
+                vendorBoundary);
         this.getShopSingletons = new GetShopSingletonsInteractor(singletonRepository, singletonObjectBoundary);
         this.modifySingleton = new ModifySingletonInteractor(vendorRepository, singletonRepository,
                 repositoryBoundary, vendorBoundary, singletonObjectBoundary);
@@ -98,7 +98,7 @@ public class SingletonController {
      * @return response object containing data to display to user
      */
     @PostMapping("/CreateSingleton/{vendorToken}")
-    public ResponseObject runCreateSingleton(@PathVariable String vendorToken, @RequestBody String singletonStr){
+    public ResponseObject runCreateSingleton(@PathVariable String vendorToken, @RequestBody String singletonStr) {
 
         JSONObject singletonJson = new JSONObject(singletonStr);
 
@@ -113,7 +113,7 @@ public class SingletonController {
      * @return response object containing data to display to user
      */
     @GetMapping("/GetShopSingletons/{shopId}")
-    public ResponseObject runGetShopSingletons(@PathVariable String shopId){
+    public ResponseObject runGetShopSingletons(@PathVariable String shopId) {
         return getShopSingletons.getShopSingletons(shopId);
     }
 
@@ -127,7 +127,7 @@ public class SingletonController {
      */
     @PutMapping("/ModifySingleton/{vendorToken}/{singletonId}")
     public ResponseObject runModifySingleton(@PathVariable String vendorToken, @PathVariable String singletonId,
-                                        @RequestBody String singletonStr){
+                                             @RequestBody String singletonStr) {
         JSONObject singletonJson = new JSONObject(singletonStr);
         Singleton singleton = singletonRepository.loadSingletonFromJSON(singletonJson);
         return modifySingleton.modifySingleton(vendorToken, singletonId, singleton);

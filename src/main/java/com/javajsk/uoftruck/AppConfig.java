@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfig {
     public @Bean
-    MongoDB mongoDb(){
+    MongoDB mongoDb() {
         return new MongoDB();
     }
 }

@@ -54,26 +54,27 @@ public class ModifyCustomerInteractor implements ModifyCustomer {
 
     /**
      * Method for modifying a customer
-     * @param userToken the customer token
-     * @param username the customer username
-     * @param password the customer password
+     *
+     * @param userToken    the customer token
+     * @param username     the customer username
+     * @param password     the customer password
      * @param passwordConf the password confirmation
      * @return a response object
      */
     @Override
     public ResponseObject modify(String userToken, String username, String password, String passwordConf) {
         Customer customer = (Customer) customerRepository.getUserFromToken(userToken);
-        if(customer == null){
+        if (customer == null) {
             return repositoryBoundary.queryNotFound("Unable to find such a customer.");
         }
-        if(!password.equals(passwordConf)){
+        if (!password.equals(passwordConf)) {
             return customerBoundary.error("Passwords must match.");
         }
         customer.setUserName(username);
         String cypherText = hasher.hash(password);
         customer.setHashedPassword(cypherText);
 
-        if(!customerRepository.update(customer.getId(), customer)){
+        if (!customerRepository.update(customer.getId(), customer)) {
             return repositoryBoundary.modificationFailed("Failed to update customer details.");
         }
         return customerObjectBoundary.showObject(customer);

@@ -42,6 +42,7 @@ public class GetAvailableAddonsInteractor implements GetAvailableAddons {
 
     /**
      * Method for getting available addons
+     *
      * @param shopId the shop id
      * @return a response object
      */
@@ -49,7 +50,7 @@ public class GetAvailableAddonsInteractor implements GetAvailableAddons {
     public ResponseObject getAvailableAddons(String shopId) {
         Shop shop = shopRepository.read(shopId);
 
-        if(shop == null){
+        if (shop == null) {
             return repositoryBoundary.queryNotFound("No such shop found.");
         }
 

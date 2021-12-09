@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * The type Singleton.
  */
-public class Singleton{
+public class Singleton {
 
     /**
      * The Id.
@@ -231,8 +231,8 @@ public class Singleton{
      * @param selection the selection
      * @return whether selection is valid
      */
-    public boolean isValidSelection(Selection selection){
-        for(Addon addon: selection.getSelectedAddons()){
+    public boolean isValidSelection(Selection selection) {
+        for (Addon addon : selection.getSelectedAddons()) {
             List<Integer> addonTypes = addon.getAddonTypes();
             for (Integer addonType : addonTypes) {
                 if (!this.allowedAddonTypes.contains(addonType)) {
@@ -249,7 +249,7 @@ public class Singleton{
      * @return string representation of singleton
      */
     @Override
-    public String toString(){
+    public String toString() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", this.id);
         jsonObject.put("price", this.price);

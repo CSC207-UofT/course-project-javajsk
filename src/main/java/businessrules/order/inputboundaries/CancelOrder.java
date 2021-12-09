@@ -8,8 +8,9 @@ import businessrules.outputboundaries.ResponseObject;
 public interface CancelOrder {
     /**
      * Method for setting order status as cancelled
+     *
      * @param userToken the user token
-     * @param orderId the order id
+     * @param orderId   the order id
      * @return a response object
      */
     ResponseObject cancelOrder(String userToken, String orderId);

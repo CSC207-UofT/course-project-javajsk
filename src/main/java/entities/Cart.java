@@ -10,10 +10,10 @@ import java.util.List;
 /**
  * The Cart entity class
  */
-public class Cart{
+public class Cart {
 
     /**
-    * The cart id.
+     * The cart id.
      */
     public String id;
     /**
@@ -42,7 +42,7 @@ public class Cart{
     /**
      * Instantiates a new empty cart
      */
-    public Cart(){
+    public Cart() {
         this.id = "";
         this.shopId = "N/A";
         this.contents = new HashMap<>();
@@ -104,23 +104,23 @@ public class Cart{
 
     /**
      * Method for adding a new item to cart
-     * @param food the food item
+     *
+     * @param food       the food item
      * @param selections the list of selection chosen
      * @return whether the new item was added successfully
      */
-    public boolean addItem(Food food, Selection[] selections){
-        if(this.shopId.equals("N/A")){
+    public boolean addItem(Food food, Selection[] selections) {
+        if (this.shopId.equals("N/A")) {
             this.setShopId(food.getShopId());
         }
 
-        if(!food.getShopId().equals(this.getShopId())){
+        if (!food.getShopId().equals(this.getShopId())) {
             return false;
         }
 
-        if(this.contents.containsKey(food)){
+        if (this.contents.containsKey(food)) {
             this.contents.get(food).add(selections);
-        }
-        else{
+        } else {
             List<Selection[]> store = new ArrayList<>();
             store.add(selections);
             this.contents.put(food, store);
@@ -130,41 +130,46 @@ public class Cart{
 
     /**
      * Method for removing an item from the cart
-     * @param food the food item
+     *
+     * @param food       the food item
      * @param selections the list of selections chosen
      */
-    public void removeItem(Food food, Selection[] selections){
-        if(this.contents.containsKey(food)){
+    public void removeItem(Food food, Selection[] selections) {
+        if (this.contents.containsKey(food)) {
             this.contents.get(food).remove(selections);
         }
     }
 
     /**
      * Method for checking if cart is empty
+     *
      * @return whether the cart is empty
      */
-    public boolean isEmpty(){return this.contents.isEmpty();}
+    public boolean isEmpty() {
+        return this.contents.isEmpty();
+    }
 
     /**
      * Method for clearing the contents of a cart
      */
-    public void empty(){
+    public void empty() {
         this.contents = new HashMap<>();
     }
 
     /**
      * Method for changing the selections of a food
-     * @param food the food receiving the selection change
+     *
+     * @param food   the food receiving the selection change
      * @param oldSel the list of old selections
      * @param newSel the list of new selections
      */
-    public void modifySelection(Food food, Selection[] oldSel, Selection[] newSel){
-        if(!this.contents.containsKey(food)){
+    public void modifySelection(Food food, Selection[] oldSel, Selection[] newSel) {
+        if (!this.contents.containsKey(food)) {
             return;
         }
         List<Selection[]> selections = this.contents.get(food);
         int index = selections.indexOf(oldSel);
-        if(index == -1){
+        if (index == -1) {
             return;
         }
         selections.remove(oldSel);
@@ -184,10 +189,10 @@ public class Cart{
         finalValue.put("shopId", this.shopId);
         JSONObject contentsJson = new JSONObject();
         HashMap<Food, List<Selection[]>> contents = this.contents;
-        for(Food food: contents.keySet()){
+        for (Food food : contents.keySet()) {
             List<Selection[]> selections = contents.get(food);
             JSONArray selectionsJson = new JSONArray();
-            for(Selection[] selectionArr: selections){
+            for (Selection[] selectionArr : selections) {
                 selectionsJson.put(loadJSONfromSelectionLst(selectionArr));
             }
             contentsJson.put(food.getId(), selectionsJson);
@@ -198,12 +203,13 @@ public class Cart{
 
     /**
      * Method that returns list of selections objects represented as a JSONArray
+     *
      * @param input list of selections to convert
      * @return JSONArray representation of list
      */
-    public static JSONArray loadJSONfromSelectionLst(Selection[] input){
+    public static JSONArray loadJSONfromSelectionLst(Selection[] input) {
         JSONArray jsonSelectionList = new JSONArray();
-        for(Selection sel: input){
+        for (Selection sel : input) {
             jsonSelectionList.put(new JSONObject(sel.toString()));
 
         }

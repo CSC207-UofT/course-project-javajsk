@@ -6,7 +6,7 @@ import org.json.JSONObject;
 /**
  * The Shop entity class
  */
-public class Shop{
+public class Shop {
 
     /**
      * The Id.
@@ -59,7 +59,7 @@ public class Shop{
      * @param name     the name
      * @param location the location
      */
-    public Shop(String name, String location){
+    public Shop(String name, String location) {
         this.id = "N/A";
         this.name = name;
         this.location = location;
@@ -177,9 +177,9 @@ public class Shop{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("id",this.id);
+        jsonObject.put("id", this.id);
         jsonObject.put("name", this.name);
         jsonObject.put("location", this.location);
         jsonObject.put("menu", loadJSONfromMenu(this.menu));
@@ -193,14 +193,14 @@ public class Shop{
      * @param menu the menu
      * @return the json object
      */
-    public static JSONObject loadJSONfromMenu(Menu menu){
+    public static JSONObject loadJSONfromMenu(Menu menu) {
         JSONObject jsonObject = new JSONObject();
         JSONArray foods = new JSONArray();
         JSONArray addons = new JSONArray();
-        for(Food food: menu.getFoods()){
+        for (Food food : menu.getFoods()) {
             foods.put(food.getId());
         }
-        for(Addon addon: menu.getAddons()){
+        for (Addon addon : menu.getAddons()) {
             addons.put(addon.getId());
         }
         jsonObject.put("foods", foods);
