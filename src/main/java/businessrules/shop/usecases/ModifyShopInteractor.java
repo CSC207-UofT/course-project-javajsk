@@ -65,22 +65,6 @@ public class ModifyShopInteractor implements ModifyShop {
     }
 
     /**
-     * Instantiates a use case for modifying a shop in the repository
-     * @param vR the vendor repository
-     * @param rB the repository boundary
-     * @param sR the shop boundary
-     * @param vB the vendor boundary
-     * @param sOB the shop object boundary
-     */
-    public ModifyShopInteractor(VendorRepository vR, RepositoryBoundary rB, Repository<Shop> sR, VendorBoundary vB, ObjectBoundary<Shop> sOB) {
-        this.vendorRepository = vR;
-        this.repositoryBoundary = rB;
-        this.shopRepository = sR;
-        this.vendorBoundary = vB;
-        this.shopObjectBoundary = sOB;
-    }
-
-    /**
      * Method that modifies a shop by replacing it with a new
      * shop. Should only be called by a Vendor.
      *

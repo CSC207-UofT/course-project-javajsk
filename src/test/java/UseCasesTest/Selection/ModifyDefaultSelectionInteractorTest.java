@@ -60,12 +60,12 @@ class ModifyDefaultSelectionInteractorTest {
         vB = new RAMVendorBoundary();
         rB = new RAMRepositoryBoundary();
         useCase = new ModifyDefaultSelectionInteractor(vR, rB, sR, vB, sOB);
-
     }
 
     @Test
     void modifyDefaultSelection() {
-        Singleton updatedSingleton = (Singleton) useCase.modifyDefaultSelection("Username", "3", newDefaultSelection).getContents();
+        Singleton updatedSingleton = (Singleton) useCase.modifyDefaultSelection("12345", "3",
+                newDefaultSelection).getContents();
         assertEquals(newDefaultSelection, updatedSingleton.getDefaultSelection());
     }
 
@@ -76,7 +76,7 @@ class ModifyDefaultSelectionInteractorTest {
 
     @Test
     void modifyDefaultSelectionInvalidSingleton() {
-        assertEquals("No such singleton found", useCase.modifyDefaultSelection("Username", "invalidSingletonId", selection).getMessage());
+        assertEquals("No such singleton found", useCase.modifyDefaultSelection("12345", "invalidSingletonId", selection).getMessage());
     }
 
     @Test
@@ -91,7 +91,8 @@ class ModifyDefaultSelectionInteractorTest {
         newSelectionHash.put(addon1, 2);
         newDefaultSelection = new Selection(newSelectionHash);
 
-        assertEquals("Incorrect values inputted for selection.", useCase.modifyDefaultSelection("Username", "3", newDefaultSelection).getMessage());
+        assertEquals("Incorrect values inputted for selection.",
+                useCase.modifyDefaultSelection("12345", "3", newDefaultSelection).getMessage());
     }
 
 }

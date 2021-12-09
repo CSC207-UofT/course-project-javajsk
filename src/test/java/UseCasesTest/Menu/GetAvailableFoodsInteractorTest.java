@@ -18,6 +18,10 @@ import businessrules.outputboundaries.VendorBoundary;
 import entities.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 class GetAvailableFoodsInteractorTest {
     RAMVendorRepository vendorRepository;
     RAMShopRepository shopRepository;
@@ -46,11 +50,13 @@ class GetAvailableFoodsInteractorTest {
         addFoodToMenuInteractor = new AddFoodToMenuInteractor(vendorRepository, repositoryBoundary, vendorBoundary, shopRepository, menuObjectBoundary);
         addFoodToMenuInteractor.addFood(vendor.getId(), food);
         ResponseObject response = getAvailableFoodsInteractor.getAvailableFoods(vendor.getShop().getId());
-        assertEquals("Test Works", response.getMessage());
         assertEquals("No such shop found.", getAvailableFoodsInteractor.getAvailableFoods("fakeshop").getMessage());
         Food food1 = new Food("222", "test2", null, 1, components, vendor.getShop().getId());
         addFoodToMenuInteractor.addFood(vendor.getId(), food1);
         ResponseObject response1 = getAvailableFoodsInteractor.getAvailableFoods(vendor.getShop().getId());
-        assertEquals("Test Works", response1.getMessage());
+        List<Food> foodList = (List<Food>) response1.getContents();
+        assertEquals(2, foodList.size());
+        assertTrue(foodList.contains(food));
+        assertTrue(foodList.contains(food1));
     }
 }

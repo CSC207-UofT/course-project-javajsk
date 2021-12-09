@@ -16,6 +16,7 @@ import entities.Addon;
 import entities.Menu;
 import entities.Vendor;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 class GetAvailableAddonsInteractorTest {
     RAMVendorRepository vendorRepository;
@@ -44,6 +45,6 @@ class GetAvailableAddonsInteractorTest {
         addAddonToMenuInteractor.addAddon(vendor.getId(), addon1);
         ResponseObject response = getAvailableAddonsInteractor.getAvailableAddons(vendor.getShop().getId());
         assertEquals("Test Works", response.getMessage());
-       assertEquals(getAvailableAddonsInteractor.getAvailableAddons("no_shop").getMessage(), "No such shop found.");
+        assertEquals(getAvailableAddonsInteractor.getAvailableAddons("no_shop").getMessage(), "No such shop found.");
     }
 }

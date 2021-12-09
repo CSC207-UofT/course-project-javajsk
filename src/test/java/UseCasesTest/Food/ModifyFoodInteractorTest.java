@@ -62,7 +62,7 @@ class ModifyFoodInteractorTest {
     @Test
     void modifyFood() {
         Food modifiedFood = new Food("123", "new burger", "A burger combo", 100, singletons, "00001");
-        Food foodUpdated = (Food) useCase.modifyFood("Username", "123", modifiedFood).getContents();
+        Food foodUpdated = (Food) useCase.modifyFood("12345", "123", modifiedFood).getContents();
         assertEquals("new burger", foodUpdated.getName());
         assertEquals(100, foodUpdated.getPrice());
     }
@@ -74,7 +74,7 @@ class ModifyFoodInteractorTest {
 
     @Test
     void modifyFoodInvalidFood() {
-        assertEquals("No such food found", useCase.modifyFood("Username", "invalidFood", burger).getMessage());
+        assertEquals("No such food found", useCase.modifyFood("12345", "invalidFood", burger).getMessage());
     }
 
     @Test
@@ -82,19 +82,19 @@ class ModifyFoodInteractorTest {
         Shop newShop = new Shop("270", "Truck", "Robarts", true, new Menu(), new OrderBook());
         Vendor newVendor = new Vendor("072", "Truck", "TruckPass", newShop);
         vR.create(newVendor);
-        assertEquals("You do not have access to modify this food.", useCase.modifyFood("Truck", "123", burger).getMessage());
+        assertEquals("You do not have access to modify this food.", useCase.modifyFood("072", "123", burger).getMessage());
     }
 
     @Test
     void modifyFoodChangeFoodId() {
         Food food =  new Food("72", "new food", "a nice combo", 20, singletons, "5");
-        assertEquals("Food ids cannot be altered.", useCase.modifyFood("Username", "123", food).getMessage());
+        assertEquals("Food ids cannot be altered.", useCase.modifyFood("12345", "123", food).getMessage());
     }
 
     @Test
     void modifyFoodChangeFoodShopId() {
         Food food =  new Food("123", "new food", "a nice combo", 20, singletons, "22");
-        assertEquals("ShopId cannot be altered.", useCase.modifyFood("Username", "123", food).getMessage());
+        assertEquals("ShopId cannot be altered.", useCase.modifyFood("12345", "123", food).getMessage());
     }
 
 }

@@ -15,6 +15,7 @@ import businessrules.outputboundaries.VendorBoundary;
 import entities.Addon;
 import entities.Vendor;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 class SetAddonAvailabilityInteractorTest {
     RAMVendorRepository vendorRepository;
@@ -38,8 +39,8 @@ class SetAddonAvailabilityInteractorTest {
         Addon addon = new Addon("ID1", "addon", 12, null, true, vendor.getShop().getId());
         addAddonToMenuInteractor.addAddon(vendor.getId(), addon);
         assertTrue(vendor.getShop().getMenu().getAddons().get(0).getId().equalsIgnoreCase("id1"));
-        assertTrue(vendor.getShop().getMenu().getAddon(addon).isAvailable());
+        assertTrue(vendor.getShop().getMenu().getAddon(addon).getAvailable());
         setAddonAvailabilityInteractor.setAddonAvailability(vendor.getId(),addon, false);
-        assertFalse(vendor.getShop().getMenu().getAddon(addon).isAvailable());
+        assertFalse(vendor.getShop().getMenu().getAddon(addon).getAvailable());
     }
 }

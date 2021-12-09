@@ -129,9 +129,9 @@ class MenuTest {
         components[0] = new Singleton("id333", 12, "name1", null, null, null, false, "shop1");
         Food food1 = new Food("id3", null, null, 23, components,"shop1");
         menu.addFood(food1);
-        assertFalse(menu.getFood(food1).getComponents()[0].isAvailable());
+        assertFalse(menu.getFood(food1).getComponents()[0].getAvailable());
         menu.setSingletonAvailability(components[0], true);
-        assertTrue(menu.getFood(food1).getComponents()[0].isAvailable());
+        assertTrue(menu.getFood(food1).getComponents()[0].getAvailable());
     }
 
     @Test

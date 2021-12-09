@@ -27,32 +27,34 @@ class CreateAddonInteractorTest{
     VendorBoundary vendorBoundary;
     RepositoryBoundary repositoryBoundary;
     ObjectBoundary<Addon> addonObjectBoundary;
+    Vendor vendor;
+
     Vendor setUp(){
         Menu menu = new Menu();
         OrderBook orderBook = new OrderBook();
         Shop shop2 = new Shop( "id1", "shop1","Bloor", true,  menu, orderBook);
-        Vendor vendor = new Vendor("id1", "vendor1", "password", shop2);
+        vendor = new Vendor("id1", "vendor1", "password", shop2);
         Addon addon = new Addon("ID1", "addon", 10, null, true,shop2.getId());
         repositoryBoundary = new RAMRepositoryBoundary();
         addonRepository = new RAMAddonRepository(addon);
         vendorRepository = new RAMVendorRepository(vendor);
-       vendorBoundary = new RAMVendorBoundary();
+        vendorBoundary = new RAMVendorBoundary();
         createAddonInteractor = new CreateAddonInteractor(addonRepository, vendorRepository, vendorBoundary, repositoryBoundary, addonObjectBoundary);
         return vendor;
     }
     @Test
     void createAddon() {
         Vendor vendor = setUp();
-        Addon addon2 = new Addon("addon500", "addon", 15, null, true, "shop1");
+        Addon addon2 = new Addon("id445", "addon3333", 15, null, true, vendor.getShop().getId());
+        Addon addon3 = new Addon("22", "addon2", 12, null, true,vendor.getShop().getId());
         addonRepository = new RAMAddonRepository(addon2);
         repositoryBoundary = new RAMRepositoryBoundary();
         vendorRepository = new RAMVendorRepository(vendor);
         vendorBoundary = new RAMVendorBoundary();
         addonObjectBoundary = new RAMAddonObjectBoundary();
         createAddonInteractor = new CreateAddonInteractor(addonRepository, vendorRepository, vendorBoundary, repositoryBoundary, addonObjectBoundary);
-        createAddonInteractor.createAddon(vendor.getId(), addon2);
-        ResponseObject response = createAddonInteractor.createAddon(vendor.getId(), addon2);
-        assertEquals(addon2, response.getContents());
-        assertSame(addonRepository.read(addon2.getId()), addon2);
+        ResponseObject response = createAddonInteractor.createAddon(vendor.getId(), addon3);
+        assertSame(response.getContents(),addon3);
+        assertSame(addonRepository.read(addon3.getId()), addon3);
     }
 }

@@ -19,6 +19,7 @@ import entities.Food;
 import entities.Singleton;
 import entities.Vendor;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 class SetSingletonAvailabilityInteractorTest {
     RAMVendorRepository vendorRepository;
@@ -52,9 +53,9 @@ class SetSingletonAvailabilityInteractorTest {
         addSingletonInteractor = new AddSingletonInteractor(vendorRepository, foodRepository, repositoryBoundary,foodObjectBoundary, vendorBoundary);
         setSingletonAvailabilityInteractor = new SetSingletonAvailabilityInteractor(menuObjectBoundary,vendorRepository,repositoryBoundary,vendorBoundary,singletonRepository, shopRepository);
         addSingletonInteractor.addSingleton(vendor.getId(),food.getId(), components[0]);
-        assertTrue(vendor.getShop().getMenu().getFood(food).getComponents()[0].isAvailable());
+        assertTrue(vendor.getShop().getMenu().getFood(food).getComponents()[0].getAvailable());
         setSingletonAvailabilityInteractor.setSingletonAvailability(vendor.getId(), components[0], false);
-        assertFalse(vendor.getShop().getMenu().getFood(food).getComponents()[0].isAvailable());
+        assertFalse(vendor.getShop().getMenu().getFood(food).getComponents()[0].getAvailable());
 
     }
 }

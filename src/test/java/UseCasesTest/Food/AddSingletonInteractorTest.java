@@ -78,7 +78,7 @@ class AddSingletonInteractorTest {
     void addSingleton() {
         Food updatedFood = burger;
         updatedFood.addSingleton(singleton2);
-        Food food = (Food) useCase.addSingleton("Username", burger.getId(), singleton2).getContents();
+        Food food = (Food) useCase.addSingleton("12345", burger.getId(), singleton2).getContents();
         assertEquals(updatedFood, food);
     }
 
@@ -92,7 +92,7 @@ class AddSingletonInteractorTest {
     void addSingletonInvalidFoodId() {
         Food updatedFood = burger;
         updatedFood.addSingleton(singleton2);
-        ResponseObject foodObj = useCase.addSingleton(vendor.getUserName(), "invalidId", singleton2);
+        ResponseObject foodObj = useCase.addSingleton(vendor.getId(), "invalidId", singleton2);
         assertEquals("No such food found.", foodObj.getMessage());
     }
 
@@ -101,14 +101,14 @@ class AddSingletonInteractorTest {
         Shop newShop = new Shop("2700", "truck", "St. George", true, new Menu(), new OrderBook());
         Vendor newVendor = new Vendor("0072", "username2", "password2", newShop);
         vR.create(newVendor);
-        ResponseObject foodObj = useCase.addSingleton(newVendor.getUserName(), burger.getId(), singleton2);
+        ResponseObject foodObj = useCase.addSingleton(newVendor.getId(), burger.getId(), singleton2);
         assertEquals("You do not have authority to modify this food.", foodObj.getMessage());
     }
 
     @Test
     void addSingletonNotShopSingleton() {
         singleton2.setShopId("2700");
-        ResponseObject foodObj = useCase.addSingleton(vendor.getUserName(), burger.getId(), singleton2);
+        ResponseObject foodObj = useCase.addSingleton(vendor.getId(), burger.getId(), singleton2);
         assertEquals("The singleton does not belong to your shop.", foodObj.getMessage());
     }
 
