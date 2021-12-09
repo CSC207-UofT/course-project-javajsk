@@ -68,7 +68,7 @@ public class RAMVendorRepository implements VendorRepository {
 
     @Override
     public User getUserFromToken(String userToken) {
-        //Assume userToken is same as ID
+
         for (Vendor vendor:storage){
             if(vendor.getId().equals(userToken)){
                 return vendor;

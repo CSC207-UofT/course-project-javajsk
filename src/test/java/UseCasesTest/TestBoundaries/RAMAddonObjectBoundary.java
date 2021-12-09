@@ -16,7 +16,7 @@ public class RAMAddonObjectBoundary implements ObjectBoundary<Addon> {
 
     @Override
     public ResponseObject showObjectList(List<Addon> listToDisp) {
-        return null;
+        return new ResponseObject(0,"Test Works", listToDisp);
     }
 
     @Override

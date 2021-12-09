@@ -86,7 +86,13 @@ class AddonTest {
     void getId() {
         String id1 = "falseID";
         assertFalse(addon.id.equalsIgnoreCase(id1));
-        assertSame("1", addon.id);
+        assertSame("1", addon.getId());
+    }
+
+
+    @Test
+    void getShopId() {
+        assertSame("12345", addon.getShopId());
     }
 
 }

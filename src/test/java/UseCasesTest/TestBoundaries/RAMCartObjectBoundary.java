@@ -17,7 +17,7 @@ public class RAMCartObjectBoundary implements ObjectBoundary<Cart> {
 
     @Override
     public ResponseObject showObjectList(List<Cart> listToDisp) {
-        return null;
+        return new ResponseObject(0,"Test Works", listToDisp);
     }
 
     @Override
