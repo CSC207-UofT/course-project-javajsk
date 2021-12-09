@@ -24,23 +24,68 @@ import adapters.presenters.ObjectPresenter;
 import adapters.presenters.RepositoryPresenter;
 import adapters.presenters.VendorPresenter;
 
+/**
+ * Controller for selection use cases
+ */
 @RestController
 public class SelectionController {
+    /**
+     * The Modify default selection input boundary.
+     */
     ModifyDefaultSelection modifyDefaultSelection;
+    /**
+     * The Modify selection in cart input boundary.
+     */
     ModifySelectionInCart modifySelectionInCart;
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Customer repository.
+     */
     CustomerRepository customerRepository;
+    /**
+     * The Singleton repository.
+     */
     Repository<Singleton> singletonRepository;
+    /**
+     * The Food repository.
+     */
     Repository<Food> foodRepository;
+    /**
+     * The database.
+     */
     MongoDB db;
+    /**
+     * The Cart repository.
+     */
     CartDB cartRepository;
+    /**
+     * The Vendor output boundary.
+     */
     VendorBoundary vendorBoundary = new VendorPresenter();
+    /**
+     * The Customer output boundary.
+     */
     CustomerBoundary customerBoundary = new CustomerPresenter();
+    /**
+     * The Repository output boundary.
+     */
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
+    /**
+     * The Singleton object output boundary.
+     */
     ObjectBoundary<Singleton> singletonObjectBoundary = new ObjectPresenter<>();
+    /**
+     * The Cart object output boundary.
+     */
     ObjectBoundary<Cart> cartObjectBoundary = new ObjectPresenter<>();
 
 
+    /**
+     * Instantiates a new Selection controller.
+     */
     public SelectionController() {
         this.db = new MongoDB();
         this.vendorRepository = new VendorDB(db);
@@ -54,6 +99,14 @@ public class SelectionController {
                 foodRepository, repositoryBoundary, customerBoundary, cartObjectBoundary);
     }
 
+    /**
+     * Runs modify default selection use case.
+     *
+     * @param singletonId  the singleton id
+     * @param vendorToken  the vendor token
+     * @param selectionStr the selection str
+     * @return response object containing data to display to user
+     */
     @PostMapping("/ModifyDefaultSelection/{vendorToken}/{singletonId}")
     public ResponseObject runModifyDefaultSelection(@PathVariable String singletonId, @PathVariable String vendorToken,
                                                @RequestBody String selectionStr){
@@ -62,6 +115,15 @@ public class SelectionController {
         return modifyDefaultSelection.modifyDefaultSelection(vendorToken, singletonId, selection);
     }
 
+    /**
+     * Runs modify selection in cart use case.
+     *
+     * @param foodId         the food id
+     * @param vendorToken    the vendor token
+     * @param original       the original
+     * @param new_singletons the new singletons
+     * @return response object containing data to display to user
+     */
     @PostMapping("/ModifySelectionInCart/{vendorToken}/{foodId}")
     public ResponseObject runModifySelectionInCart(@PathVariable String foodId, @PathVariable String vendorToken,
                                                @RequestBody Selection[] original, @RequestBody Selection[] new_singletons){
