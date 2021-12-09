@@ -172,6 +172,7 @@ public class Cart{
         selections.add(index, newSel);
     }
 
+
     /**
      * Method returns cart as a string representation
      *
@@ -206,6 +207,7 @@ public class Cart{
         JSONArray jsonSelectionList = new JSONArray();
         for(Selection sel: input){
             jsonSelectionList.put(new JSONObject(sel.toString()));
+
 
         }
         return jsonSelectionList;

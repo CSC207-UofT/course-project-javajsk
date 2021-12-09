@@ -169,7 +169,7 @@ public class CartDB implements Repository<Cart> {
             JSONArray current = data.getJSONArray(i);
             Selection[] temporary = new Selection[current.length()];
             for(int x =0;x<current.length();x++){
-                temporary[i] = parseSelection(current.getJSONObject(x));
+                temporary[x] = parseSelection(current.getJSONObject(x));
             }
             selectionData.add(temporary);
         }
