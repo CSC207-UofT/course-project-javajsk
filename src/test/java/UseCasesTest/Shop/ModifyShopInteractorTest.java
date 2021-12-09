@@ -42,15 +42,19 @@ class ModifyShopInteractorTest {
         rB = new RAMRepositoryBoundary();
         vB = new RAMVendorBoundary();
 
+
         useCase = new ModifyShopInteractor(vR, sR,rB,sOB, vB);
+
     }
 
     @Test
     void modifyShop() {
+
         Shop updatedShop = shop;
         updatedShop.setLocation("Bahen");
         useCase.modifyShop(vendor.getUserName(),updatedShop);
         assertEquals("Bahen", vendor.getShop().getLocation());
+
     }
 
     @Test

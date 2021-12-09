@@ -75,8 +75,12 @@ public class RAMVendorRepository implements VendorRepository {
             }
         }
         return null;
+
     }
 
+    /**
+     * Hard code get user from token to just be finding the username
+     */
     @Override
     public String authenticateUser(String username, String password) {
         for (Vendor vendor:storage){
@@ -89,5 +93,6 @@ public class RAMVendorRepository implements VendorRepository {
             }
         }
         return null;
+
     }
-}
+
