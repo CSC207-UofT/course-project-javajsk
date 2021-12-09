@@ -68,19 +68,20 @@ public class ModifySelectionInCartInteractor implements ModifySelectionInCart {
     public ResponseObject modifySelection(String userToken, String foodId, Selection[] originalSelection,
                                           Selection[] selections) {
         Customer customer = (Customer) customerRepository.getUserFromToken(userToken);
-        if(customer == null){
+        if (customer == null) {
             return repositoryBoundary.queryNotFound("No such customer found.");
         }
         Food food = foodRepository.read(foodId);
-        if(food == null){
+        if (food == null) {
             return repositoryBoundary.queryNotFound("No such food found.");
         }
-//checks the selections are of allowed types
-        if(!food.isValidSelections(selections)){
+
+        //checks the selections are of allowed types
+        if(!food.isValidSelections(selections)) {
             return customerBoundary.error("Invalid selection provided. Please try again.");
         }
         customer.getCurrentCart().modifySelection(food, originalSelection, selections);
-        if(!customerRepository.update(customer.getId(), customer)){
+        if (!customerRepository.update(customer.getId(), customer)) {
             return repositoryBoundary.modificationFailed("Failed to update customer's cart");
         }
         return cartObjectBoundary.showObject(customer.getCurrentCart());

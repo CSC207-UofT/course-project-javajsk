@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * The Addon entity class
  */
-public class Addon{
+public class Addon {
 
     /**
      * The Id.
@@ -162,8 +162,8 @@ public class Addon{
     }
 
     @Override
-    public boolean equals(Object object){
-        if(!(object instanceof Addon)){
+    public boolean equals(Object object) {
+        if (!(object instanceof Addon)) {
             return false;
         }
         return ((Addon) object).getId().equals(this.id);
@@ -171,13 +171,14 @@ public class Addon{
 
     /**
      * A method that returns the entity represented as a string
+     *
      * @return string representation of the addon
      */
     @Override
-    public String toString(){
+    public String toString() {
         JSONObject finalObject = new JSONObject();
         assert !this.id.equals("N/A");
-        finalObject.put("id", this.id );
+        finalObject.put("id", this.id);
         finalObject.put("price", this.price);
         finalObject.put("name", this.name);
         finalObject.put("addonTypes", this.addonTypes);

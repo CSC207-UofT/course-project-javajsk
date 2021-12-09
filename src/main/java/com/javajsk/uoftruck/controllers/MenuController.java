@@ -23,7 +23,7 @@ import adapters.presenters.VendorPresenter;
 /**/
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-public class MenuController{
+public class MenuController {
 
     /**
      * The Add addon to menu.
@@ -109,7 +109,7 @@ public class MenuController{
     /**
      * Instantiates a new Menu controller.
      */
-    public MenuController(){
+    public MenuController() {
         this.db = new MongoDB();
         this.shopRepository = new ShopDB(db);
         this.singletonRepository = new SingletonDB(db);
@@ -132,8 +132,8 @@ public class MenuController{
         this.setAddonAvailability = new SetAddonAvailabilityInteractor(menuObjectBoundary, vendorRepository,
                 repositoryBoundary, vendorBoundary, shopRepository);
         this.setSingletonAvailability = new SetSingletonAvailabilityInteractor(menuObjectBoundary, vendorRepository,
-                repositoryBoundary, vendorBoundary,singletonRepository, shopRepository);
-        this.viewMenu =new ViewMenuInteractor(shopRepository, repositoryBoundary, menuObjectBoundary);
+                repositoryBoundary, vendorBoundary, singletonRepository, shopRepository);
+        this.viewMenu = new ViewMenuInteractor(shopRepository, repositoryBoundary, menuObjectBoundary);
     }
 
     /**
@@ -144,7 +144,7 @@ public class MenuController{
      * @return A ResponseObject with the menu with the newly added addon, with status codes
      */
     @PutMapping("/AddAddonToMenu/{vendorToken}")
-    public ResponseObject runAddAddontoMenu(@PathVariable String vendorToken, @RequestBody String addon){
+    public ResponseObject runAddAddontoMenu(@PathVariable String vendorToken, @RequestBody String addon) {
         Addon addon1 = addonRepository.loadAddonFromJSON(new JSONObject(addon));
         return addAddonToMenu.addAddon(vendorToken, addon1);
     }
@@ -157,7 +157,7 @@ public class MenuController{
      * @return A ResponseObject with the menu with the newly added food, with status codes
      */
     @PutMapping("/AddFoodToMenu/{vendorToken}")
-    public ResponseObject runAddFoodtoMenu(@PathVariable String vendorToken, @RequestBody String food){
+    public ResponseObject runAddFoodtoMenu(@PathVariable String vendorToken, @RequestBody String food) {
         Food food1 = foodRepository.loadFoodFromJSON(new JSONObject(food));
         return addFoodToMenu.addFood(vendorToken, food1);
     }
@@ -169,7 +169,7 @@ public class MenuController{
      * @return A ResponseObject with all the available addons of the given shop, with status codes
      */
     @GetMapping("/GetAvailableAddons/{shopId}")
-    public ResponseObject runGetAvailableAddons(@PathVariable String shopId){
+    public ResponseObject runGetAvailableAddons(@PathVariable String shopId) {
         return getAvailableAddons.getAvailableAddons(shopId);
     }
 
@@ -180,7 +180,7 @@ public class MenuController{
      * @return A ResponseObject with all the available foods of the given shop, with status codes
      */
     @GetMapping("/GetAvailableFoods/{shopId}")
-    public ResponseObject runGetAvailableFoods(@PathVariable String shopId){
+    public ResponseObject runGetAvailableFoods(@PathVariable String shopId) {
         return getAvailableFoods.getAvailableFoods(shopId);
     }
 
@@ -192,7 +192,7 @@ public class MenuController{
      * @return A ResponseObject with the menu with the recently removed addon, with status codes
      */
     @PutMapping("/RemoveAddonFromMenu/{vendorToken}")
-    public ResponseObject runRemoveAddonFromMenu(@PathVariable String vendorToken, @RequestBody String addon){
+    public ResponseObject runRemoveAddonFromMenu(@PathVariable String vendorToken, @RequestBody String addon) {
         Addon addon1 = addonRepository.loadAddonFromJSON(new JSONObject(addon));
         return removeAddonFromMenu.removeAddon(vendorToken, addon1);
     }
@@ -205,7 +205,7 @@ public class MenuController{
      * @return A ResponseObject with the menu with the newly removed food, with status codes
      */
     @PutMapping("/RemoveFoodFromMenu/{vendorToken}")
-    public ResponseObject runRemoveFoodFromMenu(@PathVariable String vendorToken, @RequestBody String food){
+    public ResponseObject runRemoveFoodFromMenu(@PathVariable String vendorToken, @RequestBody String food) {
         Food food1 = foodRepository.loadFoodFromJSON(new JSONObject(food));
         return removeFoodFromMenu.removeFood(vendorToken, food1);
     }
@@ -217,7 +217,7 @@ public class MenuController{
      * @return A ResponseObject with the menu of the given shop, with status codes
      */
     @GetMapping("/ViewMenu/{shopId}")
-    public ResponseObject runViewMenu(@PathVariable String shopId){
+    public ResponseObject runViewMenu(@PathVariable String shopId) {
         return viewMenu.viewMenu(shopId);
     }
 }

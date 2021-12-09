@@ -109,7 +109,7 @@ public class SelectionController {
      */
     @PostMapping("/ModifyDefaultSelection/{vendorToken}/{singletonId}")
     public ResponseObject runModifyDefaultSelection(@PathVariable String singletonId, @PathVariable String vendorToken,
-                                               @RequestBody String selectionStr){
+                                                    @RequestBody String selectionStr) {
         JSONObject selectionJson = new JSONObject(selectionStr);
         Selection selection = cartRepository.parseSelection(selectionJson);
         return modifyDefaultSelection.modifyDefaultSelection(vendorToken, singletonId, selection);
@@ -126,13 +126,13 @@ public class SelectionController {
      */
     @PostMapping("/ModifySelectionInCart/{vendorToken}/{foodId}")
     public ResponseObject runModifySelectionInCart(@PathVariable String foodId, @PathVariable String vendorToken,
-                                               @RequestBody Selection[] original, @RequestBody Selection[] new_singletons){
+                                                   @RequestBody Selection[] original, @RequestBody Selection[] new_singletons) {
         Selection[] original1 = new Selection[original.length];
-        for(int i = 0; i <= original.length; i++){
+        for (int i = 0; i <= original.length; i++) {
             original1[i] = cartRepository.parseSelection(new JSONObject(original[i]));
         }
-        Selection[]  new_singletons1= new Selection[new_singletons.length];
-        for(int i = 0; i <= new_singletons.length; i++){
+        Selection[] new_singletons1 = new Selection[new_singletons.length];
+        for (int i = 0; i <= new_singletons.length; i++) {
             new_singletons1[i] = cartRepository.parseSelection(new JSONObject(new_singletons[i]));
         }
         return modifySelectionInCart.modifySelection(vendorToken, foodId, original1, new_singletons1);

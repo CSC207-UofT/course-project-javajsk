@@ -8,6 +8,7 @@ import businessrules.outputboundaries.ResponseObject;
 public interface CustomerLogin {
     /**
      * Method for logging in customer
+     *
      * @param username the customer username
      * @param password the customer password
      * @return a response object

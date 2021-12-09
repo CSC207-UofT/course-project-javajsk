@@ -8,6 +8,7 @@ import businessrules.outputboundaries.ResponseObject;
 public interface GetShopOrders {
     /**
      * Method for getting a shops orders
+     *
      * @param vendorToken the vendor token
      * @return a response object
      */

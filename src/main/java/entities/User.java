@@ -7,7 +7,7 @@ import org.json.JSONObject;
 /**
  * Abstract parent class User for Vendor and Customer entities
  */
-public abstract class User{
+public abstract class User {
     /**
      * The Id.
      */
@@ -96,7 +96,7 @@ public abstract class User{
      * @return string representation of user
      */
     @Override
-    public String toString(){
+    public String toString() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", this.id);
         jsonObject.put("username", this.userName);

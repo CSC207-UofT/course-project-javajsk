@@ -7,5 +7,5 @@ import entities.Vendor;
  *
  * Extends both the user repository and a repository of type Vendor
  */
-public interface VendorRepository extends UserRepository, Repository<Vendor>{
+public interface VendorRepository extends UserRepository, Repository<Vendor> {
 }

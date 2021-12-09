@@ -8,6 +8,7 @@ import businessrules.outputboundaries.ResponseObject;
 public interface GetAvailableAddons {
     /**
      * Method for getting available addons
+     *
      * @param shopId the shop id
      * @return a response object
      */

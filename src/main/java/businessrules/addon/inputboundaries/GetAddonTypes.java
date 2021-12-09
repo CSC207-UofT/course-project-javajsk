@@ -8,6 +8,7 @@ import businessrules.outputboundaries.ResponseObject;
 public interface GetAddonTypes {
     /**
      * Method that returns a response object containing addon types
+     *
      * @return response object containing addon types
      */
     ResponseObject getAddonTypes();

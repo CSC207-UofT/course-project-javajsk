@@ -25,7 +25,7 @@ public class Customer extends User {
      * @param orderHistory the order history
      * @param currentCart  the current cart
      */
-    public Customer(String id,String username, String password, OrderBook orderHistory, Cart currentCart) {
+    public Customer(String id, String username, String password, OrderBook orderHistory, Cart currentCart) {
         super(id, username, password);
         this.orderHistory = orderHistory;
         this.currentCart = currentCart;
@@ -38,7 +38,7 @@ public class Customer extends User {
      * @param username the username
      * @param password the password
      */
-    public Customer(String id,String username, String password) {
+    public Customer(String id, String username, String password) {
         super(id, username, password);
         this.orderHistory = new OrderBook();
         this.currentCart = new Cart();
@@ -83,7 +83,7 @@ public class Customer extends User {
     /**
      * Empty cart.
      */
-    public void emptyCart(){
+    public void emptyCart() {
         this.currentCart.empty();
     }
 
@@ -93,7 +93,7 @@ public class Customer extends User {
      * @return string representation of customer
      */
     @Override
-    public String toString(){
+    public String toString() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("cart", new JSONObject(this.currentCart.toString()));
 

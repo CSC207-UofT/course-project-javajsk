@@ -18,6 +18,7 @@ public class SHA512Hasher implements Hasher {
 
     /**
      * Method hashes given string
+     *
      * @param plainText the string to hash
      * @return hashed string
      */

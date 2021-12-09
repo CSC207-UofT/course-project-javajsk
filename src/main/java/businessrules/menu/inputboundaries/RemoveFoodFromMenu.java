@@ -9,8 +9,9 @@ import entities.Food;
 public interface RemoveFoodFromMenu {
     /**
      * Method for removing food entities from a menu
+     *
      * @param vendorToken vendor token
-     * @param food the food entity
+     * @param food        the food entity
      * @return a response object
      */
     ResponseObject removeFood(String vendorToken, Food food);

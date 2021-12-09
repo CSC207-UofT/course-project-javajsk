@@ -57,27 +57,28 @@ public class AddAddonToMenuInteractor implements AddAddonToMenu {
 
     /**
      * Method for adding an addon to a menu
+     *
      * @param vendorToken the vendor token
-     * @param addon the addon entity
+     * @param addon       the addon entity
      * @return a response object
      */
     @Override
     public ResponseObject addAddon(String vendorToken, Addon addon) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found");
         }
         Shop shop = vendor.getShop();
         Menu menu = shop.getMenu();
 
-        if(!vendor.getShop().getId().equals(addon.getShopId())){
+        if (!vendor.getShop().getId().equals(addon.getShopId())) {
             return vendorBoundary.error("This addon does not belong to this shop.");
         }
 
         menu.addAddon(addon);
         shop.setMenu(menu);
 
-        if(!shopRepository.update(shop.getId(), shop)){
+        if (!shopRepository.update(shop.getId(), shop)) {
             return repositoryBoundary.modificationFailed("Failed to update shop with new addon in the menu.");
         }
 

@@ -9,8 +9,9 @@ import entities.Food;
 public interface CreateFood {
     /**
      * Method for creating a new food
+     *
      * @param vendorToken the vendor token
-     * @param food the food entity
+     * @param food        the food entity
      * @return a response object
      */
     ResponseObject createFood(String vendorToken, Food food);

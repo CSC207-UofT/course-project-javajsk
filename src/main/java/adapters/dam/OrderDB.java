@@ -35,6 +35,7 @@ public class OrderDB implements Repository<Order> {
 
     /**
      * Method for reading an order entry from the database
+     *
      * @param id the id of the order entry
      * @return the corresponding order entity
      */
@@ -45,7 +46,8 @@ public class OrderDB implements Repository<Order> {
 
     /**
      * Method for updating an order entry in the database
-     * @param id the id of the order entry
+     *
+     * @param id   the id of the order entry
      * @param item the updated order information
      * @return whether the update was successful or not
      */
@@ -57,6 +59,7 @@ public class OrderDB implements Repository<Order> {
 
     /**
      * Method for creating a new order entry in the database
+     *
      * @param item the new order information
      * @return the id of the new order entry
      */
@@ -67,15 +70,16 @@ public class OrderDB implements Repository<Order> {
 
     /**
      * Method for retrieving multiple orders from the database
+     *
      * @param parameter the parameter to search by
-     * @param needle the value of the parameter to find
+     * @param needle    the value of the parameter to find
      * @return a list of order entities that match the requirements
      */
     @Override
     public List<Order> readMultiple(String parameter, String needle) {
         List<Order> orderList = new ArrayList<>();
         List<JSONObject> rawOrders = databaseConnector.readMultiple(tableName, parameter, needle);
-        for(JSONObject rawOrder: rawOrders){
+        for (JSONObject rawOrder : rawOrders) {
             orderList.add(loadOrderFromJSON(rawOrder));
         }
         return orderList;
@@ -83,13 +87,14 @@ public class OrderDB implements Repository<Order> {
 
     /**
      * Method for retrieving an order from the database
+     *
      * @param fieldName the field to search by
-     * @param needle the value of the field to find
+     * @param needle    the value of the field to find
      * @return an order entity that matches the requirements
      */
     @Override
     public Order findOneByFieldName(String fieldName, String needle) {
-        return loadOrderFromJSON(databaseConnector.readOne(tableName,fieldName,needle));
+        return loadOrderFromJSON(databaseConnector.readOne(tableName, fieldName, needle));
     }
 
     /**
@@ -98,7 +103,7 @@ public class OrderDB implements Repository<Order> {
      * @param order the order entity
      * @return the corresponding JSON object
      */
-    public JSONObject loadJSONFromOrder(Order order){
+    public JSONObject loadJSONFromOrder(Order order) {
         return new JSONObject(order.toString());
     }
 
@@ -108,7 +113,7 @@ public class OrderDB implements Repository<Order> {
      * @param rawOrder the JSON data
      * @return the corresponding order entity
      */
-    public Order loadOrderFromJSON(JSONObject rawOrder){
+    public Order loadOrderFromJSON(JSONObject rawOrder) {
         CartDB cartLoader = new CartDB(databaseConnector);
         try {
             String id = rawOrder.getString("id");
@@ -120,7 +125,7 @@ public class OrderDB implements Repository<Order> {
             Date timePlaced = new Date();
             Date timeStatusModified = new Date();
             return new Order(id, cart, shopId, customerId, status, timePlaced, timeStatusModified);
-        }catch (JSONException e){
+        } catch (JSONException e) {
             return null;
         }
     }

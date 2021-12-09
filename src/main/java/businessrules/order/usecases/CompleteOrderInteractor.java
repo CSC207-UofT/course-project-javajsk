@@ -55,25 +55,26 @@ public class CompleteOrderInteractor implements CompleteOrder {
 
     /**
      * Method for setting tha status of an order to completed
+     *
      * @param vendorToken the vendor token
-     * @param orderId the order id
+     * @param orderId     the order id
      * @return a response object
      */
     @Override
     public ResponseObject completeOrder(String vendorToken, String orderId) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
 
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found.");
         }
 
         Order order = orderRepository.read(orderId);
 
-        if(order == null){
+        if (order == null) {
             return repositoryBoundary.queryNotFound("No such order found.");
         }
 
-        if(!order.getShopId().equals(vendor.getShop().getId())){
+        if (!order.getShopId().equals(vendor.getShop().getId())) {
             return vendorBoundary.unauthorizedAccess("You do not own this order.");
         }
 
@@ -81,7 +82,7 @@ public class CompleteOrderInteractor implements CompleteOrder {
         order.setStatus(Order.Status.COMPLETED);
 
 
-        List<Order> userOrders = orderRepository.readMultiple("shopId", vendor.getShop().getId() );
+        List<Order> userOrders = orderRepository.readMultiple("shopId", vendor.getShop().getId());
         return orderObjectBoundary.showObjectList(userOrders);
     }
 }

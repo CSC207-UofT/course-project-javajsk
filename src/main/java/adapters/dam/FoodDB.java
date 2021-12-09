@@ -36,6 +36,7 @@ public class FoodDB implements Repository<Food> {
 
     /**
      * Method for reading a food entry from the database
+     *
      * @param id the id of the food entry
      * @return the food entity
      */
@@ -46,7 +47,8 @@ public class FoodDB implements Repository<Food> {
 
     /**
      * Method for updating a food entry in the database
-     * @param id the id of the food entry
+     *
+     * @param id   the id of the food entry
      * @param item the updated food information
      * @return whether the update was successful
      */
@@ -59,6 +61,7 @@ public class FoodDB implements Repository<Food> {
 
     /**
      * Method for adding a new food entry to the database
+     *
      * @param item the new food information
      * @return the id of the new food entry
      */
@@ -69,15 +72,16 @@ public class FoodDB implements Repository<Food> {
 
     /**
      * Method for retrieving multiple food entries from the database
+     *
      * @param parameter the parameter to search by
-     * @param needle the value of the parameter to search by
+     * @param needle    the value of the parameter to search by
      * @return a list of food entities that match the needle
      */
     @Override
     public List<Food> readMultiple(String parameter, String needle) {
         List<Food> foodList = new ArrayList<>();
         List<JSONObject> rawFoods = databaseConnector.readMultiple(tableName, parameter, needle);
-        for(JSONObject rawFood: rawFoods){
+        for (JSONObject rawFood : rawFoods) {
             foodList.add(loadFoodFromJSON(rawFood));
         }
         return foodList;
@@ -86,13 +90,14 @@ public class FoodDB implements Repository<Food> {
 
     /**
      * Method for finding a food entry in the database
+     *
      * @param fieldName the field to search by
-     * @param needle the value of the field to search
+     * @param needle    the value of the field to search
      * @return a food entity that matches the requirements
      */
     @Override
     public Food findOneByFieldName(String fieldName, String needle) {
-        return loadFoodFromJSON(databaseConnector.readOne(tableName,fieldName,needle));
+        return loadFoodFromJSON(databaseConnector.readOne(tableName, fieldName, needle));
     }
 
     /**
@@ -101,7 +106,7 @@ public class FoodDB implements Repository<Food> {
      * @param food the food entity
      * @return the corresponding JSON object
      */
-    public static JSONObject loadJSONFromFood(Food food){
+    public static JSONObject loadJSONFromFood(Food food) {
         return new JSONObject(food.toString());
 
     }
@@ -112,21 +117,21 @@ public class FoodDB implements Repository<Food> {
      * @param rawData the food data
      * @return the corresponding food entity
      */
-    public Food loadFoodFromJSON(JSONObject rawData){
+    public Food loadFoodFromJSON(JSONObject rawData) {
         SingletonDB singletonLoader = new SingletonDB(databaseConnector);
-        try{
+        try {
             String id = rawData.getString("id");
             String name = rawData.getString("name");
             String desc = rawData.getString("description");
             float price = rawData.getFloat("price");
             JSONArray arr = rawData.getJSONArray("components");
             Singleton[] selArr = new Singleton[arr.length()];
-            for(int i =0;i <arr.length();i++){
+            for (int i = 0; i < arr.length(); i++) {
                 selArr[i] = singletonLoader.read(arr.getString(i));
             }
             String shopId = rawData.getString("shopId");
-            return new Food(id,name, desc,price,selArr, shopId);
-        }catch(JSONException e){
+            return new Food(id, name, desc, price, selArr, shopId);
+        } catch (JSONException e) {
             return null;
         }
     }

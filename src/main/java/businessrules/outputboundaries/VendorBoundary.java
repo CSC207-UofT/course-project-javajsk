@@ -6,6 +6,7 @@ package businessrules.outputboundaries;
 public interface VendorBoundary {
     /**
      * A method that returns a responseObject containing information to display an error message for vendor not found
+     *
      * @return response object containing information to display error message
      */
     ResponseObject vendorNotFound();
@@ -13,6 +14,7 @@ public interface VendorBoundary {
     /**
      * A method that returns a responseObject containing information to display an error message due to
      * unauthorized access
+     *
      * @param message message to add to response object
      * @return response object containing information to display message
      */
@@ -20,6 +22,7 @@ public interface VendorBoundary {
 
     /**
      * A method that returns a responseObject containing information to display an error message
+     *
      * @param message error message to add to response object
      * @return response object containing information to display error message
      */
@@ -27,6 +30,7 @@ public interface VendorBoundary {
 
     /**
      * A method that returns a responseObject containing information to display the user token
+     *
      * @param token token of user
      * @return responseObject containing information to display token
      */

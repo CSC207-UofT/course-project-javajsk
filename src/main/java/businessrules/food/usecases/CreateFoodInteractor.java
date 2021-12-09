@@ -50,20 +50,21 @@ public class CreateFoodInteractor implements CreateFood {
 
     /**
      * Method for creating a new food
+     *
      * @param vendorToken the vendor token
-     * @param food the food entity
+     * @param food        the food entity
      * @return a response object
      */
     @Override
     public ResponseObject createFood(String vendorToken, Food food) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
 
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("Unable to find such a vendor.");
         }
 
         String foodId = foodRepository.create(food);
-        if(foodId == null){
+        if (foodId == null) {
             return repositoryBoundary.creationFailed("Failed to create food.");
         }
 

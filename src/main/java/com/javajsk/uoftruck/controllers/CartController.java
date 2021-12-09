@@ -82,7 +82,7 @@ public class CartController {
     /**
      * Instantiates a new Cart controller.
      */
-    CartController(){
+    CartController() {
         addToCart = new AddToCartInteractor(foodRepository, cartObjectBoundary, customerRepository, repositoryBoundary);
         emptyCart = new EmptyCartInteractor(customerRepository, repositoryBoundary, cartObjectBoundary);
         removeFromCart = new RemoveFromCartInteractor(customerRepository, repositoryBoundary, foodRepository, cartObjectBoundary);
@@ -100,12 +100,11 @@ public class CartController {
      */
     @PutMapping("/AddtoCart/{userToken}/{foodId}/{shopId}")
     public Cart runAddToCart(@PathVariable String userToken, @PathVariable String shopId,
-                             @PathVariable String foodId, @RequestBody String selections){
+                             @PathVariable String foodId, @RequestBody String selections) {
         JSONObject contents = new JSONObject(selections);
         JSONArray raw_selections = contents.getJSONArray("selections");
         Selection[] selection_list = new Selection[raw_selections.length()];
-        for(int i = 0; i < raw_selections.length(); i++)
-        {
+        for (int i = 0; i < raw_selections.length(); i++) {
             JSONObject raw_object = raw_selections.getJSONObject(i);
             Selection curr_selection = cartrepository.parseSelection(raw_object);
             selection_list[i] = curr_selection;
@@ -121,7 +120,7 @@ public class CartController {
      * @return A ResponseObject containing an empty cart and status codes
      */
     @PutMapping("/EmptyCart/{userToken}")
-    public ResponseObject runEmptyCart(@PathVariable String userToken){
+    public ResponseObject runEmptyCart(@PathVariable String userToken) {
         return emptyCart.emptyCart(userToken);
     }
 
@@ -135,10 +134,10 @@ public class CartController {
      */
     @PutMapping("/RemovefromCart/{userToken}")
     public ResponseObject runRemoveFromCart(@PathVariable String userToken, @RequestBody Food food,
-                                  @RequestBody Selection[] selections){
+                                            @RequestBody Selection[] selections) {
         Selection[] contents = new Selection[selections.length];
-        for(int i = 0; i <= selections.length; i++){
-            contents[i] =  cartrepository.parseSelection(new JSONObject(selections[i]));
+        for (int i = 0; i <= selections.length; i++) {
+            contents[i] = cartrepository.parseSelection(new JSONObject(selections[i]));
         }
 
         return removeFromCart.removeFromCart(userToken, food, contents);
@@ -151,7 +150,7 @@ public class CartController {
      * @return A ResponseObject containing their cart object and status codes
      */
     @GetMapping("/ViewCart/{userToken}")
-    public ResponseObject runViewCart(@PathVariable String userToken){
+    public ResponseObject runViewCart(@PathVariable String userToken) {
         return viewCart.viewCart(userToken);
     }
 

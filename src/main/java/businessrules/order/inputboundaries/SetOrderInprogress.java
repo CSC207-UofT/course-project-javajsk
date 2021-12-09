@@ -8,8 +8,9 @@ import businessrules.outputboundaries.ResponseObject;
 public interface SetOrderInprogress {
     /**
      * Method for setting the order status as in progress
+     *
      * @param vendorToken the vendor token
-     * @param orderId the order id
+     * @param orderId     the order id
      * @return a response object
      */
     ResponseObject setOrderInprogress(String vendorToken, String orderId);

@@ -43,6 +43,7 @@ public class GetShopAddonsInteractor implements GetShopAddons {
     /**
      * Method that returns a response object that contains the addons of the shop
      * with the given id
+     *
      * @param shopId id of shop
      * @return response object containing shop addons or error message
      */
@@ -50,7 +51,7 @@ public class GetShopAddonsInteractor implements GetShopAddons {
     public ResponseObject getShopAddons(String shopId) {
 
         List<Addon> result = addonRepository.readMultiple("shopId", shopId);
-        if(result == null){
+        if (result == null) {
             return repositoryBoundary.queryNotFound("Unable to find shop.");
         }
         return addonObjectBoundary.showObjectList(result);

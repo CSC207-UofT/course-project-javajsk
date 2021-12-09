@@ -16,8 +16,8 @@ public interface RemoveFromCart {
      * the given selection is removed - if there are multiple with this selection, the first
      * instance is removed)
      *
-     * @param userToken token of customer currently logged in
-     * @param food food to remove from cart
+     * @param userToken  token of customer currently logged in
+     * @param food       food to remove from cart
      * @param selections selection corresponding to food to remove from cart
      * @return response object containing updated cart or error message to display
      */

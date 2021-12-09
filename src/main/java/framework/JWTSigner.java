@@ -19,10 +19,12 @@ public class JWTSigner implements TokenSigner {
     /**
      * Instantiates a new Jwt signer.
      */
-    public JWTSigner() {}
+    public JWTSigner() {
+    }
 
     /**
      * Method generates token from given user id
+     *
      * @param userId id of user
      * @return string containing user token
      */
@@ -34,6 +36,7 @@ public class JWTSigner implements TokenSigner {
 
     /**
      * Method returns id associated with given user token
+     *
      * @param token token of user
      * @return string id of user
      */
@@ -41,7 +44,7 @@ public class JWTSigner implements TokenSigner {
     public String getIdFromToken(String token) {
         try {
             return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().getSubject();
-        }catch (Exception e){
+        } catch (Exception e) {
             return "ERROR: " + e.getMessage();
         }
     }

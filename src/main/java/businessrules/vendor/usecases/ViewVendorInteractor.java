@@ -34,6 +34,7 @@ public class ViewVendorInteractor implements ViewVendor {
      * Method to display vendor with given id
      *
      * (or en error message if no such vendor exists)
+     *
      * @param vendorId id of vendor
      * @return response object containing vendor or error message
      */

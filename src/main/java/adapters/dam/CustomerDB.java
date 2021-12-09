@@ -77,7 +77,7 @@ CustomerDB implements CustomerRepository {
     public List<Customer> readMultiple(String parameter, String needle) {
         List<Customer> customerList = new ArrayList<>();
         List<JSONObject> rawCustomers = databaseConnector.readMultiple(tableName, parameter, needle);
-        for(JSONObject rawCustomer: rawCustomers){
+        for (JSONObject rawCustomer : rawCustomers) {
             customerList.add(loadCustomerFromJSON(rawCustomer));
         }
         return customerList;
@@ -90,8 +90,8 @@ CustomerDB implements CustomerRepository {
      */
     @Override
     public Customer findOneByFieldName(String fieldName, String needle) {
-        JSONObject customerData = databaseConnector.readOne(tableName,fieldName, needle);
-        if (customerData == null){
+        JSONObject customerData = databaseConnector.readOne(tableName, fieldName, needle);
+        if (customerData == null) {
             return null;
         }
         return loadCustomerFromJSON(customerData);
@@ -106,7 +106,7 @@ CustomerDB implements CustomerRepository {
     public User getUserFromToken(String userToken) {
         String info = tokenSigner.getIdFromToken(userToken);
         String userId = info.split(",")[0];
-        if(userId.contains("ERROR")){
+        if (userId.contains("ERROR")) {
             return null;
         }
         return read(userId);
@@ -120,13 +120,13 @@ CustomerDB implements CustomerRepository {
     @Override
     public String authenticateUser(String username, String password) {
         Customer customer = findOneByFieldName("username", username);
-        if(customer == null){
+        if (customer == null) {
             return null;
         }
-        if(!customer.getHashedPassword().equals(password)){
+        if (!customer.getHashedPassword().equals(password)) {
             return null;
         }
-        String token_parameter = customer.getId() + "," +customer.getUserName();
+        String token_parameter = customer.getId() + "," + customer.getUserName();
         return tokenSigner.generateToken(token_parameter);
     }
 
@@ -136,12 +136,12 @@ CustomerDB implements CustomerRepository {
      * @param customer Customer entity that we want to create a JSON of
      * @return The JSONObject representation of that object
      */
-    public static JSONObject loadJSONFromCustomer(Customer customer){
+    public static JSONObject loadJSONFromCustomer(Customer customer) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", customer.getId());
         jsonObject.put("cart", CartDB.loadJSONFromCart(customer.getCurrentCart()));
         jsonObject.put("password", customer.getHashedPassword());
-        jsonObject.put("username",customer.getUserName());
+        jsonObject.put("username", customer.getUserName());
         return jsonObject;
     }
 
@@ -152,17 +152,17 @@ CustomerDB implements CustomerRepository {
      * @param jsonObject JSON Object representation of Customer
      * @return A constructed customer object
      */
-    public Customer loadCustomerFromJSON(JSONObject jsonObject){
+    public Customer loadCustomerFromJSON(JSONObject jsonObject) {
         CartDB cartLoader = new CartDB(databaseConnector);
         OrderDB orderLoader = new OrderDB(databaseConnector);
-        try{
+        try {
             String id = jsonObject.getString("id");
             String username = jsonObject.getString("username");
             String hashedPassword = jsonObject.getString("password");
             Cart cart = cartLoader.loadCartFromJSON(jsonObject.getJSONObject("cart"));
             OrderBook custOrderbook = new OrderBook();
             return new Customer(id, username, hashedPassword, custOrderbook, cart);
-        }catch (JSONException e){
+        } catch (JSONException e) {
             return null;
         }
     }

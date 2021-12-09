@@ -12,7 +12,7 @@ public interface ChangeShopStatus {
      *
      * @param vendorToken the vendor that owns the shop
      * @param newStatus   the new status of the shop
-     * @return  response object
+     * @return response object
      */
     ResponseObject changeShopStatus(String vendorToken, boolean newStatus);
 }

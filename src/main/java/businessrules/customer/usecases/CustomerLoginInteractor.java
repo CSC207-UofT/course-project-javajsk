@@ -46,6 +46,7 @@ public class CustomerLoginInteractor implements CustomerLogin {
 
     /**
      * Method for logging in customer
+     *
      * @param username the customer username
      * @param password the customer password
      * @return a response object
@@ -55,7 +56,7 @@ public class CustomerLoginInteractor implements CustomerLogin {
         String hashedPassword = hasher.hash(password);
         String token = customerRepository.authenticateUser(username, hashedPassword);
 
-        if(token == null){
+        if (token == null) {
             return repositoryBoundary.queryNotFound("Incorrect username or password.");
         }
 

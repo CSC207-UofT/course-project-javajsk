@@ -49,13 +49,14 @@ public class GetUserPastOrdersInteractor implements GetUserPastOrders {
 
     /**
      * Method for getting a customer's past orders
+     *
      * @param userToken customer token
      * @return a response object
      */
     @Override
     public ResponseObject getUserPastOrders(String userToken) {
         Customer customer = (Customer) customerRepository.getUserFromToken(userToken);
-        if(customer == null){
+        if (customer == null) {
             return repositoryBoundary.queryNotFound("No such user found.");
         }
 

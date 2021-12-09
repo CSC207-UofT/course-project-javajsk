@@ -86,21 +86,21 @@ public class ModifyDefaultSelectionInteractor implements ModifyDefaultSelection 
     @Override
     public ResponseObject modifyDefaultSelection(String vendorToken, String singletonId, Selection selection) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found");
         }
         Singleton singleton = singletonRepository.read(singletonId);
-        if(singleton == null){
+        if (singleton == null) {
             return repositoryBoundary.queryNotFound("No such singleton found");
         }
 
-        if(!singleton.isValidSelection(selection)){
+        if (!singleton.isValidSelection(selection)) {
             return vendorBoundary.error("Incorrect values inputted for selection.");
         }
 
         singleton.setDefaultSelection(selection);
 
-        if(!singletonRepository.update(singletonId, singleton)){
+        if (!singletonRepository.update(singletonId, singleton)) {
             return repositoryBoundary.modificationFailed("Failed to modify singleton with new default selection.");
         }
         return singletonObjectBoundary.showObject(singleton);

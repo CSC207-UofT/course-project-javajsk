@@ -9,8 +9,9 @@ import entities.Singleton;
 public interface SetSingletonAvailability {
     /**
      * Method for setting the availability of a singleton
-     * @param vendorToken the vendor token
-     * @param singleton the singleton entity
+     *
+     * @param vendorToken     the vendor token
+     * @param singleton       the singleton entity
      * @param newAvailability the new availability
      * @return a response object
      */

@@ -8,6 +8,7 @@ import businessrules.outputboundaries.ResponseObject;
 public interface GetUserPastOrders {
     /**
      * Method for getting a customer's past orders
+     *
      * @param userToken customer token
      * @return a response object
      */

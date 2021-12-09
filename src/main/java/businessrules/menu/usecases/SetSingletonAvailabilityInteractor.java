@@ -60,22 +60,23 @@ public class SetSingletonAvailabilityInteractor implements SetSingletonAvailabil
 
     /**
      * Method for setting the availability of a singleton
-     * @param vendorToken the vendor token
-     * @param singleton the singleton entity
+     *
+     * @param vendorToken     the vendor token
+     * @param singleton       the singleton entity
      * @param newAvailability the new availability
      * @return a response object
      */
     @Override
     public ResponseObject setSingletonAvailability(String vendorToken, Singleton singleton, boolean newAvailability) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found.");
         }
 
         Shop shop = vendor.getShop();
         shop.getMenu().setSingletonAvailability(singleton, newAvailability);
 
-        if(!shopRepository.update(shop.getId(), shop)){
+        if (!shopRepository.update(shop.getId(), shop)) {
             return repositoryBoundary.modificationFailed("Failed to update singleton availability in shop.");
         }
 

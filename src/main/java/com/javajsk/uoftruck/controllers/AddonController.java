@@ -102,7 +102,7 @@ public class AddonController {
      * @return A responseObject with a JSON of the object if status is 200, error message otherwise
      */
     @PostMapping("/CreateAddon/{vendorToken}")
-    public ResponseObject runCreateAddon(@PathVariable String vendorToken, @RequestBody String addon){
+    public ResponseObject runCreateAddon(@PathVariable String vendorToken, @RequestBody String addon) {
         Addon addon1 = addonRepository.loadAddonFromJSON(new JSONObject(addon));
         return createAddon.createAddon(vendorToken, addon1);
     }
@@ -114,7 +114,7 @@ public class AddonController {
      * @return A ResponseObjects with the addons data along with status codes
      */
     @GetMapping("/GetShopAddons/{shopId}")
-    public ResponseObject runGetShopAddons(@PathVariable String shopId){
+    public ResponseObject runGetShopAddons(@PathVariable String shopId) {
         return getShopAddons.getShopAddons(shopId);
     }
 
@@ -135,7 +135,7 @@ public class AddonController {
      * @return A ResponseObjects with all of the Addon Types in the database along with status codes
      */
     @GetMapping("/GetAddonTypes/")
-    public ResponseObject runGetAddonTypes(){
+    public ResponseObject runGetAddonTypes() {
         return getAddonTypes.getAddonTypes();
     }
 
@@ -149,7 +149,7 @@ public class AddonController {
      */
     @PutMapping("/ModifyAddon/{vendorToken}/{addonId}")
     public ResponseObject runModifyAddon(@PathVariable String vendorToken, @PathVariable String addonId,
-                                         @RequestBody Addon addon){
+                                         @RequestBody Addon addon) {
         return modifyAddon.modifyAddon(vendorToken, addonId, addon);
     }
 

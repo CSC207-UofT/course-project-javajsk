@@ -56,15 +56,16 @@ public class RemoveAddonFromMenuInteractor implements RemoveAddonFromMenu {
     }
 
     /**
-     * Methof for removing an addon entity
+     * Method for removing an addon entity
+     *
      * @param vendorToken vendor token
-     * @param addon addon entity
+     * @param addon       addon entity
      * @return a response object
      */
     @Override
     public ResponseObject removeAddon(String vendorToken, Addon addon) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
-        if(vendor == null){
+        if (vendor == null) {
             return repositoryBoundary.queryNotFound("No such vendor found");
         }
         Shop shop = vendor.getShop();
@@ -72,7 +73,7 @@ public class RemoveAddonFromMenuInteractor implements RemoveAddonFromMenu {
         menu.deleteAddon(addon);
         shop.setMenu(menu);
 
-        if(!shopRepository.update(shop.getId(), shop)){
+        if (!shopRepository.update(shop.getId(), shop)) {
             return repositoryBoundary.modificationFailed("Failed to remove addon from menu.");
         }
 

@@ -42,6 +42,7 @@ public class EmptyCartInteractor implements EmptyCart {
     /**
      * Method empties/clears the cart of the customer with given token
      * and returns object containing information to display
+     *
      * @param userToken token of customer currently logged in
      * @return response object containing empty cart or error message to display
      */
@@ -49,13 +50,13 @@ public class EmptyCartInteractor implements EmptyCart {
     public ResponseObject emptyCart(String userToken) {
         Customer customer = (Customer) customerRepository.getUserFromToken(userToken);
 
-        if(customer == null){
+        if (customer == null) {
             return repositoryBoundary.queryNotFound("No such customer found.");
         }
 
         customer.emptyCart();
 
-        if(!customerRepository.update(customer.getId(), customer)){
+        if (!customerRepository.update(customer.getId(), customer)) {
             return repositoryBoundary.modificationFailed("Failed to update customer's cart.");
         }
 
