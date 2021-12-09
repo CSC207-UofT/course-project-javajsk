@@ -1,18 +1,14 @@
 package framework;
 
-import adapters.dam.TokenSigner;
+import adapters.TokenSigner;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.security.Key;
 
 public class JWTSigner implements TokenSigner {
-    static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);;
+    static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     public JWTSigner() {
     }

@@ -14,14 +14,24 @@ import java.util.List;
  * Use case for getting the available foods from a shop entry in a repository
  */
 public class GetAvailableFoodsInteractor implements GetAvailableFoods {
+    /**
+     * The Shop repository.
+     */
     Repository<Shop> shopRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Addon object boundary.
+     */
     ObjectBoundary<Food> addonObjectBoundary;
 
     /**
      * Instantiates a use case for getting available food entities from a shop entry
-     * @param sR the shop repository
-     * @param rB the repository boundary
+     *
+     * @param sR  the shop repository
+     * @param rB  the repository boundary
      * @param aOB the addon object boundary
      */
     public GetAvailableFoodsInteractor(Repository<Shop> sR, RepositoryBoundary rB, ObjectBoundary<Food> aOB) {

@@ -1,6 +1,6 @@
-package adapters.dam.entityrepoitories;
+package adapters.dam;
 
-import adapters.dam.DBGateway;
+import adapters.DBGateway;
 import businessrules.dai.Repository;
 import entities.Cart;
 import entities.Food;
@@ -123,7 +123,9 @@ public class CartDB implements Repository<Cart> {
             String id = object.getString("id");
             String shopId = object.getString("shopId");
             JSONObject contentsRaw = object.getJSONObject("contents");
-            return new Cart(id, shopId, loadContents(contentsRaw));
+            HashMap<Food, List<Selection[]>> contents = loadContents(contentsRaw);
+
+            return new Cart(id, shopId,contents);
         }catch (JSONException e){
             return null;
         }

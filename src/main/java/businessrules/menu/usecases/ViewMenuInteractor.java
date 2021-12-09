@@ -12,14 +12,24 @@ import entities.Shop;
  * Use case for viewing the menu of a menu of a repository
  */
 public class ViewMenuInteractor implements ViewMenu {
+    /**
+     * The Shop repository.
+     */
     Repository<Shop> shopRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Menu object boundary.
+     */
     ObjectBoundary<Menu> menuObjectBoundary;
 
     /**
      * Instantiates a use case for viewing the menu of a menu
-     * @param sR the shop repository
-     * @param rB the repository boundary
+     *
+     * @param sR  the shop repository
+     * @param rB  the repository boundary
      * @param mOB the menu object boundary
      */
     public ViewMenuInteractor(Repository<Shop> sR, RepositoryBoundary rB, ObjectBoundary<Menu> mOB) {

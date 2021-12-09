@@ -1,21 +1,25 @@
 package framework;
 
-import adapters.dam.DBGateway;
+import adapters.DBGateway;
 import com.mongodb.*;
 import com.mongodb.client.*;
 import com.mongodb.client.MongoClient;
+import io.jsonwebtoken.io.IOException;
 import org.bson.Document;
-import org.bson.io.BsonOutput;
 import org.bson.types.ObjectId;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
 public class MongoDB implements DBGateway {
+
+
+
     String username = "Application";
     String password = "F9PYZ6nevnvxGP6U";
     MongoClient mongoClient;
@@ -26,8 +30,46 @@ public class MongoDB implements DBGateway {
         Connect();
     }
 
+    /**
+     * @return Loads mongo password from properties file
+     */
+    public String getMongoPassword(){
+
+        try (InputStream input = new FileInputStream("src/props.properties")) {
+
+            Properties prop = new Properties();
+
+            prop.load(input);
+
+            return(prop.getProperty("dbpassword"));
+
+
+        } catch (IOException | java.io.IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    /**
+     * @return Loads mongo username from properties file
+     */
+    public String getMongoUsername(){
+
+        try (InputStream input = new FileInputStream("src/props.properties")) {
+
+            Properties prop = new Properties();
+
+            prop.load(input);
+
+            return(prop.getProperty("dbusernmae"));
+
+
+        } catch (IOException | java.io.IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
     private void Connect(){
-        ConnectionString connectionString = new ConnectionString("mongodb+srv://Application:"+ password +
+        ConnectionString connectionString = new ConnectionString("mongodb+srv://Application:"+ this.getMongoPassword() +
                 "@cluster0." +
                 "whkvw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
         MongoClientSettings settings = MongoClientSettings.builder()
@@ -108,11 +150,6 @@ public class MongoDB implements DBGateway {
         System.out.println("Here");
         JSONArray addon_types = new JSONArray();
         MongoCollection<Document> collection_doc = database.getCollection(collection);
-//        FindIterable<Document> iterDoc = collection_doc.find();
-//        MongoCursor<Document> dbc =  iterDoc.cursor();
-//        for(Document document: iterDoc){
-//            addon_types.put(jsonObjectCleaner(new JSONObject(document.toJson())));
-//        }
         FindIterable<Document> iterDoc = collection_doc.find();
 
         for(Document document: iterDoc){
@@ -123,7 +160,7 @@ public class MongoDB implements DBGateway {
 
 
         JSONObject res = new JSONObject();
-        res.put("Addon_Types",addon_types);
+        res.put(collection,addon_types);
         return res;
     }
 

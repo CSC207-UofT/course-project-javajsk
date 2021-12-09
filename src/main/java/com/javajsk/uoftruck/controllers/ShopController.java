@@ -1,18 +1,17 @@
 package com.javajsk.uoftruck.controllers;
 
-import adapters.dam.entityrepoitories.ShopDB;
-import adapters.dam.entityrepoitories.VendorDB;
-import businessrules.dai.Repository;
+import adapters.dam.ShopDB;
+import adapters.dam.VendorDB;
 import businessrules.dai.VendorRepository;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.VendorBoundary;
+import businessrules.shop.inputboundaries.ViewAllShops;
 import businessrules.shop.inputboundaries.ViewShop;
 import businessrules.shop.usecases.ChangeShopStatusInteractor;
 import businessrules.shop.usecases.ModifyShopInteractor;
+import businessrules.shop.usecases.ViewAllShopsInteractor;
 import businessrules.shop.usecases.ViewShopInteractor;
-import entities.Addon;
-import entities.Vendor;
 import framework.MongoDB;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +19,11 @@ import businessrules.outputboundaries.ResponseObject;
 import businessrules.shop.inputboundaries.ChangeShopStatus;
 import businessrules.shop.inputboundaries.ModifyShop;
 import entities.Shop;
-import presenters.ObjectPresenter;
-import presenters.RepositoryPresenter;
-import presenters.VendorPresenter;
+import adapters.presenters.ObjectPresenter;
+import adapters.presenters.RepositoryPresenter;
+import adapters.presenters.VendorPresenter;
+
+import javax.swing.text.View;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -32,6 +33,7 @@ public class ShopController {
     ChangeShopStatus changeShopStatus;
     ModifyShop modifyShop;
     ViewShop viewShop;
+    ViewAllShops viewAllShops;
     MongoDB db;
     ShopDB shopRepository;
     VendorRepository vendorRepository;
@@ -47,6 +49,7 @@ public class ShopController {
         this.repositoryBoundary = new RepositoryPresenter();
         this.shopObjectBoundary = new ObjectPresenter<>();
         this.vendorBoundary = new VendorPresenter();
+        this.viewAllShops = new ViewAllShopsInteractor();
         this.changeShopStatus = new ChangeShopStatusInteractor(vendorRepository, shopRepository, repositoryBoundary, shopObjectBoundary);
         this.modifyShop = new ModifyShopInteractor(vendorRepository, repositoryBoundary, shopRepository,vendorBoundary, shopObjectBoundary);
         this.viewShop = new ViewShopInteractor(shopRepository,shopObjectBoundary);
@@ -66,5 +69,10 @@ public class ShopController {
     @GetMapping("/GetShop/{shopId}")
     public ResponseObject viewShop(@PathVariable String shopId){
         return viewShop.viewShop(shopId);
+    }
+
+    @GetMapping("/ViewAllShops/")
+    public ResponseObject viewAllShop(){
+        return viewAllShops.viewAllShops();
     }
 }

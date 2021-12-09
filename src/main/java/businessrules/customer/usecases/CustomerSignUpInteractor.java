@@ -13,10 +13,25 @@ import entities.Customer;
  * Use case for signing up a customer and adding it to a repository
  */
 public class CustomerSignUpInteractor implements CustomerSignUp {
+    /**
+     * The Customer repository.
+     */
     CustomerRepository customerRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Customer boundary.
+     */
     CustomerBoundary customerBoundary;
+    /**
+     * The Customer object boundary.
+     */
     ObjectBoundary<Customer> customerObjectBoundary;
+    /**
+     * The Password Hasher.
+     */
     Hasher hasher;
 
     /**

@@ -15,12 +15,36 @@ import entities.Vendor;
  * Use case for modifying the default selection of a Singleton
  */
 public class ModifyDefaultSelectionInteractor implements ModifyDefaultSelection {
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Singleton repository.
+     */
     Repository<Singleton> singletonRepository;
+    /**
+     * The Vendor boundary.
+     */
     VendorBoundary vendorBoundary;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Singleton object boundary.
+     */
     ObjectBoundary<Singleton> singletonObjectBoundary;
 
+    /**
+     * Instantiates a new Modify default selection interactor.
+     *
+     * @param vendorRepository        the vendor repository
+     * @param singletonRepository     the singleton repository
+     * @param vendorBoundary          the vendor boundary
+     * @param repositoryBoundary      the repository boundary
+     * @param singletonObjectBoundary the singleton object boundary
+     */
     public ModifyDefaultSelectionInteractor(VendorRepository vendorRepository,
                                             Repository<Singleton> singletonRepository,
                                             VendorBoundary vendorBoundary,
@@ -40,7 +64,7 @@ public class ModifyDefaultSelectionInteractor implements ModifyDefaultSelection 
      * @param vendorToken token of the Vendor
      * @param singletonId id of Singleton to be modified
      * @param selection   the new default selection
-     * @return            JSONObject representing the modified Singleton
+     * @return response object
      */
     @Override
     public ResponseObject modifyDefaultSelection(String vendorToken, String singletonId, Selection selection) {

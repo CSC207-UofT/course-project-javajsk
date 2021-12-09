@@ -1,8 +1,8 @@
 package com.javajsk.uoftruck.controllers;
 
-import adapters.dam.SHA512Hasher;
-import adapters.dam.entityrepoitories.ShopDB;
-import adapters.dam.entityrepoitories.VendorDB;
+import adapters.SHA512Hasher;
+import adapters.dam.ShopDB;
+import adapters.dam.VendorDB;
 import businessrules.dai.Hasher;
 import businessrules.dai.Repository;
 import businessrules.dai.VendorRepository;
@@ -26,9 +26,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
-import presenters.ObjectPresenter;
-import presenters.RepositoryPresenter;
-import presenters.VendorPresenter;
+import adapters.presenters.ObjectPresenter;
+import adapters.presenters.RepositoryPresenter;
+import adapters.presenters.VendorPresenter;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")

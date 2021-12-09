@@ -1,9 +1,5 @@
 package businessrules.vendor.usecases;
 
-import adapters.dam.DBGateway;
-import adapters.dam.SHA512Hasher;
-import adapters.dam.entityrepoitories.ShopDB;
-import adapters.dam.entityrepoitories.VendorDB;
 import businessrules.dai.Hasher;
 import businessrules.dai.Repository;
 import businessrules.dai.VendorRepository;
@@ -14,22 +10,46 @@ import businessrules.outputboundaries.VendorBoundary;
 import businessrules.vendor.inputboundaries.VendorSignUp;
 import entities.Shop;
 import entities.Vendor;
-import framework.MongoDB;
-import presenters.ObjectPresenter;
-import presenters.RepositoryPresenter;
-import presenters.VendorPresenter;
 
 /**
  * Use case that signs up a Vendor
  */
 public class VendorSignUpInteractor implements VendorSignUp {
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Hasher.
+     */
     Hasher hasher;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Vendor object boundary.
+     */
     ObjectBoundary<Vendor> vendorObjectBoundary;
+    /**
+     * The Shop repository.
+     */
     Repository<Shop> shopRepository;
+    /**
+     * The Vendor boundary.
+     */
     VendorBoundary vendorBoundary;
 
+    /**
+     * Instantiates a new Vendor sign up interactor.
+     *
+     * @param vendorRepository     the vendor repository
+     * @param hasher               the hasher
+     * @param repositoryBoundary   the repository boundary
+     * @param vendorObjectBoundary the vendor object boundary
+     * @param shopRepository       the shop repository
+     * @param vendorBoundary       the vendor boundary
+     */
     public VendorSignUpInteractor(VendorRepository vendorRepository, Hasher hasher,
                                   RepositoryBoundary repositoryBoundary, ObjectBoundary<Vendor> vendorObjectBoundary,
                                   Repository<Shop> shopRepository, VendorBoundary vendorBoundary) {
@@ -48,8 +68,8 @@ public class VendorSignUpInteractor implements VendorSignUp {
      * @param password     password of the new Vendor
      * @param passwordConf password of the new Vendor confirmed
      * @param shopName     name of the shop of the new Vendor
-     * @param shopLocation location of the shop of the new Vendor
-     * @return             JSONObject representing the new Vendor
+     * @param shopLocation      location of the shop of the new Vendor
+     * @return response object representing the new Vendor (or error message)
      */
     @Override
     public ResponseObject signUp(String username, String password, String passwordConf,

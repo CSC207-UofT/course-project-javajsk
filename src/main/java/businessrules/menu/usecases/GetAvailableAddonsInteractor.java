@@ -14,14 +14,24 @@ import java.util.List;
  * Use case for getting available addons of a shop from a repository
  */
 public class GetAvailableAddonsInteractor implements GetAvailableAddons {
+    /**
+     * The Shop repository.
+     */
     Repository<Shop> shopRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Addon object boundary.
+     */
     ObjectBoundary<Addon> addonObjectBoundary;
 
     /**
      * Instantiates a use case for getting a shop's available addons
-     * @param sR the shop repository
-     * @param rB the repository boundary
+     *
+     * @param sR  the shop repository
+     * @param rB  the repository boundary
      * @param aOB the addon object boundary
      */
     public GetAvailableAddonsInteractor(Repository<Shop> sR, RepositoryBoundary rB, ObjectBoundary<Addon> aOB) {

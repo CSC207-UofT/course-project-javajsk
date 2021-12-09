@@ -5,15 +5,33 @@ import org.json.JSONObject;
 import java.util.List;
 
 /**
- * The Addon Entity - represents toppings/ingredients that can be added to a food
+ * The Addon entity class
  */
 public class Addon{
 
+    /**
+     * The Id.
+     */
     public String id;
+    /**
+     * The Name.
+     */
     protected String name;
+    /**
+     * The Price.
+     */
     protected float price;
+    /**
+     * The Addon types.
+     */
     protected List<Integer> addonTypes;
+    /**
+     * The Is available.
+     */
     protected boolean isAvailable;
+    /**
+     * The Shop id.
+     */
     protected String shopId;
 
     /**
@@ -24,6 +42,7 @@ public class Addon{
      * @param price       the price
      * @param addonTypes  the addon types
      * @param isAvailable the is available
+     * @param shopId      the shop id
      */
     public Addon(String id, String name, float price, List<Integer> addonTypes, boolean isAvailable, String shopId) {
         this.id = id;
@@ -126,6 +145,7 @@ public class Addon{
 
     /**
      * A method that returns the shop id of the addon
+     *
      * @return shop id of the addon
      */
     public String getShopId() {
@@ -134,10 +154,19 @@ public class Addon{
 
     /**
      * A method that sets the shop id of the addon
+     *
      * @param shopId new shop id
      */
     public void setShopId(String shopId) {
         this.shopId = shopId;
+    }
+
+    @Override
+    public boolean equals(Object object){
+        if(!(object instanceof Addon)){
+            return false;
+        }
+        return ((Addon) object).getId().equals(this.id);
     }
 
     /**
@@ -156,5 +185,4 @@ public class Addon{
         finalObject.put("shopId", this.shopId);
         return finalObject.toString();
     }
-
 }

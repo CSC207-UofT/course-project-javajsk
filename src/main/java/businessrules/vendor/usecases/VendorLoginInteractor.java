@@ -7,16 +7,36 @@ import businessrules.outputboundaries.RepositoryBoundary;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.vendor.inputboundaries.VendorLogin;
 
-import javax.sound.midi.Soundbank;
-
-
+/**
+ * Vendor Login use case
+ */
 public class VendorLoginInteractor implements VendorLogin {
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Vendor boundary.
+     */
     VendorBoundary vendorBoundary;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Hasher.
+     */
     Hasher hasher;
 
 
+    /**
+     * Instantiates a new Vendor login interactor.
+     *
+     * @param vendorRepository   the vendor repository
+     * @param vendorBoundary     the vendor boundary
+     * @param repositoryBoundary the repository boundary
+     * @param hasher             the hasher
+     */
     public VendorLoginInteractor(VendorRepository vendorRepository,
                                  VendorBoundary vendorBoundary, RepositoryBoundary
                                          repositoryBoundary, Hasher hasher) {
@@ -31,7 +51,7 @@ public class VendorLoginInteractor implements VendorLogin {
      *
      * @param username username of the Vendor
      * @param password password of the Vendor
-     * @return         the token of the Vendor
+     * @return response object containing the token of the Vendor or an error message
      */
     @Override
     public ResponseObject login(String username, String password) {

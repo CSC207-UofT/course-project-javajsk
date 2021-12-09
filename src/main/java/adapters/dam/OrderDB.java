@@ -1,6 +1,6 @@
-package adapters.dam.entityrepoitories;
+package adapters.dam;
 
-import adapters.dam.DBGateway;
+import adapters.DBGateway;
 import businessrules.dai.Repository;
 import entities.Cart;
 import entities.Order;
@@ -108,7 +108,6 @@ public class OrderDB implements Repository<Order> {
             String customerId = rawOrder.getString("customerId");
             Order.Status status = rawOrder.getEnum(Order.Status.class, "status");
 
-            //TODO: FIX DATES.
             Date timePlaced = new Date();
             Date timeStatusModified = new Date();
             return new Order(id, cart, shopId, customerId, status, timePlaced, timeStatusModified);
