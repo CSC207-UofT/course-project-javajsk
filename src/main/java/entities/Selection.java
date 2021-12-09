@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
- * The type Selection.
+ * The Selection entity class
  */
 public class Selection {
     /**
@@ -41,6 +41,10 @@ public class Selection {
         this.singletonSelection = singletonSelection;
     }
 
+    /**
+     * Method returns set of addons in the selection
+     * @return set of addons
+     */
     public Set<Addon> getSelectedAddons(){
         return this.singletonSelection.keySet();
     }
@@ -54,5 +58,4 @@ public class Selection {
         }
         return jsonObject.toString();
     }
-
 }

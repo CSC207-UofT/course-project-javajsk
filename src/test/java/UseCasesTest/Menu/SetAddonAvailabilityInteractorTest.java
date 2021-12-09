@@ -16,8 +16,6 @@ import entities.Addon;
 import entities.Vendor;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class SetAddonAvailabilityInteractorTest {
     RAMVendorRepository vendorRepository;
     RAMShopRepository shopRepository;

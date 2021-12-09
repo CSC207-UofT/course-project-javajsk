@@ -14,19 +14,35 @@ import entities.Vendor;
  * Use case for modifying a food entry in a repository
  */
 public class ModifyFoodInteractor implements ModifyFood {
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Food repository.
+     */
     Repository<Food> foodRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Food object boundary.
+     */
     ObjectBoundary<Food> foodObjectBoundary;
+    /**
+     * The Vendor boundary.
+     */
     VendorBoundary vendorBoundary;
 
     /**
      * Instantiates a use case for modifying a food entry in a repository
-     * @param vR the vendor repository
-     * @param fR the food repository
-     * @param rB the repository boundary
+     *
+     * @param vR  the vendor repository
+     * @param fR  the food repository
+     * @param rB  the repository boundary
      * @param fOB the food object boundary
-     * @param vB the vendor boundary
+     * @param vB  the vendor boundary
      */
     public ModifyFoodInteractor(VendorRepository vR, Repository<Food> fR, RepositoryBoundary rB,
                                 ObjectBoundary<Food> fOB, VendorBoundary vB) {

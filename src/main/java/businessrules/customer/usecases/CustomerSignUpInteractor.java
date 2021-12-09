@@ -13,10 +13,25 @@ import entities.Customer;
  * Use case for signing up a customer and adding it to a repository
  */
 public class CustomerSignUpInteractor implements CustomerSignUp {
+    /**
+     * The Customer repository.
+     */
     CustomerRepository customerRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Customer boundary.
+     */
     CustomerBoundary customerBoundary;
+    /**
+     * The Customer object boundary.
+     */
     ObjectBoundary<Customer> customerObjectBoundary;
+    /**
+     * The Password Hasher.
+     */
     Hasher hasher;
 
     /**
@@ -47,25 +62,24 @@ public class CustomerSignUpInteractor implements CustomerSignUp {
     @Override
     public ResponseObject signUp(String username, String password, String passwordConf) {
         if(!password.equals(passwordConf)){
-            customerBoundary.error("Passwords do not match.");
+            return customerBoundary.error("Passwords do not match.");
         }
 
         Customer customer = customerRepository.findOneByFieldName("username", username);
         if(customer != null){
-            customerBoundary.error("Username is already taken!");
+            return customerBoundary.error("Username is already taken!");
         }
 
         String cypherText = hasher.hash(password);
 
-        Customer customerNew = new Customer("N/A", username,password);
+        Customer customerNew = new Customer("N/A",username,cypherText);
 
         String custId = customerRepository.create(customerNew);
         if(custId == null){
-            repositoryBoundary.creationFailed("Unable to create user.");
+            return repositoryBoundary.creationFailed("Unable to create user.");
         }
         customerNew.setId(custId);
 
         return customerObjectBoundary.showObject(customerNew);
     }
-
 }

@@ -1,9 +1,7 @@
 package UseCasesTest.daitesters;
 import businessrules.dai.CustomerRepository;
-import businessrules.dai.UserRepository;
 import entities.Customer;
 import entities.User;
-import entities.Vendor;
 
 import java.util.ArrayList;
 import java.util.List;

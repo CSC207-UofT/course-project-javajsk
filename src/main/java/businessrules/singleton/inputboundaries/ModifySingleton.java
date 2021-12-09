@@ -3,6 +3,9 @@ package businessrules.singleton.inputboundaries;
 import businessrules.outputboundaries.ResponseObject;
 import entities.Singleton;
 
+/**
+ * Input boundary for ModifySingletonInteractor
+ */
 public interface ModifySingleton {
     /**
      * Replaces the Singleton with the specified id
@@ -12,6 +15,7 @@ public interface ModifySingleton {
      * @param vendorToken  the token of the vendor modifying the Singleton
      * @param singletonId  the id of the Singleton to be modified
      * @param newSingleton the Singleton replacing the original
+     * @return a reponse object
      */
     ResponseObject modifySingleton(String vendorToken, String singletonId, Singleton newSingleton);
 }

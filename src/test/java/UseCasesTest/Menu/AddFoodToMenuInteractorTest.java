@@ -16,8 +16,6 @@ import entities.Food;
 import entities.Vendor;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class AddFoodToMenuInteractorTest {
     RAMVendorRepository vendorRepository;
     RAMShopRepository shopRepository;

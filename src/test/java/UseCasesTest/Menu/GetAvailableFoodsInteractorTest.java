@@ -18,8 +18,6 @@ import businessrules.outputboundaries.VendorBoundary;
 import entities.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class GetAvailableFoodsInteractorTest {
     RAMVendorRepository vendorRepository;
     RAMShopRepository shopRepository;

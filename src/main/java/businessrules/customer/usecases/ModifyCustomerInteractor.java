@@ -13,19 +13,35 @@ import entities.Customer;
  * Use case for modifying a customer in a repository
  */
 public class ModifyCustomerInteractor implements ModifyCustomer {
+    /**
+     * The Customer repository.
+     */
     CustomerRepository customerRepository;
+    /**
+     * The Customer object boundary.
+     */
     ObjectBoundary<Customer> customerObjectBoundary;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Customer boundary.
+     */
     CustomerBoundary customerBoundary;
+    /**
+     * The Password Hasher.
+     */
     Hasher hasher;
 
     /**
      * Instantiates a use case for modifying a customer
-     * @param cR the customer repository
+     *
+     * @param cR  the customer repository
      * @param cOB the customer object boundary
-     * @param rB the repository boundary
-     * @param cB the customer boundary
-     * @param h the password hasher
+     * @param rB  the repository boundary
+     * @param cB  the customer boundary
+     * @param h   the password hasher
      */
     public ModifyCustomerInteractor(CustomerRepository cR, ObjectBoundary<Customer> cOB, RepositoryBoundary rB,
                                     CustomerBoundary cB, Hasher h) {

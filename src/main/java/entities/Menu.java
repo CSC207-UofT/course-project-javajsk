@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Menu entity class.
+ * The Menu entity class
  */
 public class Menu{
     /**
@@ -110,7 +110,7 @@ public class Menu{
      * @param addon the addon to remove
      */
     public void deleteAddon(Addon addon) {
-        this.addons.remove(addon);
+        this.addons.removeIf(addon::equals);
     }
 
     /**
@@ -145,7 +145,7 @@ public class Menu{
      * @param food the food entity to renove
      */
     public void deleteFood(Food food){
-        this.foods.remove(food);
+        this.foods.removeIf(food::equals);
     }
 
     /**
@@ -207,7 +207,7 @@ public class Menu{
         for(Food food: this.foods){
             for(Singleton singletonIter: food.getComponents()){
                 if(singletonIter.equals(singleton)){
-                    singletonIter.setAvailability(availability);
+                    singletonIter.setAvailable(availability);
                 }
             }
         }
@@ -220,7 +220,7 @@ public class Menu{
     public List<Addon> getAvailableAddons(){
         List<Addon> availAddons = new ArrayList<>();
         for(Addon addon: this.addons){
-            if(addon.isAvailable()){
+            if(addon.getAvailable()){
                 availAddons.add(addon);
             }
         }
@@ -241,6 +241,11 @@ public class Menu{
         return availFoods;
     }
 
+    /**
+     * Method returns menu as a string representation
+     *
+     * @return string representation of menu
+     */
     @Override
     public String toString(){
         JSONObject jsonObject = new JSONObject();

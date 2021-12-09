@@ -7,8 +7,6 @@ import businessrules.menu.usecases.ViewMenuInteractor;
 import entities.Vendor;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ViewMenuInteractorTest {
     RAMShopRepository shopRepository;
     RAMRepositoryBoundary repositoryBoundary;

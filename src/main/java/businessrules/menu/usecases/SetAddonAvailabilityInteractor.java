@@ -16,19 +16,35 @@ import entities.Vendor;
  * Use case for setting the availability of an addon on a menu of a repository
  */
 public class SetAddonAvailabilityInteractor implements SetAddonAvailability {
+    /**
+     * The Menu object boundary.
+     */
     ObjectBoundary<Menu> menuObjectBoundary;
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary;
+    /**
+     * The Vendor boundary.
+     */
     VendorBoundary vendorBoundary;
+    /**
+     * The Shop repository.
+     */
     Repository<Shop> shopRepository;
 
     /**
      * Instantiates a use case for setting the availability of an addon on a menu
+     *
      * @param mOB the menu object boundary
-     * @param vR the vendor repository
-     * @param rB the repository boundary
-     * @param vB the vendor boundary
-     * @param sR the shop repository
+     * @param vR  the vendor repository
+     * @param rB  the repository boundary
+     * @param vB  the vendor boundary
+     * @param sR  the shop repository
      */
     public SetAddonAvailabilityInteractor(ObjectBoundary<Menu> mOB, VendorRepository vR, RepositoryBoundary rB,
                                           VendorBoundary vB, Repository<Shop> sR) {

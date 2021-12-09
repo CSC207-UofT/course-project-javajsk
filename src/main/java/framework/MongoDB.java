@@ -1,23 +1,25 @@
 package framework;
 
-import adapters.dam.DBGateway;
-import com.mongodb.BasicDBObject;
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientSettings;
+import adapters.DBGateway;
+import com.mongodb.*;
 import com.mongodb.client.*;
-import com.mongodb.util.JSON;
+import com.mongodb.client.MongoClient;
+import io.jsonwebtoken.io.IOException;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.aop.scope.ScopedObject;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.print.Doc;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class MongoDB implements DBGateway {
+
+
+
     String username = "Application";
     String password = "F9PYZ6nevnvxGP6U";
     MongoClient mongoClient;
@@ -28,8 +30,46 @@ public class MongoDB implements DBGateway {
         Connect();
     }
 
+    /**
+     * @return Loads mongo password from properties file
+     */
+    public String getMongoPassword(){
+
+        try (InputStream input = new FileInputStream("src/props.properties")) {
+
+            Properties prop = new Properties();
+
+            prop.load(input);
+
+            return(prop.getProperty("dbpassword"));
+
+
+        } catch (IOException | java.io.IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    /**
+     * @return Loads mongo username from properties file
+     */
+    public String getMongoUsername(){
+
+        try (InputStream input = new FileInputStream("src/props.properties")) {
+
+            Properties prop = new Properties();
+
+            prop.load(input);
+
+            return(prop.getProperty("dbusernmae"));
+
+
+        } catch (IOException | java.io.IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
     private void Connect(){
-        ConnectionString connectionString = new ConnectionString("mongodb+srv://Application:"+ password +
+        ConnectionString connectionString = new ConnectionString("mongodb+srv://Application:"+ this.getMongoPassword() +
                 "@cluster0." +
                 "whkvw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
         MongoClientSettings settings = MongoClientSettings.builder()
@@ -43,12 +83,17 @@ public class MongoDB implements DBGateway {
     @Override
     public JSONObject read(String table, String id) {
         MongoCollection<Document> collection = database.getCollection(table);
-        Document first = collection.find(new Document("_id",new ObjectId(id))).first();
+
         try{
+            Document first = collection.find(new Document("_id",new ObjectId(id))).first();
             assert first != null;
             JSONObject jsonObject = new JSONObject(first.toJson());
             return jsonObjectCleaner(jsonObject);
-        }catch (NullPointerException e){
+        }catch(IllegalArgumentException obj){
+            System.out.println("Not a valid id.");
+            return null;
+        }
+        catch (NullPointerException e){
             System.out.println(e.getMessage());
             return null;
         }
@@ -57,12 +102,12 @@ public class MongoDB implements DBGateway {
     @Override
     public boolean update(String table, String id, JSONObject newDat) {
         try {
+            newDat.remove("id");
             MongoCollection<Document> collection = database.getCollection(table);
             Document filter = new Document("_id", new ObjectId(id));
-            System.out.println("filter: "+filter);
             Document newDoc = Document.parse(newDat.toString());
-            System.out.println("filter: "+newDoc);
-            collection.replaceOne(filter, newDoc); //TODO: findOneAndUpdate doesn't seem to work...
+            System.out.println("filter: "+ newDoc);
+            collection.replaceOne(filter, newDoc);
             //TODO This exception clause needs to be modified.
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -78,6 +123,7 @@ public class MongoDB implements DBGateway {
             data.remove("id");
             Document insertion = Document.parse(data.toString());
             collection.insertOne(insertion);
+            System.out.println("ID from db:"+insertion.getObjectId("_id").toString());
             return insertion.getObjectId("_id").toString();
         }catch (Exception e){
             return null;
@@ -99,6 +145,23 @@ public class MongoDB implements DBGateway {
             return null;
         }
 
+    }
+    public JSONObject getCollection(String collection){
+        System.out.println("Here");
+        JSONArray addon_types = new JSONArray();
+        MongoCollection<Document> collection_doc = database.getCollection(collection);
+        FindIterable<Document> iterDoc = collection_doc.find();
+
+        for(Document document: iterDoc){
+            addon_types.put(jsonObjectCleaner(new JSONObject(document.toJson())));
+        }
+
+
+
+
+        JSONObject res = new JSONObject();
+        res.put(collection,addon_types);
+        return res;
     }
 
     @Override
@@ -131,7 +194,6 @@ public class MongoDB implements DBGateway {
             System.out.println(e.getMessage());
             return null;
         }
-
     }
 
 

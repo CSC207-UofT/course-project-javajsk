@@ -5,7 +5,6 @@ import UseCasesTest.TestBoundaries.RAMRepositoryBoundary;
 import UseCasesTest.daitesters.*;
 import businessrules.addon.usecases.CreateAddonInteractor;
 import businessrules.cart.usecases.AddToCartInteractor;
-import businessrules.cart.usecases.EmptyCartInteractor;
 import businessrules.cart.usecases.RemoveFromCartInteractor;
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.RepositoryBoundary;

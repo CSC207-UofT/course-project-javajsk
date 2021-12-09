@@ -6,7 +6,6 @@ import UseCasesTest.TestBoundaries.RAMVendorBoundary;
 import UseCasesTest.daitesters.RAMAddonRepository;
 import UseCasesTest.daitesters.RAMShopRepository;
 import UseCasesTest.daitesters.RAMVendorRepository;
-import businessrules.addon.usecases.CreateAddonInteractor;
 import businessrules.addon.usecases.ModifyAddonInteractor;
 import businessrules.menu.usecases.AddAddonToMenuInteractor;
 import businessrules.outputboundaries.ObjectBoundary;
@@ -15,7 +14,6 @@ import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
 import entities.*;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ModifyAddonInteractorTest {
     RAMVendorRepository vendorRepository;

@@ -110,14 +110,14 @@ class SingletonTest {
 
     @Test
     void isAvailable() {
-        boolean availability = singleton.isAvailable();
+        boolean availability = singleton.getAvailable();
         assertTrue(availability);
     }
 
     @Test
     void setAvailability() {
-        singleton.setAvailability(false);
-        assertFalse(singleton.isAvailable());
+        singleton.setAvailable(false);
+        assertFalse(singleton.getAvailable());
     }
 
     @Test
@@ -143,7 +143,7 @@ class SingletonTest {
         assertEquals("Burger with Mushrooms", singleton.getDescription());
         assertEquals(new_allowedAddonTypes, singleton.getAllowedAddonTypes());
         assertEquals(new_defaultSelection, singleton.getDefaultSelection());
-        assertFalse(singleton.isAvailable());
+        assertFalse(singleton.getAvailable());
         assertEquals("00002", singleton.getShopId());
     }
 
