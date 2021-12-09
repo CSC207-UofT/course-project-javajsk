@@ -26,7 +26,7 @@ Finally, this product will be used in real time, with customers interacting with
 
 ### Clean Architecture
 
-[Diagram[(https://docs.google.com/presentation/d/15Nqi7JpQAbOuP7HIm6xVuQEYlJPoqZvuPpNGTfDJ6CA/edit#slide=id.gcb4f6cfc7d_1_6) 
+[Diagram](https://docs.google.com/presentation/d/15Nqi7JpQAbOuP7HIm6xVuQEYlJPoqZvuPpNGTfDJ6CA/edit#slide=id.gcb4f6cfc7d_1_6) 
 
 Overall, we think we’ve adhered to clean architecture rather well. We think that this can be seen through just our package structure, where we’ve structured the packages by layer - which shows a high level view of how we’ve organized our program to adhere to clean architecture. In fact, we’ve redesigned our entire code many times over in order to better adhere to clean architecture. Our current iteration, although imperfect (as we’ll elaborate on later), covers much of the principles of clean architecture. We’ve strongly modeled the structure of our entire program after the classic concentric circles diagram associated with clean architecture - our entities layer encapsulates the enterprise business rules layer, our use case layer encapsulates the application business rules layer, our controller layer encapsulates the interface adapter layer, and we have a layer of presenters as well as a database on the most outer layer. Furthermore, we’ve made strong efforts to adhere to the dependency rule - which states that dependency must only point from outer to inner adjacent layers. Wherever we have to go from inner to outer layers, we’ve utilized the dependency inversion principle, which can easily be seen in our use case layer which accesses the database layer via accessing a Repository<T> interface which is of the type that the use case is related to.
   
