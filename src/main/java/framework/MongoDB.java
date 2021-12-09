@@ -16,21 +16,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * Mongo Database
+ */
 public class MongoDB implements DBGateway {
-
-
-
-    String username = "Application";
-    String password = "F9PYZ6nevnvxGP6U";
+    /**
+     * The Mongo client.
+     */
     MongoClient mongoClient;
+    /**
+     * The Database.
+     */
     MongoDatabase database;
 
 
+    /**
+     * Instantiates a new Mongo db.
+     */
     public MongoDB() {
         Connect();
     }
 
     /**
+     * Get mongo password string.
+     *
      * @return Loads mongo password from properties file
      */
     public String getMongoPassword(){
@@ -49,7 +58,10 @@ public class MongoDB implements DBGateway {
         }
         return null;
     }
+
     /**
+     * Get mongo username string.
+     *
      * @return Loads mongo username from properties file
      */
     public String getMongoUsername(){
@@ -60,7 +72,7 @@ public class MongoDB implements DBGateway {
 
             prop.load(input);
 
-            return(prop.getProperty("dbusernmae"));
+            return(prop.getProperty("dbusername"));
 
 
         } catch (IOException | java.io.IOException ex) {
@@ -68,6 +80,11 @@ public class MongoDB implements DBGateway {
         }
         return null;
     }
+
+
+    /**
+     * Method sets up Mongo Client to connect mongo database to program
+     */
     private void Connect(){
         ConnectionString connectionString = new ConnectionString("mongodb+srv://Application:"+ this.getMongoPassword() +
                 "@cluster0." +
@@ -80,6 +97,12 @@ public class MongoDB implements DBGateway {
         this.database = mongoClient.getDatabase("UofTruck");
     }
 
+    /**
+     * Method returns JSONObject representing data with given id from database under given table
+     * @param table database table
+     * @param id id of object
+     * @return JSON object
+     */
     @Override
     public JSONObject read(String table, String id) {
         MongoCollection<Document> collection = database.getCollection(table);
@@ -99,6 +122,13 @@ public class MongoDB implements DBGateway {
         }
     }
 
+    /**
+     * Method updates object in given table with given id with new data
+     * @param table table of database to update
+     * @param id id of object in table to update
+     * @param newDat new data
+     * @return whether data was successfully updated
+     */
     @Override
     public boolean update(String table, String id, JSONObject newDat) {
         try {
@@ -116,6 +146,12 @@ public class MongoDB implements DBGateway {
         return true;
     }
 
+    /**
+     * Method creates new object to save on given table with given data
+     * @param table table on database
+     * @param data data to add
+     * @return String representation of object created
+     */
     @Override
     public String create(String table, JSONObject data) {
         try{
@@ -130,6 +166,12 @@ public class MongoDB implements DBGateway {
         }
     }
 
+    /**
+     * Method for reading multiple entries of an object from the database
+     * @param parameter the parameter to look up in the database
+     * @param needle the value of the parameter to find in the database
+     * @return a list of entity objects that match the requirements
+     */
     @Override
     public List<JSONObject> readMultiple(String table, String parameter, String needle) {
         try{
@@ -146,8 +188,13 @@ public class MongoDB implements DBGateway {
         }
 
     }
+
+    /**
+     * Method returns JSON object of given collection from database
+     * @param collection collection to get from database
+     * @return JSON object
+     */
     public JSONObject getCollection(String collection){
-        System.out.println("Here");
         JSONArray addon_types = new JSONArray();
         MongoCollection<Document> collection_doc = database.getCollection(collection);
         FindIterable<Document> iterDoc = collection_doc.find();
@@ -156,14 +203,18 @@ public class MongoDB implements DBGateway {
             addon_types.put(jsonObjectCleaner(new JSONObject(document.toJson())));
         }
 
-
-
-
         JSONObject res = new JSONObject();
         res.put(collection,addon_types);
         return res;
     }
 
+    /**
+     * Method for reading one entry of an object from the database
+     * @param table table on database
+     * @param parameter the parameter to look up in the database
+     * @param needle the value of the parameter to find in the database
+     * @return JSON object that matches the requirements
+     */
     @Override
     public JSONObject readOne(String table, String parameter, String needle) {
         try{
@@ -177,12 +228,12 @@ public class MongoDB implements DBGateway {
         }
     }
 
-    public static void main(String[] args){
-        MongoDB mongoDB = new MongoDB();
-        JSONObject jsonObject = mongoDB.read("Addon", "61abe7bb0a9c2c3d423a94c0");
-        //TODO: Check if insertion n shit works.
-    }
-
+    /**
+     * Json object cleaner json object.
+     *
+     * @param jsonObject the json object
+     * @return the json object
+     */
     public static JSONObject jsonObjectCleaner(JSONObject jsonObject){
         try {
             String id = jsonObject.getJSONObject("_id").getString("$oid");
@@ -195,6 +246,4 @@ public class MongoDB implements DBGateway {
             return null;
         }
     }
-
-
 }

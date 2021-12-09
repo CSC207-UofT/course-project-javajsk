@@ -17,31 +17,98 @@ import adapters.presenters.ObjectPresenter;
 import adapters.presenters.RepositoryPresenter;
 import adapters.presenters.VendorPresenter;
 
+/**
+ * The type Menu controller.
+ */
+/**/
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class MenuController{
 
+    /**
+     * The Add addon to menu.
+     */
     AddAddonToMenu addAddonToMenu;
+    /**
+     * The Add food to menu.
+     */
     AddFoodToMenu addFoodToMenu;
+    /**
+     * The Get available addons.
+     */
     GetAvailableAddons getAvailableAddons;
+    /**
+     * The Get available foods.
+     */
     GetAvailableFoods getAvailableFoods;
+    /**
+     * The Remove addon from menu.
+     */
     RemoveAddonFromMenu removeAddonFromMenu;
+    /**
+     * The Remove food from menu.
+     */
     RemoveFoodFromMenu removeFoodFromMenu;
+    /**
+     * The Set addon availability.
+     */
     SetAddonAvailability setAddonAvailability;
+    /**
+     * The Set singleton availability.
+     */
     SetSingletonAvailability setSingletonAvailability;
+    /**
+     * The View menu.
+     */
     ViewMenu viewMenu;
+    /**
+     * The Db.
+     */
     MongoDB db;
+    /**
+     * The Shop repository.
+     */
     Repository<Shop> shopRepository;
+    /**
+     * The Singleton repository.
+     */
     SingletonDB singletonRepository;
+    /**
+     * The Vendor repository.
+     */
     VendorRepository vendorRepository;
+    /**
+     * The Addon repository.
+     */
     AddonDB addonRepository;
+    /**
+     * The Food repository.
+     */
     FoodDB foodRepository;
+    /**
+     * The Vendor boundary.
+     */
     VendorBoundary vendorBoundary = new VendorPresenter();
+    /**
+     * The Repository boundary.
+     */
     RepositoryBoundary repositoryBoundary = new RepositoryPresenter();
+    /**
+     * The Menu object boundary.
+     */
     ObjectBoundary<Menu> menuObjectBoundary = new ObjectPresenter<>();
+    /**
+     * The Addon object boundary.
+     */
     ObjectBoundary<Addon> addonObjectBoundary = new ObjectPresenter<>();
+    /**
+     * The Food object boundary.
+     */
     ObjectBoundary<Food> foodObjectBoundary = new ObjectPresenter<>();
 
+    /**
+     * Instantiates a new Menu controller.
+     */
     public MenuController(){
         this.db = new MongoDB();
         this.shopRepository = new ShopDB(db);
@@ -70,8 +137,10 @@ public class MenuController{
     }
 
     /**
+     * Run add addonto menu response object.
+     *
      * @param vendorToken Token associated with vendor trying to add to their menu
-     * @param addon The addon object they want to add ot their menu
+     * @param addon       The addon object they want to add ot their menu
      * @return A ResponseObject with the menu with the newly added addon, with status codes
      */
     @PutMapping("/AddAddonToMenu/{vendorToken}")
@@ -81,8 +150,10 @@ public class MenuController{
     }
 
     /**
+     * Run add foodto menu response object.
+     *
      * @param vendorToken Token associated with vendor trying to add to their menu
-     * @param food The food object they want to add ot their menu
+     * @param food        The food object they want to add ot their menu
      * @return A ResponseObject with the menu with the newly added food, with status codes
      */
     @PutMapping("/AddFoodToMenu/{vendorToken}")
@@ -92,6 +163,8 @@ public class MenuController{
     }
 
     /**
+     * Run get available addons response object.
+     *
      * @param shopId The shopid of the shop we want to  check available addons of
      * @return A ResponseObject with all the available addons of the given shop, with status codes
      */
@@ -101,6 +174,8 @@ public class MenuController{
     }
 
     /**
+     * Run get available foods response object.
+     *
      * @param shopId The shopid of the shop we want to  check available foods of
      * @return A ResponseObject with all the available foods of the given shop, with status codes
      */
@@ -110,8 +185,10 @@ public class MenuController{
     }
 
     /**
+     * Run remove addon from menu response object.
+     *
      * @param vendorToken Token associated with vendor trying to remove from their menu
-     * @param addon The addon object they want to remove from their menu
+     * @param addon       The addon object they want to remove from their menu
      * @return A ResponseObject with the menu with the recently removed addon, with status codes
      */
     @PutMapping("/RemoveAddonFromMenu/{vendorToken}")
@@ -121,8 +198,10 @@ public class MenuController{
     }
 
     /**
+     * Run remove food from menu response object.
+     *
      * @param vendorToken Token associated with vendor trying to remove from their menu
-     * @param food The food object they want to remove from their menu
+     * @param food        The food object they want to remove from their menu
      * @return A ResponseObject with the menu with the newly removed food, with status codes
      */
     @PutMapping("/RemoveFoodFromMenu/{vendorToken}")
@@ -132,6 +211,8 @@ public class MenuController{
     }
 
     /**
+     * Run view menu response object.
+     *
      * @param shopId the shop id of the menu we're trying to view
      * @return A ResponseObject with the menu of the given shop, with status codes
      */

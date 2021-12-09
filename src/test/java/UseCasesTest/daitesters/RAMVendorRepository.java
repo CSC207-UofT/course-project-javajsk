@@ -1,6 +1,7 @@
 package UseCasesTest.daitesters;
 
 import businessrules.dai.VendorRepository;
+import entities.Customer;
 import entities.User;
 import entities.Vendor;
 
@@ -67,9 +68,19 @@ public class RAMVendorRepository implements VendorRepository {
 
     @Override
     public User getUserFromToken(String userToken) {
+
+        for (Vendor vendor:storage){
+            if(vendor.getId().equals(userToken)){
+                return vendor;
+            }
+        }
         return null;
+
     }
 
+    /**
+     * Hard code get user from token to just be finding the username
+     */
     @Override
     public String authenticateUser(String username, String password) {
         for (Vendor vendor:storage){
@@ -77,10 +88,11 @@ public class RAMVendorRepository implements VendorRepository {
                 if (vendor.getHashedPassword().equals(password))
                     return "User authenticated";
                 else {
-                    return "Password incorrect";
+                    return null;
                 }
             }
         }
-        return "User not found";
+        return null;
+
     }
-}
+

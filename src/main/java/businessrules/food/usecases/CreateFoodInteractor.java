@@ -66,7 +66,8 @@ public class CreateFoodInteractor implements CreateFood {
         }
 
         food.setId(foodId);
-
-        return foodObjectBoundary.showObject(food);
+        String shopId = vendor.getShop().getId();
+        List<Food> foods = foodRepository.readMultiple("shopId", shopId);
+        return foodObjectBoundary.showObjectList(foods);
     }
 }

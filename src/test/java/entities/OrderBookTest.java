@@ -76,6 +76,10 @@ class OrderBookTest {
 
     @Test
     void getOrderIds() {
+        List<String> orderIds = orderBook.getOrderIds();
+        assertEquals(2, orderIds.size());
+        assertTrue(orderIds.contains("00001"));
+        assertTrue(orderIds.contains("00003"));
     }
 
     @Test

@@ -3,6 +3,9 @@ package adapters.presenters;
 import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
 
+/**
+ * Presenter for Vendor
+ */
 public class VendorPresenter implements VendorBoundary {
     /**
      * A method that returns a responseObject containing information to display an error message for vendor not found

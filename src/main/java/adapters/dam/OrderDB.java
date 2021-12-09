@@ -12,14 +12,21 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * An implementation of a repository with type order
+ * The data access manager for Order database.
  */
 public class OrderDB implements Repository<Order> {
+    /**
+     * The Database connector.
+     */
     DBGateway databaseConnector;
+    /**
+     * The Table name.
+     */
     final String tableName = "Order";
 
     /**
      * Instantiates a order database
+     *
      * @param databaseConnector the database connector
      */
     public OrderDB(DBGateway databaseConnector) {
@@ -87,6 +94,7 @@ public class OrderDB implements Repository<Order> {
 
     /**
      * Method for converting an order entity to a JSON object
+     *
      * @param order the order entity
      * @return the corresponding JSON object
      */
@@ -96,6 +104,7 @@ public class OrderDB implements Repository<Order> {
 
     /**
      * Method for converting a JSON object to an order entity
+     *
      * @param rawOrder the JSON data
      * @return the corresponding order entity
      */

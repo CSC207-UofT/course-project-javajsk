@@ -111,7 +111,8 @@ class CartTest {
 
     @Test
     void modifySelection() {
-        Food Shawarma = new Food("1001", "Shawarma", "A regular Shawarma", 15, null, "shop1");
+        Food Shawarma = new Food("1001", "Shawarma", "A regular Shawarma", 15,
+                null, "shop1");
         HashMap<Addon, Integer> hash = new HashMap<Addon, Integer>();
         Selection selection = new Selection(hash);
         Selection[] selections = new Selection[1];
@@ -120,7 +121,9 @@ class CartTest {
         hash.put(addon, 10);
        Selection[] newSel = null;
         cart.modifySelection(Shawarma, selections, newSel);
-        assertNull(cart.getContents().get(Shawarma));
+        List<Selection[]> nullmap = new ArrayList<>();
+        nullmap.add(null);
+        assertEquals(nullmap, cart.getContents().get(Shawarma));
 
 
 

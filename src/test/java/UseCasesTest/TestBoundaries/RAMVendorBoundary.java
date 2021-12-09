@@ -22,6 +22,6 @@ public class RAMVendorBoundary implements  VendorBoundary {
 
     @Override
     public ResponseObject displayToken(String token) {
-        return new ResponseObject(0, token, "");
+        return new ResponseObject(0, "", token);
     }
 }

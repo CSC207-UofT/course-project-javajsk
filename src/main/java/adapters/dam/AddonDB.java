@@ -11,11 +11,22 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The data access manager for Addon database.
+ */
 public class AddonDB implements Repository<Addon> {
+    /**
+     * The Database connector.
+     */
     DBGateway databaseConnector;
+    /**
+     * The Table name.
+     */
     final String tableName = "Addon";
 
     /**
+     * Instantiates a new Addon db.
+     *
      * @param databaseConnector The concrete implementation of the specific database we want to use
      */
     public AddonDB(DBGateway databaseConnector) {
@@ -51,6 +62,12 @@ public class AddonDB implements Repository<Addon> {
         return databaseConnector.create(tableName, loadJSONfromAddon(item));
     }
 
+    /**
+     * Method for reading multiple addon entries from the database
+     * @param parameter the parameter to look up in the database
+     * @param needle the value of the parameter to find in the database
+     * @return a list of addon entities that match the requirements
+     */
     @Override
     public List<Addon> readMultiple(String parameter, String needle) {
         List<Addon> addonList = new ArrayList<>();
@@ -62,6 +79,8 @@ public class AddonDB implements Repository<Addon> {
     }
 
     /**
+     * Get addon types json object.
+     *
      * @return A JSONObject of all Addon types in the databse.
      */
     public JSONObject getAddonTypes(){
@@ -75,10 +94,22 @@ public class AddonDB implements Repository<Addon> {
         return loadAddonFromJSON(databaseConnector.readOne(tableName, fieldName, needle));
     }
 
+    /**
+     * Load jso nfrom addon json object.
+     *
+     * @param addon the addon
+     * @return the json object
+     */
     public static JSONObject loadJSONfromAddon(Addon addon){
         return new JSONObject(addon.toString());
     }
 
+    /**
+     * Load addon from json addon.
+     *
+     * @param addonObj the addon obj
+     * @return the addon
+     */
     public Addon loadAddonFromJSON(JSONObject addonObj){
         if(addonObj == null){
             return null;

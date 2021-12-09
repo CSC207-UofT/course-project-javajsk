@@ -11,12 +11,30 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * The data access manager for Vendor database.
+ */
 public class VendorDB implements VendorRepository {
+    /**
+     * The Database connector.
+     */
     DBGateway databaseConnector;
+    /**
+     * The Table name.
+     */
     final String tableName = "Vendor";
+    /**
+     * The Token signer.
+     */
     TokenSigner tokenSigner;
 
 
+    /**
+     * Instantiates a new Vendor db.
+     *
+     * @param databaseConnector the database connector
+     */
     public VendorDB(DBGateway databaseConnector) {
         this.databaseConnector = databaseConnector;
         this.tokenSigner = new JWTSigner();
@@ -112,8 +130,10 @@ public class VendorDB implements VendorRepository {
         String token_parameter = vendor.getId() + "," +vendor.getUserName() +","+vendor.getShop().getId();
         return tokenSigner.generateToken(token_parameter);
     }
+
     /**
      * Method for converting a JSON object to a vendor entity
+     *
      * @param jsonObject the JSON data
      * @return the corresponding vendor entity
      */
@@ -130,8 +150,10 @@ public class VendorDB implements VendorRepository {
             return null;
         }
     }
+
     /**
      * Method for converting a vendor entity to a JSON object
+     *
      * @param vendor the shop entity
      * @return the corresponding JSON object
      */
