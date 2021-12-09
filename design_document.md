@@ -45,10 +45,11 @@ To explain, we chose to package our overall program by layer because initially, 
 We acknowledge that if we were to restart the entire project from scratch with the knowledge we have now, we would probably choose to package by feature due to lower coupling across packages and higher cohesion within packages. However, as of current, the hybrid packaging strategy we are using does not pose major problems.
 
 ### Refactoring 
-  We refactored our project multiple times throughout the course of this semester. We initially refactored our phase 0 design as it didn’t adhere to clean architecture at all, as we didn’t really understand those principles during phase 0. We refactored towards the end of phase 1 where we refactored out project structure and dependencies to allow for it to be packaged by Spring. This meant switching to a Maven project among other refactoring decisions. 
+  We refactored our project multiple times throughout the course of this semester. We initially refactored our phase 0 design as it didn’t adhere to clean architecture at all, as we didn’t really understand those principles during phase 0. We refactored towards the end of phase 1 where we refactored our project structure and dependencies to allow for Spring packaging. This meant switching to a Maven project among other refactors. 
 Clean Architecture Refactoring: https://github.com/CSC207-UofT/course-project-javajsk/pull/31
 Maven Refactoring:: https://github.com/CSC207-UofT/course-project-javajsk/pull/103
 Entities Refactoring: https://github.com/CSC207-UofT/course-project-javajsk/pull/80
+ 
 
 ### Design Patterns
   There were many uses of different sorts of design patterns used during the construction of our application. The main uses of design patterns were to ensure our application would be a good scaling application with easy modification and understandable code. 

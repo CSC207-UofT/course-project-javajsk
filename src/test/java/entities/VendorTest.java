@@ -10,6 +10,7 @@ class VendorTest {
     OrderBook orderBook;
     Shop shop;
     Vendor vendor;
+    Vendor vendor1;
 
     @BeforeEach
     void setUp(){
@@ -17,6 +18,8 @@ class VendorTest {
         orderBook = new OrderBook();
         shop = new Shop("00001", "JavaJShop", "Bay Street", true, menu, orderBook);
         vendor = new Vendor("12345", "Username", "Password", shop);
+        vendor1 = new Vendor("12344", "username1", "password1",
+                "Poutine Shop", "Gerstein");
     }
 
     @Test

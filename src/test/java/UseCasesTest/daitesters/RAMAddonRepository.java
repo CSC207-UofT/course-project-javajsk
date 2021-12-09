@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class RAMAddonRepository implements Repository<Addon> {
     List<Addon> addonlist;
+
     public RAMAddonRepository(Addon addon){
         List<Addon> addonlist = new ArrayList<>();
         addonlist.add(addon);

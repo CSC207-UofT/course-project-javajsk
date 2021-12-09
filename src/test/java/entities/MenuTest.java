@@ -82,8 +82,6 @@ class MenuTest {
         assertEquals(menu.getAddons().get(1), newaddon);
         menu.deleteAddon(newaddon);
         assertFalse(menu.getAddons().contains(newaddon));
-
-
     }
 
     @Test
@@ -122,7 +120,6 @@ class MenuTest {
         assertTrue(menu.foods.contains(food1));
         menu.deleteFood(food1);
         assertFalse(menu.foods.contains(food1));
-
     }
 
     @Test
@@ -139,6 +136,7 @@ class MenuTest {
 
     @Test
     void getAvailableAddons() {
+
         menu = setMenu();
         Addon addon1 = new Addon("id2", "addon", 12, null, true, "shop1");
         menu.addAddon(addon1);
@@ -146,6 +144,7 @@ class MenuTest {
         Addon addon2 = new Addon("id66", "addon11", 12, null, false, "shop1");
         menu.addAddon(addon2);
         assertFalse(menu.getAvailableAddons().contains(addon2));
+
     }
 
     @Test

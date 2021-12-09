@@ -6,11 +6,15 @@ import entities.Cart;
 
 import java.util.List;
 
+
 public class RAMCartObjectBoundary implements ObjectBoundary<Cart> {
+
+
     @Override
     public ResponseObject showObject(Cart obj) {
-        return new ResponseObject(0, "",obj);
+        return new ResponseObject(0, "", obj);
     }
+
     @Override
     public ResponseObject showObjectList(List<Cart> listToDisp) {
         return new ResponseObject(0,"Test Works", listToDisp);

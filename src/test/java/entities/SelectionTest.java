@@ -6,21 +6,24 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SelectionTest {
     HashMap<Addon, Integer> singletonSelection;
     Selection selection;
+    Addon addon1;
+    Addon addon2;
 
     @BeforeEach
     void setUp() {
         List<Integer> allowedAddonTypes = new ArrayList<Integer>();
         allowedAddonTypes.add(1);
         allowedAddonTypes.add(2);
-        Addon addon1 = new Addon("00000", "Lettuce", 0.5f,
+        addon1 = new Addon("00000", "Lettuce", 0.5f,
                 allowedAddonTypes, true, "00001");
-        Addon addon2 = new Addon("00003", "Tomato", 0.5f,
+        addon2 = new Addon("00003", "Tomato", 0.5f,
                 allowedAddonTypes, true, "00001");
         singletonSelection = new HashMap<Addon, Integer>();
         singletonSelection.put(addon1, 1);
@@ -44,6 +47,10 @@ class SelectionTest {
 
     @Test
     void getSelectedAddons() {
+        Set<Addon> selectedAddons = selection.getSelectedAddons();
+        assertEquals(2, selectedAddons.size());
+        assertTrue(selectedAddons.contains(addon1));
+        assertTrue(selectedAddons.contains(addon2));
     }
 
     private HashMap<Addon, Integer> createNewSingletonSelection(){
