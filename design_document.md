@@ -3,9 +3,13 @@
 ### Specification
 
 At the University of Toronto, students like to order from food trucks, such as the ones that are commonly found on St. George st. The goal of this app is to allow students to place online orders for food from these food trucks on campus. A system like this would make life easier for both students and food truck vendors, since it allows students to save time while allowing food truck vendors to better expedite their orders.
+
 Each food truck has a unique menu that contains different types of items, including normal items such as burgers or fries, but also combo items such as burger combo with fries and drink. A customer might also choose to customize their order - for example, one customer might want extra lettuce inside their wrap, and another might not want any pickles in their burger. Furthermore, individual food trucks might do things like deals or discounts.
+
 As for the food trucks themselves, there are many food trucks around campus, each with their own locations and opening hours. Some food trucks may be unavailable on certain days.
+
 Customers using this app would want to be able to log into some sort of account, especially since they are disclosing their personal information within the app. They would want their payments and transactions to be secure and smooth. From within the app, they should be able to browse all food trucks, view menus, order food, and view their order history.
+
 Vendors, on the other hand, would also want to be able to log into some sort of account to be able to manage their food truck, which is essentially an online shop. They should be able to modify their shop by adding or removing items, updating item information such as prices, discounts, or components of the item (such as removing combo pieces). They should be able to update their opening and closing times at will. They should also be able to view their current orders, and choose to accept and confirm orders or decline them.
 Finally, this product will be used in real time, with customers interacting with vendors in real time in a number of ways. Since ordering food should be a fast process, the interactions should be quick and easy for both sides.
 
@@ -20,13 +24,12 @@ Finally, this product will be used in real time, with customers interacting with
 - Hashing algorithm SHA512 - We utilized the SHA512 hashing algorithm for storing passwords in our database. First of all, we realized early on that hashing passwords would be very important for security purposes. We chose to use the SHA512 hashing algorithm, since it is generally considered to be one of the best hashing algorithms, even better than SHA256 which is commonly considered a strong and widely used hashing algorithm. It should be noted that hashing is not nearly enough for password protection since there are many algorithms that can break hashes - however, for our purposes hashing is already a decent step towards having some semblance of security within our system.
 
 
-
-1. Use of a database
-
 ### Clean Architecture
 
 Overall, we think we’ve adhered to clean architecture rather well. We think that this can be seen through just our package structure, where we’ve structured the packages by layer - which shows a high level view of how we’ve organized our program to adhere to clean architecture. In fact, we’ve redesigned our entire code many times over in order to better adhere to clean architecture. Our current iteration, although imperfect (as we’ll elaborate on later), covers much of the principles of clean architecture. We’ve strongly modeled the structure of our entire program after the classic concentric circles diagram associated with clean architecture - our entities layer encapsulates the enterprise business rules layer, our use case layer encapsulates the application business rules layer, our controller layer encapsulates the interface adapter layer, and we have a layer of presenters as well as a database on the most outer layer. Furthermore, we’ve made strong efforts to adhere to the dependency rule - which states that dependency must only point from outer to inner adjacent layers. Wherever we have to go from inner to outer layers, we’ve utilized the dependency inversion principle, which can easily be seen in our use case layer which accesses the database layer via accessing a Repository<T> interface which is of the type that the use case is related to.
+  
 However, there are instances where we’ve failed to utilize clean architecture. An easy example of this is the fact that in some cases, outer layers depend on concrete implementations of inner layers that are not adjacent to each other. For example, our controller layer depends on concrete implementations of our entities layer. However, the reason for this is mostly because as far as we know, Spring is defined that way and we have no easy way of fixing it.
+  
 Furthermore, in some of our use cases, we’ve accessed concrete implementations of the database access layer. Earlier, it was explained that we took care of most of these relations via the dependency inversion principle and accessing a Repository<T> interface. However, later in our project we realized that there were functions that the Repository<T> interface did not include that some use cases actually needed (Singleton types?).
 
 
@@ -41,21 +44,29 @@ Furthermore, in some of our use cases, we’ve accessed concrete implementations
 ### Packaging Strategies
 
 In general, we have packaged our program by layer. That is to say that the highest-level packages in our program reflect the different layers of architecture, which are the interface adapters, business rules, controllers, and entities. However, within the business rules layer, we decided to package by feature. To clarify, the overall program is packaged by layer, but we packaged classes within the business rules layer based on the features that they were related to.
+  
 To explain, we chose to package our overall program by layer because initially, it felt that it would be easier to navigate by layer, and it would also be easier to delegate tasks as certain people could be responsible for certain layers. However, as we worked, we noticed that the business rules layer was quickly becoming crowded and difficult to navigate. However, the rest of the program was not difficult to navigate, so we felt that this problem did not warrant changing the packaging structure of the entire program. Thus, we chose to only package the business rules by feature, since that would solve the issue without needing to refactor the packaging of the entire program.
+  
 We acknowledge that if we were to restart the entire project from scratch with the knowledge we have now, we would probably choose to package by feature due to lower coupling across packages and higher cohesion within packages. However, as of current, the hybrid packaging strategy we are using does not pose major problems.
 
 ### Refactoring 
-  We refactored our project multiple times throughout the course of this semester. We initially refactored our phase 0 design as it didn’t adhere to clean architecture at all, as we didn’t really understand those principles during phase 0. We refactored towards the end of phase 1 where we refactored our project structure and dependencies to allow for Spring packaging. This meant switching to a Maven project among other refactors. 
+  
+We refactored our project multiple times throughout the course of this semester. We initially refactored our phase 0 design as it didn’t adhere to clean architecture at all, as we didn’t really understand those principles during phase 0. We refactored towards the end of phase 1 where we refactored our project structure and dependencies to allow for Spring packaging. This meant switching to a Maven project among other refactors. 
+  
 Clean Architecture Refactoring: https://github.com/CSC207-UofT/course-project-javajsk/pull/31
 Maven Refactoring:: https://github.com/CSC207-UofT/course-project-javajsk/pull/103
 Entities Refactoring: https://github.com/CSC207-UofT/course-project-javajsk/pull/80
  
 
 ### Design Patterns
-  There were many uses of different sorts of design patterns used during the construction of our application. The main uses of design patterns were to ensure our application would be a good scaling application with easy modification and understandable code. 
+There were many uses of different sorts of design patterns used during the construction of our application. The main uses of design patterns were to ensure our application would be a good scaling application with easy modification and understandable code. 
+
 The first such example of design pattern is the strategy pattern which was used to ensure that the algorithm used to hash a string or sign a web token was easily modifiable. In fact, even the database connector was written with the strategy design pattern. This means we could have easily swapped out the database if we wanted to.
+ 
 When sending responses from the presenter to the view, we had to use the adapter design pattern to adapt the output type of the presenter such that the view would be able to display it to the UI. In our specific case, this meant converting an entity object into a response object. 
+  
 Another example of a design pattern used in the project is the template design pattern, used to create the user repository classes. User repository classes were formed from 2 different interfaces which contained requirements for the user repository to implement. 
+  
 There are more examples of factory design patterns in the code but it requires some preliminary knowledge on react.js and can be found in the front end code.
 A lot of the design patterns were added in this refactor push: https://github.com/CSC207-UofT/course-project-javajsk/pull/80
 
