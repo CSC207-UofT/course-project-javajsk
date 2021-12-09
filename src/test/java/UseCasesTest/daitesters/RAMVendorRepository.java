@@ -1,6 +1,7 @@
 package UseCasesTest.daitesters;
 
 import businessrules.dai.VendorRepository;
+import entities.Customer;
 import entities.User;
 import entities.Vendor;
 
@@ -67,6 +68,11 @@ public class RAMVendorRepository implements VendorRepository {
 
     @Override
     public User getUserFromToken(String userToken) {
+        for (Vendor vendor:storage){
+            if(vendor.getId().equals(userToken)){
+                return vendor;
+            }
+        }
         return null;
     }
 

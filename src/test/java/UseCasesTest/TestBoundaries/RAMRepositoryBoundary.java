@@ -6,7 +6,7 @@ import businessrules.outputboundaries.ResponseObject;
 public class RAMRepositoryBoundary implements RepositoryBoundary {
     @Override
     public ResponseObject creationFailed(String message) {
-        return null;
+        return new ResponseObject(0,message, "");
     }
 
     @Override

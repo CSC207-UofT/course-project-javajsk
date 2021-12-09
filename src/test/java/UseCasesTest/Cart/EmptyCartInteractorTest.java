@@ -19,13 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EmptyCartInteractorTest {
     RAMCartObjectBoundary cartObjectBoundary;
-    RAMVendorRepository vendorRepository;
-    RAMShopRepository shopRepository;
-    RAMAddonRepository addonRepository;
-    CreateAddonInteractor createAddonInteractor;
-    VendorBoundary vendorBoundary;
     RepositoryBoundary repositoryBoundary;
-    ObjectBoundary<Addon> addonObjectBoundary;
     RAMFoodRepository foodRepository;
     RAMCustomerRepository customerRepository;
 

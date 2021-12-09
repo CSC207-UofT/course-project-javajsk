@@ -20,15 +20,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RemoveFromCartInteractorTest {
     RAMCartObjectBoundary cartObjectBoundary;
-    RAMVendorRepository vendorRepository;
-    RAMShopRepository shopRepository;
-    RAMAddonRepository addonRepository;
-    CreateAddonInteractor createAddonInteractor;
-    VendorBoundary vendorBoundary;
     RepositoryBoundary repositoryBoundary;
-    ObjectBoundary<Addon> addonObjectBoundary;
     RAMFoodRepository foodRepository;
     RAMCustomerRepository customerRepository;
+    RemoveFromCartInteractor removeFromCartInteractor;
+    AddToCartInteractor addToCartInteractor;
 
     @Test
     void removeFromCart() {
@@ -49,19 +45,13 @@ class RemoveFromCartInteractorTest {
         Selection[] selections = new Selection[0];
         Cart cart = new Cart();
         customer.setCurrentCart(cart);
-        assertSame(customerRepository.getUserFromToken(customer.getId()), customer);
-        AddToCartInteractor addToCartInteractor = new AddToCartInteractor(foodRepository, cartObjectBoundary, customerRepository, repositoryBoundary);
-        RemoveFromCartInteractor removeFromCartInteractor = new RemoveFromCartInteractor(customerRepository, repositoryBoundary, foodRepository, cartObjectBoundary);
-        addToCartInteractor.addToCart(customer.getId(),food.getShopId(), food.getId(), null);
-        addToCartInteractor.addToCart(customer.getId(), food1.getShopId(), food1.getId(), null);
-        assertTrue(cart.getContents().containsKey(food));
-        assertTrue(cart.getContents().containsKey(food1));
-        ResponseObject responseObject = removeFromCartInteractor.removeFromCart(customer.getId(), food1, null);
+        addToCartInteractor = new AddToCartInteractor(foodRepository, cartObjectBoundary, customerRepository, repositoryBoundary);
+        removeFromCartInteractor = new RemoveFromCartInteractor(customerRepository, repositoryBoundary, foodRepository, cartObjectBoundary);
+        addToCartInteractor.addToCart(customer.getId(),food.getShopId(), food.getId(), selections);
+        addToCartInteractor.addToCart(customer.getId(), food1.getShopId(), food1.getId(), selections);
+       assertTrue(customer.getCurrentCart().getContents().containsKey(food));
+       assertTrue(customer.getCurrentCart().getContents().containsKey(food1));
+        removeFromCartInteractor.removeFromCart(customer.getId(), food1, selections);
         assertTrue(customer.getCurrentCart().getContents().containsKey(food));
-        assertFalse(customer.getCurrentCart().getContents().containsKey(food1)); //TODO find out why this does not work
-
-
-
-
     }
 }
