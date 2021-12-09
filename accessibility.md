@@ -1,7 +1,7 @@
 # Question 1
 ### Equitable use: This principle encourages products designed to be useful and marketable to people with diverse abilities.
 
-In some ways, this principle is less applicable to our product. Our product adheres to this principle very well, just by nature, since it is a web app that is inherently accessible by everyone, and equally accessible by anyone that has access to a computing device such as a computer or smartphone. Our design also takes security into account, which is accessible for all users as soon as they make an account. This is accounted for in our JWT (JSON Web Token) login design, as well as our use of password hashing. Furthermore, we have implemented authentication directly into our use case layer, as methods such as changing passwords have to go through a layer of authentication.
+In some ways, this principle is less applicable to our product, though it adheres to this principle very well, just by nature. Since it is a web app that is inherently accessible by everyone, and equally accessible by anyone that has access to a computing device such as a computer or smartphone. Our design also takes security into account, which is accessible for all users as soon as they make an account. This is accounted for in our JWT (JSON Web Token) login design, as well as our use of password hashing. Furthermore, we have implemented authentication directly into our use case layer, as methods such as changing passwords have to go through a layer of authentication.
 
 ### Flexibility in use: This principle refers to accommodation of a wide range of preferences and abilities. 
 
