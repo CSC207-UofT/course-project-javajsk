@@ -66,21 +66,37 @@ public class RAMVendorRepository implements VendorRepository {
     }
 
     @Override
-    public User getUserFromToken(String userToken) {
-        return null;
+    public String authenticateUser(String username, String password) {
+        Vendor vendor = findOneByFieldName("username", username);
+        if(vendor == null){
+            return null;
+        }
+        if(!vendor.getHashedPassword().equals(password)){
+            return null;
+        }
+        //hard code token to be just the username
+        return username;
     }
 
+    /**
+     * Hard code get user from token to just be finding the username
+     */
     @Override
-    public String authenticateUser(String username, String password) {
-        for (Vendor vendor:storage){
-            if (vendor.getUserName().equals(username)) {
-                if (vendor.getHashedPassword().equals(password))
-                    return "User authenticated";
-                else {
-                    return "Password incorrect";
-                }
-            }
-        }
-        return "User not found";
+    public User getUserFromToken(String userToken) {
+        return findOneByFieldName("username", userToken);
     }
+
+//    @Override
+//    public String authenticateUser(String username, String password) {
+//        for (Vendor vendor:storage){
+//            if (vendor.getUserName().equals(username)) {
+//                if (vendor.getHashedPassword().equals(password))
+//                    return "User authenticated";
+//                else {
+//                    return "Password incorrect";
+//                }
+//            }
+//        }
+//        return "User not found";
+//    }
 }

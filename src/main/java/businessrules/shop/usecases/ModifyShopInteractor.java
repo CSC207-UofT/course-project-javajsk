@@ -56,11 +56,28 @@ public class ModifyShopInteractor implements ModifyShop {
     }
 
     /**
-     * Modifies the specified Vendor's shop by replacing with another
+     * Instantiates a use case for modifying a shop in the repository
+     * @param vR the vendor repository
+     * @param rB the repository boundary
+     * @param sR the shop boundary
+     * @param vB the vendor boundary
+     * @param sOB the shop object boundary
+     */
+    public ModifyShopInteractor(VendorRepository vR, RepositoryBoundary rB, Repository<Shop> sR, VendorBoundary vB, ObjectBoundary<Shop> sOB) {
+        this.vendorRepository = vR;
+        this.repositoryBoundary = rB;
+        this.shopRepository = sR;
+        this.vendorBoundary = vB;
+        this.shopObjectBoundary = sOB;
+    }
+
+    /**
+     * Method that modifies a shop by replacing it with a new
+     * shop. Should only be called by a Vendor.
      *
      * @param vendorToken the Vendor that owns the shop
      * @param shop        the Shop that will replace the original shop
-     * @return a response object
+     * @return the response object containing the object or error message
      */
     public ResponseObject modifyShop(String vendorToken, Shop shop) {
         Vendor vendor = (Vendor) vendorRepository.getUserFromToken(vendorToken);
@@ -77,6 +94,8 @@ public class ModifyShopInteractor implements ModifyShop {
         if(!shopRepository.update(oldShop.getId(), shop)){
             return repositoryBoundary.modificationFailed("Failed to update shop in repository.");
         }
+        vendor.setShop(shop);
+        vendorRepository.update(vendor.getId(), vendor);
 
         return shopObjectBoundary.showObject(shop);
     }
