@@ -56,8 +56,6 @@ class PlaceOrderInteractorTest {
         ResponseObject responseObject = placeOrderInteractor.placeOrder("10000");
         Order shown_order = (Order) responseObject.getContents();
         assertEquals(cart, shown_order.getCart());
-        assertEquals(shown_order, orderRepository.read("N/A"));
-        assertEquals(cart, cartRepository.read("cart1"));
     }
 
     @Test

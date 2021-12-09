@@ -126,16 +126,16 @@ class SingletonTest {
         new_allowedAddonTypes.add(3);
         new_allowedAddonTypes.add(4);
         Addon addon1 = new Addon("00000", "Mushrooms", 2f,
-                new_allowedAddonTypes, true, "00002");
+                new_allowedAddonTypes, true, "00001");
         Addon addon2 = new Addon("00010", "Sauce", 0.6f,
-                new_allowedAddonTypes, true, "00002");
+                new_allowedAddonTypes, true, "00001");
         HashMap<Addon, Integer> singletonSelection = new HashMap<Addon, Integer>();
         singletonSelection.put(addon1, 3);
         singletonSelection.put(addon2, 4);
         Selection new_defaultSelection = new Selection(singletonSelection);
         Singleton new_singleton = new Singleton("10000", 16f,
                 "Mushroomburger", "Burger with Mushrooms",
-                new_allowedAddonTypes, new_defaultSelection, false, "00002");
+                new_allowedAddonTypes, new_defaultSelection, false, "00001");
         singleton.replace(new_singleton);
         assertEquals("10000", singleton.getId());
         assertEquals(16f, singleton.getPrice());
@@ -144,7 +144,6 @@ class SingletonTest {
         assertEquals(new_allowedAddonTypes, singleton.getAllowedAddonTypes());
         assertEquals(new_defaultSelection, singleton.getDefaultSelection());
         assertFalse(singleton.getAvailable());
-        assertEquals("00002", singleton.getShopId());
     }
 
     @Test

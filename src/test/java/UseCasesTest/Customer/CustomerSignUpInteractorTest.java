@@ -60,8 +60,7 @@ class CustomerSignUpInteractorTest {
     void successfulSignUp() {
         ResponseObject responseObject = customerSignUpInteractor.signUp("Username",
                 "Password", "Password");
-        Customer new_customer = customerRepository.read("N/A");
-        assertNotNull(new_customer);
-        assertEquals(hasher.hash("Password"), new_customer.getHashedPassword());
+        Customer new_customer = (Customer) responseObject.getContents();
+        assertEquals("Username", new_customer.getUserName());
     }
 }

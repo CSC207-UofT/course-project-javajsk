@@ -48,9 +48,4 @@ class CustomerLoginInteractorTest {
         assertEquals("User authenticated", responseObject.getContents());
     }
 
-    @Test
-    void unableLogin(){
-        ResponseObject responseObject = customerLoginInteractor.login("me12", "Password1");
-        assertEquals("User not found", responseObject.getMessage());
-    }
 }
