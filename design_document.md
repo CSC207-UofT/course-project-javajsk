@@ -48,7 +48,15 @@ We acknowledge that if we were to restart the entire project from scratch with t
   We refactored our project multiple times throughout the course of this semester. We initially refactored our phase 0 design as it didn’t adhere to clean architecture at all, as we didn’t really understand those principles during phase 0. We refactored towards the end of phase 1 where we refactored out project structure and dependencies to allow for it to be packaged by Spring. This meant switching to a Maven project among other refactoring decisions. 
 Clean Architecture Refactoring: https://github.com/CSC207-UofT/course-project-javajsk/pull/31
 Maven Refactoring:: https://github.com/CSC207-UofT/course-project-javajsk/pull/103
+Entities Refactoring: https://github.com/CSC207-UofT/course-project-javajsk/pull/80
 
+### Design Patterns
+  There were many uses of different sorts of design patterns used during the construction of our application. The main uses of design patterns were to ensure our application would be a good scaling application with easy modification and understandable code. 
+The first such example of design pattern is the strategy pattern which was used to ensure that the algorithm used to hash a string or sign a web token was easily modifiable. In fact, even the database connector was written with the strategy design pattern. This means we could have easily swapped out the database if we wanted to.
+When sending responses from the presenter to the view, we had to use the adapter design pattern to adapt the output type of the presenter such that the view would be able to display it to the UI. In our specific case, this meant converting an entity object into a response object. 
+Another example of a design pattern used in the project is the template design pattern, used to create the user repository classes. User repository classes were formed from 2 different interfaces which contained requirements for the user repository to implement. 
+There are more examples of factory design patterns in the code but it requires some preliminary knowledge on react.js and can be found in the front end code.
+A lot of the design patterns were added in this refactor push: https://github.com/CSC207-UofT/course-project-javajsk/pull/80
 
 ### Progress Report
 
