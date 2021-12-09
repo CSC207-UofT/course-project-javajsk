@@ -38,27 +38,25 @@ public class ModifySelectionInCartInteractor implements ModifySelectionInCart {
     ObjectBoundary<Cart> cartObjectBoundary;
 
     /**
-     * Instantiates a new Modify selection in cart interactor.
-     *
-     * @param customerRepository the customer repository
-     * @param foodRepository     the food repository
-     * @param repositoryBoundary the repository boundary
-     * @param customerBoundary   the customer boundary
-     * @param cartObjectBoundary the cart object boundary
+     * Instantiates a use case for modifying a cart selection
+     * @param cR the customer repository
+     * @param fR the food repository
+     * @param rB the repository boundary
+     * @param cB the customer boundary
+     * @param cOB the cart object boundary
      */
-    public ModifySelectionInCartInteractor(CustomerRepository customerRepository,
-                                           Repository<Food> foodRepository, RepositoryBoundary repositoryBoundary,
-                                           CustomerBoundary customerBoundary,
-                                           ObjectBoundary<Cart> cartObjectBoundary) {
-        this.customerRepository = customerRepository;
-        this.foodRepository = foodRepository;
-        this.repositoryBoundary = repositoryBoundary;
-        this.customerBoundary = customerBoundary;
-        this.cartObjectBoundary = cartObjectBoundary;
+    public ModifySelectionInCartInteractor(CustomerRepository cR, Repository<Food> fR, RepositoryBoundary rB, CustomerBoundary cB,
+                                           ObjectBoundary<Cart> cOB) {
+        this.customerRepository = cR;
+        this.foodRepository = fR;
+        this.repositoryBoundary = rB;
+        this.customerBoundary = cB;
+        this.cartObjectBoundary = cOB;
     }
 
     /**
-     * Modifies the selections in a cart
+     * Method that modifies the selections in a cart and
+     * returns a JSONObject representing the modified cart
      *
      * @param userToken         token representing the user that owns the cart
      * @param foodId            the food that has the selections
@@ -78,7 +76,8 @@ public class ModifySelectionInCartInteractor implements ModifySelectionInCart {
             return repositoryBoundary.queryNotFound("No such food found.");
         }
 
-        if (!food.isValidSelections(selections)) {
+        //checks the selections are of allowed types
+        if(!food.isValidSelections(selections)) {
             return customerBoundary.error("Invalid selection provided. Please try again.");
         }
         customer.getCurrentCart().modifySelection(food, originalSelection, selections);

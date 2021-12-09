@@ -2,22 +2,20 @@ package UseCasesTest.TestBoundaries;
 
 import businessrules.outputboundaries.ObjectBoundary;
 import businessrules.outputboundaries.ResponseObject;
-import entities.Cart;
+import entities.Singleton;
 
 import java.util.List;
 
-
-public class RAMCartObjectBoundary implements ObjectBoundary<Cart> {
-
+public class RAMSingletonObjectBoundary implements ObjectBoundary<Singleton> {
 
     @Override
-    public ResponseObject showObject(Cart obj) {
+    public ResponseObject showObject(Singleton obj) {
         return new ResponseObject(0, "", obj);
     }
 
     @Override
-    public ResponseObject showObjectList(List<Cart> listToDisp) {
-        return new ResponseObject(0,"Test Works", listToDisp);
+    public ResponseObject showObjectList(List<Singleton> listToDisp) {
+        return null;
     }
 
     @Override

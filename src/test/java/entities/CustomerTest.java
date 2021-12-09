@@ -84,7 +84,8 @@ class CustomerTest {
     @Test
     void emptyCart() {
         customer.emptyCart();
-        assertNull(customer.getCurrentCart());
+        HashMap<Food, List<Selection[]>> contents = new HashMap<Food, List<Selection[]>>();
+        assertEquals(contents, customer.getCurrentCart().contents);
     }
 
     private OrderBook createNewOrderHistory(){

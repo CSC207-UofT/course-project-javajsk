@@ -9,6 +9,8 @@ import businessrules.outputboundaries.ResponseObject;
 import entities.Food;
 import entities.Vendor;
 
+import java.util.List;
+
 /**
  * Use case for creating a food entry in a repository
  */
@@ -67,7 +69,8 @@ public class CreateFoodInteractor implements CreateFood {
         }
 
         food.setId(foodId);
-
-        return foodObjectBoundary.showObject(food);
+        String shopId = vendor.getShop().getId();
+        List<Food> foods = foodRepository.readMultiple("shopId", shopId);
+        return foodObjectBoundary.showObjectList(foods);
     }
 }

@@ -1,7 +1,9 @@
 package entities;
 
+import businessrules.dai.Hasher;
+import adapters.SHA512Hasher;
+import businessrules.dai.Hasher;
 import org.json.JSONObject;
-
 /**
  * Abstract parent class User for Vendor and Customer entities
  */
@@ -18,6 +20,7 @@ public abstract class User {
      * The Hashed password.
      */
     protected String hashedPassword;
+    protected Hasher hasher;
 
     /**
      * Instantiates a new User.
@@ -27,9 +30,10 @@ public abstract class User {
      * @param hashedPassword the hashed password
      */
     public User(String id, String userName, String hashedPassword) {
+        this.hasher = new SHA512Hasher();
         this.id = id;
         this.userName = userName;
-        this.hashedPassword = hashedPassword;
+        this.hashedPassword = hasher.hash(hashedPassword);
     }
 
     /**
