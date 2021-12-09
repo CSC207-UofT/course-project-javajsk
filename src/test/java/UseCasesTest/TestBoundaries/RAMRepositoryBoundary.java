@@ -6,21 +6,25 @@ import businessrules.outputboundaries.ResponseObject;
 public class RAMRepositoryBoundary implements RepositoryBoundary {
     @Override
     public ResponseObject creationFailed(String message) {
-        return null;
+        ResponseObject responseObject = new ResponseObject(1, message, "");
+        return responseObject;
     }
 
     @Override
     public ResponseObject queryNotFound(String message) {
-        return new ResponseObject(0, message, "");
+        ResponseObject responseObject = new ResponseObject(1, message, "");
+        return responseObject;
     }
 
     @Override
     public ResponseObject modificationFailed(String message) {
-        return new ResponseObject(0, message, "");
+        ResponseObject responseObject = new ResponseObject(1, message, "");
+        return responseObject;
     }
 
     @Override
     public ResponseObject invalidInput(String message) {
-        return new ResponseObject(0, message, "");
+        ResponseObject responseObject = new ResponseObject(1, message, "");
+        return responseObject;
     }
 }

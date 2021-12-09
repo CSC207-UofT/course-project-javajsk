@@ -18,6 +18,7 @@ import entities.Shop;
 import entities.Vendor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ModifyShopInteractorTest {
 
@@ -41,17 +42,19 @@ class ModifyShopInteractorTest {
         rB = new RAMRepositoryBoundary();
         vB = new RAMVendorBoundary();
 
-        useCase = new ModifyShopInteractor(vR, rB, sR, vB, sOB);
+
+        useCase = new ModifyShopInteractor(vR, sR,rB,sOB, vB);
 
     }
 
     @Test
     void modifyShop() {
-        Shop updatedShop = new Shop("00001", "truck2", "Bahen", true,
-                new Menu(), new OrderBook());
+
+        Shop updatedShop = shop;
+        updatedShop.setLocation("Bahen");
         useCase.modifyShop(vendor.getUserName(),updatedShop);
         assertEquals("Bahen", vendor.getShop().getLocation());
-        assertEquals("truck2", vendor.getShop().getName());
+
     }
 
     @Test

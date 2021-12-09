@@ -1,6 +1,7 @@
 package UseCasesTest.daitesters;
 
 import businessrules.dai.VendorRepository;
+import entities.Customer;
 import entities.User;
 import entities.Vendor;
 
@@ -66,37 +67,32 @@ public class RAMVendorRepository implements VendorRepository {
     }
 
     @Override
-    public String authenticateUser(String username, String password) {
-        Vendor vendor = findOneByFieldName("username", username);
-        if(vendor == null){
-            return null;
+    public User getUserFromToken(String userToken) {
+        //Assume userToken is same as ID
+        for (Vendor vendor:storage){
+            if(vendor.getId().equals(userToken)){
+                return vendor;
+            }
         }
-        if(!vendor.getHashedPassword().equals(password)){
-            return null;
-        }
-        //hard code token to be just the username
-        return username;
+        return null;
+
     }
 
     /**
      * Hard code get user from token to just be finding the username
      */
     @Override
-    public User getUserFromToken(String userToken) {
-        return findOneByFieldName("username", userToken);
+    public String authenticateUser(String username, String password) {
+        for (Vendor vendor:storage){
+            if (vendor.getUserName().equals(username)) {
+                if (vendor.getHashedPassword().equals(password))
+                    return "User authenticated";
+                else {
+                    return null;
+                }
+            }
+        }
+        return null;
+
     }
 
-//    @Override
-//    public String authenticateUser(String username, String password) {
-//        for (Vendor vendor:storage){
-//            if (vendor.getUserName().equals(username)) {
-//                if (vendor.getHashedPassword().equals(password))
-//                    return "User authenticated";
-//                else {
-//                    return "Password incorrect";
-//                }
-//            }
-//        }
-//        return "User not found";
-//    }
-}
