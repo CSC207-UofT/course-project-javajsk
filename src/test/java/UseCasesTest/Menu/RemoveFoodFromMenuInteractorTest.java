@@ -19,6 +19,7 @@ import entities.Singleton;
 import entities.Vendor;
 import org.apache.catalina.authenticator.SingleSignOnEntry;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 class RemoveFoodFromMenuInteractorTest {
     RAMVendorRepository vendorRepository;

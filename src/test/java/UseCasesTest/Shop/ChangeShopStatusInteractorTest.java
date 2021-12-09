@@ -45,14 +45,14 @@ class ChangeShopStatusInteractorTest {
 
     @Test
     void changeShopStatusToClosedTest() {
-        Shop tempShop = (Shop) useCase.changeShopStatus(vendor.getUserName(), false).getContents();
+        Shop tempShop = (Shop) useCase.changeShopStatus(vendor.getId(), false).getContents();
         assertFalse(tempShop.isOpen());
     }
 
     @Test
     void changeShopStatusToOpenedTest() {
         shop.setOpen(false);
-        Shop shop = (Shop) useCase.changeShopStatus(vendor.getUserName(), true).getContents();
+        Shop shop = (Shop) useCase.changeShopStatus(vendor.getId(), true).getContents();
         assertTrue(shop.isOpen());
     }
 

@@ -57,7 +57,7 @@ class CreateFoodInteractorTest {
 
     @Test
     void createFood() {
-        List<Food> foods = (List<Food>) useCase.createFood("Username", burger).getContents();
+        List<Food> foods = (List<Food>) useCase.createFood("12345", burger).getContents();
         assertEquals(burger, foods.get(0));
     }
 

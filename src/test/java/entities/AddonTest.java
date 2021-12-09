@@ -90,9 +90,4 @@ class AddonTest {
     }
 
 
-    @Test
-    void getShopId() {
-        assertSame("12345", addon.getShopId());
-    }
-
 }

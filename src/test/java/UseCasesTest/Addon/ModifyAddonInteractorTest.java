@@ -14,6 +14,7 @@ import businessrules.outputboundaries.ResponseObject;
 import businessrules.outputboundaries.VendorBoundary;
 import entities.*;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ModifyAddonInteractorTest {
     RAMVendorRepository vendorRepository;
