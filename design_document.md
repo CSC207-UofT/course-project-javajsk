@@ -92,4 +92,14 @@ New Endpoints: https://github.com/CSC207-UofT/course-project-javajsk/pull/125
 Unit Tests: https://github.com/CSC207-UofT/course-project-javajsk/pull/130
 Use Cases: https://github.com/CSC207-UofT/course-project-javajsk/pull/93/files
 
+- Jeremy - The tasks I’ve been working on have changed multiple times, after phase 1. Although I was initially working on some of the entities and use cases, for the final design of our project, I not only helped give input to adhering our program to clean architecture, but also I spent a lot of time doing unit tests for the program, contributing to testing the methods in entities and use cases. Since we had many changes to the design of our program, I had to restructure a lot of my tests. Along the way, I suggested different ideas for testing our code correctly and testing the most lines of code, an instance of this is when Avinash and I started making local repositories and boundaries for testing. This simplified the problem of testing code that interacted with a database and allowed us to use JUnit5 for our unit tests, which is a testing framework that our team is comfortable with. I have stated the links of some significant pull requests for the unit testing below. Due to this significant time testing code, I also went through a lot of code and made corrections to the code. 
+Entity Unit Tests: https://github.com/CSC207-UofT/course-project-javajsk/pull/107
+Use Case Unit Tests: https://github.com/CSC207-UofT/course-project-javajsk/pull/134
+
+- Avinash - At the beginning of the project, I was tasked to work alongside my team helping to write our entities and seeing how our project would look like using clean architecture. For phase 0, I worked with my teammates to draw up our CRC cards and used this to see the direction in which our project was heading. After phase 0 and phase 1, we had to restructure our program a few times in order to correctly adhere to clean architecture. As a team, we all pitched our ideas on how the program should run and came to a conclusion together about the final project. After we got our final model, I mostly worked on back-end unit testing for our entities, use cases etc. Since there were 7 of us in the group, we delegated tasks based on back and front end coding. The testing proved to be a rigorous process since we could not rely on our live database at the time and had to improvise by making local repositories. As a consequence of constant testing, I also found it necessary to change some of our core code due to some bugs
+Local repositories: https://github.com/CSC207-UofT/course-project-javajsk/pull/116. 
+Entity tests: https://github.com/CSC207-UofT/course-project-javajsk/pull/106
+Use case tests: https://github.com/CSC207-UofT/course-project-javajsk/pull/133
+
+
 
